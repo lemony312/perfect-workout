@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useWorkout } from '@/context/WorkoutContext'
-import { getWorkoutForDate2025, CYCLE_LENGTH_2025 } from '@/data/workouts-2025'
+import { getWorkoutForDate2025, CYCLE_LENGTH_2025, WORKOUT_CYCLE_2025 } from '@/data/workouts-2025'
+import WorkoutPicker from '@/components/WorkoutPicker'
 
 const MUSCLE_GROUP_COLORS: Record<string, string> = {
   Chest: 'border-red-600',
@@ -88,11 +89,27 @@ export default function Calendar2025() {
     <div className="min-h-screen bg-[#0f0f0f] p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
             PERFECT WORKOUT 2025
           </h1>
           <p className="text-lg text-[#a0a0a0]">Science-Based Series</p>
+        </div>
+
+        {/* Workout Picker */}
+        <div className="mb-6 max-w-sm mx-auto">
+          <WorkoutPicker
+            options={WORKOUT_CYCLE_2025.map((day) => ({
+              dayNumber: day.dayNumber,
+              label: day.dayLabel,
+              detail: day.isRest
+                ? 'Rest & Recovery'
+                : day.sessions.map((s) => s.muscleGroups.join(' + ')).join(', '),
+              isRest: day.isRest,
+            }))}
+            cycleLength={CYCLE_LENGTH_2025}
+            currentDayNumber={getWorkoutForDate2025(startDate, today).dayNumber}
+          />
         </div>
 
         {/* Month Navigation */}

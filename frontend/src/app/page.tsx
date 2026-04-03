@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useWorkout } from '@/context/WorkoutContext'
-import { getWorkoutForDate, CYCLE_LENGTH } from '@/data/workouts'
+import { getWorkoutForDate, CYCLE_LENGTH, WORKOUT_CYCLE } from '@/data/workouts'
+import WorkoutPicker from '@/components/WorkoutPicker'
 
 const MUSCLE_GROUP_COLORS: Record<string, string> = {
   Chest: 'bg-red-600/20 border-red-600/40 text-red-400',
@@ -87,11 +88,25 @@ export default function Home() {
     <div className="min-h-screen bg-[#0f0f0f] p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
             PERFECT WORKOUT
           </h1>
           <p className="text-lg text-[#a0a0a0]">AthleanX Series</p>
+        </div>
+
+        {/* Workout Picker */}
+        <div className="mb-6 max-w-sm mx-auto">
+          <WorkoutPicker
+            options={WORKOUT_CYCLE.map((day) => ({
+              dayNumber: day.dayNumber,
+              label: day.name,
+              detail: day.isRest ? 'Rest & Recovery' : day.muscleGroup,
+              isRest: day.isRest,
+            }))}
+            cycleLength={CYCLE_LENGTH}
+            currentDayNumber={getWorkoutForDate(startDate, today).dayNumber}
+          />
         </div>
 
         {/* Month Navigation */}
