@@ -32,3 +32,8 @@ Thumbs.db
 # Build
 dist/
 build/
+
+# Data and cache (root level only, not frontend/src/data/)
+/data/
+*.mp4
+*.vtt

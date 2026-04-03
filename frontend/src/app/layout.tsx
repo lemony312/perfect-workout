@@ -29,7 +29,28 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <WorkoutProvider>{children}</WorkoutProvider>
+        <WorkoutProvider>
+          <nav className="bg-[#1a1a1a] border-b border-white/5 sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-center h-14 gap-6">
+                <a
+                  href="/"
+                  className="text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-3 py-2 rounded-md hover:bg-[#252525]"
+                >
+                  Original Series
+                </a>
+                <div className="h-4 w-px bg-white/10" />
+                <a
+                  href="/2025"
+                  className="text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-3 py-2 rounded-md hover:bg-[#252525]"
+                >
+                  2025 Series
+                </a>
+              </div>
+            </div>
+          </nav>
+          {children}
+        </WorkoutProvider>
       </body>
     </html>
   );

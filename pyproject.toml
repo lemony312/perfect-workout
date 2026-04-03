@@ -3,7 +3,9 @@ name = "perfect-workout-scripts"
 version = "0.1.0"
 description = "Python scripts for Perfect Workout app"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "yt-dlp>=2026.3.17",
+]
 
 [tool.uv]
 dev-dependencies = []
