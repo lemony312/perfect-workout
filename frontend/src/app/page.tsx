@@ -88,7 +88,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
             PERFECT WORKOUT
           </h1>
           <p className="text-lg text-[#a0a0a0]">AthleanX Series</p>
@@ -98,7 +98,7 @@ export default function Home() {
         <div className="flex items-center justify-between mb-6 bg-[#1a1a1a] p-4 rounded-lg border border-white/5">
           <button
             onClick={handlePrevMonth}
-            className="p-2 hover:bg-[#252525] rounded-lg transition-colors"
+            className="p-3 hover:bg-[#252525] active:bg-[#303030] rounded-lg transition-colors"
             aria-label="Previous month"
           >
             <svg
@@ -117,13 +117,13 @@ export default function Home() {
             </svg>
           </button>
 
-          <h2 className="text-2xl font-semibold text-[#f5f5f5]">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[#f5f5f5]">
             {MONTHS[month]} {year}
           </h2>
 
           <button
             onClick={handleNextMonth}
-            className="p-2 hover:bg-[#252525] rounded-lg transition-colors"
+            className="p-3 hover:bg-[#252525] active:bg-[#303030] rounded-lg transition-colors"
             aria-label="Next month"
           >
             <svg
@@ -146,11 +146,11 @@ export default function Home() {
         {/* Calendar Grid */}
         <div className="bg-[#1a1a1a] rounded-lg border border-white/5 p-4 shadow-2xl">
           {/* Weekday Headers */}
-          <div className="grid grid-cols-7 gap-2 mb-4">
+          <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-4">
             {WEEKDAYS.map((day) => (
               <div
                 key={day}
-                className="text-center text-sm font-semibold text-[#a0a0a0] py-2"
+                className="text-center text-xs sm:text-sm font-semibold text-[#a0a0a0] py-2"
               >
                 {day}
               </div>
@@ -158,7 +158,7 @@ export default function Home() {
           </div>
 
           {/* Calendar Days */}
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-1 sm:gap-2">
             {calendarDays.map((date, index) => {
               if (!date) {
                 return <div key={`empty-${index}`} className="aspect-square" />
@@ -173,17 +173,17 @@ export default function Home() {
                   key={date.toISOString()}
                   onClick={() => handleDayClick(date)}
                   className={`
-                    aspect-square p-2 rounded-lg border transition-all
-                    hover:scale-105 hover:bg-[#252525]
+                    aspect-square p-1 sm:p-2 rounded-md sm:rounded-lg border transition-all
+                    hover:scale-105 hover:bg-[#252525] active:bg-[#303030]
                     ${colorClass}
-                    ${isTodayDate ? 'ring-2 ring-[#e53e3e] ring-offset-2 ring-offset-[#0f0f0f]' : ''}
+                    ${isTodayDate ? 'ring-2 ring-[#e53e3e] ring-offset-1 sm:ring-offset-2 ring-offset-[#0f0f0f]' : ''}
                   `}
                 >
                   <div className="flex flex-col h-full">
-                    <span className="text-sm font-semibold mb-1">
+                    <span className="text-xs sm:text-sm font-semibold mb-0.5 sm:mb-1">
                       {date.getDate()}
                     </span>
-                    <span className="text-xs line-clamp-2 leading-tight">
+                    <span className="text-[10px] sm:text-xs line-clamp-2 leading-tight" title={workout.name}>
                       {workout.name}
                     </span>
                   </div>

@@ -89,7 +89,7 @@ export default function Calendar2025() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
             PERFECT WORKOUT 2025
           </h1>
           <p className="text-lg text-[#a0a0a0]">Science-Based Series</p>
@@ -99,7 +99,7 @@ export default function Calendar2025() {
         <div className="flex items-center justify-between mb-6 bg-[#1a1a1a] p-4 rounded-lg border border-white/5">
           <button
             onClick={handlePrevMonth}
-            className="p-2 hover:bg-[#252525] rounded-lg transition-colors"
+            className="p-3 hover:bg-[#252525] active:bg-[#303030] rounded-lg transition-colors"
             aria-label="Previous month"
           >
             <svg
@@ -118,13 +118,13 @@ export default function Calendar2025() {
             </svg>
           </button>
 
-          <h2 className="text-2xl font-semibold text-[#f5f5f5]">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[#f5f5f5]">
             {MONTHS[month]} {year}
           </h2>
 
           <button
             onClick={handleNextMonth}
-            className="p-2 hover:bg-[#252525] rounded-lg transition-colors"
+            className="p-3 hover:bg-[#252525] active:bg-[#303030] rounded-lg transition-colors"
             aria-label="Next month"
           >
             <svg
@@ -147,11 +147,11 @@ export default function Calendar2025() {
         {/* Calendar Grid */}
         <div className="bg-[#1a1a1a] rounded-lg border border-white/5 p-4 shadow-2xl">
           {/* Weekday Headers */}
-          <div className="grid grid-cols-7 gap-2 mb-4">
+          <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-4">
             {WEEKDAYS.map((day) => (
               <div
                 key={day}
-                className="text-center text-sm font-semibold text-[#a0a0a0] py-2"
+                className="text-center text-xs sm:text-sm font-semibold text-[#a0a0a0] py-2"
               >
                 {day}
               </div>
@@ -159,7 +159,7 @@ export default function Calendar2025() {
           </div>
 
           {/* Calendar Days */}
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-1 sm:gap-2">
             {calendarDays.map((date, index) => {
               if (!date) {
                 return <div key={`empty-${index}`} className="aspect-square" />
@@ -173,25 +173,26 @@ export default function Calendar2025() {
                   key={date.toISOString()}
                   onClick={() => handleDayClick(date)}
                   className={`
-                    aspect-square p-2 rounded-lg border border-white/5 transition-all
-                    hover:scale-105 hover:bg-[#252525] bg-[#1a1a1a]/50
-                    ${isTodayDate ? 'ring-2 ring-[#e53e3e] ring-offset-2 ring-offset-[#0f0f0f]' : ''}
+                    aspect-square p-1 sm:p-2 rounded-md sm:rounded-lg border border-white/5 transition-all
+                    hover:scale-105 hover:bg-[#252525] active:bg-[#303030] bg-[#1a1a1a]/50
+                    ${isTodayDate ? 'ring-2 ring-[#e53e3e] ring-offset-1 sm:ring-offset-2 ring-offset-[#0f0f0f]' : ''}
                   `}
                 >
                   <div className="flex flex-col h-full">
-                    <span className="text-sm font-semibold mb-1 text-[#f5f5f5]">
+                    <span className="text-xs sm:text-sm font-semibold mb-0.5 sm:mb-1 text-[#f5f5f5]">
                       {date.getDate()}
                     </span>
                     {workout.isRest ? (
-                      <span className="text-xs text-gray-400">Rest</span>
+                      <span className="text-[10px] sm:text-xs text-gray-400">Rest</span>
                     ) : (
-                      <div className="flex flex-col gap-1 flex-1">
+                      <div className="flex flex-col gap-0.5 sm:gap-1 flex-1">
                         {workout.sessions.map((session, idx) => {
                           const primaryColor = MUSCLE_GROUP_COLORS[session.muscleGroups[0]] || 'border-gray-600'
                           return (
                             <div
                               key={idx}
-                              className={`text-xs line-clamp-1 leading-tight border-l-2 pl-1 ${primaryColor}`}
+                              className={`text-[10px] sm:text-xs line-clamp-1 leading-tight border-l-2 pl-0.5 sm:pl-1 ${primaryColor}`}
+                              title={session.muscleGroups.join(' + ')}
                               style={{
                                 color: session.muscleGroups[0] === 'Chest' ? '#f87171' :
                                        session.muscleGroups[0] === 'Back' ? '#60a5fa' :

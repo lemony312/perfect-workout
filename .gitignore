@@ -37,6 +37,6 @@ build/
 /data/
 *.vtt
 
-# Generated video clips (large files, regenerate with scripts/clip_exercises.py)
-frontend/public/clips/**/*.mp4
+# Uncomment below to exclude clips from git (regenerate with scripts/clip_exercises.py)
+# frontend/public/clips/**/*.mp4
 !frontend/public/clips/manifest.json
