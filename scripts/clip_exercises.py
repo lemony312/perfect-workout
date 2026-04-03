@@ -80,8 +80,16 @@ class Exercise:
 
     @property
     def slug(self) -> str:
-        """URL-friendly slug for the exercise."""
-        return self.name.lower().replace(" ", "-").replace("(", "").replace(")", "").replace("/", "-")
+        """URL-friendly slug for the exercise. Must match frontend toSlug()."""
+        import re
+        s = self.name.lower()
+        s = s.replace("→", "to")
+        s = s.replace(" ", "-")
+        s = s.replace("(", "").replace(")", "")
+        s = s.replace("/", "-")
+        s = re.sub(r'[^a-z0-9.\-]', '', s)
+        s = re.sub(r'-+', '-', s)
+        return s.strip('-')
 
 
 @dataclass
@@ -104,6 +112,7 @@ class VideoInfo:
 # ============================================================================
 
 EXERCISE_DATA: Dict[str, VideoInfo] = {
+    # ── Chest ──────────────────────────────────────────────────────────────
     "zD266B2jk0s": VideoInfo(
         video_id="zD266B2jk0s",
         title="Chest",
@@ -111,27 +120,28 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("Banded ER (Primer)", 233, 280),
-                    Exercise("Incline DB Bench Press", 288, 370),
-                    Exercise("Crossovers", 374, 445),
-                    Exercise("Floor Flys", 448, 520),
-                    Exercise("Deficit 1.5 Rep Ladder Pushups", 521, 590),
-                    Exercise("Dips", 593, 655),
+                    Exercise("Banded ER (Primer)", 236, 248),
+                    Exercise("Incline DB Bench Press", 340, 352),
+                    Exercise("Crossovers", 390, 402),
+                    Exercise("Floor Flys", 478, 490),
+                    Exercise("Deficit 1.5 Rep Ladder Pushups", 558, 572),
+                    Exercise("Dips", 610, 622),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Band Pull Apart (Primer)", 664, 695),
-                    Exercise("Flat DB Bench Press", 700, 735),
-                    Exercise("High-to-Low Crossover", 737, 780),
-                    Exercise("Incline Cable Press", 784, 830),
-                    Exercise("Dip (1.5 Rep Ladder)", 831, 867),
-                    Exercise("Prison Yard Pushup", 870, 905),
+                    Exercise("Band Pull Apart (Primer)", 675, 687),
+                    Exercise("Flat DB Bench Press", 718, 730),
+                    Exercise("High-to-Low Crossover", 750, 762),
+                    Exercise("Incline Cable Press", 800, 812),
+                    Exercise("Dip (1.5 Rep Ladder)", 838, 852),
+                    Exercise("Prison Yard Pushup", 878, 892),
                 ]
             ),
         ]
     ),
+    # ── Back ───────────────────────────────────────────────────────────────
     "fX36liNtKzw": VideoInfo(
         video_id="fX36liNtKzw",
         title="Back",
@@ -139,27 +149,28 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("Scap Pulldown (Primer)", 180, 220),
-                    Exercise("Seated Cable Rows (elbows wide)", 225, 300),
-                    Exercise("Lat Pulldowns (narrow grip)", 305, 375),
-                    Exercise("Straight Arm Pushdowns", 380, 440),
-                    Exercise("1.5 Rep DB Pullover Ladder", 445, 510),
-                    Exercise("Bodyweight/Banded Pullups", 515, 565),
+                    Exercise("Scap Pulldown (Primer)", 195, 208),
+                    Exercise("Seated Cable Rows (elbows wide)", 258, 272),
+                    Exercise("Lat Pulldowns (narrow grip)", 314, 327),
+                    Exercise("Straight Arm Pushdowns", 382, 395),
+                    Exercise("1.5 Rep DB Pullover Ladder", 465, 478),
+                    Exercise("Bodyweight/Banded Pullups", 515, 528),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Dead Hang (Primer)", 575, 605),
-                    Exercise("Weighted Chin-Ups", 610, 665),
-                    Exercise("Barbell Rows", 670, 720),
-                    Exercise("Cable Pullovers", 725, 775),
-                    Exercise("Inverted Row Ladder", 780, 830),
-                    Exercise("Straight Arm Pulldown", 835, 875),
+                    Exercise("Face Pulls (Primer)", 590, 603),
+                    Exercise("Barbell Row", 614, 627),
+                    Exercise("Wide Grip Lat Pulldown", 655, 668),
+                    Exercise("DB High Pull", 717, 730),
+                    Exercise("1.5 Rep High Cable Row Ladder", 776, 790),
+                    Exercise("Inverted Row", 825, 838),
                 ]
             ),
         ]
     ),
+    # ── Legs ───────────────────────────────────────────────────────────────
     "QXtXEug0PLU": VideoInfo(
         video_id="QXtXEug0PLU",
         title="Legs",
@@ -167,27 +178,28 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("Reverse Hyper (Primer)", 180, 225),
-                    Exercise("Deadlifts", 228, 310),
-                    Exercise("Barbell Front Squats", 315, 380),
-                    Exercise("Alternating DB Reverse Lunges", 385, 430),
-                    Exercise("Seated Hamstring Curls", 435, 495),
-                    Exercise("Standing Calf Raises", 500, 560),
+                    Exercise("Reverse Hyper (Primer)", 198, 210),
+                    Exercise("Deadlifts", 253, 265),
+                    Exercise("Barbell Front Squats", 335, 347),
+                    Exercise("Alternating DB Reverse Lunges", 400, 413),
+                    Exercise("Seated Hamstring Curls", 470, 482),
+                    Exercise("Standing Calf Raises", 530, 542),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Reverse Hyper (Primer)", 605, 635),
-                    Exercise("Barbell Hip Thrusts", 640, 710),
-                    Exercise("Leg Press", 715, 770),
-                    Exercise("Walking Lunges", 775, 820),
-                    Exercise("Nordic Hamstring Curl", 825, 880),
-                    Exercise("Seated Calf Raises", 885, 935),
+                    Exercise("Banded Overhead Squat (Primer)", 622, 635),
+                    Exercise("Barbell Squat", 670, 682),
+                    Exercise("Barbell Hip Thrust", 755, 768),
+                    Exercise("DB Spanish Squat", 835, 848),
+                    Exercise("Glute-Ham Raise (GHR)", 878, 891),
+                    Exercise("Seated Calf Raises", 962, 975),
                 ]
             ),
         ]
     ),
+    # ── Triceps ────────────────────────────────────────────────────────────
     "8Nkfuhxsl-0": VideoInfo(
         video_id="8Nkfuhxsl-0",
         title="Triceps",
@@ -195,23 +207,24 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("Triceps Pushdowns", 125, 205),
-                    Exercise("Lying DB Extensions", 210, 290),
-                    Exercise("DB/Cable Triceps Kickbacks", 295, 375),
-                    Exercise("Cobra Pushups", 380, 420),
+                    Exercise("Triceps Pushdowns", 197, 210),
+                    Exercise("Lying DB Extensions", 253, 266),
+                    Exercise("DB/Cable Triceps Kickbacks", 337, 350),
+                    Exercise("Cobra Pushups", 408, 420),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Close Grip Bench Press", 430, 510),
-                    Exercise("Overhead Cable Extensions", 515, 580),
-                    Exercise("Diamond Cutter Pushups", 585, 640),
-                    Exercise("JM Press", 645, 710),
+                    Exercise("PJR Pullover", 495, 508),
+                    Exercise("Cable Tricep Push Away", 545, 558),
+                    Exercise("X Push Down", 597, 610),
+                    Exercise("Bench Dip", 672, 685),
                 ]
             ),
         ]
     ),
+    # ── Biceps ─────────────────────────────────────────────────────────────
     "hmeTQHsBwv8": VideoInfo(
         video_id="hmeTQHsBwv8",
         title="Biceps",
@@ -219,23 +232,24 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("Barbell Strict Curl to Cheat Curls", 105, 190),
-                    Exercise("DB Cross Body Hammer Curls", 195, 260),
-                    Exercise("Cable Stretch Drag Curls", 265, 340),
-                    Exercise("Mentzer Pulldowns (Trap Set)", 345, 400),
+                    Exercise("Barbell Strict Curl to Cheat Curls", 120, 132),
+                    Exercise("DB Cross Body Hammer Curls", 206, 218),
+                    Exercise("Cable Stretch Drag Curls", 295, 308),
+                    Exercise("Mentzer Pulldowns (Trap Set)", 357, 370),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Incline DB Curls", 410, 470),
-                    Exercise("Waiter Curls", 475, 530),
-                    Exercise("Preacher Curls", 535, 590),
-                    Exercise("Chin-Up Curls", 595, 645),
+                    Exercise("Chin-Up Curls", 415, 428),
+                    Exercise("DB Spider Curl", 460, 472),
+                    Exercise("DB Incline Curl", 515, 528),
+                    Exercise("Standing DB Curl Trap Set", 575, 588),
                 ]
             ),
         ]
     ),
+    # ── Shoulders ──────────────────────────────────────────────────────────
     "zEf4pKoKc70": VideoInfo(
         video_id="zEf4pKoKc70",
         title="Shoulders",
@@ -243,17 +257,17 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("DB Single Arm OHP / Barbell OHP", 65, 150),
-                    Exercise("DB Lateral Raises (Straight to Bent Arm)", 155, 235),
-                    Exercise("DB Rear Delt Rows", 240, 300),
+                    Exercise("DB Single Arm OHP / Barbell OHP", 112, 125),
+                    Exercise("DB Lateral Raises (Straight Arm to Bent Arm)", 195, 209),
+                    Exercise("DB Rear Delt Rows", 272, 285),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Cable Overhead Press", 310, 365),
-                    Exercise("Cable Lateral Raises", 370, 420),
-                    Exercise("Face Pulls", 425, 475),
+                    Exercise("DB Cheat Lateral Raise", 323, 337),
+                    Exercise("Incline Stretch Front Raise", 393, 407),
+                    Exercise("Face Pulls", 438, 452),
                 ]
             ),
         ]

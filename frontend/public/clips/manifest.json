@@ -5,37 +5,37 @@
         "exercise": "Banded ER (Primer)",
         "slug": "banded-er-primer",
         "file": "zD266B2jk0s/banded-er-primer.mp4",
-        "duration": 47
+        "duration": 12
       },
       {
         "exercise": "Incline DB Bench Press",
         "slug": "incline-db-bench-press",
         "file": "zD266B2jk0s/incline-db-bench-press.mp4",
-        "duration": 82
+        "duration": 12
       },
       {
         "exercise": "Crossovers",
         "slug": "crossovers",
         "file": "zD266B2jk0s/crossovers.mp4",
-        "duration": 71
+        "duration": 12
       },
       {
         "exercise": "Floor Flys",
         "slug": "floor-flys",
         "file": "zD266B2jk0s/floor-flys.mp4",
-        "duration": 72
+        "duration": 12
       },
       {
         "exercise": "Deficit 1.5 Rep Ladder Pushups",
         "slug": "deficit-1.5-rep-ladder-pushups",
         "file": "zD266B2jk0s/deficit-1.5-rep-ladder-pushups.mp4",
-        "duration": 69
+        "duration": 14
       },
       {
         "exercise": "Dips",
         "slug": "dips",
         "file": "zD266B2jk0s/dips.mp4",
-        "duration": 62
+        "duration": 12
       }
     ],
     "workout2": [
@@ -43,37 +43,37 @@
         "exercise": "Band Pull Apart (Primer)",
         "slug": "band-pull-apart-primer",
         "file": "zD266B2jk0s/band-pull-apart-primer.mp4",
-        "duration": 31
+        "duration": 12
       },
       {
         "exercise": "Flat DB Bench Press",
         "slug": "flat-db-bench-press",
         "file": "zD266B2jk0s/flat-db-bench-press.mp4",
-        "duration": 35
+        "duration": 12
       },
       {
         "exercise": "High-to-Low Crossover",
         "slug": "high-to-low-crossover",
         "file": "zD266B2jk0s/high-to-low-crossover.mp4",
-        "duration": 43
+        "duration": 12
       },
       {
         "exercise": "Incline Cable Press",
         "slug": "incline-cable-press",
         "file": "zD266B2jk0s/incline-cable-press.mp4",
-        "duration": 46
+        "duration": 12
       },
       {
         "exercise": "Dip (1.5 Rep Ladder)",
         "slug": "dip-1.5-rep-ladder",
         "file": "zD266B2jk0s/dip-1.5-rep-ladder.mp4",
-        "duration": 36
+        "duration": 14
       },
       {
         "exercise": "Prison Yard Pushup",
         "slug": "prison-yard-pushup",
         "file": "zD266B2jk0s/prison-yard-pushup.mp4",
-        "duration": 35
+        "duration": 14
       }
     ]
   },
@@ -83,75 +83,75 @@
         "exercise": "Scap Pulldown (Primer)",
         "slug": "scap-pulldown-primer",
         "file": "fX36liNtKzw/scap-pulldown-primer.mp4",
-        "duration": 40
+        "duration": 13
       },
       {
         "exercise": "Seated Cable Rows (elbows wide)",
         "slug": "seated-cable-rows-elbows-wide",
         "file": "fX36liNtKzw/seated-cable-rows-elbows-wide.mp4",
-        "duration": 75
+        "duration": 14
       },
       {
         "exercise": "Lat Pulldowns (narrow grip)",
         "slug": "lat-pulldowns-narrow-grip",
         "file": "fX36liNtKzw/lat-pulldowns-narrow-grip.mp4",
-        "duration": 70
+        "duration": 13
       },
       {
         "exercise": "Straight Arm Pushdowns",
         "slug": "straight-arm-pushdowns",
         "file": "fX36liNtKzw/straight-arm-pushdowns.mp4",
-        "duration": 60
+        "duration": 13
       },
       {
         "exercise": "1.5 Rep DB Pullover Ladder",
         "slug": "1.5-rep-db-pullover-ladder",
         "file": "fX36liNtKzw/1.5-rep-db-pullover-ladder.mp4",
-        "duration": 65
+        "duration": 13
       },
       {
         "exercise": "Bodyweight/Banded Pullups",
         "slug": "bodyweight-banded-pullups",
         "file": "fX36liNtKzw/bodyweight-banded-pullups.mp4",
-        "duration": 50
+        "duration": 13
       }
     ],
     "workout2": [
       {
-        "exercise": "Dead Hang (Primer)",
-        "slug": "dead-hang-primer",
-        "file": "fX36liNtKzw/dead-hang-primer.mp4",
-        "duration": 30
+        "exercise": "Face Pulls (Primer)",
+        "slug": "face-pulls-primer",
+        "file": "fX36liNtKzw/face-pulls-primer.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Weighted Chin-Ups",
-        "slug": "weighted-chin-ups",
-        "file": "fX36liNtKzw/weighted-chin-ups.mp4",
-        "duration": 55
+        "exercise": "Barbell Row",
+        "slug": "barbell-row",
+        "file": "fX36liNtKzw/barbell-row.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Barbell Rows",
-        "slug": "barbell-rows",
-        "file": "fX36liNtKzw/barbell-rows.mp4",
-        "duration": 50
+        "exercise": "Wide Grip Lat Pulldown",
+        "slug": "wide-grip-lat-pulldown",
+        "file": "fX36liNtKzw/wide-grip-lat-pulldown.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Cable Pullovers",
-        "slug": "cable-pullovers",
-        "file": "fX36liNtKzw/cable-pullovers.mp4",
-        "duration": 50
+        "exercise": "DB High Pull",
+        "slug": "db-high-pull",
+        "file": "fX36liNtKzw/db-high-pull.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Inverted Row Ladder",
-        "slug": "inverted-row-ladder",
-        "file": "fX36liNtKzw/inverted-row-ladder.mp4",
-        "duration": 50
+        "exercise": "1.5 Rep High Cable Row Ladder",
+        "slug": "1.5-rep-high-cable-row-ladder",
+        "file": "fX36liNtKzw/1.5-rep-high-cable-row-ladder.mp4",
+        "duration": 14
       },
       {
-        "exercise": "Straight Arm Pulldown",
-        "slug": "straight-arm-pulldown",
-        "file": "fX36liNtKzw/straight-arm-pulldown.mp4",
-        "duration": 40
+        "exercise": "Inverted Row",
+        "slug": "inverted-row",
+        "file": "fX36liNtKzw/inverted-row.mp4",
+        "duration": 13
       }
     ]
   },
@@ -161,75 +161,75 @@
         "exercise": "Reverse Hyper (Primer)",
         "slug": "reverse-hyper-primer",
         "file": "QXtXEug0PLU/reverse-hyper-primer.mp4",
-        "duration": 45
+        "duration": 12
       },
       {
         "exercise": "Deadlifts",
         "slug": "deadlifts",
         "file": "QXtXEug0PLU/deadlifts.mp4",
-        "duration": 82
+        "duration": 12
       },
       {
         "exercise": "Barbell Front Squats",
         "slug": "barbell-front-squats",
         "file": "QXtXEug0PLU/barbell-front-squats.mp4",
-        "duration": 65
+        "duration": 12
       },
       {
         "exercise": "Alternating DB Reverse Lunges",
         "slug": "alternating-db-reverse-lunges",
         "file": "QXtXEug0PLU/alternating-db-reverse-lunges.mp4",
-        "duration": 45
+        "duration": 13
       },
       {
         "exercise": "Seated Hamstring Curls",
         "slug": "seated-hamstring-curls",
         "file": "QXtXEug0PLU/seated-hamstring-curls.mp4",
-        "duration": 60
+        "duration": 12
       },
       {
         "exercise": "Standing Calf Raises",
         "slug": "standing-calf-raises",
         "file": "QXtXEug0PLU/standing-calf-raises.mp4",
-        "duration": 60
+        "duration": 12
       }
     ],
     "workout2": [
       {
-        "exercise": "Reverse Hyper (Primer)",
-        "slug": "reverse-hyper-primer",
-        "file": "QXtXEug0PLU/reverse-hyper-primer.mp4",
-        "duration": 30
+        "exercise": "Banded Overhead Squat (Primer)",
+        "slug": "banded-overhead-squat-primer",
+        "file": "QXtXEug0PLU/banded-overhead-squat-primer.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Barbell Hip Thrusts",
-        "slug": "barbell-hip-thrusts",
-        "file": "QXtXEug0PLU/barbell-hip-thrusts.mp4",
-        "duration": 70
+        "exercise": "Barbell Squat",
+        "slug": "barbell-squat",
+        "file": "QXtXEug0PLU/barbell-squat.mp4",
+        "duration": 12
       },
       {
-        "exercise": "Leg Press",
-        "slug": "leg-press",
-        "file": "QXtXEug0PLU/leg-press.mp4",
-        "duration": 55
+        "exercise": "Barbell Hip Thrust",
+        "slug": "barbell-hip-thrust",
+        "file": "QXtXEug0PLU/barbell-hip-thrust.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Walking Lunges",
-        "slug": "walking-lunges",
-        "file": "QXtXEug0PLU/walking-lunges.mp4",
-        "duration": 45
+        "exercise": "DB Spanish Squat",
+        "slug": "db-spanish-squat",
+        "file": "QXtXEug0PLU/db-spanish-squat.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Nordic Hamstring Curl",
-        "slug": "nordic-hamstring-curl",
-        "file": "QXtXEug0PLU/nordic-hamstring-curl.mp4",
-        "duration": 55
+        "exercise": "Glute-Ham Raise (GHR)",
+        "slug": "glute-ham-raise-ghr",
+        "file": "QXtXEug0PLU/glute-ham-raise-ghr.mp4",
+        "duration": 13
       },
       {
         "exercise": "Seated Calf Raises",
         "slug": "seated-calf-raises",
         "file": "QXtXEug0PLU/seated-calf-raises.mp4",
-        "duration": 50
+        "duration": 13
       }
     ]
   },
@@ -239,51 +239,51 @@
         "exercise": "Triceps Pushdowns",
         "slug": "triceps-pushdowns",
         "file": "8Nkfuhxsl-0/triceps-pushdowns.mp4",
-        "duration": 80
+        "duration": 13
       },
       {
         "exercise": "Lying DB Extensions",
         "slug": "lying-db-extensions",
         "file": "8Nkfuhxsl-0/lying-db-extensions.mp4",
-        "duration": 80
+        "duration": 13
       },
       {
         "exercise": "DB/Cable Triceps Kickbacks",
         "slug": "db-cable-triceps-kickbacks",
         "file": "8Nkfuhxsl-0/db-cable-triceps-kickbacks.mp4",
-        "duration": 80
+        "duration": 13
       },
       {
         "exercise": "Cobra Pushups",
         "slug": "cobra-pushups",
         "file": "8Nkfuhxsl-0/cobra-pushups.mp4",
-        "duration": 40
+        "duration": 12
       }
     ],
     "workout2": [
       {
-        "exercise": "Close Grip Bench Press",
-        "slug": "close-grip-bench-press",
-        "file": "8Nkfuhxsl-0/close-grip-bench-press.mp4",
-        "duration": 80
+        "exercise": "PJR Pullover",
+        "slug": "pjr-pullover",
+        "file": "8Nkfuhxsl-0/pjr-pullover.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Overhead Cable Extensions",
-        "slug": "overhead-cable-extensions",
-        "file": "8Nkfuhxsl-0/overhead-cable-extensions.mp4",
-        "duration": 65
+        "exercise": "Cable Tricep Push Away",
+        "slug": "cable-tricep-push-away",
+        "file": "8Nkfuhxsl-0/cable-tricep-push-away.mp4",
+        "duration": 13
       },
       {
-        "exercise": "Diamond Cutter Pushups",
-        "slug": "diamond-cutter-pushups",
-        "file": "8Nkfuhxsl-0/diamond-cutter-pushups.mp4",
-        "duration": 55
+        "exercise": "X Push Down",
+        "slug": "x-push-down",
+        "file": "8Nkfuhxsl-0/x-push-down.mp4",
+        "duration": 13
       },
       {
-        "exercise": "JM Press",
-        "slug": "jm-press",
-        "file": "8Nkfuhxsl-0/jm-press.mp4",
-        "duration": 65
+        "exercise": "Bench Dip",
+        "slug": "bench-dip",
+        "file": "8Nkfuhxsl-0/bench-dip.mp4",
+        "duration": 13
       }
     ]
   },
@@ -293,51 +293,51 @@
         "exercise": "Barbell Strict Curl to Cheat Curls",
         "slug": "barbell-strict-curl-to-cheat-curls",
         "file": "hmeTQHsBwv8/barbell-strict-curl-to-cheat-curls.mp4",
-        "duration": 85
+        "duration": 12
       },
       {
         "exercise": "DB Cross Body Hammer Curls",
         "slug": "db-cross-body-hammer-curls",
         "file": "hmeTQHsBwv8/db-cross-body-hammer-curls.mp4",
-        "duration": 65
+        "duration": 12
       },
       {
         "exercise": "Cable Stretch Drag Curls",
         "slug": "cable-stretch-drag-curls",
         "file": "hmeTQHsBwv8/cable-stretch-drag-curls.mp4",
-        "duration": 75
+        "duration": 13
       },
       {
         "exercise": "Mentzer Pulldowns (Trap Set)",
         "slug": "mentzer-pulldowns-trap-set",
         "file": "hmeTQHsBwv8/mentzer-pulldowns-trap-set.mp4",
-        "duration": 55
+        "duration": 13
       }
     ],
     "workout2": [
       {
-        "exercise": "Incline DB Curls",
-        "slug": "incline-db-curls",
-        "file": "hmeTQHsBwv8/incline-db-curls.mp4",
-        "duration": 60
-      },
-      {
-        "exercise": "Waiter Curls",
-        "slug": "waiter-curls",
-        "file": "hmeTQHsBwv8/waiter-curls.mp4",
-        "duration": 55
-      },
-      {
-        "exercise": "Preacher Curls",
-        "slug": "preacher-curls",
-        "file": "hmeTQHsBwv8/preacher-curls.mp4",
-        "duration": 55
-      },
-      {
         "exercise": "Chin-Up Curls",
         "slug": "chin-up-curls",
         "file": "hmeTQHsBwv8/chin-up-curls.mp4",
-        "duration": 50
+        "duration": 13
+      },
+      {
+        "exercise": "DB Spider Curl",
+        "slug": "db-spider-curl",
+        "file": "hmeTQHsBwv8/db-spider-curl.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "DB Incline Curl",
+        "slug": "db-incline-curl",
+        "file": "hmeTQHsBwv8/db-incline-curl.mp4",
+        "duration": 13
+      },
+      {
+        "exercise": "Standing DB Curl Trap Set",
+        "slug": "standing-db-curl-trap-set",
+        "file": "hmeTQHsBwv8/standing-db-curl-trap-set.mp4",
+        "duration": 13
       }
     ]
   },
@@ -345,41 +345,41 @@
     "workout1": [
       {
         "exercise": "DB Single Arm OHP / Barbell OHP",
-        "slug": "db-single-arm-ohp---barbell-ohp",
-        "file": "zEf4pKoKc70/db-single-arm-ohp---barbell-ohp.mp4",
-        "duration": 85
+        "slug": "db-single-arm-ohp-barbell-ohp",
+        "file": "zEf4pKoKc70/db-single-arm-ohp-barbell-ohp.mp4",
+        "duration": 13
       },
       {
-        "exercise": "DB Lateral Raises (Straight to Bent Arm)",
-        "slug": "db-lateral-raises-straight-to-bent-arm",
-        "file": "zEf4pKoKc70/db-lateral-raises-straight-to-bent-arm.mp4",
-        "duration": 80
+        "exercise": "DB Lateral Raises (Straight Arm to Bent Arm)",
+        "slug": "db-lateral-raises-straight-arm-to-bent-arm",
+        "file": "zEf4pKoKc70/db-lateral-raises-straight-arm-to-bent-arm.mp4",
+        "duration": 14
       },
       {
         "exercise": "DB Rear Delt Rows",
         "slug": "db-rear-delt-rows",
         "file": "zEf4pKoKc70/db-rear-delt-rows.mp4",
-        "duration": 60
+        "duration": 13
       }
     ],
     "workout2": [
       {
-        "exercise": "Cable Overhead Press",
-        "slug": "cable-overhead-press",
-        "file": "zEf4pKoKc70/cable-overhead-press.mp4",
-        "duration": 55
+        "exercise": "DB Cheat Lateral Raise",
+        "slug": "db-cheat-lateral-raise",
+        "file": "zEf4pKoKc70/db-cheat-lateral-raise.mp4",
+        "duration": 14
       },
       {
-        "exercise": "Cable Lateral Raises",
-        "slug": "cable-lateral-raises",
-        "file": "zEf4pKoKc70/cable-lateral-raises.mp4",
-        "duration": 50
+        "exercise": "Incline Stretch Front Raise",
+        "slug": "incline-stretch-front-raise",
+        "file": "zEf4pKoKc70/incline-stretch-front-raise.mp4",
+        "duration": 14
       },
       {
         "exercise": "Face Pulls",
         "slug": "face-pulls",
         "file": "zEf4pKoKc70/face-pulls.mp4",
-        "duration": 50
+        "duration": 14
       }
     ]
   }

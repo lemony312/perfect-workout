@@ -300,39 +300,40 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         notes: "Exercise details from video - Workout 2",
         exercises: [
           {
-            name: "Banded ER",
+            name: "Band Pull Apart (Primer)",
             sets: "1-2",
             reps: "10-15",
             notes: "Primer - sub max"
           },
           {
-            name: "Flat DB Bench Press / Barbell Bench Press",
+            name: "Flat DB Bench Press",
             sets: 3,
             reps: "5-8",
             notes: "To failure - heavy compound movement"
           },
           {
-            name: "Incline Cable Flys",
+            name: "High-to-Low Crossover",
             sets: 3,
             reps: "10-12 + Partials",
-            notes: "Upper chest focus"
+            notes: "Lower chest cable emphasis"
           },
           {
-            name: "Decline DB Press",
+            name: "Incline Cable Press",
             sets: "2-3",
             reps: "8-10 + Eccentric Only Reps",
-            notes: "Lower chest emphasis"
+            notes: "Upper chest emphasis"
           },
           {
-            name: "Banded Resisted Pushups",
+            name: "Dip (1.5 Rep Ladder)",
             sets: 1,
             reps: "to failure",
-            notes: "Intensity technique"
+            notes: "Ascending hold ladder"
           },
           {
-            name: "Weighted Dips",
+            name: "Prison Yard Pushup",
             sets: 1,
-            reps: "to failure + Partial Reps"
+            reps: "to failure + Partial Reps",
+            notes: "Bodyweight burnout"
           }
         ]
       },
@@ -345,28 +346,28 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         notes: "Exercise details from video - Workout 2",
         exercises: [
           {
-            name: "Close-Grip Bench Press / JM Press",
+            name: "PJR Pullover",
             sets: "2-3",
             reps: "6-8",
-            notes: "To failure - heavy compound"
+            notes: "To failure - elbow extension focus"
           },
           {
-            name: "Overhead Cable Extensions",
+            name: "Cable Tricep Push Away",
             sets: "2-3",
             reps: "8-10 + Eccentric Only Reps",
-            notes: "Long head emphasis"
+            notes: "Arms overhead, perpendicular cable angle"
           },
           {
-            name: "Cable Pushdowns (rope or bar)",
+            name: "X Push Down",
             sets: "2-3",
             reps: "10-12 + Partials",
-            notes: "Lateral/medial heads"
+            notes: "Cross-grip cable pushdown, elbows behind body"
           },
           {
-            name: "Diamond Pushups",
+            name: "Bench Dip",
             sets: 1,
             reps: "to failure",
-            notes: "Bodyweight burnout"
+            notes: "Bodyweight burnout - palms out, chest up"
           }
         ]
       }
@@ -388,37 +389,37 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         notes: "Exercise details from video - Workout 2",
         exercises: [
           {
-            name: "Scap Pulldown",
+            name: "Face Pulls (Primer)",
             sets: "1-2",
             reps: "10-15",
             notes: "Primer - sub max"
           },
           {
-            name: "Weighted Pullups / Weighted Chin-ups",
+            name: "Barbell Row",
             sets: 3,
             reps: "5-8",
             notes: "To failure - heavy compound"
           },
           {
-            name: "Barbell Rows",
+            name: "Wide Grip Lat Pulldown",
             sets: 3,
             reps: "10-12 + Partials",
-            notes: "Mid-back thickness"
+            notes: "Wide grip for upper back width"
           },
           {
-            name: "One-Arm DB Rows",
+            name: "DB High Pull",
             sets: "2-3",
             reps: "8-10 + Eccentric Only Reps",
-            notes: "Unilateral work"
+            notes: "Upper back and rear delt focus"
           },
           {
-            name: "Cable Pullovers",
+            name: "1.5 Rep High Cable Row Ladder",
             sets: 1,
             reps: "to failure",
-            notes: "Lat stretch focus"
+            notes: "Ascending hold ladder"
           },
           {
-            name: "Inverted Rows",
+            name: "Inverted Row",
             sets: 1,
             reps: "to failure",
             notes: "Bodyweight burnout"
@@ -434,28 +435,28 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         notes: "Exercise details from video - Workout 2",
         exercises: [
           {
-            name: "Weighted Chin-ups",
+            name: "Chin-Up Curls",
             sets: "2-3",
             reps: "6-8",
-            notes: "To failure - heavy compound"
+            notes: "Bodyweight biceps compound"
           },
           {
-            name: "Incline DB Curls",
+            name: "DB Spider Curl",
             sets: "2-3",
-            reps: "8-10",
+            reps: "10-12",
+            notes: "Short head emphasis - incline bench"
+          },
+          {
+            name: "DB Incline Curl",
+            sets: "2-3",
+            reps: "10-12 + Partials",
             notes: "Long head emphasis - stretched position"
           },
           {
-            name: "Concentration Curls / Preacher Curls",
-            sets: "2-3",
-            reps: "10-12 + Partials",
-            notes: "Peak contraction"
-          },
-          {
-            name: "Reverse Grip Curls (Trap Set)",
+            name: "Standing DB Curl (Trap Set)",
             sets: 1,
             reps: "to failure",
-            notes: "Brachialis and forearm burnout"
+            notes: "Escalating tempo trap set burnout"
           }
         ]
       }
@@ -477,34 +478,34 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         notes: "Exercise details from video - Workout 2",
         exercises: [
           {
-            name: "Reverse Hyper",
+            name: "Banded Overhead Squat (Primer)",
             sets: "1-2",
             reps: "10-15",
-            notes: "Primer - sub max"
+            notes: "Primer - sub max; mobility and activation"
           },
           {
-            name: "Back Squats / Front Squats",
+            name: "Barbell Squat",
             sets: 3,
             reps: "5-8",
-            notes: "To failure - heavy compound"
+            notes: "To failure - quad dominant compound"
           },
           {
-            name: "Romanian Deadlifts",
+            name: "Barbell Hip Thrust",
             sets: "2-3",
             reps: "6-8",
-            notes: "Hamstring/glute focus"
+            notes: "Glute focus"
           },
           {
-            name: "Bulgarian Split Squats",
+            name: "DB Spanish Squat",
             sets: "2-3",
             reps: "10 each leg",
-            notes: "Unilateral work"
+            notes: "Quad focus with band assist"
           },
           {
-            name: "Leg Extensions / Leg Curls Superset",
+            name: "Glute-Ham Raise (GHR)",
             sets: 1,
             reps: "12-15 to failure + Eccentric Only Reps",
-            notes: "Quad and hamstring burnout"
+            notes: "Hamstring burnout"
           },
           {
             name: "Seated Calf Raises",
@@ -523,19 +524,19 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         notes: "Exercise details from video - Workout 2",
         exercises: [
           {
-            name: "Standing Barbell OHP / Arnold Press",
+            name: "DB Cheat Lateral Raise",
             sets: "2-3",
             reps: "6-8",
-            notes: "To failure - heavy compound"
+            notes: "To failure - heavy lateral delts with momentum"
           },
           {
-            name: "Cable Lateral Raises",
+            name: "Incline Stretch Front Raise",
             sets: "3-4",
             reps: "10-12 + Partials",
-            notes: "Constant tension on medial delts"
+            notes: "Front delt emphasis from incline stretch"
           },
           {
-            name: "Face Pulls / Reverse Flys",
+            name: "Face Pulls",
             sets: 2,
             reps: "10-12",
             notes: "Rear delt focus"
