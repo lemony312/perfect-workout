@@ -1,0 +1,9 @@
+[project]
+name = "perfect-workout-scripts"
+version = "0.1.0"
+description = "Python scripts for Perfect Workout app"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+dev-dependencies = []
