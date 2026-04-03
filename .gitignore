@@ -35,5 +35,8 @@ build/
 
 # Data and cache (root level only, not frontend/src/data/)
 /data/
-*.mp4
 *.vtt
+
+# Generated video clips (large files, regenerate with scripts/clip_exercises.py)
+frontend/public/clips/**/*.mp4
+!frontend/public/clips/manifest.json
