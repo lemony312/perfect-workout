@@ -26,8 +26,8 @@ const MONTHS = [
 export default function WorkoutDetailClient({ dateStr }: { dateStr: string }) {
   const { startDate } = useWorkout()
 
-  const targetDate = new Date(dateStr)
-  targetDate.setHours(0, 0, 0, 0)
+  const [yr, mo, da] = dateStr.split('-').map(Number)
+  const targetDate = new Date(yr, mo - 1, da)
 
   const workout = getWorkoutForDate(startDate, targetDate)
 

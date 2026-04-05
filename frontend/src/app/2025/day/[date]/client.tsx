@@ -296,8 +296,8 @@ export default function WorkoutDetail2025Client({ dateStr }: { dateStr: string }
     load()
   }, [])
 
-  const targetDate = new Date(dateStr)
-  targetDate.setHours(0, 0, 0, 0)
+  const [yr, mo, da] = dateStr.split('-').map(Number)
+  const targetDate = new Date(yr, mo - 1, da)
 
   const workout = getWorkoutForDate2025(startDate, targetDate)
 

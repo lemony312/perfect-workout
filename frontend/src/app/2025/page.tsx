@@ -73,7 +73,7 @@ export default function Calendar2025() {
   }
 
   const handleDayClick = (date: Date) => {
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
     router.push(`/2025/day/${dateStr}`)
   }
 
@@ -164,11 +164,11 @@ export default function Calendar2025() {
         {/* Calendar Grid */}
         <div className="bg-[#1a1a1a] rounded-lg border border-white/5 p-4 shadow-2xl">
           {/* Weekday Headers */}
-          <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-4">
+          <div className="grid grid-cols-7 gap-0.5 sm:gap-2 mb-4">
             {WEEKDAYS.map((day) => (
               <div
                 key={day}
-                className="text-center text-xs sm:text-sm font-semibold text-[#a0a0a0] py-2"
+                className="text-center text-[10px] sm:text-sm font-semibold text-[#a0a0a0] py-1 sm:py-2"
               >
                 {day}
               </div>
@@ -176,7 +176,7 @@ export default function Calendar2025() {
           </div>
 
           {/* Calendar Days */}
-          <div className="grid grid-cols-7 gap-1 sm:gap-2">
+          <div className="grid grid-cols-7 gap-0.5 sm:gap-2">
             {calendarDays.map((date, index) => {
               if (!date) {
                 return <div key={`empty-${index}`} className="aspect-square" />
@@ -187,28 +187,33 @@ export default function Calendar2025() {
 
               return (
                 <button
-                  key={date.toISOString()}
+                  key={`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`}
                   onClick={() => handleDayClick(date)}
                   className={`
-                    aspect-square p-1 sm:p-2 rounded-md sm:rounded-lg border border-white/5 transition-all
+                    aspect-square p-0.5 sm:p-2 rounded sm:rounded-lg border border-white/5 transition-all overflow-hidden
                     hover:scale-105 hover:bg-[#252525] active:bg-[#303030] bg-[#1a1a1a]/50
                     ${isTodayDate ? 'ring-2 ring-[#e53e3e] ring-offset-1 sm:ring-offset-2 ring-offset-[#0f0f0f]' : ''}
                   `}
                 >
-                  <div className="flex flex-col h-full">
-                    <span className="text-xs sm:text-sm font-semibold mb-0.5 sm:mb-1 text-[#f5f5f5]">
+                  <div className="flex flex-col h-full overflow-hidden">
+                    <span className="text-[10px] sm:text-sm font-semibold mb-0 sm:mb-1 text-[#f5f5f5] leading-tight">
                       {date.getDate()}
                     </span>
                     {workout.isRest ? (
-                      <span className="text-[10px] sm:text-xs text-gray-400">Rest</span>
+                      <span className="text-[8px] sm:text-xs text-gray-400">Rest</span>
                     ) : (
-                      <div className="flex flex-col gap-0.5 sm:gap-1 flex-1">
+                      <div className="flex flex-col gap-0 sm:gap-1 flex-1 overflow-hidden">
                         {workout.sessions.map((session, idx) => {
                           const primaryColor = MUSCLE_GROUP_COLORS[session.muscleGroups[0]] || 'border-gray-600'
+                          const abbrev: Record<string, string> = {
+                            Chest: 'Chst', Back: 'Back', Legs: 'Legs',
+                            Triceps: 'Tri', Biceps: 'Bi', Shoulders: 'Shld',
+                          }
+                          const label = session.muscleGroups.map(g => abbrev[g] || g).join('+')
                           return (
                             <div
                               key={idx}
-                              className={`text-[10px] sm:text-xs line-clamp-1 leading-tight border-l-2 pl-0.5 sm:pl-1 ${primaryColor}`}
+                              className={`text-[7px] sm:text-xs leading-tight truncate border-l sm:border-l-2 pl-0.5 sm:pl-1 ${primaryColor}`}
                               title={session.muscleGroups.join(' + ')}
                               style={{
                                 color: session.muscleGroups[0] === 'Chest' ? '#f87171' :
@@ -220,7 +225,8 @@ export default function Calendar2025() {
                                        '#9ca3af'
                               }}
                             >
-                              {session.muscleGroups.join(' + ')}
+                              <span className="sm:hidden">{label}</span>
+                              <span className="hidden sm:inline">{session.muscleGroups.join(' + ')}</span>
                             </div>
                           )
                         })}

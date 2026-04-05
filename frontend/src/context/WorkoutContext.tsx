@@ -34,9 +34,9 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
-      const d = new Date(stored)
+      const [y, m, da] = stored.split('-').map(Number)
+      const d = new Date(y, m - 1, da)
       if (!isNaN(d.getTime())) {
-        d.setHours(0, 0, 0, 0)
         setStartDate(d)
       }
     }
@@ -45,7 +45,7 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
   const setTodayAs = useCallback((dayNumber: number, cycleLength: number) => {
     const newStart = calculateStartDate(dayNumber, cycleLength)
     setStartDate(newStart)
-    localStorage.setItem(STORAGE_KEY, newStart.toISOString().split('T')[0])
+    localStorage.setItem(STORAGE_KEY, `${newStart.getFullYear()}-${String(newStart.getMonth() + 1).padStart(2, '0')}-${String(newStart.getDate()).padStart(2, '0')}`)
   }, [])
 
   return (

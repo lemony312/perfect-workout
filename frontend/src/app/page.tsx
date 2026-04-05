@@ -72,7 +72,7 @@ export default function Home() {
   }
 
   const handleDayClick = (date: Date) => {
-    const dateStr = date.toISOString().split('T')[0]
+    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
     router.push(`/day/${dateStr}`)
   }
 
@@ -185,7 +185,7 @@ export default function Home() {
 
               return (
                 <button
-                  key={date.toISOString()}
+                  key={`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`}
                   onClick={() => handleDayClick(date)}
                   className={`
                     aspect-square p-1 sm:p-2 rounded-md sm:rounded-lg border transition-all
