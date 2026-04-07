@@ -422,6 +422,9 @@ def generate_manifest(
     """
     Generate a JSON manifest of all clips.
 
+    When video_ids is a subset, the existing manifest is loaded first so that
+    entries for other videos are preserved (not clobbered).
+
     Args:
         video_ids: Optional list of video IDs to include (defaults to all)
         dry_run: If True, don't write manifest file
@@ -429,7 +432,14 @@ def generate_manifest(
     Returns:
         The manifest dictionary
     """
+    # Load existing manifest so a partial run doesn't clobber other entries
     manifest = {}
+    if MANIFEST_PATH.exists():
+        try:
+            with open(MANIFEST_PATH, 'r') as f:
+                manifest = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            manifest = {}
 
     video_ids_to_process = video_ids if video_ids else list(EXERCISE_DATA.keys())
 
