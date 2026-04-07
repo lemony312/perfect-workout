@@ -149,23 +149,23 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout1",
                 exercises=[
-                    Exercise("Scap Pulldown (Primer)", 195, 208),
-                    Exercise("Seated Cable Rows (elbows wide)", 258, 272),
-                    Exercise("Lat Pulldowns (narrow grip)", 314, 327),
-                    Exercise("Straight Arm Pushdowns", 382, 395),
-                    Exercise("1.5 Rep DB Pullover Ladder", 465, 478),
-                    Exercise("Bodyweight/Banded Pullups", 515, 528),
+                    Exercise("Scap Pulldown (Primer)", 218, 231),
+                    Exercise("Seated Cable Rows (elbows wide)", 263, 277),
+                    Exercise("Lat Pulldowns (narrow grip)", 325, 338),
+                    Exercise("Straight Arm Pushdowns", 398, 411),
+                    Exercise("1.5 Rep DB Pullover Ladder", 458, 471),
+                    Exercise("Bodyweight/Banded Pullups", 523, 536),
                 ]
             ),
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Face Pulls (Primer)", 590, 603),
-                    Exercise("Barbell Row", 614, 627),
-                    Exercise("Wide Grip Lat Pulldown", 655, 668),
-                    Exercise("DB High Pull", 717, 730),
+                    Exercise("Face Pulls (Primer)", 595, 608),
+                    Exercise("Barbell Row", 616, 629),
+                    Exercise("Wide Grip Lat Pulldown", 664, 677),
+                    Exercise("DB High Pull", 719, 732),
                     Exercise("1.5 Rep High Cable Row Ladder", 776, 790),
-                    Exercise("Inverted Row", 825, 838),
+                    Exercise("Inverted Row", 829, 842),
                 ]
             ),
         ]
@@ -259,7 +259,7 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
                 exercises=[
                     Exercise("DB Single Arm OHP / Barbell OHP", 112, 125),
                     Exercise("DB Lateral Raises (Straight Arm to Bent Arm)", 195, 209),
-                    Exercise("DB Rear Delt Rows", 272, 285),
+                    Exercise("DB Rear Delt Rows", 247, 260),
                 ]
             ),
             Workout(
@@ -267,7 +267,7 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
                 exercises=[
                     Exercise("DB Cheat Lateral Raise", 323, 337),
                     Exercise("Incline Stretch Front Raise", 393, 407),
-                    Exercise("Face Pulls", 438, 452),
+                    Exercise("Face Pulls", 434, 447),
                 ]
             ),
         ]
