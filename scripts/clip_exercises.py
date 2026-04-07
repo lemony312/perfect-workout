@@ -244,7 +244,7 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
                     Exercise("Chin-Up Curls", 415, 428),
                     Exercise("DB Spider Curl", 460, 472),
                     Exercise("DB Incline Curl", 515, 528),
-                    Exercise("Standing DB Curl Trap Set", 575, 588),
+                    Exercise("Standing DB Curl Trap Set", 566, 579),
                 ]
             ),
         ]
