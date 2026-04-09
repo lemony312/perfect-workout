@@ -189,8 +189,8 @@ EXERCISE_DATA: Dict[str, VideoInfo] = {
             Workout(
                 name="workout2",
                 exercises=[
-                    Exercise("Banded Overhead Squat (Primer)", 622, 635),
-                    Exercise("Barbell Squat", 670, 682),
+                    Exercise("Banded Overhead Squat (Primer)", 606, 619),
+                    Exercise("Barbell Squat", 636, 649),
                     Exercise("Barbell Hip Thrust", 755, 768),
                     Exercise("DB Spanish Squat", 835, 848),
                     Exercise("Glute-Ham Raise (GHR)", 878, 891),
