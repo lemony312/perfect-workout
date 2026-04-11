@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useWorkout } from '@/context/WorkoutContext'
 import { getWorkoutForDate } from '@/data/workouts'
+import RestTimer from '@/components/RestTimer'
 
 const MUSCLE_GROUP_COLORS: Record<string, string> = {
   Chest: 'bg-red-600/20 border-red-600 text-red-400',
@@ -122,6 +123,8 @@ export default function WorkoutDetailClient({ dateStr }: { dateStr: string }) {
                 </div>
               ))}
             </div>
+
+            <RestTimer />
 
             {/* YouTube Search Link */}
             <a

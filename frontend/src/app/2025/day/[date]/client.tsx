@@ -8,6 +8,7 @@ import {
   type Exercise,
   type WorkoutSession2025,
 } from '@/data/workouts-2025'
+import RestTimer from '@/components/RestTimer'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -375,16 +376,19 @@ export default function WorkoutDetail2025Client({ dateStr }: { dateStr: string }
             </div>
           </div>
         ) : (
-          <div className="space-y-8">
-            {workout.sessions.map((session, sessionIdx) => (
-              <SessionBlock
-                key={sessionIdx}
-                session={session}
-                manifest={manifest}
-                workoutNumber={workoutNumber}
-              />
-            ))}
-          </div>
+          <>
+            <div className="space-y-8">
+              {workout.sessions.map((session, sessionIdx) => (
+                <SessionBlock
+                  key={sessionIdx}
+                  session={session}
+                  manifest={manifest}
+                  workoutNumber={workoutNumber}
+                />
+              ))}
+            </div>
+            <RestTimer />
+          </>
         )}
       </div>
     </div>
