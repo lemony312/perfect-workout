@@ -24,7 +24,7 @@ export interface WorkoutDay2025 {
   dayLabel: string;
 }
 
-export const CYCLE_LENGTH_2025 = 7;
+export const CYCLE_LENGTH_2025 = 8;
 
 export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
   {
@@ -544,6 +544,14 @@ export const WORKOUT_CYCLE_2025: WorkoutDay2025[] = [
         ]
       }
     ]
+  },
+  {
+    dayNumber: 8,
+    name: "Rest Day",
+    slug: "rest-day-2",
+    dayLabel: "Rest Day",
+    isRest: true,
+    sessions: []
   }
 ];
 

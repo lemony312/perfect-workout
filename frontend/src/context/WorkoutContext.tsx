@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, useCallback, ReactNode 
 
 interface WorkoutContextType {
   startDate: Date
-  /** Set which day in the cycle today should be (1-7) */
+  /** Set which day in the cycle today should be (1-indexed) */
   setTodayAs: (dayNumber: number, cycleLength: number) => void
 }
 
