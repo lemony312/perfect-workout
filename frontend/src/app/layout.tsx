@@ -55,6 +55,13 @@ export default function RootLayout({
                 >
                   2025 Series
                 </Link>
+                <div className="h-4 w-px bg-white/10" />
+                <Link
+                  href="/bodyweight"
+                  className="text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-4 py-3 rounded-md hover:bg-[#252525] active:bg-[#303030]"
+                >
+                  Bodyweight
+                </Link>
               </div>
             </div>
           </nav>
