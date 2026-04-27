@@ -385,110 +385,440 @@
   },
   "bodyweight-chest": {
     "workout1": [
-      { "exercise": "Scapula Push-ups", "slug": "scapula-push-ups", "file": "bodyweight/scapula-push-ups.mp4", "duration": 12 },
-      { "exercise": "Incline Push-ups → Flat Push-ups", "slug": "incline-push-ups-to-flat-push-ups", "file": "bodyweight/incline-push-ups-to-flat-push-ups.mp4", "duration": 12 },
-      { "exercise": "Decline Push-ups", "slug": "decline-push-ups", "file": "bodyweight/decline-push-ups.mp4", "duration": 12 },
-      { "exercise": "Archer Push-ups", "slug": "archer-push-ups", "file": "bodyweight/archer-push-ups.mp4", "duration": 12 },
-      { "exercise": "Push-up Plus", "slug": "push-up-plus", "file": "bodyweight/push-up-plus.mp4", "duration": 12 },
-      { "exercise": "Deficit Push-up Ladder", "slug": "deficit-push-up-ladder", "file": "bodyweight/deficit-push-up-ladder.mp4", "duration": 12 }
+      {
+        "exercise": "Scapula Push-ups",
+        "slug": "scapula-push-ups",
+        "file": "bodyweight/scapula-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Incline Push-ups \u2192 Flat Push-ups",
+        "slug": "incline-push-ups-to-flat-push-ups",
+        "file": "bodyweight/incline-push-ups-to-flat-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Decline Push-ups",
+        "slug": "decline-push-ups",
+        "file": "bodyweight/decline-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Archer Push-ups",
+        "slug": "archer-push-ups",
+        "file": "bodyweight/archer-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Push-up Plus",
+        "slug": "push-up-plus",
+        "file": "bodyweight/push-up-plus.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Deficit Push-up Ladder",
+        "slug": "deficit-push-up-ladder",
+        "file": "bodyweight/deficit-push-up-ladder.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Band Pull Apart (Primer)", "slug": "band-pull-apart-primer", "file": "bodyweight/band-pull-apart-primer.mp4", "duration": 12 },
-      { "exercise": "Wide Push-ups", "slug": "wide-push-ups", "file": "bodyweight/wide-push-ups.mp4", "duration": 12 },
-      { "exercise": "Pseudo Planche Push-ups", "slug": "pseudo-planche-push-ups", "file": "bodyweight/pseudo-planche-push-ups.mp4", "duration": 12 },
-      { "exercise": "Hindu Push-ups", "slug": "hindu-push-ups", "file": "bodyweight/hindu-push-ups.mp4", "duration": 12 },
-      { "exercise": "Typewriter Push-ups", "slug": "typewriter-push-ups", "file": "bodyweight/typewriter-push-ups.mp4", "duration": 12 },
-      { "exercise": "Push-up Burnout 21s", "slug": "push-up-burnout-21s", "file": "bodyweight/push-up-burnout-21s.mp4", "duration": 12 }
+      {
+        "exercise": "Band Pull Apart (Primer)",
+        "slug": "band-pull-apart-primer",
+        "file": "bodyweight/band-pull-apart-primer.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Wide Push-ups",
+        "slug": "wide-push-ups",
+        "file": "bodyweight/wide-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Pseudo Planche Push-ups",
+        "slug": "pseudo-planche-push-ups",
+        "file": "bodyweight/pseudo-planche-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Hindu Push-ups",
+        "slug": "hindu-push-ups",
+        "file": "bodyweight/hindu-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Typewriter Push-ups",
+        "slug": "typewriter-push-ups",
+        "file": "bodyweight/typewriter-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Push-up Burnout 21s",
+        "slug": "push-up-burnout-21s",
+        "file": "bodyweight/push-up-burnout-21s.mp4",
+        "duration": 12
+      }
     ]
   },
   "bodyweight-triceps": {
     "workout1": [
-      { "exercise": "Bodyweight Triceps Extensions", "slug": "bodyweight-triceps-extensions", "file": "bodyweight/bodyweight-triceps-extensions.mp4", "duration": 12 },
-      { "exercise": "Diamond Push-ups", "slug": "diamond-push-ups", "file": "bodyweight/diamond-push-ups.mp4", "duration": 12 },
-      { "exercise": "Bench Dips", "slug": "bench-dips", "file": "bodyweight/bench-dips.mp4", "duration": 12 },
-      { "exercise": "Cobra Push-ups", "slug": "cobra-push-ups", "file": "bodyweight/cobra-push-ups.mp4", "duration": 12 }
+      {
+        "exercise": "Bodyweight Triceps Extensions",
+        "slug": "bodyweight-triceps-extensions",
+        "file": "bodyweight/bodyweight-triceps-extensions.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Diamond Push-ups",
+        "slug": "diamond-push-ups",
+        "file": "bodyweight/diamond-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Bench Dips",
+        "slug": "bench-dips",
+        "file": "bodyweight/bench-dips.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Cobra Push-ups",
+        "slug": "cobra-push-ups",
+        "file": "bodyweight/cobra-push-ups.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Bodyweight Triceps Extensions", "slug": "bodyweight-triceps-extensions", "file": "bodyweight/bodyweight-triceps-extensions.mp4", "duration": 12 },
-      { "exercise": "Diamond Push-ups", "slug": "diamond-push-ups", "file": "bodyweight/diamond-push-ups.mp4", "duration": 12 },
-      { "exercise": "Bench Dips", "slug": "bench-dips", "file": "bodyweight/bench-dips.mp4", "duration": 12 },
-      { "exercise": "Cobra Push-ups", "slug": "cobra-push-ups", "file": "bodyweight/cobra-push-ups.mp4", "duration": 12 }
+      {
+        "exercise": "Bodyweight Triceps Extensions",
+        "slug": "bodyweight-triceps-extensions",
+        "file": "bodyweight/bodyweight-triceps-extensions.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Diamond Push-ups",
+        "slug": "diamond-push-ups",
+        "file": "bodyweight/diamond-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Bench Dips",
+        "slug": "bench-dips",
+        "file": "bodyweight/bench-dips.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Cobra Push-ups",
+        "slug": "cobra-push-ups",
+        "file": "bodyweight/cobra-push-ups.mp4",
+        "duration": 12
+      }
     ]
   },
   "bodyweight-shoulders": {
     "workout1": [
-      { "exercise": "Pike Push-ups", "slug": "pike-push-ups", "file": "bodyweight/pike-push-ups.mp4", "duration": 12 },
-      { "exercise": "Wall Handstand Hold", "slug": "wall-handstand-hold", "file": "bodyweight/wall-handstand-hold.mp4", "duration": 12 },
-      { "exercise": "Prone I-Y-T Raises", "slug": "prone-i-y-t-raises", "file": "bodyweight/prone-i-y-t-raises.mp4", "duration": 12 }
+      {
+        "exercise": "Pike Push-ups",
+        "slug": "pike-push-ups",
+        "file": "bodyweight/pike-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Wall Handstand Hold",
+        "slug": "wall-handstand-hold",
+        "file": "bodyweight/wall-handstand-hold.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Prone I-Y-T Raises",
+        "slug": "prone-i-y-t-raises",
+        "file": "bodyweight/prone-i-y-t-raises.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Pike Push-ups", "slug": "pike-push-ups", "file": "bodyweight/pike-push-ups.mp4", "duration": 12 },
-      { "exercise": "Wall Handstand Hold", "slug": "wall-handstand-hold", "file": "bodyweight/wall-handstand-hold.mp4", "duration": 12 },
-      { "exercise": "Prone I-Y-T Raises", "slug": "prone-i-y-t-raises", "file": "bodyweight/prone-i-y-t-raises.mp4", "duration": 12 }
+      {
+        "exercise": "Pike Push-ups",
+        "slug": "pike-push-ups",
+        "file": "bodyweight/pike-push-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Wall Handstand Hold",
+        "slug": "wall-handstand-hold",
+        "file": "bodyweight/wall-handstand-hold.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Prone I-Y-T Raises",
+        "slug": "prone-i-y-t-raises",
+        "file": "bodyweight/prone-i-y-t-raises.mp4",
+        "duration": 12
+      }
     ]
   },
   "bodyweight-back": {
     "workout1": [
-      { "exercise": "Scap Pull-ups", "slug": "scap-pull-ups", "file": "bodyweight/scap-pull-ups.mp4", "duration": 12 },
-      { "exercise": "Pull-ups", "slug": "pull-ups", "file": "bodyweight/pull-ups.mp4", "duration": 12 },
-      { "exercise": "Inverted Rows (overhand wide)", "slug": "inverted-rows-overhand-wide", "file": "bodyweight/inverted-rows-overhand-wide.mp4", "duration": 12 },
-      { "exercise": "Prone Y-T-W Raises", "slug": "prone-y-t-w-raises", "file": "bodyweight/prone-y-t-w-raises.mp4", "duration": 12 },
-      { "exercise": "Superman Hold", "slug": "superman-hold", "file": "bodyweight/superman-hold.mp4", "duration": 12 },
-      { "exercise": "Dead Hang", "slug": "dead-hang", "file": "bodyweight/dead-hang.mp4", "duration": 12 }
+      {
+        "exercise": "Scap Pull-ups",
+        "slug": "scap-pull-ups",
+        "file": "bodyweight/scap-pull-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Pull-ups",
+        "slug": "pull-ups",
+        "file": "bodyweight/pull-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Inverted Rows (overhand wide)",
+        "slug": "inverted-rows-overhand-wide",
+        "file": "bodyweight/inverted-rows-overhand-wide.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Prone Y-T-W Raises",
+        "slug": "prone-y-t-w-raises",
+        "file": "bodyweight/prone-y-t-w-raises.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Superman Hold",
+        "slug": "superman-hold",
+        "file": "bodyweight/superman-hold.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Dead Hang",
+        "slug": "dead-hang",
+        "file": "bodyweight/dead-hang.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Band Face Pulls (Primer)", "slug": "band-face-pulls-primer", "file": "bodyweight/band-face-pulls-primer.mp4", "duration": 12 },
-      { "exercise": "Commando Pull-ups", "slug": "commando-pull-ups", "file": "bodyweight/commando-pull-ups.mp4", "duration": 12 },
-      { "exercise": "Inverted Rows (underhand close)", "slug": "inverted-rows-underhand-close", "file": "bodyweight/inverted-rows-underhand-close.mp4", "duration": 12 },
-      { "exercise": "Sliding Pullover", "slug": "sliding-pullover", "file": "bodyweight/sliding-pullover.mp4", "duration": 12 },
-      { "exercise": "Reverse Snow Angels", "slug": "reverse-snow-angels", "file": "bodyweight/reverse-snow-angels.mp4", "duration": 12 },
-      { "exercise": "Flexed Arm Hang", "slug": "flexed-arm-hang", "file": "bodyweight/flexed-arm-hang.mp4", "duration": 12 }
+      {
+        "exercise": "Band Face Pulls (Primer)",
+        "slug": "band-face-pulls-primer",
+        "file": "bodyweight/band-face-pulls-primer.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Commando Pull-ups",
+        "slug": "commando-pull-ups",
+        "file": "bodyweight/commando-pull-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Inverted Rows (underhand close)",
+        "slug": "inverted-rows-underhand-close",
+        "file": "bodyweight/inverted-rows-underhand-close.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Sliding Pullover",
+        "slug": "sliding-pullover",
+        "file": "bodyweight/sliding-pullover.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Reverse Snow Angels",
+        "slug": "reverse-snow-angels",
+        "file": "bodyweight/reverse-snow-angels.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Flexed Arm Hang",
+        "slug": "flexed-arm-hang",
+        "file": "bodyweight/flexed-arm-hang.mp4",
+        "duration": 12
+      }
     ]
   },
   "bodyweight-biceps": {
     "workout1": [
-      { "exercise": "Chin-ups", "slug": "chin-ups", "file": "bodyweight/chin-ups.mp4", "duration": 12 },
-      { "exercise": "Inverted Curls (supinated)", "slug": "inverted-curls-supinated", "file": "bodyweight/inverted-curls-supinated.mp4", "duration": 12 },
-      { "exercise": "Doorway Curls", "slug": "doorway-curls", "file": "bodyweight/doorway-curls.mp4", "duration": 12 },
-      { "exercise": "Headbanger Pull-ups", "slug": "headbanger-pull-ups", "file": "bodyweight/headbanger-pull-ups.mp4", "duration": 12 }
+      {
+        "exercise": "Chin-ups",
+        "slug": "chin-ups",
+        "file": "bodyweight/chin-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Inverted Curls (supinated)",
+        "slug": "inverted-curls-supinated",
+        "file": "bodyweight/inverted-curls-supinated.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Doorway Curls",
+        "slug": "doorway-curls",
+        "file": "bodyweight/doorway-curls.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Headbanger Pull-ups",
+        "slug": "headbanger-pull-ups",
+        "file": "bodyweight/headbanger-pull-ups.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Close-Grip Chin-ups", "slug": "close-grip-chin-ups", "file": "bodyweight/close-grip-chin-ups.mp4", "duration": 12 },
-      { "exercise": "Pelican Curls (rings/bar)", "slug": "pelican-curls-ringsbar", "file": "bodyweight/pelican-curls-ringsbar.mp4", "duration": 12 },
-      { "exercise": "Inverted Curls (1.5 rep)", "slug": "inverted-curls-1.5-rep", "file": "bodyweight/inverted-curls-1.5-rep.mp4", "duration": 12 },
-      { "exercise": "Towel Isometric Curls", "slug": "towel-isometric-curls", "file": "bodyweight/towel-isometric-curls.mp4", "duration": 12 }
+      {
+        "exercise": "Close-Grip Chin-ups",
+        "slug": "close-grip-chin-ups",
+        "file": "bodyweight/close-grip-chin-ups.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Pelican Curls (rings/bar)",
+        "slug": "pelican-curls-rings-bar",
+        "file": "bodyweight/pelican-curls-rings-bar.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Inverted Curls (1.5 rep)",
+        "slug": "inverted-curls-1.5-rep",
+        "file": "bodyweight/inverted-curls-1.5-rep.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Towel Isometric Curls",
+        "slug": "towel-isometric-curls",
+        "file": "bodyweight/towel-isometric-curls.mp4",
+        "duration": 12
+      }
     ]
   },
   "bodyweight-legs": {
     "workout1": [
-      { "exercise": "Bodyweight Squats", "slug": "bodyweight-squats", "file": "bodyweight/bodyweight-squats.mp4", "duration": 12 },
-      { "exercise": "Pistol Squats (assisted if needed)", "slug": "pistol-squats-assisted-if-needed", "file": "bodyweight/pistol-squats-assisted-if-needed.mp4", "duration": 12 },
-      { "exercise": "Bulgarian Split Squats", "slug": "bulgarian-split-squats", "file": "bodyweight/bulgarian-split-squats.mp4", "duration": 12 },
-      { "exercise": "Reverse Lunges", "slug": "reverse-lunges", "file": "bodyweight/reverse-lunges.mp4", "duration": 12 },
-      { "exercise": "Nordic Hamstring Curls", "slug": "nordic-hamstring-curls", "file": "bodyweight/nordic-hamstring-curls.mp4", "duration": 12 },
-      { "exercise": "Single Leg Calf Raises", "slug": "single-leg-calf-raises", "file": "bodyweight/single-leg-calf-raises.mp4", "duration": 12 }
+      {
+        "exercise": "Bodyweight Squats",
+        "slug": "bodyweight-squats",
+        "file": "bodyweight/bodyweight-squats.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Pistol Squats (assisted if needed)",
+        "slug": "pistol-squats-assisted-if-needed",
+        "file": "bodyweight/pistol-squats-assisted-if-needed.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Bulgarian Split Squats",
+        "slug": "bulgarian-split-squats",
+        "file": "bodyweight/bulgarian-split-squats.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Reverse Lunges",
+        "slug": "reverse-lunges",
+        "file": "bodyweight/reverse-lunges.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Nordic Hamstring Curls",
+        "slug": "nordic-hamstring-curls",
+        "file": "bodyweight/nordic-hamstring-curls.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Single Leg Calf Raises",
+        "slug": "single-leg-calf-raises",
+        "file": "bodyweight/single-leg-calf-raises.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Cossack Squats", "slug": "cossack-squats", "file": "bodyweight/cossack-squats.mp4", "duration": 12 },
-      { "exercise": "Shrimp Squats (assisted if needed)", "slug": "shrimp-squats-assisted-if-needed", "file": "bodyweight/shrimp-squats-assisted-if-needed.mp4", "duration": 12 },
-      { "exercise": "Step-ups (high box)", "slug": "step-ups-high-box", "file": "bodyweight/step-ups-high-box.mp4", "duration": 12 },
-      { "exercise": "Walking Lunges", "slug": "walking-lunges", "file": "bodyweight/walking-lunges.mp4", "duration": 12 },
-      { "exercise": "Sliding Hamstring Curls", "slug": "sliding-hamstring-curls", "file": "bodyweight/sliding-hamstring-curls.mp4", "duration": 12 },
-      { "exercise": "Wall Sit + Calf Raises", "slug": "wall-sit-calf-raises", "file": "bodyweight/wall-sit-calf-raises.mp4", "duration": 12 }
+      {
+        "exercise": "Cossack Squats",
+        "slug": "cossack-squats",
+        "file": "bodyweight/cossack-squats.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Shrimp Squats (assisted if needed)",
+        "slug": "shrimp-squats-assisted-if-needed",
+        "file": "bodyweight/shrimp-squats-assisted-if-needed.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Step-ups (high box)",
+        "slug": "step-ups-high-box",
+        "file": "bodyweight/step-ups-high-box.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Walking Lunges",
+        "slug": "walking-lunges",
+        "file": "bodyweight/walking-lunges.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Sliding Hamstring Curls",
+        "slug": "sliding-hamstring-curls",
+        "file": "bodyweight/sliding-hamstring-curls.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Wall Sit + Calf Raises",
+        "slug": "wall-sit-calf-raises",
+        "file": "bodyweight/wall-sit-calf-raises.mp4",
+        "duration": 12
+      }
     ]
   },
   "bodyweight-core": {
     "workout1": [
-      { "exercise": "Dead Bugs", "slug": "dead-bugs", "file": "bodyweight/dead-bugs.mp4", "duration": 12 },
-      { "exercise": "Ab Wheel Rollout / Body Saw", "slug": "ab-wheel-rollout-body-saw", "file": "bodyweight/ab-wheel-rollout-body-saw.mp4", "duration": 12 },
-      { "exercise": "Hanging Leg Raises", "slug": "hanging-leg-raises", "file": "bodyweight/hanging-leg-raises.mp4", "duration": 12 },
-      { "exercise": "Side Plank + Hip Dip", "slug": "side-plank-hip-dip", "file": "bodyweight/side-plank-hip-dip.mp4", "duration": 12 }
+      {
+        "exercise": "Dead Bugs",
+        "slug": "dead-bugs",
+        "file": "bodyweight/dead-bugs.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Ab Wheel Rollout / Body Saw",
+        "slug": "ab-wheel-rollout-body-saw",
+        "file": "bodyweight/ab-wheel-rollout-body-saw.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Hanging Leg Raises",
+        "slug": "hanging-leg-raises",
+        "file": "bodyweight/hanging-leg-raises.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Side Plank + Hip Dip",
+        "slug": "side-plank-hip-dip",
+        "file": "bodyweight/side-plank-hip-dip.mp4",
+        "duration": 12
+      }
     ],
     "workout2": [
-      { "exercise": "Reverse Crunches", "slug": "reverse-crunches", "file": "bodyweight/reverse-crunches.mp4", "duration": 12 },
-      { "exercise": "Pallof Press (band) / Plank Shoulder Taps", "slug": "pallof-press-band-plank-shoulder-taps", "file": "bodyweight/pallof-press-band-plank-shoulder-taps.mp4", "duration": 12 },
-      { "exercise": "Dragon Flag Negatives", "slug": "dragon-flag-negatives", "file": "bodyweight/dragon-flag-negatives.mp4", "duration": 12 },
-      { "exercise": "Hollow Body Hold", "slug": "hollow-body-hold", "file": "bodyweight/hollow-body-hold.mp4", "duration": 12 }
+      {
+        "exercise": "Reverse Crunches",
+        "slug": "reverse-crunches",
+        "file": "bodyweight/reverse-crunches.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Pallof Press (band) / Plank Shoulder Taps",
+        "slug": "pallof-press-band-plank-shoulder-taps",
+        "file": "bodyweight/pallof-press-band-plank-shoulder-taps.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Dragon Flag Negatives",
+        "slug": "dragon-flag-negatives",
+        "file": "bodyweight/dragon-flag-negatives.mp4",
+        "duration": 12
+      },
+      {
+        "exercise": "Hollow Body Hold",
+        "slug": "hollow-body-hold",
+        "file": "bodyweight/hollow-body-hold.mp4",
+        "duration": 12
+      }
     ]
   }
 }
