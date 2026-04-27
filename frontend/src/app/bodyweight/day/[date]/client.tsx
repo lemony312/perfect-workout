@@ -1,5 +1,6 @@
 'use client'
 
+import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useWorkout } from '@/context/WorkoutContext'
 import {
@@ -7,6 +8,8 @@ import {
 } from '@/data/workouts-bodyweight'
 import type { Exercise, WorkoutSession2025 } from '@/data/workouts-2025'
 import RestTimer from '@/components/RestTimer'
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 const MUSCLE_GROUP_COLORS: Record<string, string> = {
   Chest: 'border-red-600 bg-red-600/10',
@@ -37,30 +40,134 @@ const MONTHS = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
 
+type ClipEntry = {
+  exercise: string
+  slug: string
+  file: string
+  duration: number
+}
+
+type ManifestWorkout = {
+  workout1: ClipEntry[]
+  workout2: ClipEntry[]
+}
+
+type ClipManifest = Record<string, ManifestWorkout>
+
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[()]/g, '')
+    .replace(/\//g, '-')
+    .replace(/→/g, 'to')
+    .replace(/[^a-z0-9.-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function ExerciseClip({ clipPath, exerciseName }: { clipPath: string; exerciseName: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [hasError, setHasError] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.disconnect() } },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const togglePlay = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) {
+      video.play()
+      setIsPlaying(true)
+    } else {
+      video.pause()
+      setIsPlaying(false)
+    }
+  }
+
+  if (hasError) {
+    return null
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full max-w-[140px] sm:max-w-[180px] md:max-w-[200px] aspect-[9/16] rounded-lg overflow-hidden bg-black flex-shrink-0 cursor-pointer group"
+      onClick={togglePlay}
+    >
+      <video
+        ref={videoRef}
+        src={isVisible ? clipPath : undefined}
+        className="w-full h-full object-cover"
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        onError={() => setHasError(true)}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+      <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+        {isPlaying ? (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-12 h-12 sm:w-10 sm:h-10 text-white/80">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-12 h-12 sm:w-10 sm:h-10 text-white/80">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        )}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+        <p className="text-xs text-white/90 font-medium truncate">{exerciseName}</p>
+      </div>
+    </div>
+  )
+}
+
 function ExerciseCard({
   exercise,
   index,
   textColor,
+  clipPath,
 }: {
   exercise: Exercise
   index: number
   textColor: string
+  clipPath: string | null
 }) {
   return (
     <div className="bg-[#252525] rounded-lg border border-white/5 p-4 sm:p-5 hover:bg-[#2a2a2a] transition-colors">
-      <div className="flex-1 flex flex-col justify-between min-w-0">
-        <div>
-          <h5 className="text-base font-semibold text-[#f5f5f5] mb-2">
-            {index + 1}. {exercise.name}
-          </h5>
-          {exercise.notes && (
-            <p className="text-sm text-[#a0a0a0] mt-1">{exercise.notes}</p>
-          )}
-        </div>
-        <div className="mt-3">
-          <div className="text-xs text-[#a0a0a0] mb-1">Sets × Reps</div>
-          <div className="text-lg font-bold" style={{ color: textColor }}>
-            {exercise.sets} × {exercise.reps}
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        {clipPath && (
+          <ExerciseClip clipPath={clipPath} exerciseName={exercise.name} />
+        )}
+
+        <div className="flex-1 flex flex-col justify-between min-w-0">
+          <div>
+            <h5 className="text-base font-semibold text-[#f5f5f5] mb-2">
+              {index + 1}. {exercise.name}
+            </h5>
+            {exercise.notes && (
+              <p className="text-sm text-[#a0a0a0] mt-1">{exercise.notes}</p>
+            )}
+          </div>
+          <div className="mt-3">
+            <div className="text-xs text-[#a0a0a0] mb-1">Sets × Reps</div>
+            <div className="text-lg font-bold" style={{ color: textColor }}>
+              {exercise.sets} × {exercise.reps}
+            </div>
           </div>
         </div>
       </div>
@@ -68,10 +175,30 @@ function ExerciseCard({
   )
 }
 
-function SessionBlock({ session }: { session: WorkoutSession2025 }) {
+function SessionBlock({
+  session,
+  manifest,
+  workoutNumber,
+}: {
+  session: WorkoutSession2025
+  manifest: ClipManifest | null
+  workoutNumber: number
+}) {
   const primaryMuscle = session.muscleGroups[0]
   const colorClass = MUSCLE_GROUP_COLORS[primaryMuscle] || 'border-gray-600 bg-gray-600/10'
   const textColor = MUSCLE_TEXT_COLORS[primaryMuscle] || '#9ca3af'
+
+  const workoutKey = workoutNumber <= 1 ? 'workout1' : 'workout2'
+  const videoClips = manifest?.[session.videoId]?.[workoutKey] ?? []
+
+  function findClip(exerciseName: string): string | null {
+    const slug = toSlug(exerciseName)
+    const match = videoClips.find(
+      (c) => c.slug === slug || slug.includes(c.slug) || c.slug.includes(slug)
+    )
+    if (match) return `${BASE_PATH}/clips/${match.file}`
+    return null
+  }
 
   return (
     <div
@@ -100,6 +227,7 @@ function SessionBlock({ session }: { session: WorkoutSession2025 }) {
             exercise={exercise}
             index={exIdx}
             textColor={textColor}
+            clipPath={findClip(exercise.name)}
           />
         ))}
       </div>
@@ -109,6 +237,21 @@ function SessionBlock({ session }: { session: WorkoutSession2025 }) {
 
 export default function BodyweightDayClient({ dateStr }: { dateStr: string }) {
   const { startDate } = useWorkout()
+  const [manifest, setManifest] = useState<ClipManifest | null>(null)
+
+  useEffect(() => {
+    let attempt = 0
+    const load = () => {
+      fetch(`${BASE_PATH}/clips/manifest.json`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => setManifest(data))
+        .catch(() => {
+          if (attempt < 2) { attempt++; setTimeout(load, 2000) }
+          else setManifest(null)
+        })
+    }
+    load()
+  }, [])
 
   const [yr, mo, da] = dateStr.split('-').map(Number)
   const targetDate = new Date(yr, mo - 1, da)
@@ -119,6 +262,8 @@ export default function BodyweightDayClient({ dateStr }: { dateStr: string }) {
   const month = MONTHS[targetDate.getMonth()]
   const day = targetDate.getDate()
   const year = targetDate.getFullYear()
+
+  const workoutNumber = workout.dayNumber <= 3 ? 1 : 2
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] p-4 md:p-8">
@@ -185,7 +330,12 @@ export default function BodyweightDayClient({ dateStr }: { dateStr: string }) {
           <>
             <div className="space-y-8">
               {workout.sessions.map((session, sessionIdx) => (
-                <SessionBlock key={sessionIdx} session={session} />
+                <SessionBlock
+                  key={sessionIdx}
+                  session={session}
+                  manifest={manifest}
+                  workoutNumber={workoutNumber}
+                />
               ))}
             </div>
             <RestTimer />

@@ -14,7 +14,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Chest Workout 1",
         muscleGroups: ["Chest"],
         isPrimary: true,
-        videoId: "",
+        videoId: "bodyweight-chest",
         videoTitle: "Bodyweight Chest — Push Focus",
         exercises: [
           {
@@ -59,7 +59,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Triceps Workout 1",
         muscleGroups: ["Triceps"],
         isPrimary: false,
-        videoId: "",
+        videoId: "bodyweight-triceps",
         videoTitle: "Bodyweight Triceps — Push Focus",
         exercises: [
           {
@@ -101,7 +101,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Back Workout 1",
         muscleGroups: ["Back"],
         isPrimary: true,
-        videoId: "",
+        videoId: "bodyweight-back",
         videoTitle: "Bodyweight Back — Pull Focus",
         exercises: [
           {
@@ -146,7 +146,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Biceps Workout 1",
         muscleGroups: ["Biceps"],
         isPrimary: false,
-        videoId: "",
+        videoId: "bodyweight-biceps",
         videoTitle: "Bodyweight Biceps — Pull Focus",
         exercises: [
           {
@@ -188,7 +188,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Legs Workout 1",
         muscleGroups: ["Legs"],
         isPrimary: true,
-        videoId: "",
+        videoId: "bodyweight-legs",
         videoTitle: "Bodyweight Legs — Lower Body Focus",
         exercises: [
           {
@@ -233,7 +233,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Core Workout 1",
         muscleGroups: ["Core"],
         isPrimary: false,
-        videoId: "",
+        videoId: "bodyweight-core",
         videoTitle: "Bodyweight Core — Abs & Obliques",
         exercises: [
           {
@@ -283,7 +283,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Chest Workout 2",
         muscleGroups: ["Chest"],
         isPrimary: true,
-        videoId: "",
+        videoId: "bodyweight-chest",
         videoTitle: "Bodyweight Chest — Push Variation",
         exercises: [
           {
@@ -328,7 +328,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Shoulders Workout 2",
         muscleGroups: ["Shoulders"],
         isPrimary: false,
-        videoId: "",
+        videoId: "bodyweight-shoulders",
         videoTitle: "Bodyweight Shoulders — Delt Focus",
         exercises: [
           {
@@ -364,7 +364,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Back Workout 2",
         muscleGroups: ["Back"],
         isPrimary: true,
-        videoId: "",
+        videoId: "bodyweight-back",
         videoTitle: "Bodyweight Back — Pull Variation",
         exercises: [
           {
@@ -409,7 +409,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Biceps Workout 2",
         muscleGroups: ["Biceps"],
         isPrimary: false,
-        videoId: "",
+        videoId: "bodyweight-biceps",
         videoTitle: "Bodyweight Biceps — Pull Variation",
         exercises: [
           {
@@ -451,7 +451,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Legs Workout 2",
         muscleGroups: ["Legs"],
         isPrimary: true,
-        videoId: "",
+        videoId: "bodyweight-legs",
         videoTitle: "Bodyweight Legs — Lower Body Variation",
         exercises: [
           {
@@ -496,7 +496,7 @@ export const WORKOUT_CYCLE_BODYWEIGHT: WorkoutDay2025[] = [
         name: "Bodyweight Core Workout 2",
         muscleGroups: ["Core"],
         isPrimary: false,
-        videoId: "",
+        videoId: "bodyweight-core",
         videoTitle: "Bodyweight Core — Anti-Movement Focus",
         exercises: [
           {
