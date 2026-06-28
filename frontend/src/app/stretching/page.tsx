@@ -22,13 +22,15 @@ const TOTAL_SECONDS = routine.moves.reduce((s, m) => s + m.duration, 0)
 type Status = 'idle' | 'running' | 'paused' | 'done'
 
 export default function StretchingPage() {
-  const REST_SECONDS = 2
+  // Each move begins with a short lead-in: its own demo clip plays and a
+  // "Get ready" countdown runs, THEN the move's counter starts.
+  const LEAD_IN_SECONDS = 2
 
   const [status, setStatus] = useState<Status>('idle')
   const [moveIndex, setMoveIndex] = useState(0)
   const [remaining, setRemaining] = useState(routine.moves[0].duration)
-  const [resting, setResting] = useState(false)
-  const [restRemaining, setRestRemaining] = useState(0)
+  const [leadIn, setLeadIn] = useState(false)
+  const [leadRemaining, setLeadRemaining] = useState(0)
   const [muteVoice, setMuteVoice] = useState(false)
   const [trackId, setTrackId] = useState<string>(MUSIC_TRACKS[0].id)
   const [musicOn, setMusicOn] = useState(true)
@@ -54,13 +56,13 @@ export default function StretchingPage() {
   const remainingRef = useRef(remaining)
   const halfwayFiredRef = useRef(false)
   const muteVoiceRef = useRef(muteVoice)
-  const restingRef = useRef(resting)
-  const restRemainingRef = useRef(restRemaining)
+  const leadInRef = useRef(leadIn)
+  const leadRemainingRef = useRef(leadRemaining)
   moveIndexRef.current = moveIndex
   remainingRef.current = remaining
   muteVoiceRef.current = muteVoice
-  restingRef.current = resting
-  restRemainingRef.current = restRemaining
+  leadInRef.current = leadIn
+  leadRemainingRef.current = leadRemaining
 
   const move = routine.moves[moveIndex]
   const nextMove: StretchMove | undefined = routine.moves[moveIndex + 1]
@@ -69,44 +71,32 @@ export default function StretchingPage() {
     if (!muteVoiceRef.current) say(text)
   }, [])
 
-  // Announce a move starting: chime + spoken name.
-  const announceMove = useCallback(
+  // Move to `idx` and begin its lead-in: the move's own clip is on screen and a
+  // "Get ready" countdown runs before the counter starts. Announce the name now.
+  const beginMove = useCallback(
     (idx: number) => {
-      const m = routine.moves[idx]
+      halfwayFiredRef.current = false
+      setMoveIndex(idx)
+      setRemaining(routine.moves[idx].duration)
+      setLeadIn(true)
+      setLeadRemaining(LEAD_IN_SECONDS)
       startChime()
-      speak(m.name)
-    },
-    [speak],
-  )
-
-  // Begin the short rest between moves. The interval keeps running and the
-  // rest branch of tickSecond handles the countdown.
-  const beginRest = useCallback(
-    (nextIdx: number) => {
-      setResting(true)
-      setRestRemaining(REST_SECONDS)
-      switchChime()
-      speak(`Next, ${routine.moves[nextIdx].name}`)
+      speak(routine.moves[idx].name)
     },
     [speak],
   )
 
   const tickSecond = useCallback(() => {
-    // --- Rest phase: counting down to the next move ---
-    if (restingRef.current) {
-      const r = restRemainingRef.current
+    // --- Lead-in phase: showing this move's clip before its counter starts ---
+    if (leadInRef.current) {
+      const r = leadRemainingRef.current
       if (r > 1) {
-        setRestRemaining(r - 1)
+        setLeadRemaining(r - 1)
         return
       }
-      // Rest over — start the next move.
-      const next = moveIndexRef.current + 1
-      halfwayFiredRef.current = false
-      setResting(false)
-      setRestRemaining(0)
-      setMoveIndex(next)
-      setRemaining(routine.moves[next].duration)
-      announceMove(next)
+      // Lead-in over — start the move's counter.
+      setLeadIn(false)
+      setLeadRemaining(0)
       return
     }
 
@@ -139,7 +129,7 @@ export default function StretchingPage() {
       return
     }
 
-    // Move finished — rest before the next move, or finish.
+    // Move finished — advance to the next move (which starts with its lead-in).
     const isLast = idx >= routine.moves.length - 1
     if (isLast) {
       setStatus('done')
@@ -147,8 +137,8 @@ export default function StretchingPage() {
       speak('All done. Great work.')
       return
     }
-    beginRest(idx)
-  }, [announceMove, beginRest, speak])
+    beginMove(idx + 1)
+  }, [beginMove, speak])
 
   // Drive the timer.
   useEffect(() => {
@@ -159,13 +149,8 @@ export default function StretchingPage() {
 
   const start = () => {
     unlockAudio()
-    setMoveIndex(0)
-    setRemaining(routine.moves[0].duration)
-    setResting(false)
-    setRestRemaining(0)
-    halfwayFiredRef.current = false
     setStatus('running')
-    announceMove(0)
+    beginMove(0)
   }
 
   const pause = () => setStatus('paused')
@@ -175,8 +160,8 @@ export default function StretchingPage() {
     setStatus('idle')
     setMoveIndex(0)
     setRemaining(routine.moves[0].duration)
-    setResting(false)
-    setRestRemaining(0)
+    setLeadIn(false)
+    setLeadRemaining(0)
     halfwayFiredRef.current = false
   }
 
@@ -188,13 +173,7 @@ export default function StretchingPage() {
       finishChime()
       return
     }
-    const next = idx + 1
-    halfwayFiredRef.current = false
-    setResting(false)
-    setRestRemaining(0)
-    setMoveIndex(next)
-    setRemaining(routine.moves[next].duration)
-    if (status === 'running') announceMove(next)
+    beginMove(idx + 1)
   }
 
   // Stop speech if the user leaves mid-routine.
@@ -205,6 +184,38 @@ export default function StretchingPage() {
       }
     }
   }, [])
+
+  // Keep the screen awake while the routine is actively running (like a video
+  // player). Released on pause / done / unmount. Re-acquired if the tab regains
+  // visibility, since the OS drops the lock when the page is hidden.
+  useEffect(() => {
+    if (status !== 'running') return
+    if (typeof navigator === 'undefined' || !('wakeLock' in navigator)) return
+
+    let lock: WakeLockSentinel | null = null
+    let cancelled = false
+
+    const acquire = async () => {
+      try {
+        lock = await navigator.wakeLock.request('screen')
+      } catch {
+        // Denied (e.g. low battery) — nothing more we can do.
+      }
+    }
+
+    const onVisible = () => {
+      if (!cancelled && document.visibilityState === 'visible') void acquire()
+    }
+
+    void acquire()
+    document.addEventListener('visibilitychange', onVisible)
+
+    return () => {
+      cancelled = true
+      document.removeEventListener('visibilitychange', onVisible)
+      void lock?.release().catch(() => {})
+    }
+  }, [status])
 
   // Elapsed seconds for the overall progress bar.
   const elapsedBefore = routine.moves
@@ -264,8 +275,8 @@ export default function StretchingPage() {
             move={move}
             nextMove={nextMove}
             remaining={remaining}
-            resting={resting}
-            restRemaining={restRemaining}
+            leadIn={leadIn}
+            leadRemaining={leadRemaining}
             movePct={movePct}
             overallPct={overallPct}
             moveIndex={moveIndex}
@@ -387,8 +398,8 @@ function TimerView({
   move,
   nextMove,
   remaining,
-  resting,
-  restRemaining,
+  leadIn,
+  leadRemaining,
   movePct,
   overallPct,
   moveIndex,
@@ -404,8 +415,8 @@ function TimerView({
   move: StretchMove
   nextMove?: StretchMove
   remaining: number
-  resting: boolean
-  restRemaining: number
+  leadIn: boolean
+  leadRemaining: number
   movePct: number
   overallPct: number
   moveIndex: number
@@ -422,16 +433,14 @@ function TimerView({
   const C = 2 * Math.PI * R
   const clipRef = useRef<HTMLVideoElement>(null)
 
-  // During the rest gap, preview the NEXT move's clip so the user can get set.
-  const clipMove = resting && nextMove ? nextMove : move
-
-  // Keep the demo clip in step with the timer: pause when paused, play when running.
+  // The clip always shows the CURRENT move (during its lead-in and while active).
+  // Keep it in step with the timer: pause when paused, play when running.
   useEffect(() => {
     const v = clipRef.current
     if (!v) return
     if (status === 'running') void v.play().catch(() => {})
     else v.pause()
-  }, [status, moveIndex, resting])
+  }, [status, moveIndex, leadIn])
 
   return (
     <div className="bg-[#1a1a1a] rounded-2xl border border-white/5 p-6">
@@ -452,23 +461,24 @@ function TimerView({
       </div>
 
       {/* Per-move demo clip — keyed on the clip so it reloads each move.
-          During the rest gap it previews the next move and dims slightly. */}
+          Shows the CURRENT move's clip during its lead-in and while active. */}
       <div className="relative rounded-xl overflow-hidden bg-black mb-5 aspect-[9/16] max-h-[42vh] mx-auto">
         <video
-          key={clipMove.clip}
+          key={move.clip}
           ref={clipRef}
-          src={`${BASE_PATH}${clipMove.clip}`}
+          src={`${BASE_PATH}${move.clip}`}
           muted
           loop
           autoPlay
           playsInline
           preload="auto"
-          className={`w-full h-full object-cover transition-opacity ${resting ? 'opacity-40' : 'opacity-100'}`}
+          className="w-full h-full object-cover"
         />
-        {resting && (
-          <div className="absolute inset-0 grid place-items-center text-center">
-            <div className="text-xs uppercase tracking-widest text-[#fbbf24] bg-black/50 rounded-full px-3 py-1">
-              Up next
+        {leadIn && (
+          <div className="absolute inset-0 grid place-items-center text-center bg-black/40">
+            <div>
+              <div className="text-xs uppercase tracking-widest text-[#fbbf24]">Get ready</div>
+              <div className="text-2xl font-bold mt-1">{move.name}</div>
             </div>
           </div>
         )}
@@ -483,22 +493,20 @@ function TimerView({
             cy="150"
             r={R}
             fill="none"
-            stroke={remaining <= 3 ? '#fbbf24' : '#e53e3e'}
+            stroke={leadIn ? '#fbbf24' : remaining <= 3 ? '#fbbf24' : '#e53e3e'}
             strokeWidth="14"
             strokeLinecap="round"
             strokeDasharray={C}
-            strokeDashoffset={C - (movePct / 100) * C}
+            strokeDashoffset={leadIn ? 0 : C - (movePct / 100) * C}
             className="transition-all duration-1000 ease-linear"
           />
         </svg>
         <div className="absolute inset-0 grid place-items-center text-center px-8">
-          {resting ? (
+          {leadIn ? (
             <div>
               <div className="text-sm uppercase tracking-widest text-[#fbbf24]">Get ready</div>
-              <div className="text-7xl font-bold tabular-nums">{restRemaining}</div>
-              {nextMove && (
-                <div className="text-base font-semibold mt-1 text-[#a0a0a0]">{nextMove.name}</div>
-              )}
+              <div className="text-7xl font-bold tabular-nums">{leadRemaining}</div>
+              <div className="text-base font-semibold mt-1 text-[#a0a0a0]">{move.name}</div>
             </div>
           ) : (
             <div>
