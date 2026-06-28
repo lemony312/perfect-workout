@@ -62,6 +62,13 @@ export default function RootLayout({
                 >
                   Bodyweight
                 </Link>
+                <div className="h-4 w-px bg-white/10" />
+                <Link
+                  href="/stretching"
+                  className="text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-4 py-3 rounded-md hover:bg-[#252525] active:bg-[#303030]"
+                >
+                  Stretching
+                </Link>
               </div>
             </div>
           </nav>
