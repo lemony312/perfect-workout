@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   MORNING_MOBILITY,
   MUSIC_TRACKS,
+  DEFAULT_LEAD_IN,
   type StretchMove,
 } from '@/data/stretching-routine'
 import {
@@ -17,14 +18,24 @@ import {
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const routine = MORNING_MOBILITY
+// Move time only — drives the overall progress bar (lead-ins are excluded from
+// both this and `elapsed`, so the two stay consistent).
 const TOTAL_SECONDS = routine.moves.reduce((s, m) => s + m.duration, 0)
+// Wall-clock estimate for the header, including each move's lead-in / rest.
+const WALL_CLOCK_SECONDS = routine.moves.reduce(
+  (s, m) => s + m.duration + (m.leadIn ?? DEFAULT_LEAD_IN),
+  0,
+)
 
 type Status = 'idle' | 'running' | 'paused' | 'done'
 
+// Lead-in ("Get ready") before a move's counter starts. Most moves use the
+// short default; later moves carry a longer 10s break via `leadIn`.
+const leadInFor = (m: StretchMove) => m.leadIn ?? DEFAULT_LEAD_IN
+
 export default function StretchingPage() {
-  // Each move begins with a short lead-in: its own demo clip plays and a
-  // "Get ready" countdown runs, THEN the move's counter starts.
-  const LEAD_IN_SECONDS = 2
+  // Each move begins with a lead-in: its own demo clip plays and a "Get ready"
+  // countdown runs, THEN the move's counter starts.
 
   const [status, setStatus] = useState<Status>('idle')
   const [moveIndex, setMoveIndex] = useState(0)
@@ -79,7 +90,7 @@ export default function StretchingPage() {
       setMoveIndex(idx)
       setRemaining(routine.moves[idx].duration)
       setLeadIn(true)
-      setLeadRemaining(LEAD_IN_SECONDS)
+      setLeadRemaining(leadInFor(routine.moves[idx]))
       startChime()
       speak(routine.moves[idx].name)
     },
@@ -233,7 +244,7 @@ export default function StretchingPage() {
           <h1 className="text-2xl md:text-3xl font-bold">{routine.title}</h1>
           <p className="text-[#a0a0a0] mt-1 text-sm md:text-base">{routine.subtitle}</p>
           <p className="text-[#707070] mt-1 text-xs">
-            {routine.moves.length} moves · {Math.round(TOTAL_SECONDS / 60)} min · 30s each
+            {routine.moves.length} moves · ~{Math.round(WALL_CLOCK_SECONDS / 60)} min · 30s each
           </p>
         </header>
 

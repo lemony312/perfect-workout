@@ -13,9 +13,18 @@ export interface StretchMove {
   description: string
   /** Spoken/beeped cue at the halfway point, e.g. for switching sides. */
   halfwayCue?: string
+  /**
+   * Lead-in ("Get ready") countdown before the move's counter starts, in
+   * seconds. Defaults to DEFAULT_LEAD_IN when omitted. Used to add a longer
+   * rest between later moves (10s breaks from Squat Twist onward).
+   */
+  leadIn?: number
   /** Per-move looping demo clip, path under /public (cut from the source reel). */
   clip: string
 }
+
+/** Default lead-in before each move; overridden per-move via `leadIn`. */
+export const DEFAULT_LEAD_IN = 2
 
 export interface StretchRoutine {
   id: string
@@ -102,35 +111,33 @@ export const MORNING_MOBILITY: StretchRoutine = {
       description: 'Hands, arms, shoulders, and the entire back and front side of your body.',
       clip: '/clips/stretching/moves/pump-stretch.mp4',
     },
-    {
-      name: 'Human Cat Stretch',
-      duration: 30,
-      description: 'Flow through spinal flexion and extension.',
-      clip: '/clips/stretching/moves/human-cat.mp4',
-    },
+    // 10s breaks from here on — a longer lead-in before each remaining move.
     {
       name: 'Squat Twist',
       duration: 30,
       description: 'Feet, ankles, knees, hips, back and shoulders.',
-      halfwayCue: 'Twist the other way',
+      leadIn: 10,
       clip: '/clips/stretching/moves/squat-twist.mp4',
     },
     {
       name: '90-90 Switches',
       duration: 30,
       description: 'Internal and external rotation of the hips — buttery hips mean no more back pain.',
+      leadIn: 10,
       clip: '/clips/stretching/moves/ninety-ninety.mp4',
     },
     {
       name: 'Windshield Wipers',
       duration: 30,
       description: 'Twist the body and reset the spine.',
+      leadIn: 10,
       clip: '/clips/stretching/moves/windshield-wipers.mp4',
     },
     {
       name: 'Bridge Hold',
       duration: 30,
       description: 'Open up the upper body and counteract the damage done by sitting.',
+      leadIn: 10,
       clip: '/clips/stretching/moves/bridge-hold.mp4',
     },
   ],
