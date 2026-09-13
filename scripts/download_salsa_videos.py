@@ -68,6 +68,7 @@ import json
 import logging
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -101,6 +102,12 @@ RES_SORT = "res:720"
 # transcode, then progressively weaker fallbacks so a video whose HLS ladder is
 # missing still downloads rather than erroring out.
 FORMAT = "bv*[protocol^=m3u8]+ba[ext=m4a]/bv*+ba[ext=m4a]/bv*+ba/b"
+
+# Pacing. Downloading 21 classes back to back earned a "Sign in to confirm
+# you're not a bot" on the last 5 — a different failure from the PO token 403,
+# and this one really is rate limiting. A few seconds between videos costs
+# nothing on a job that runs once and takes minutes anyway.
+SLEEP_BETWEEN = 5
 
 log = logging.getLogger("download_salsa_videos")
 
@@ -195,8 +202,12 @@ def main() -> int:
     failed: list[str] = []
     for i, video_id in enumerate(jobs, 1):
         log.info("[%d/%d] %s", i, len(jobs), video_id)
+        downloaded = not (VIDEOS_DIR / f"{video_id}.mp4").exists()
         if not download(video_id, dry_run=args.dry_run):
             failed.append(video_id)
+        # Only pace actual network work; skipping cached files must stay instant.
+        if downloaded and not args.dry_run and i < len(jobs):
+            time.sleep(SLEEP_BETWEEN)
 
     if failed:
         log.error("")
