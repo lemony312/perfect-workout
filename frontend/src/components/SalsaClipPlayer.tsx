@@ -17,6 +17,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ClipPair } from '@/data/salsa-types'
 import type { TempoMode } from '@/lib/salsa-tempo'
+import { VideoTransport } from './VideoTransport'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -71,6 +72,11 @@ export function SalsaClipPlayer({
   const showFast = fast != null && (tempoMode === 'fast' || (isAuto && activeClip === 'fast') || !slow)
 
   // Play the visible clip, pause the hidden one.
+  //
+  // The dependency list is deliberately only [showSlow, showFast], and that is
+  // what makes the VideoTransport pause button work: this effect re-runs only when
+  // the *visible clip changes*, so an unrelated re-render cannot resume a clip the
+  // user paused on purpose. Adding a `playing` dependency here would fight it.
   useEffect(() => {
     const s = slowRef.current
     const f = fastRef.current
@@ -127,6 +133,15 @@ export function SalsaClipPlayer({
           />
         )}
       </div>
+
+      {/* Transport, on its own row above the tempo buttons. It drives whichever
+          clip is currently visible — hence the ref switch rather than a single
+          ref: VideoTransport re-subscribes when the ref object identity changes,
+          which is exactly what happens on a Slow<->Fast swap. */}
+      <VideoTransport
+        videoRef={showFast && !showSlow ? fastRef : slowRef}
+        className="mb-3"
+      />
 
       {/* Controls */}
       <div className="flex items-center justify-between flex-wrap gap-3">

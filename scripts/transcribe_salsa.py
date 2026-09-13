@@ -140,8 +140,18 @@ SHORTS = [
 
 # SHORTS is deliberately absent: there is no `shorts` subcommand, so the finding
 # above is enforced rather than merely advised. `ids` is still there if someone
-# wants to re-check the conclusion on one video.
+# wants to re-check the conclusion on one video — but it refuses these ids without
+# --allow-music-only (see MUSIC_ONLY below), because the escape hatch was also the
+# hole: the audio is still cached, so `ids <short>` would report "audio cached",
+# regenerate the same hallucination in seconds, and normalize_salsa_terms.py would
+# then mine aliases out of it. The deletion of the 15 outputs only held as long as
+# nobody re-ran the command.
 COURSES = {"steps": STEPS, "couples": COUPLES, "body": BODY}
+
+# Every id in SHORTS is music-only; kept as a set for the guard in main(). This is
+# the same list, not a second hand-maintained copy — if a short ever turns out to
+# have speech, remove it from SHORTS and the guard follows.
+MUSIC_ONLY = {vid for _, vid in SHORTS}
 
 log = logging.getLogger("transcribe_salsa")
 
@@ -153,9 +163,11 @@ def fetch_audio(video_id: str) -> Path:
     Preference order — cached audio, then the local video, then YouTube. The
     middle case matters: download_salsa_videos.py already keeps every source
     video on disk for clip cutting, so demuxing that is both instant and one
-    fewer YouTube request. That is not just politeness; YouTube answers a burst
-    of requests with "Sign in to confirm you're not a bot" and then refuses the
-    IP for a while, which is exactly how the last 5 couples classes got stuck.
+    fewer YouTube request — worth doing on its own merits, without needing a
+    rate-limit story to justify it. (The last 5 couples classes did fail with
+    "Sign in to confirm you're not a bot", but that turned out to be a stale
+    yt-dlp and a missing JS-challenge solver, not throttling. See
+    download_salsa_videos.py.)
     """
     dest = AUDIO_DIR / f"{video_id}.m4a"
     if dest.exists():
@@ -272,6 +284,10 @@ def main() -> int:
     ap.add_argument("course", choices=[*COURSES, "ids"], help="which playlist, or 'ids'")
     ap.add_argument("ids", nargs="*", help="video ids, when course is 'ids'")
     ap.add_argument("--force", action="store_true", help="re-transcribe even if cached")
+    ap.add_argument("--allow-music-only", action="store_true",
+                    help="transcribe an id known to have no speech. Only for "
+                         "re-checking that finding by hand — the output must not be "
+                         "left on disk for the alias normaliser to pick up.")
     args = ap.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -284,6 +300,13 @@ def main() -> int:
         if not args.ids:
             ap.error("course 'ids' needs at least one video id")
         items = [(vid, vid) for vid in args.ids]
+        blocked = [vid for vid in args.ids if vid in MUSIC_ONLY]
+        if blocked and not args.allow_music_only:
+            ap.error(
+                f"{', '.join(blocked)}: music-only, no speech — transcribing these "
+                "produces hallucinations that look like real cues. See the SHORTS "
+                "comment. Pass --allow-music-only only to re-check that finding, and "
+                "delete the output afterwards.")
     else:
         items = COURSES[args.course]
 

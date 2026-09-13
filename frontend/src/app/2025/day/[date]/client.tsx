@@ -9,6 +9,7 @@ import {
   type WorkoutSession2025,
 } from '@/data/workouts-2025'
 import RestTimer from '@/components/RestTimer'
+import { VideoTransport } from '@/components/VideoTransport'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
@@ -103,9 +104,13 @@ function ExerciseClip({ clipPath, exerciseName }: { clipPath: string; exerciseNa
   }
 
   return (
+    // The transport sits OUTSIDE the clickable frame below, not inside it: the
+    // frame toggles play/pause on any click, so a button nested in it would fire
+    // both its own handler and the toggle, and restart would land paused.
+    <div className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[200px] flex-shrink-0">
     <div
       ref={containerRef}
-      className="relative w-full max-w-[140px] sm:max-w-[180px] md:max-w-[200px] aspect-[9/16] rounded-lg overflow-hidden bg-black flex-shrink-0 cursor-pointer group"
+      className="relative w-full aspect-[9/16] rounded-lg overflow-hidden bg-black cursor-pointer group"
       onClick={togglePlay}
     >
       <video
@@ -136,6 +141,8 @@ function ExerciseClip({ clipPath, exerciseName }: { clipPath: string; exerciseNa
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
         <p className="text-xs text-white/90 font-medium truncate">{exerciseName}</p>
       </div>
+    </div>
+    <VideoTransport videoRef={videoRef} compact className="mt-1.5 justify-center" />
     </div>
   )
 }

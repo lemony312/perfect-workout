@@ -73,7 +73,28 @@ ALIASES: dict[str, list[str]] = {
                  # Bare "vacila" is the teachers' own shortening —
                  # "Vacila por la mano" @198.7 — and is safe because the
                  # pattern is \b-anchored and cannot match inside "vacilala".
-                 "vacillala", "vacílala", "facilala", "vacila"],
+                 "vacillala", "vacílala", "facilala", "vacila",
+                 # Couples classes 7 and 14. This is the worst break in the
+                 # corpus and the exact "exibela" failure again, but bigger:
+                 # across the 36 transcripts the mangled forms occur 108 times
+                 # and the correct "Vacilala" only 4, so without these the two
+                 # Vacilala classes are unfindable by name (R1). Whisper hears
+                 # the /b/ and then splits the word in every possible place.
+                 #
+                 # Only the move NAME is mapped, never "por la mano". That
+                 # keeps the two distinct moves — Vacilala (class 14) and
+                 # Vacilala por la mano (class 7) — apart for free: "Basila La
+                 # Por La Mano" becomes "Vacilala por la mano" because the
+                 # trailing words were already transcribed correctly. Mapping
+                 # the full phrase separately would risk assigning one move's
+                 # name to the other's.
+                 #
+                 # Ordering is handled by build_pattern's longest-first sort,
+                 # which is load-bearing here: "basila la" must win over
+                 # "basila". The remaining splits ("basilala" vs "basila") are
+                 # safe regardless, because \b cannot match mid-word.
+                 "basi la la", "basila la", "basi lala", "basilala",
+                 "basila", "vasila"],
     "Sombrero": ["sombrer", "tombrero"],
     "Dile que no": ["dilekeno", "dile que non"],
     "Mambo Cubano": ["mambo kubano", "mambo cuban", "mamba cubano",

@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["yt-dlp"]
+# dependencies = ["yt-dlp>=2026.8.19"]
 # ///
 """
 Download the source video for every La Suerte salsa video we cut clips from.
@@ -12,14 +12,20 @@ shorts — so it gets a script.
 
 Three things here are load-bearing, all three learned by watching downloads fail:
 
-  1. **yt-dlp comes from uv, not from PATH.** It is a PEP 723 dependency and is
-     invoked as `-m yt_dlp`, so a fresh copy is resolved on every run. The
-     Homebrew yt-dlp on this machine was six months stale and could not download
-     these videos at all: YouTube now enforces a PO token for the DASH streams,
-     and a stale build's only remaining option was a muxed 360p — too coarse to
-     read footwork from, which is the entire purpose of the clip. yt-dlp tracks
-     YouTube's extraction changes weekly, so pinning to whatever the OS happens
-     to have installed is not viable for this one job.
+  1. **yt-dlp comes from uv, not from PATH, and its floor is pinned.** It is a
+     PEP 723 dependency invoked as `-m yt_dlp`. The floor pin is the load-bearing
+     part: an unpinned `yt-dlp` resolved to a build five months stale from uv's
+     cache, and `--refresh-package` did not dislodge it. That build could no
+     longer download these videos at all — it got "Sign in to confirm you're not
+     a bot" on every one, which reads as a rate limit and is not. Raise the floor
+     when YouTube's extraction moves again.
+
+     The Homebrew yt-dlp on this machine was the same story six months earlier:
+     YouTube enforces a PO token for the DASH streams, and that build's only
+     remaining option was a muxed 360p — too coarse to read footwork from, which
+     is the entire purpose of the clip. yt-dlp tracks YouTube's extraction changes
+     weekly, so pinning to whatever the OS happens to have installed is not viable
+     for this one job.
 
   2. **HLS video is preferred over DASH.** All 21 classes 403'd on every DASH
      format, audio included, while the shorts downloaded fine with identical
@@ -30,11 +36,19 @@ Three things here are load-bearing, all three learned by watching downloads fail
      Note this is NOT a rate limit, which is what it looks like: an unrelated
      video 403'd at the same moment a just-fetched short still succeeded.
 
-  3. **`--js-runtimes node`.** Without it every download 403s, because YouTube
-     requires solving a JS challenge to sign the media URL and yt-dlp needs an
-     external JS engine to do it. Same flag and same failure as
-     transcribe_salsa.py, which still shells out to the PATH yt-dlp — that keeps
-     working only because audio-only extraction survives on a stale build.
+  3. **`--js-runtimes node` AND `--remote-components ejs:github`.** Both are
+     needed, and node alone is not enough any more. YouTube signs the media URL
+     with a JS challenge; node is the engine that runs the solver, and
+     `ejs:github` fetches the solver script itself from the yt-dlp project's own
+     releases. With node but no solver script, extraction reports "n challenge
+     solving failed" and then falls through to the bot-check error — so the
+     symptom points at authentication when the cause is the challenge.
+
+  4. **`--extractor-args youtube:player_client=...`.** Left to itself, yt-dlp
+     picked the `visionos` client for these videos, which offers exactly one
+     format: muxed 360p. Naming HLS-capable clients brings back the full m3u8
+     ladder including 1280x720 with the en-US original audio. This is the flag
+     that decides whether a clip is readable footwork or a blurry mess.
 
 The audio track is checked, not assumed: these videos carry auto-dubbed Hindi,
 Indonesian, Polish and Ukrainian tracks alongside the English original, and
@@ -54,11 +68,22 @@ re-running it. Failures are collected and reported at the end rather than
 aborting the batch, because a single transient failure in a 36-video run should
 not throw away the other 35.
 
+`--cookies-from-browser` is opt-in and off by default, and **it is probably not
+what you need.** Classes 17–21 returned "Sign in to confirm you're not a bot" for
+a while, which reads as an account problem and is not: it was points 1 and 3
+above, and borrowing a signed-in session made no difference. The flag survives
+only because a real sign-in wall is plausible one day. Two reasons it stays
+opt-in: the downloads then carry the account's identity, which YouTube can
+rate-limit or flag; and Chromium keeps the cookie DB locked, so the browser has to
+be quit first. Ask before using it — and exhaust the version pin and the challenge
+diagnostics first.
+
 Usage:
     uv run scripts/download_salsa_videos.py couples    # 21 classes
     uv run scripts/download_salsa_videos.py shorts     # 15 official shorts
     uv run scripts/download_salsa_videos.py all
     uv run scripts/download_salsa_videos.py all --dry-run
+    uv run scripts/download_salsa_videos.py couples --cookies-from-browser brave
 """
 
 from __future__ import annotations
@@ -98,15 +123,19 @@ SHORTS: list[str] = [
 # See the docstring: this is orientation-agnostic.
 RES_SORT = "res:720"
 
+# Clients that expose the HLS ladder. Order is a preference, not a fallback chain:
+# yt-dlp queries all of them and pools the formats.
+PLAYER_CLIENTS = "ios,web_safari,mweb"
+
 # HLS video first (the DASH streams 403), m4a audio so the mux needs no
 # transcode, then progressively weaker fallbacks so a video whose HLS ladder is
 # missing still downloads rather than erroring out.
 FORMAT = "bv*[protocol^=m3u8]+ba[ext=m4a]/bv*+ba[ext=m4a]/bv*+ba/b"
 
-# Pacing. Downloading 21 classes back to back earned a "Sign in to confirm
-# you're not a bot" on the last 5 — a different failure from the PO token 403,
-# and this one really is rate limiting. A few seconds between videos costs
-# nothing on a job that runs once and takes minutes anyway.
+# Pacing. Kept as cheap insurance, not because a rate limit was ever proven: the
+# "Sign in to confirm you're not a bot" on the last 5 classes looked like one and
+# turned out to be the stale build plus the missing challenge solver. A few seconds
+# between videos costs nothing on a job that runs once and takes minutes anyway.
 SLEEP_BETWEEN = 5
 
 log = logging.getLogger("download_salsa_videos")
@@ -134,7 +163,7 @@ def expected_duration(video_id: str) -> float | None:
     return float(json.loads(p.read_text()).get("duration") or 0) or None
 
 
-def download(video_id: str, *, dry_run: bool) -> bool:
+def download(video_id: str, *, dry_run: bool, cookies_from: str | None = None) -> bool:
     dest = VIDEOS_DIR / f"{video_id}.mp4"
     if dest.exists():
         log.info("  %s cached (%.0f MB)", video_id, dest.stat().st_size / 1e6)
@@ -148,16 +177,23 @@ def download(video_id: str, *, dry_run: bool) -> bool:
         # -m yt_dlp, not the PATH binary: see the module docstring.
         sys.executable, "-m", "yt_dlp",
         "--no-update", "--quiet", "--no-warnings", "--progress",
-        # Without this, every download 403s on YouTube's JS challenge.
+        # Both halves of the JS challenge: the engine, and the solver script.
         "--js-runtimes", "node",
+        "--remote-components", "ejs:github",
+        # Otherwise yt-dlp settles on a client that only offers muxed 360p.
+        "--extractor-args", f"youtube:player_client={PLAYER_CLIENTS}",
         "-S", RES_SORT,
         "-f", FORMAT,
         # Remux rather than re-encode. The clip cutter re-encodes anyway, so
         # transcoding here would cost a generation of quality for nothing.
         "--merge-output-format", "mp4",
         "-o", str(VIDEOS_DIR / "%(id)s.%(ext)s"),
-        f"https://www.youtube.com/watch?v={video_id}",
     ]
+    if cookies_from:
+        # Only reached with --cookies-from-browser. See the module docstring: this
+        # attaches the account's identity to the request, so it is never default.
+        cmd += ["--cookies-from-browser", cookies_from]
+    cmd.append(f"https://www.youtube.com/watch?v={video_id}")
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0 or not dest.exists():
         log.error("  %s FAILED: %s", video_id,
@@ -189,6 +225,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("what", choices=["couples", "shorts", "all"])
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--cookies-from-browser", metavar="BROWSER",
+                    help="borrow a signed-in session (e.g. brave, chrome) to get "
+                         "past \"Sign in to confirm you're not a bot\". Quit the "
+                         "browser first — Chromium locks the cookie DB.")
     args = ap.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -203,7 +243,8 @@ def main() -> int:
     for i, video_id in enumerate(jobs, 1):
         log.info("[%d/%d] %s", i, len(jobs), video_id)
         downloaded = not (VIDEOS_DIR / f"{video_id}.mp4").exists()
-        if not download(video_id, dry_run=args.dry_run):
+        if not download(video_id, dry_run=args.dry_run,
+                        cookies_from=args.cookies_from_browser):
             failed.append(video_id)
         # Only pace actual network work; skipping cached files must stay instant.
         if downloaded and not args.dry_run and i < len(jobs):

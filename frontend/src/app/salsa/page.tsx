@@ -15,6 +15,7 @@ import {
 import { searchMoves } from '@/lib/salsa-search'
 import { useTempoMode } from '@/lib/salsa-tempo'
 import { SalsaClipPlayer } from '@/components/SalsaClipPlayer'
+import { SalsaCourseSwitcher } from '@/components/SalsaCourseSwitcher'
 import {
   buildDrill,
   advanceCursor,
@@ -200,11 +201,7 @@ function IndexView({
           ))}
         </div>
 
-        {/* Course selector (placeholder for future couples course) */}
-        <div className="mb-6 text-center text-xs text-[#707070]">
-          Course: <span className="text-[#f5f5f5]">Solo steps</span>{' '}
-          <span className="text-[#5a5a5a]">Partnerwork — next</span>
-        </div>
+        <SalsaCourseSwitcher active="steps" />
 
         {/* Move list, grouped by class */}
         <div className="space-y-6">

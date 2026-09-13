@@ -6,7 +6,11 @@
 // "exib" must hit Exhibela through the "exibela" alias, because Class 5 says
 // "exibela" 10 times and "exhibela" zero.
 
-import type { SalsaMove } from '@/data/salsa-steps'
+// Imported from the types module, not from `salsa-steps`: `searchMoves` already
+// takes the move list and the class-title lookup as arguments, so it is
+// course-neutral, and the couples page passes its own. Pulling the type through
+// the steps course made it read as steps-only.
+import type { SalsaMove } from '@/data/salsa-types'
 
 /**
  * Normalise a string for comparison: lowercase, strip diacritics, collapse
