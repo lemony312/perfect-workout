@@ -90,6 +90,13 @@ export default function RootLayout({
                 >
                   Voice Training
                 </Link>
+                <div className="h-4 w-px shrink-0 bg-white/10" />
+                <Link
+                  href="/salsa"
+                  className="shrink-0 whitespace-nowrap text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-4 py-3 rounded-md hover:bg-[#252525] active:bg-[#303030]"
+                >
+                  Salsa
+                </Link>
               </div>
             </div>
           </nav>

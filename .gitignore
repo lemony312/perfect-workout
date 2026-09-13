@@ -3,7 +3,9 @@ node_modules/
 frontend/node_modules/
 
 # Next.js
-frontend/.next/
+# Unanchored so it also catches the repo-root .next/ that appears when next is
+# run from here rather than frontend/ — it only ever holds trace files.
+.next/
 frontend/out/
 
 # Python

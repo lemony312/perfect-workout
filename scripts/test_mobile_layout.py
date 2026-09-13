@@ -28,7 +28,19 @@ DEFAULT_BASE = "http://localhost:3000/perfect-workout"
 # Narrowest widths we care about: iPhone SE / mini, then a standard iPhone.
 WIDTHS = [320, 375, 390]
 
-PAGES = ["/", "/2025", "/bodyweight", "/stretching", "/posture", "/voice-training"]
+PAGES = [
+    "/",
+    "/2025",
+    "/bodyweight",
+    "/stretching",
+    "/posture",
+    "/voice-training",
+    "/salsa",
+    # The salsa detail and drill views are separate layouts behind query state,
+    # not separate routes, so they need listing explicitly or they go untested.
+    "/salsa?move=exhibela-crossing",
+    "/salsa?mode=drill",
+]
 
 # A few px of slop: subpixel rounding on scaled layouts is not a real overflow.
 TOLERANCE = 1
