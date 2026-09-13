@@ -29,6 +29,7 @@ Usage:
     uv run scripts/transcribe_salsa.py steps          # the 15 solo-steps classes
     uv run scripts/transcribe_salsa.py couples        # the 21 partnerwork classes
     uv run scripts/transcribe_salsa.py body           # the 4 Cuban Body Movement classes
+    # (there is no "shorts" run: they are music-only — see the SHORTS comment below)
     uv run scripts/transcribe_salsa.py steps --force  # re-transcribe, ignore cache
     uv run scripts/transcribe_salsa.py ids nOABL5GW_qk
 
@@ -54,6 +55,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 AUDIO_DIR = REPO / "data" / "cache" / "salsa" / "audio"
 OUT_DIR = REPO / "data" / "cache" / "salsa" / "whisper"
+VIDEOS_DIR = REPO / "data" / "cache" / "salsa" / "videos"
 
 # Turbo is ~8x faster than large-v3 with no meaningful accuracy loss on clear
 # studio speech, and these are 6-19 minute videos with two speakers close-miked.
@@ -113,19 +115,70 @@ BODY = [
     (4, "zv8_lwP4fPE"),
 ]
 
+# The official per-move shorts for couples classes 5-19, keyed by the class they
+# belong to. Classes 1-4, 20 and 21 have none.
+#
+# DO NOT TRANSCRIBE THESE. Kept here as the record of an answered question, not
+# as work to be done. All 15 were transcribed once, to try to anchor each short's
+# clip window to an internal event rather than taking the whole file; every one
+# came back hallucinated, because the shorts are music-only with no speech at
+# all. Whisper's music signature was unmistakable — "Music playing", "Outro
+# Music", repetition loops ("onward onward onward…"), a trailing "Thank you",
+# and stray Cyrillic and Korean. The 15 outputs were deleted rather than kept,
+# because a plausible-looking transcript of a silent video is worse than no
+# transcript: a later pass would mine cues out of noise.
+#
+# The consequence for the build is settled, not open: a short's clip window IS
+# the whole file. That is fine — they run 20-35s, which is the target clip
+# length anyway, and each one is already a single clean loop of one move.
+SHORTS = [
+    (5, "qwR89NAQgqM"), (6, "V57F7c5R5jY"), (7, "18cM9UvzsoI"), (8, "JkwUzKb_X-8"),
+    (9, "Nl714zi8W-A"), (10, "fNXwnQuVdEI"), (11, "TyOHtkirh_g"), (12, "UsvPdXW4-O4"),
+    (13, "7MODqLfyTQQ"), (14, "c0H4GQnYjNE"), (15, "xwwnWPXpKz8"), (16, "wAK8hMxwfes"),
+    (17, "B5A2kgjTvnw"), (18, "TM9kP4jy0To"), (19, "vlSqi-msy60"),
+]
+
+# SHORTS is deliberately absent: there is no `shorts` subcommand, so the finding
+# above is enforced rather than merely advised. `ids` is still there if someone
+# wants to re-check the conclusion on one video.
 COURSES = {"steps": STEPS, "couples": COUPLES, "body": BODY}
 
 log = logging.getLogger("transcribe_salsa")
 
 
 def fetch_audio(video_id: str) -> Path:
-    """Download audio only. Kept on disk so re-transcribing costs nothing."""
+    """
+    Get the audio, from the cheapest source available.
+
+    Preference order — cached audio, then the local video, then YouTube. The
+    middle case matters: download_salsa_videos.py already keeps every source
+    video on disk for clip cutting, so demuxing that is both instant and one
+    fewer YouTube request. That is not just politeness; YouTube answers a burst
+    of requests with "Sign in to confirm you're not a bot" and then refuses the
+    IP for a while, which is exactly how the last 5 couples classes got stuck.
+    """
     dest = AUDIO_DIR / f"{video_id}.m4a"
     if dest.exists():
         log.info("  audio cached")
         return dest
 
     AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+
+    local_video = VIDEOS_DIR / f"{video_id}.mp4"
+    if local_video.exists():
+        # -vn drops the video and the audio is re-encoded to aac rather than
+        # stream-copied. Copying looks free and is not possible here: the shorts
+        # carry opus, which has no tag in an mp4/m4a container, so `-c:a copy`
+        # fails outright on 12 of the 15. Transcoding costs nothing that matters
+        # because Whisper resamples to 16 kHz mono before it sees any of this.
+        subprocess.run(
+            ["ffmpeg", "-nostdin", "-loglevel", "error", "-i", str(local_video),
+             "-vn", "-c:a", "aac", "-b:a", "160k", "-y", str(dest)],
+            check=True)
+        log.info("  audio demuxed from local video (%.1f MB)",
+                 dest.stat().st_size / 1e6)
+        return dest
+
     # m4a specifically: ffmpeg (which Whisper shells out to) reads it without
     # the remux step that opus/webm would need.
     # --js-runtimes node is load-bearing: without it every download 403s. YouTube
