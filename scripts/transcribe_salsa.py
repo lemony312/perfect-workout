@@ -128,8 +128,13 @@ def fetch_audio(video_id: str) -> Path:
     AUDIO_DIR.mkdir(parents=True, exist_ok=True)
     # m4a specifically: ffmpeg (which Whisper shells out to) reads it without
     # the remux step that opus/webm would need.
+    # --js-runtimes node is load-bearing: without it every download 403s. YouTube
+    # requires solving a JS challenge to sign the media URL, and yt-dlp needs an
+    # external JS engine to do it. All 15 steps classes failed this way before the
+    # flag was added.
     cmd = [
         "yt-dlp", "--no-update", "--quiet", "--no-warnings",
+        "--js-runtimes", "node",
         "-f", "bestaudio[ext=m4a]/bestaudio",
         "--extract-audio", "--audio-format", "m4a",
         "-o", str(AUDIO_DIR / "%(id)s.%(ext)s"),

@@ -51,23 +51,52 @@ WHISPER_DIR = REPO / "data" / "cache" / "salsa" / "whisper"
 # transcript, which is worse than leaving a term unmatched and flagged.
 ALIASES: dict[str, list[str]] = {
     "Exhibela": ["exibela", "exhibla", "exhiba", "exibella", "zibela",
-                 "exit below", "exhibit"],
-    "Enchufla": ["chufla", "enchufa", "anchufla", "enchuffla", "choupla", "shufla"],
+                 "exit below", "exhibit",
+                 # Couples pass: the h is silent, so Whisper drops it and then
+                 # guesses at the first syllable.
+                 "exivela", "xibela", "exibala", "exiblas"],
+    "Enchufla": ["chufla", "enchufa", "anchufla", "enchuffla", "choupla", "shufla",
+                 # Couples pass. "chuflas" is the plural the teachers actually
+                 # say ("two chuflas"), heard without the leading "en".
+                 "enchuva", "enciufla", "chuflas", "chuffla"],
     "Charanga": ["taranga", "charanaga"],
     "Rumba": ["roomba", "rhumba"],
     "Guaguancó": ["wawanko", "guaguanco", "wawanco"],
     "Cubano": ["kubano"],
     "Setenta": ["cetenta", "satenta", "sententa", "sedenta"],
-    "Guapea": ["guapear", "wapea", "guapéa"],
-    "Vacilala": ["vasilala", "bacilala"],
-    "Sombrero": ["sombrer"],
+    "Guapea": ["guapear", "wapea", "guapéa",
+               # Couples pass. Spanish "gu" is /gw/, hence "gwapea"; "guape"
+               # is the word clipped short ("it ends with Guape again").
+               "gwapea", "guatea", "guape"],
+    "Vacilala": ["vasilala", "bacilala",
+                 # Couples pass. Spanish v is /b/, so v<->f<->b all appear.
+                 # Bare "vacila" is the teachers' own shortening —
+                 # "Vacila por la mano" @198.7 — and is safe because the
+                 # pattern is \b-anchored and cannot match inside "vacilala".
+                 "vacillala", "vacílala", "facilala", "vacila"],
+    "Sombrero": ["sombrer", "tombrero"],
     "Dile que no": ["dilekeno", "dile que non"],
     "Mambo Cubano": ["mambo kubano", "mambo cuban", "mamba cubano",
                      "manpo cubano", "mambo kumano"],
-    "Paseala": ["pasa yala"],
+    "Paseala": ["pasa yala",
+                # Couples pass. Class 12 is Paseala and mangles it every way.
+                "pasala", "passala", "pansala", "passela", "baseala"],
     "basic side": ["basic sign"],
 }
 
+# Deliberately NOT aliased, from the couples-course near-miss report. Both look
+# like obvious manglings and both are traps — each was checked in context first:
+#
+#   "cubana" -> Cubano.  It is NOT a mangling. Couples Class 17 teaches a move
+#       called *Juana la Cubana*, and "cubana" is its correct feminine spelling
+#       ("beginning till this point, Juana la Cubana should be very easy",
+#       uoq2J1txSTE @39.40). Rewriting it would rename a real move.
+#
+#   "rueba" -> Rumba.  It is actually *Rueda* — the casino circle dance —
+#       mis-heard: "very often it happens that in Rueba we can..." Rueda is a
+#       separate playlist and explicitly out of scope (charter non-goals), so it
+#       gets no alias in either direction.
+#
 # Deliberately NOT aliased: "3 to 1" / "3 2 1" / "three to one" for the move
 # "Three, Two, One" (steps Class 8). Those strings are also literal counting,
 # which the teachers do constantly, so the variant list could not be kept tight
@@ -84,6 +113,10 @@ KNOWN_GOOD = {
     "sombrero", "cubano", "mambo", "alarde", "casino", "kentucky", "tiramisu",
     "dedo", "santiago", "paseala", "guaguancó", "timba", "rueda", "son",
     "cuban", "cano",
+    # Correct as written: the feminine in "Juana la Cubana" (couples Class 17).
+    # Without this the scan reports it against "Cubano" on five transcripts
+    # forever, and a report that is never clean stops being read.
+    "cubana", "juana",
 }
 
 log = logging.getLogger("normalize_salsa_terms")

@@ -11,9 +11,10 @@ import {
   DRILLABLE_CUE_KINDS,
   type SalsaMove,
   type SalsaCue,
-  type ClipPair,
 } from '@/data/salsa-steps'
 import { searchMoves } from '@/lib/salsa-search'
+import { useTempoMode } from '@/lib/salsa-tempo'
+import { SalsaClipPlayer } from '@/components/SalsaClipPlayer'
 import {
   buildDrill,
   advanceCursor,
@@ -326,7 +327,10 @@ function groupMoves(moves: SalsaMove[], filter: string): { label: string; moves:
 // ============================================================================
 
 function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
-  const [tempoMode, setTempoMode] = useState<'slow' | 'auto' | 'fast'>('auto')
+  // Shared and persisted, not local: see the note at the top of salsa-tempo.ts.
+  // Choosing "Slow" has to survive moving to the next move, or you re-pick it
+  // 22 times.
+  const [tempoMode, setTempoMode] = useTempoMode()
   const [clipMuted, setClipMuted] = useState(false)
   const [showMoreCues, setShowMoreCues] = useState(false)
 
@@ -348,7 +352,6 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
   }
 
   const classNum = source.classNumber
-  const classTitle = getClassTitle(classNum)
 
   return (
     <main className="min-h-screen bg-[#0f0f0f] text-[#f5f5f5] p-4 md:p-8">
@@ -371,8 +374,10 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
           )}
         </header>
 
-        {/* Video player */}
-        <ClipPlayer
+        {/* Video player. `key` remounts it per move so a Slow→Fast cycle
+            restarts at the counted demo rather than carrying over. */}
+        <SalsaClipPlayer
+          key={move.id}
           clips={source.clips}
           aspect={source.clips.slow?.aspect ?? source.clips.fast?.aspect ?? '16/9'}
           tempoMode={tempoMode}
@@ -380,7 +385,6 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
           muted={clipMuted}
           onMutedChange={setClipMuted}
           classNum={classNum}
-          classTitle={classTitle}
         />
 
         {/* Cues */}
@@ -652,185 +656,6 @@ function CueItem({ cue }: { cue: SalsaCue }) {
   )
 }
 
-// ============================================================================
-// Clip player — two <video> elements, swap on ended
-// ============================================================================
-
-function ClipPlayer({
-  clips,
-  aspect,
-  tempoMode,
-  onTempoChange,
-  muted,
-  onMutedChange,
-  classNum,
-  classTitle,
-}: {
-  clips: ClipPair
-  aspect: '16/9' | '9/16'
-  tempoMode: 'slow' | 'auto' | 'fast'
-  onTempoChange: (mode: 'slow' | 'auto' | 'fast') => void
-  muted: boolean
-  onMutedChange: (muted: boolean) => void
-  classNum: number
-  classTitle: string
-}) {
-  const [activeClip, setActiveClip] = useState<'slow' | 'fast'>('slow')
-  const slowRef = useRef<HTMLVideoElement>(null)
-  const fastRef = useRef<HTMLVideoElement>(null)
-
-  const slow = clips.slow
-  const fast = clips.fast
-
-  // In auto mode, both clips loop={false} and swap on ended.
-  const isAuto = tempoMode === 'auto'
-  const showSlow = tempoMode === 'slow' || (isAuto && activeClip === 'slow')
-  const showFast = tempoMode === 'fast' || (isAuto && activeClip === 'fast')
-
-  // Play the visible clip, pause the hidden one.
-  useEffect(() => {
-    const s = slowRef.current
-    const f = fastRef.current
-    if (showSlow && s) void s.play().catch(() => {})
-    else if (s) s.pause()
-    if (showFast && f) void f.play().catch(() => {})
-    else if (f) f.pause()
-  }, [showSlow, showFast])
-
-  const onSlowEnded = () => {
-    if (isAuto && fast) setActiveClip('fast')
-  }
-
-  const onFastEnded = () => {
-    if (isAuto && slow) setActiveClip('slow')
-  }
-
-  if (!slow && !fast) {
-    return (
-      <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-6 text-center text-sm text-[#a0a0a0]">
-        {clips.missingReason ?? 'No clips available for this move.'}
-      </div>
-    )
-  }
-
-  const aspectClass = aspect === '9/16' ? 'aspect-[9/16]' : 'aspect-video'
-
-  return (
-    <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-4">
-      {/* Video container */}
-      <div className={`relative rounded-xl overflow-hidden bg-black mb-4 ${aspectClass} max-h-[50vh] mx-auto`}>
-        {slow && (
-          <video
-            ref={slowRef}
-            src={`${BASE_PATH}${slow.src}`}
-            loop={!isAuto}
-            muted={muted}
-            playsInline
-            preload="auto"
-            onEnded={onSlowEnded}
-            className={`absolute inset-0 w-full h-full object-contain ${showSlow ? '' : 'hidden'}`}
-          />
-        )}
-        {fast && (
-          <video
-            ref={fastRef}
-            src={`${BASE_PATH}${fast.src}`}
-            loop={!isAuto}
-            muted={muted}
-            playsInline
-            preload="auto"
-            onEnded={onFastEnded}
-            className={`absolute inset-0 w-full h-full object-contain ${showFast ? '' : 'hidden'}`}
-          />
-        )}
-      </div>
-
-      {/* Controls */}
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div className="flex items-center gap-2">
-          {slow && fast && (
-            <>
-              <button
-                onClick={() => {
-                  onTempoChange('slow')
-                  setActiveClip('slow')
-                }}
-                disabled={!slow}
-                className={`text-xs rounded px-3 py-1.5 border transition-colors ${
-                  tempoMode === 'slow'
-                    ? 'border-[#e53e3e] bg-[#e53e3e]/10 text-[#f5f5f5]'
-                    : 'border-white/10 text-[#707070] hover:text-[#a0a0a0]'
-                }`}
-              >
-                ◀ Slow
-              </button>
-              <button
-                onClick={() => {
-                  onTempoChange('auto')
-                  setActiveClip('slow')
-                }}
-                className={`text-xs rounded px-3 py-1.5 border transition-colors ${
-                  tempoMode === 'auto'
-                    ? 'border-[#e53e3e] bg-[#e53e3e]/10 text-[#f5f5f5]'
-                    : 'border-white/10 text-[#707070] hover:text-[#a0a0a0]'
-                }`}
-              >
-                Slow→Fast
-              </button>
-              <button
-                onClick={() => {
-                  onTempoChange('fast')
-                  setActiveClip('fast')
-                }}
-                disabled={!fast}
-                className={`text-xs rounded px-3 py-1.5 border transition-colors ${
-                  tempoMode === 'fast'
-                    ? 'border-[#e53e3e] bg-[#e53e3e]/10 text-[#f5f5f5]'
-                    : 'border-white/10 text-[#707070] hover:text-[#a0a0a0]'
-                }`}
-              >
-                Full tempo ▶
-              </button>
-            </>
-          )}
-        </div>
-        <button
-          onClick={() => onMutedChange(!muted)}
-          className="text-xs text-[#707070] hover:text-[#a0a0a0]"
-        >
-          {muted ? '🔇' : '🔊'}
-        </button>
-      </div>
-
-      {/* Caption */}
-      <div className="mt-3 text-xs text-[#a0a0a0]">
-        {showSlow && slow && (
-          <div>
-            <p>
-              {slow.label ?? 'Counted, no music'} · {Math.round(slow.end - slow.start)}s · Class{' '}
-              {classNum} @ {formatTime(slow.start)}
-            </p>
-            {slow.caveat && <p className="text-[#fbbf24] mt-1">ⓘ {slow.caveat}</p>}
-          </div>
-        )}
-        {showFast && fast && (
-          <div>
-            <p>
-              {fast.label ?? 'Full tempo'} · {Math.round(fast.end - fast.start)}s · Class{' '}
-              {classNum} @ {formatTime(fast.start)}
-            </p>
-            {fast.caveat && <p className="text-[#fbbf24] mt-1">ⓘ {fast.caveat}</p>}
-          </div>
-        )}
-      </div>
-
-      {/* CRITICAL COMMENT: clips are NOT muted by default. The spoken count in
-          the salsa clips IS the metronome, so the clip's audio must play. This
-          is a deliberate deviation from the posture page, which mutes its clips
-          and plays its own background music. */}
-    </div>
-  )
-}
 
 // ============================================================================
 // Drill view — timed session, reuses posture timer machinery
@@ -855,17 +680,22 @@ function DrillView({ onExit }: { onExit: () => void }) {
 
   const track = MUSIC_TRACKS.find((t) => t.id === trackId) ?? MUSIC_TRACKS[0]
 
-  // Refs for the interval callback.
+  // Latest-value refs, so the setInterval callback reads current state instead
+  // of the values captured when it was created. Assigned in an effect rather
+  // than during render: a render can be thrown away or replayed, and mutating a
+  // ref while rendering makes the tick observe state that was never committed.
   const statusRef = useRef(status)
   const slotIndexRef = useRef(slotIndex)
   const phaseRef = useRef(phase)
   const remainingRef = useRef(remaining)
   const muteVoiceRef = useRef(muteVoice)
-  statusRef.current = status
-  slotIndexRef.current = slotIndex
-  phaseRef.current = phase
-  remainingRef.current = remaining
-  muteVoiceRef.current = muteVoice
+  useEffect(() => {
+    statusRef.current = status
+    slotIndexRef.current = slotIndex
+    phaseRef.current = phase
+    remainingRef.current = remaining
+    muteVoiceRef.current = muteVoice
+  }, [status, slotIndex, phase, remaining, muteVoice])
 
   const slot = drillSlots[slotIndex]
   const nextSlot = drillSlots[slotIndex + 1]
@@ -1184,14 +1014,15 @@ function DrillClip({
   const fastRef = useRef<HTMLVideoElement>(null)
 
   const clips = slot.move.sources[0]?.clips
-  if (!clips) return null
-
-  const slow = clips.slow
-  const fast = clips.fast
+  const slow = clips?.slow
+  const fast = clips?.fast
   const showSlow = phase === 'leadIn' || phase === 'slow'
   const showFast = phase === 'fast'
 
-  // Play/pause based on status and phase.
+  // Play/pause based on status and phase. This must run before the "no clips"
+  // bail-out below: hooks have to be called in the same order on every render,
+  // and an early return above it would skip this one whenever a move happened
+  // to have no clips, changing the hook order mid-drill.
   useEffect(() => {
     const s = slowRef.current
     const f = fastRef.current
@@ -1205,6 +1036,8 @@ function DrillClip({
       f?.pause()
     }
   }, [status, showSlow, showFast])
+
+  if (!clips) return null
 
   const phaseLabel =
     phase === 'leadIn'
