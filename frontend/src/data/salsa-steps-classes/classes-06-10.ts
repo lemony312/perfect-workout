@@ -9,7 +9,7 @@
 //   - Move names + aliases: the class descriptions and the teachers' own spoken
 //     naming. Nothing here is translated or invented (charter R1).
 
-import type { SalsaClass, SalsaMove } from '../salsa-steps-types'
+import type { SalsaClass, SalsaMove } from '../salsa-types'
 
 export const CLASSES_06_10: SalsaClass[] = [
   // Class 6 — Basic body movement (bonus class, drills)

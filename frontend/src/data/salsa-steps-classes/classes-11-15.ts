@@ -11,7 +11,7 @@
 // Cue provenance: data/cache/salsa/whisper/<VIDEO_ID>.norm.json (local
 // mlx-whisper large-v3-turbo, term-normalised, word-level timings). Clip windows
 // from SALSA_STEPS_BUILD_SPEC.md §3, segment boundaries from the outlines.
-import type { SalsaClass, SalsaMove } from '../salsa-steps-types'
+import type { SalsaClass, SalsaMove } from '../salsa-types'
 
 export const CLASSES_11_15: SalsaClass[] = [
   // Class 11 — Cross front and back; Cross and slide; Cross, slide, cha cha cha

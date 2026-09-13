@@ -11,7 +11,7 @@
 //                                spoken naming. Nothing here is translated or
 //                                invented (charter R1 and the non-goals).
 //
-// This module is the public surface: types come from `salsa-steps-types.ts`, the
+// This module is the public surface: types come from `salsa-types.ts`, the
 // per-class data from the fragments under `salsa-steps-classes/`. Importers use this
 // module only — `import { SALSA_MOVES, type SalsaMove } from '@/data/salsa-steps'`.
 //
@@ -20,18 +20,18 @@
 // Class order within and across fragments is playlist order and is settled
 // (SALSA_TAB_GOALS.md, "Decided") — do not sort or regroup here.
 
-import type { SalsaCourseData, SalsaMove, MoveId } from './salsa-steps-types'
+import type { SalsaCourseData, SalsaMove, MoveId } from './salsa-types'
 import { CLASSES_01_05, MOVES_01_05 } from './salsa-steps-classes/classes-01-05'
 import { CLASSES_06_10, MOVES_06_10 } from './salsa-steps-classes/classes-06-10'
 import { CLASSES_11_15, MOVES_11_15 } from './salsa-steps-classes/classes-11-15'
 
-export * from './salsa-steps-types'
+export * from './salsa-types'
 
 // The three runtime *values* in the types module are also re-exported by name.
 // `export *` alone is correct, but some extensionless resolvers pick them up
 // inconsistently, and `DRILLABLE_CUE_KINDS` being undefined at runtime would
 // silently empty every drill session rather than fail loudly.
-export { DRILLABLE_CUE_KINDS, youtubeLink, MUSIC_TRACKS } from './salsa-steps-types'
+export { DRILLABLE_CUE_KINDS, youtubeLink, MUSIC_TRACKS } from './salsa-types'
 
 export const STEPS_COURSE: SalsaCourseData = {
   id: 'steps',

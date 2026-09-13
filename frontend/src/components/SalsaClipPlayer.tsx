@@ -15,7 +15,7 @@
 // local, and that resets per move.
 
 import { useEffect, useRef, useState } from 'react'
-import type { ClipPair } from '@/data/salsa-steps-types'
+import type { ClipPair } from '@/data/salsa-types'
 import type { TempoMode } from '@/lib/salsa-tempo'
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''

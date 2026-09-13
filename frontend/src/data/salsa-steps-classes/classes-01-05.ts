@@ -8,7 +8,7 @@
 //   move names + aliases     -> class descriptions and teachers' spoken naming
 //
 // This fragment covers classes 1, 2, 3, 4 and 5 only.
-import type { SalsaClass, SalsaMove } from '../salsa-steps-types'
+import type { SalsaClass, SalsaMove } from '../salsa-types'
 
 export const CLASSES_01_05: SalsaClass[] = [
   // Class 1 — Basic to the side; Basic front and back
