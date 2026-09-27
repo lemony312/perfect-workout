@@ -17,9 +17,8 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ClipPair } from '@/data/salsa-types'
 import type { TempoMode } from '@/lib/salsa-tempo'
+import { mediaUrl } from '@/lib/media'
 import { VideoTransport } from './VideoTransport'
-
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 /** mm:ss, for the "Class 7 @ 2:23" source caption under the player. */
 function formatTime(seconds: number): string {
@@ -111,7 +110,7 @@ export function SalsaClipPlayer({
         {slow && (
           <video
             ref={slowRef}
-            src={`${BASE_PATH}${slow.src}`}
+            src={mediaUrl(slow.src)}
             loop={!isAuto}
             muted={muted}
             playsInline
@@ -123,7 +122,7 @@ export function SalsaClipPlayer({
         {fast && (
           <video
             ref={fastRef}
-            src={`${BASE_PATH}${fast.src}`}
+            src={mediaUrl(fast.src)}
             loop={!isAuto}
             muted={muted}
             playsInline

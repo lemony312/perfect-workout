@@ -42,3 +42,16 @@ build/
 # Uncomment below to exclude clips from git (regenerate with scripts/clip_exercises.py)
 # frontend/public/clips/**/*.mp4
 !frontend/public/clips/manifest.json
+
+# The salsa clips are NOT in this repo. GitHub Pages publishes at most 1 GB per
+# site and this one built to ~1.28 GB with them, so they live in
+# lemony312/perfect-workout-media and are served from its own Pages site. See
+# frontend/src/lib/media.ts, which maps the /clips/salsa/ prefix onto
+# NEXT_PUBLIC_MEDIA_BASE.
+#
+# Ignored rather than merely deleted because the clip scripts still write here:
+# `clip_salsa.py` and `clip_salsa_intermediate.py` output to this directory, and
+# without this rule a regeneration would silently re-commit all 524 MB and put
+# the site back over the limit. Regenerate here, preview with
+# NEXT_PUBLIC_MEDIA_BASE= (empty), then copy into the media repo and commit there.
+frontend/public/clips/salsa/

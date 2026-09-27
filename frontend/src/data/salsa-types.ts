@@ -23,8 +23,21 @@ export { MUSIC_TRACKS, type MusicTrack }
 // Vocabulary
 // ---------------------------------------------------------------------------
 
-/** Which La Suerte playlist a class or clip came from. */
-export type SalsaCourse = 'steps' | 'couples' | 'shorts' | 'body-movement'
+/**
+ * Which La Suerte playlist a class or clip came from.
+ *
+ * `int-couples` is not a numbered course, unlike the other four. Its playlist is
+ * 22 individually-titled move videos plus 4 sequences, and the channel never
+ * numbers them — so anything rendering a course label must not print
+ * "Class 13" for an int-couples move. See `SALSA_INTERMEDIATE_PLAN.md` §5.
+ */
+export type SalsaCourse =
+  | 'steps'
+  | 'couples'
+  | 'shorts'
+  | 'body-movement'
+  | 'int-steps'
+  | 'int-couples'
 
 /**
  * Normalised segment role, from the charter's chapter vocabulary.

@@ -13,6 +13,7 @@ import {
   type SalsaCue,
 } from '@/data/salsa-steps'
 import { searchMoves } from '@/lib/salsa-search'
+import { mediaUrl } from '@/lib/media'
 import { useTempoMode } from '@/lib/salsa-tempo'
 import { SalsaClipPlayer } from '@/components/SalsaClipPlayer'
 import { SalsaCourseSwitcher } from '@/components/SalsaCourseSwitcher'
@@ -31,7 +32,6 @@ import {
   say,
 } from '@/lib/cues'
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 type DrillStatus = 'idle' | 'running' | 'paused' | 'done'
 type DrillPhase = 'leadIn' | 'slow' | 'fast'
@@ -852,7 +852,7 @@ function DrillView({ onExit }: { onExit: () => void }) {
         </header>
 
         {/* Background music */}
-        <audio ref={musicRef} src={`${BASE_PATH}${track.src}`} loop preload="none" />
+        <audio ref={musicRef} src={mediaUrl(track.src)} loop preload="none" />
 
         {/* Music picker */}
         <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
@@ -1049,7 +1049,7 @@ function DrillClip({
         <video
           key={`slow-${slot.move.id}`}
           ref={slowRef}
-          src={`${BASE_PATH}${slow.src}`}
+          src={mediaUrl(slow.src)}
           loop
           playsInline
           preload="auto"
@@ -1060,7 +1060,7 @@ function DrillClip({
         <video
           key={`fast-${slot.move.id}`}
           ref={fastRef}
-          src={`${BASE_PATH}${fast.src}`}
+          src={mediaUrl(fast.src)}
           loop
           playsInline
           preload="auto"

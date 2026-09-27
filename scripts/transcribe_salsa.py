@@ -65,18 +65,65 @@ MODEL = "mlx-community/whisper-large-v3-turbo"
 # one the channel actually says; do not add moves they do not teach, or Whisper
 # will start hallucinating them into the transcript. Names taken from the class
 # titles and descriptions (see SALSA_TAB_GOALS.md for the verified index).
-SALSA_PROMPT = (
+_PROMPT_HEAD = (
     "This is a Cuban salsa (casino) class from La Suerte Dance School in "
     "Manchester, taught by Michal and Manuela. Moves and terms used: "
+)
+_PROMPT_TAIL = " Counting is: one two three, five six seven."
+
+# Terms from the two BEGINNERS courses. Unchanged — the 51 beginners transcripts
+# were produced with exactly this list and are cached, so touching it would make
+# a re-run silently disagree with what is on disk.
+BEGINNER_TERMS = (
     "al centro, arriba, abajo, la chica, el chico, los dos, dile que no, "
     "guapea, enchufla, enchufla al centro, enchufla doble, alarde, exhibela, "
     "el uno, kentucky, vacilala, vacilala por la mano, adios con la hermana, "
     "sombrero, sombrero complicado doble, setenta, paseala, coca cola, "
     "tiramisu, juana la cubana, dedo, santiago, mambo cubano, charanga, "
     "cuban rumba, quick 5, hook turn, double right turn, cross and slide, "
-    "cha cha cha, tapping on 8, casino, rueda, timba, son, guapear. "
-    "Counting is: one two three, five six seven."
+    "cha cha cha, tapping on 8, casino, rueda, timba, son, guapear."
 )
+
+# Terms the INTERMEDIATE courses add. Every one is taken from a title or a
+# description's "Steps in this video:" list, so every one is genuinely taught —
+# the standing warning above applies and is why this is a separate list rather
+# than being appended to BEGINNER_TERMS: seeding a beginners class with
+# "Elegua" or "Gota de la sombra" invites Whisper to hear moves that class never
+# mentions, and the beginners transcripts are already the basis of ~900 cues.
+INTERMEDIATE_TERMS = (
+    "cuba libre, toe heel cross, malibu, triple jump, charanga wave, pilon, "
+    "mojito, cachan, elegua, palo, chango, arara, salsa to son transition, "
+    "fast double right turn, sombrero complicado, balsero, tiramisu complicado, "
+    "la botella, setenta complicado, el dos, paseala complicado, "
+    "sombrero por debajo, setenta y cuatro, bayamo, el uno complicado, "
+    "montaña, chocolate, enchufla triple mix, gota de la sombra, quebrala, "
+    "muchacho, codo de la rabia, donde vas, abanico, chihuahua, "
+    "casino con estilo, salsa con rumba, aguajea, caminala."
+)
+
+# Which term list each course seeds the decoder with. The `ids` subcommand has no
+# course, so it gets both — a deliberate trade: a one-off re-check of a single
+# video is worth a slightly noisier prompt, whereas a whole-course run is not.
+COURSE_TERMS = {
+    "steps": BEGINNER_TERMS,
+    "couples": BEGINNER_TERMS,
+    "body": BEGINNER_TERMS,
+    "int-steps": INTERMEDIATE_TERMS,
+    "int-couples": INTERMEDIATE_TERMS,
+}
+
+
+def prompt_for(course: str) -> str:
+    """The initial_prompt for a course. `ids` gets every term we know."""
+    terms = COURSE_TERMS.get(course)
+    if terms is None:
+        terms = f"{BEGINNER_TERMS} {INTERMEDIATE_TERMS}"
+    return f"{_PROMPT_HEAD}{terms}{_PROMPT_TAIL}"
+
+
+# Kept so that re-running the beginners courses reproduces the cached transcripts
+# byte for byte; `prompt_for` is what new work should call.
+SALSA_PROMPT = prompt_for("steps")
 
 # The Beginners Cuban Salsa Steps Course, in the channel's own playlist order —
 # which is also the order the tab presents them in. Class 6 is a body-movement
@@ -115,6 +162,71 @@ BODY = [
     (4, "zv8_lwP4fPE"),
 ]
 
+# The Intermediate Cuban Salsa Steps Course, playlist order. One new step per
+# class, named in each description's "Steps in this video:" list.
+INT_STEPS = [
+    (1, "g0h32MDXV6Q"),   # Cuba Libre
+    (2, "mXK-uPDBlRg"),   # Toe-Heel-Cross
+    (3, "UGD79mroi9E"),   # Malibu
+    (4, "hf4Lo0mXaG4"),   # Triple jump
+    (5, "I8a_F5iOXp8"),   # Charanga wave
+    (6, "IQ41651xh8Q"),   # Pilon
+    (7, "AthN6Dl2zqw"),   # Mojito
+    (8, "j3O7xmKbaAE"),   # Cachan
+    (9, "nBHFEQU1CnA"),   # Salsa->Son / Son->Salsa transition (a skill, not a step)
+    (10, "DSpArsCN860"),  # Fast double right turn (a turn)
+    (11, "gPDxOZsjEbo"),  # Elegua basic step
+    (12, "hRy-a1NI888"),  # Palo — authored chapters
+    (13, "z_0VsWZJNqc"),  # Chango — authored chapters
+    (14, "avhrmPAd_VI"),  # Arara — authored chapters, and teaches TWO steps
+]
+
+# "Intermediate Salsa Moves for Couples" — note this is NOT a numbered course.
+# It is 22 standalone per-move videos plus 4 sequences; the channel assigned no
+# class numbers, so the first element is playlist index and nothing more. The
+# gaps (14, 21-23, 26, 28-30) are the sequence, styling and theory videos.
+#
+# `fPOzAAf8z0I` (index 23) is included even though it is not its own entry: it is
+# the full-tempo demo of the Salsa con Rumba sequence at index 22, and is that
+# sequence's `fast` clip source. It is the one video here whose two tempos come
+# from two different files.
+#
+# Excluded on purpose (approved scope — link-only, no clips, no cue extraction):
+#   MRYPsGBpmoo  How to create a salsa dance (24-min theory talk, nothing to clip)
+#   oDEXcK_HAPw  Caminala Variations
+#   Z2jM4P7KqTE  Simple ladies styling in couple - Dile que no
+#   R9KM_ysfppc  Simple styling ideas in couple - Vacilala
+# The last two are follower-focused, which cuts against R4's leader-first default.
+INT_COUPLES = [
+    (1, "Bmz_K32Ybxo"),   # Sombrero Complicado
+    (2, "pY55QVrPals"),   # Balsero
+    (3, "kr0fYDZABME"),   # Tiramisu complicado
+    (4, "_A0VNIVvhtA"),   # La Botella
+    (5, "YOYk3Wbcf_M"),   # Setenta Complicado
+    (6, "SOjNHsjPFL4"),   # El Dos
+    (7, "7ugimJ0MFas"),   # Paseala Complicado
+    (8, "QAixPUmIQ64"),   # Sombrero por dabajo
+    (9, "mwifx01N5KI"),   # Santiago
+    (10, "_L36hAcjsXg"),  # Setenta y cuatro
+    (11, "sjPliNxddxQ"),  # Bayamo
+    (12, "N1T5fjywnh8"),  # El uno complicado
+    (13, "X9Ad-ljIw-c"),  # Montaña
+    (14, "ScbrkgnWV8s"),  # SEQUENCE: Casino con estilo
+    (15, "6Fb_DL3TN9Y"),  # Chocolate
+    (16, "MRpIKs0iQD8"),  # Enchufla Triple Mix
+    (17, "8E6SV_3TxYo"),  # Gota De La Sombra
+    (18, "K5LSifs80fc"),  # Quebrala
+    (19, "qaX9s-YzvKE"),  # Muchacho
+    (20, "Dcsd-Yt1Vug"),  # Codo de la rabia
+    (21, "uMun9OrDKPc"),  # SEQUENCE: Casino con estilo 2
+    (22, "FtsTDpd8ARA"),  # SEQUENCE: Salsa con Rumba for Couples
+    (23, "fPOzAAf8z0I"),  # ^ its full-tempo demo, not a separate entry
+    (24, "-oIcWUIwlx4"),  # Donde vas
+    (25, "vjcWjUOy0po"),  # SEQUENCE: Aguajea and Caminala
+    (27, "8qLrLTk1aVE"),  # Abanico
+    (31, "nFe3BF8ln5s"),  # Chihuahua
+]
+
 # The official per-move shorts for couples classes 5-19, keyed by the class they
 # belong to. Classes 1-4, 20 and 21 have none.
 #
@@ -138,6 +250,42 @@ SHORTS = [
     (17, "B5A2kgjTvnw"), (18, "TM9kP4jy0To"), (19, "vlSqi-msy60"),
 ]
 
+# The "Intermediate Salsa Moves - Shorts" playlist. Music-only exactly like the
+# beginners shorts above, and listed here for the same reason: so MUSIC_ONLY
+# refuses them. These are registered BEFORE anyone transcribes this course,
+# rather than after the hallucinations have to be spotted and deleted again.
+#
+# Keyed by the move name **as the channel titled it**, not by a class number, and
+# that is deliberate. These shorts carry their own "Class N" labels which match
+# neither playlist's order (Montaña is "Class 1" here and 13th in the couples
+# playlist) and are self-contradictory — two are both labelled Class 9. Matching
+# a short to a move by that number would attach the wrong video.
+#
+# Three entries share the title "Sombrero por Debajo" and there is only one
+# Sombrero por dabajo move video, so **two of these three show some other move**
+# and are mistitled at source. They are named here as titled, not as guessed:
+# resolving them needs someone to watch them, and until then only `nolwu7BcRdc`
+# is attached to a move. The candidate pool is the nine moves with no short
+# (Tiramisu complicado, El Dos, Santiago, Chocolate, Enchufla Triple Mix,
+# Gota De La Sombra, Quebrala, Muchacho, Codo de la rabia).
+INT_SHORTS = [
+    ("Montaña", "AtQqi_5hNCY"),
+    ("Balsero", "9TRul_cN9ts"),
+    ("El uno complicado", "A_5VmrVYuXA"),
+    ("Sombrero Por Debajo", "nolwu7BcRdc"),        # the one we trust
+    ("Paseala complicado", "eWR8KHyoQXw"),
+    ("Donde Vas", "_9amNey_heg"),
+    ("Setenta y cuatro", "5XYM9h_TYoU"),
+    ("La botella", "K5gDS-XIF3Q"),
+    ("Sombrero por Debajo (mistitled?)", "_a5fC4nGz1c"),
+    ("Chihuahua", "YVxWBaVaJO8"),
+    ("Bayamo", "cBPUTs6I3J4"),
+    ("Setenta Complicado", "TFc1glp6XXY"),
+    ("Sombrero Complicado", "CuUwwKNxCuI"),
+    ("Sombrero por Debajo (mistitled?)", "hET29nU1hV8"),
+    ("Abanico", "WEa9tZMpSvc"),
+]
+
 # SHORTS is deliberately absent: there is no `shorts` subcommand, so the finding
 # above is enforced rather than merely advised. `ids` is still there if someone
 # wants to re-check the conclusion on one video — but it refuses these ids without
@@ -146,12 +294,18 @@ SHORTS = [
 # regenerate the same hallucination in seconds, and normalize_salsa_terms.py would
 # then mine aliases out of it. The deletion of the 15 outputs only held as long as
 # nobody re-ran the command.
-COURSES = {"steps": STEPS, "couples": COUPLES, "body": BODY}
+COURSES = {
+    "steps": STEPS,
+    "couples": COUPLES,
+    "body": BODY,
+    "int-steps": INT_STEPS,
+    "int-couples": INT_COUPLES,
+}
 
-# Every id in SHORTS is music-only; kept as a set for the guard in main(). This is
-# the same list, not a second hand-maintained copy — if a short ever turns out to
-# have speech, remove it from SHORTS and the guard follows.
-MUSIC_ONLY = {vid for _, vid in SHORTS}
+# Every id in SHORTS and INT_SHORTS is music-only; kept as a set for the guard in
+# main(). These are the same lists, not a second hand-maintained copy — if a short
+# ever turns out to have speech, remove it from its list and the guard follows.
+MUSIC_ONLY = {vid for _, vid in SHORTS} | {vid for _, vid in INT_SHORTS}
 
 log = logging.getLogger("transcribe_salsa")
 
@@ -212,14 +366,14 @@ def fetch_audio(video_id: str) -> Path:
     return dest
 
 
-def transcribe(audio: Path, video_id: str) -> dict:
+def transcribe(audio: Path, video_id: str, prompt: str = SALSA_PROMPT) -> dict:
     import mlx_whisper
 
     result = mlx_whisper.transcribe(
         str(audio),
         path_or_hf_repo=MODEL,
         language="en",  # the teaching is in English; Spanish only for move names
-        initial_prompt=SALSA_PROMPT,
+        initial_prompt=prompt,
         word_timestamps=True,
         condition_on_previous_text=False,  # stops one bad segment cascading
     )
@@ -244,7 +398,7 @@ def transcribe(audio: Path, video_id: str) -> dict:
     }
 
 
-def run(items: list[tuple[int | str, str]], force: bool) -> int:
+def run(items: list[tuple[int | str, str]], force: bool, prompt: str) -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     failures = []
 
@@ -258,7 +412,7 @@ def run(items: list[tuple[int | str, str]], force: bool) -> int:
         try:
             audio = fetch_audio(video_id)
             t0 = time.monotonic()
-            data = transcribe(audio, video_id)
+            data = transcribe(audio, video_id, prompt)
             elapsed = time.monotonic() - t0
         except Exception as exc:  # keep going; one bad video shouldn't stop the batch
             log.error("  FAILED: %s", exc)
@@ -310,7 +464,7 @@ def main() -> int:
     else:
         items = COURSES[args.course]
 
-    return run(items, args.force)
+    return run(items, args.force, prompt_for(args.course))
 
 
 if __name__ == "__main__":

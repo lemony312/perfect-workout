@@ -44,11 +44,25 @@ Three things here are load-bearing, all three learned by watching downloads fail
      solving failed" and then falls through to the bot-check error — so the
      symptom points at authentication when the cause is the challenge.
 
-  4. **`--extractor-args youtube:player_client=...`.** Left to itself, yt-dlp
-     picked the `visionos` client for these videos, which offers exactly one
-     format: muxed 360p. Naming HLS-capable clients brings back the full m3u8
-     ladder including 1280x720 with the en-US original audio. This is the flag
-     that decides whether a clip is readable footwork or a blurry mess.
+  4. **No `--extractor-args youtube:player_client=...` — and that is a reversal.**
+     This script used to pin `ios,web_safari,mweb`, because left to itself yt-dlp
+     picked `visionos`, which then offered exactly one format: muxed 360p. That is
+     no longer true, and by the intermediate courses the pin had become the bug it
+     was added to prevent: `ios` https formats are now skipped as SABR-only and
+     `mweb` formats are skipped for a missing GVS PO token, so on some videos the
+     only survivor is format 18, muxed 640x360. Meanwhile `visionos` now lists the
+     full m3u8 ladder to 1080p.
+
+     The tell is that it is per-video, not global: with the pin, intermediate steps
+     classes 4 and 5 came back 640x360 while class 6 came back 1280x720 on the same
+     run with identical flags — whichever client happened to still serve formats for
+     that video decided the resolution. Without the pin both offer 1280x720.
+
+     So the client is left to yt-dlp and the *format selector* does the choosing,
+     which is the durable arrangement: FORMAT asks for HLS first, and the
+     post-download check below rejects anything under 700px rather than trusting
+     that the ladder was there. If 360p ever comes back, read the format list
+     before re-adding a pin — the correct pin has now changed twice.
 
 The audio track is checked, not assumed: these videos carry auto-dubbed Hindi,
 Indonesian, Polish and Ukrainian tracks alongside the English original, and
@@ -81,8 +95,10 @@ diagnostics first.
 Usage:
     uv run scripts/download_salsa_videos.py couples    # 21 classes
     uv run scripts/download_salsa_videos.py shorts     # 15 official shorts
+    uv run scripts/download_salsa_videos.py int-steps  # 14 intermediate classes
     uv run scripts/download_salsa_videos.py all
     uv run scripts/download_salsa_videos.py all --dry-run
+    uv run scripts/download_salsa_videos.py all --recheck   # audit what is on disk
     uv run scripts/download_salsa_videos.py couples --cookies-from-browser brave
 """
 
@@ -119,13 +135,49 @@ SHORTS: list[str] = [
     "xwwnWPXpKz8", "wAK8hMxwfes", "B5A2kgjTvnw", "TM9kP4jy0To", "vlSqi-msy60",
 ]
 
+# The Intermediate Cuban Salsa Steps Course, 14 classes in playlist order.
+# Mirrors INT_STEPS in transcribe_salsa.py, which carries the move names.
+INT_STEPS: list[str] = [
+    "g0h32MDXV6Q", "mXK-uPDBlRg", "UGD79mroi9E", "hf4Lo0mXaG4", "I8a_F5iOXp8",
+    "IQ41651xh8Q", "AthN6Dl2zqw", "j3O7xmKbaAE", "nBHFEQU1CnA", "DSpArsCN860",
+    "gPDxOZsjEbo", "hRy-a1NI888", "z_0VsWZJNqc", "avhrmPAd_VI",
+]
+
+# "Intermediate Salsa Moves for Couples" — 22 per-move videos, 4 sequences, and
+# `fPOzAAf8z0I` (the full-tempo demo belonging to the Salsa con Rumba sequence).
+# Mirrors INT_COUPLES in transcribe_salsa.py; see that list for which id is which
+# and for the four videos deliberately excluded from the build.
+INT_COUPLES: list[str] = [
+    "Bmz_K32Ybxo", "pY55QVrPals", "kr0fYDZABME", "_A0VNIVvhtA", "YOYk3Wbcf_M",
+    "SOjNHsjPFL4", "7ugimJ0MFas", "QAixPUmIQ64", "mwifx01N5KI", "_L36hAcjsXg",
+    "sjPliNxddxQ", "N1T5fjywnh8", "X9Ad-ljIw-c", "ScbrkgnWV8s", "6Fb_DL3TN9Y",
+    "MRpIKs0iQD8", "8E6SV_3TxYo", "K5LSifs80fc", "qaX9s-YzvKE", "Dcsd-Yt1Vug",
+    "uMun9OrDKPc", "FtsTDpd8ARA", "fPOzAAf8z0I", "-oIcWUIwlx4", "vjcWjUOy0po",
+    "8qLrLTk1aVE", "nFe3BF8ln5s",
+]
+
+# The "Intermediate Salsa Moves - Shorts" playlist. Music-only, like the
+# beginners shorts — these are downloaded (each one IS a finished full-tempo clip)
+# but must never be transcribed; transcribe_salsa.py's MUSIC_ONLY guard refuses
+# them. Three share the title "Sombrero por Debajo" and two of those three are
+# mistitled at source; see INT_SHORTS in transcribe_salsa.py.
+INT_SHORTS: list[str] = [
+    "AtQqi_5hNCY", "9TRul_cN9ts", "A_5VmrVYuXA", "nolwu7BcRdc", "eWR8KHyoQXw",
+    "_9amNey_heg", "5XYM9h_TYoU", "K5gDS-XIF3Q", "_a5fC4nGz1c", "YVxWBaVaJO8",
+    "cBPUTs6I3J4", "TFc1glp6XXY", "CuUwwKNxCuI", "hET29nU1hV8", "WEa9tZMpSvc",
+]
+
+GROUPS: dict[str, list[str]] = {
+    "couples": COUPLES,
+    "shorts": SHORTS,
+    "int-steps": INT_STEPS,
+    "int-couples": INT_COUPLES,
+    "int-shorts": INT_SHORTS,
+}
+
 # 720px on the short edge, matching the 15 steps classes already on disk.
 # See the docstring: this is orientation-agnostic.
 RES_SORT = "res:720"
-
-# Clients that expose the HLS ladder. Order is a preference, not a fallback chain:
-# yt-dlp queries all of them and pools the formats.
-PLAYER_CLIENTS = "ios,web_safari,mweb"
 
 # HLS video first (the DASH streams 403), m4a audio so the mux needs no
 # transcode, then progressively weaker fallbacks so a video whose HLS ladder is
@@ -163,11 +215,46 @@ def expected_duration(video_id: str) -> float | None:
     return float(json.loads(p.read_text()).get("duration") or 0) or None
 
 
-def download(video_id: str, *, dry_run: bool, cookies_from: str | None = None) -> bool:
+def verify(path: Path, video_id: str) -> list[str]:
+    """Reasons `path` is unusable as a clip source. Empty means it is fine.
+
+    Both of these have happened, which is why they are checked rather than
+    assumed: a stale yt-dlp silently fell back to a muxed 360p, and a 403
+    mid-stream left a truncated file behind. Either one would otherwise surface
+    much later as an unusable clip, a long way from its cause.
+    """
+    w, h, dur = probe(path)
+    short_edge = min(w, h) if w and h else 0
+    problems = []
+    if short_edge < 700:
+        problems.append(f"only {w}x{h} — too coarse to read footwork from")
+    want = expected_duration(video_id)
+    if want and abs(dur - want) > 2.0:
+        problems.append(f"duration {dur:.0f}s, metadata says {want:.0f}s")
+    return problems
+
+
+def download(video_id: str, *, dry_run: bool, recheck: bool = False,
+             cookies_from: str | None = None) -> bool:
     dest = VIDEOS_DIR / f"{video_id}.mp4"
     if dest.exists():
-        log.info("  %s cached (%.0f MB)", video_id, dest.stat().st_size / 1e6)
-        return True
+        # --recheck re-applies today's checks to a file downloaded under older
+        # rules. Without it "cached" means only "a file is there", which is what
+        # let three 360p rejects survive. A failing file is deleted, not merely
+        # reported, so this run then re-downloads it.
+        if recheck:
+            problems = verify(dest, video_id)
+            if problems:
+                log.error("  %s STALE (deleted, re-downloading): %s",
+                          video_id, "; ".join(problems))
+                dest.unlink(missing_ok=True)
+            else:
+                log.info("  %s cached, verified (%.0f MB)",
+                         video_id, dest.stat().st_size / 1e6)
+                return True
+        else:
+            log.info("  %s cached (%.0f MB)", video_id, dest.stat().st_size / 1e6)
+            return True
     if dry_run:
         log.info("  %s would download", video_id)
         return True
@@ -180,8 +267,8 @@ def download(video_id: str, *, dry_run: bool, cookies_from: str | None = None) -
         # Both halves of the JS challenge: the engine, and the solver script.
         "--js-runtimes", "node",
         "--remote-components", "ejs:github",
-        # Otherwise yt-dlp settles on a client that only offers muxed 360p.
-        "--extractor-args", f"youtube:player_client={PLAYER_CLIENTS}",
+        # Deliberately no --extractor-args player_client: see docstring point 4.
+        # Pinning clients is what *caused* the 360p downloads it once prevented.
         "-S", RES_SORT,
         "-f", FORMAT,
         # Remux rather than re-encode. The clip cutter re-encodes anyway, so
@@ -200,22 +287,22 @@ def download(video_id: str, *, dry_run: bool, cookies_from: str | None = None) -
                   (result.stderr or result.stdout or "no output").strip()[-400:])
         return False
 
-    # Verify rather than trust. Both failure modes here have already happened:
-    # a stale yt-dlp silently fell back to a muxed 360p, and a 403 mid-stream can
-    # leave a short file behind. Either would be discovered much later, as an
-    # unusable clip, so they are caught at the source instead.
-    w, h, dur = probe(dest)
-    short_edge = min(w, h) if w and h else 0
-    problems = []
-    if short_edge < 700:
-        problems.append(f"only {w}x{h} — too coarse to read footwork from")
-    want = expected_duration(video_id)
-    if want and abs(dur - want) > 2.0:
-        problems.append(f"duration {dur:.0f}s, metadata says {want:.0f}s")
+    # Verify rather than trust; see verify() for what and why.
+    problems = verify(dest, video_id)
     if problems:
-        log.error("  %s BAD: %s", video_id, "; ".join(problems))
+        # Delete it. A rejected file that stays on disk is worse than no file: the
+        # `dest.exists()` check at the top of this function is how a resumed run
+        # skips work, so leaving a 360p reject behind means every later run reports
+        # it as "cached" and the bad video is never replaced — it just quietly
+        # becomes the source for a blurry clip weeks later. This actually happened
+        # to three intermediate steps classes. Failing loudly and leaving nothing
+        # means a re-run retries, which is what the caller is told to do.
+        log.error("  %s BAD (deleted, will retry on re-run): %s",
+                  video_id, "; ".join(problems))
+        dest.unlink(missing_ok=True)
         return False
 
+    w, h, dur = probe(dest)
     log.info("  %s ok (%dx%d, %.0fs, %.0f MB)",
              video_id, w, h, dur, dest.stat().st_size / 1e6)
     return True
@@ -223,8 +310,14 @@ def download(video_id: str, *, dry_run: bool, cookies_from: str | None = None) -
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("what", choices=["couples", "shorts", "all"])
+    # "all" means every playlist this script knows about, so it grows as lists are
+    # added. Name a single group to fetch just that one.
+    ap.add_argument("what", choices=[*GROUPS, "all"])
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--recheck", action="store_true",
+                    help="re-verify files already on disk instead of trusting that "
+                         "their existence means they are good, and re-download any "
+                         "that fail. Use after changing the download flags.")
     ap.add_argument("--cookies-from-browser", metavar="BROWSER",
                     help="borrow a signed-in session (e.g. brave, chrome) to get "
                          "past \"Sign in to confirm you're not a bot\". Quit the "
@@ -232,30 +325,37 @@ def main() -> int:
     args = ap.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-    jobs: list[str] = []
-    if args.what in {"couples", "all"}:
-        jobs += COUPLES
-    if args.what in {"shorts", "all"}:
-        jobs += SHORTS
+    # dict.fromkeys rather than a set: `all` overlaps nothing today, but it keeps
+    # playlist order (which the log relies on) while still de-duplicating if two
+    # groups ever share an id.
+    names = list(GROUPS) if args.what == "all" else [args.what]
+    jobs: list[str] = list(dict.fromkeys(v for n in names for v in GROUPS[n]))
 
     log.info("%d video(s) -> %s", len(jobs), VIDEOS_DIR)
     failed: list[str] = []
     for i, video_id in enumerate(jobs, 1):
         log.info("[%d/%d] %s", i, len(jobs), video_id)
-        downloaded = not (VIDEOS_DIR / f"{video_id}.mp4").exists()
-        if not download(video_id, dry_run=args.dry_run,
+        # Pace on what actually changed, not on what was there beforehand: under
+        # --recheck a file can exist before the call and still be deleted and
+        # re-fetched, which is network work that needs pacing. An mtime that moved
+        # (or a file that appeared) is the only reliable signal of that from here.
+        path = VIDEOS_DIR / f"{video_id}.mp4"
+        before = path.stat().st_mtime if path.exists() else None
+        if not download(video_id, dry_run=args.dry_run, recheck=args.recheck,
                         cookies_from=args.cookies_from_browser):
             failed.append(video_id)
-        # Only pace actual network work; skipping cached files must stay instant.
-        if downloaded and not args.dry_run and i < len(jobs):
+        after = path.stat().st_mtime if path.exists() else None
+        # Skipping a cached file must stay instant.
+        if after != before and not args.dry_run and i < len(jobs):
             time.sleep(SLEEP_BETWEEN)
 
     if failed:
         log.error("")
         log.error("%d failed: %s", len(failed), " ".join(failed))
-        log.error("Re-run to retry — anything already on disk is skipped. If every "
-                  "video 403s, YouTube's extraction has moved again; check the "
-                  "format list before changing FORMAT.")
+        log.error("Re-run to retry — anything already on disk and good is skipped, "
+                  "and a rejected file was deleted so it will be re-fetched. If "
+                  "every video 403s, YouTube's extraction has moved again; check "
+                  "the format list before changing FORMAT or pinning a client.")
         return 1
     log.info("")
     log.info("All %d present.", len(jobs))
