@@ -371,6 +371,19 @@ runs 25–40 per class and about 10 KB of markdown each.
 The cue table format is in `SALSA_INTERMEDIATE_SPEC_BRIEF.md`; the worked example
 is `SALSA_COUPLES_SPEC_PART1.md` §1.4.
 
+**Cue fragments.** Where a batch's cue work is too large for one agent, individual
+classes are split out to `SALSA_INTERMEDIATE_CUES_<segment-prefix>.md` — one file
+per class or move, e.g. `SALSA_INTERMEDIATE_CUES_is12.md`. Step 5 must read these
+as well as the `PART*.md` files, and the integrity pass must treat a class whose
+cues live in a fragment as covered rather than missing.
+
+The reason for the separate files rather than more hands on one file is mundane
+but real: two agents editing the same markdown at once lose each other's work,
+and there is no merge step that would catch it. The fragment also happens to match
+how the TypeScript is already organised (`salsa-int-steps-classes/`), so the
+one-file-per-class mapping survives into Step 5 instead of being flattened and
+re-split.
+
 Non-negotiables handed to every agent:
 - Boundaries from `chapters` **only** if the description has `Table of contents`
   (§2a). Otherwise derive from the transcript and grade D.
