@@ -337,21 +337,39 @@ manglings and add aliases rather than accepting near-misses silently. Also settl
 the outstanding `rueba`→`Rumba` near-miss from the beginners pass while in here,
 since `Salsa con Rumba` makes it live.
 
-### Step 3 — Segment maps and clip windows (sonnet, batched)
+### Step 3 — Segment maps, clip windows, and cues (sonnet, batched)
 
-Four batches, each one fragment, each checkable against one spec section:
+Five batches, each one fragment, each checkable against one spec section:
 
 | Batch | Content |
 |---|---|
 | A | int-steps classes 1–7 |
 | B | int-steps classes 8–14 |
 | C | int-couples moves 1–13 |
-| D | int-couples moves 15–31 + the 4 sequences |
+| D | int-couples moves 15–31 |
+| E | the 4 sequence videos |
 
-Per batch, written to `SALSA_INTERMEDIATE_SPEC_PART{A..D}.md`: segment
-boundaries with the transcript event or chapter title each is anchored to, a
-trust grade (A authored chapter / D derived / V eye-verified), and the slow+fast
-clip windows.
+E is split out from D because the sequences are 19–22 minute multi-move lessons
+and do not fit the one-move-per-entry shape the other four batches assume. D was
+also the heaviest batch by a wide margin with them in it.
+
+Per batch, written to `SALSA_INTERMEDIATE_SPEC_PART{A..E}.md`: segment boundaries
+with the transcript event or chapter title each is anchored to, a trust grade
+(A authored chapter / D derived / V eye-verified), the slow+fast clip windows,
+**and the cues**.
+
+The cues are not optional here and not deferrable to Step 5, which is a mistake
+this step's earlier wording invited: it listed cue *rules* in the
+non-negotiables below while leaving cues out of the deliverable, and all four
+agents in the first pass duly produced a clean skeleton of chapter boundaries
+with no cues in it. Step 5 writes TypeScript *from* this spec, so a spec with no
+cues would mean inventing cue text at TypeScript-writing time, with no transcript
+anchor and nothing for the integrity pass to check — which is exactly what R3
+exists to prevent. Cues are also the bulk of the document: the beginners spec
+runs 25–40 per class and about 10 KB of markdown each.
+
+The cue table format is in `SALSA_INTERMEDIATE_SPEC_BRIEF.md`; the worked example
+is `SALSA_COUPLES_SPEC_PART1.md` §1.4.
 
 Non-negotiables handed to every agent:
 - Boundaries from `chapters` **only** if the description has `Table of contents`

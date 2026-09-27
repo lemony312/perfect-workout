@@ -1,9 +1,14 @@
-# Intermediate spec pass — shared brief for all four batches
+# Intermediate spec pass — shared brief for all five batches
 
-This is the single set of rules for the four spec batches (A–D) of the two
-intermediate La Suerte courses. It exists so the four agents produce documents
+This is the single set of rules for the five spec batches (A–E) of the two
+intermediate La Suerte courses. It exists so the five agents produce documents
 that agree with each other; anything specific to one batch is in that batch's
 own prompt.
+
+The batches are A and B for int-steps classes 1–7 and 8–14, C and D for the
+int-couples single-move videos, and E for the four long sequence videos. E is
+split out from D because the sequences are 19–22 minute multi-move lessons and do
+not fit the one-move-per-entry shape the other four assume.
 
 Read these first, in this order:
 
@@ -94,13 +99,52 @@ move or class:
   or chapter title it is anchored to, quoted.
 - The slow and fast clip windows, to the hundredth of a second, each with its
   anchor quoted and a trust grade.
-- The cues, split leader/follower, each with `sourceStart` and `sourceVideo`.
+- **The cues.** This is the bulk of the document and the part with the most value
+  in it — see the format below, and budget your effort accordingly.
 - Anything you could not resolve, stated plainly as unresolved. **An honest gap
   is worth more than a plausible guess** — the next pass cross-checks every
   number against the transcript and reports invented ones, so a guess costs more
   than it saves.
 
-Segment id prefixes, so the four batches never collide:
+### The cue table format
+
+Cues are markdown tables, grouped under a `## <n>.4 Cues` heading with one
+sub-table per move or per aspect of a move (frame, footwork, arms). The column
+order is fixed, because a later pass parses these:
+
+```
+| id | beat | role | kind | text | @ | verbatim |
+|---|---|---|---|---|---|---|
+| `al-centro-frame-2` | — | `leader` | `arms` | Show her the thumb of your left hand. | 274.44 | "I show her thumb of my left hand and she grabs my thumb." |
+| `al-centro-3` | [1,2,3,5,6,7] | `leader` | `footwork` | Left, right, left — then right, left, right. | 304.88 | "left, right, left, and right, left, right." |
+| `al-centro-rhythm` | — | `both` | `rhythm` | Hear it as "cheeky cheeky, open". | 301.86 | "five six seven and cheeky cheeky open and cheeky cheeky open" |
+```
+
+The `@` column **is** `sourceStart` — a real word timing from the transcript, to
+the hundredth. `sourceVideo` is stated once per class in prose ("All
+`sourceVideo: 'MDEAN40DUVY'`"), not repeated per row. State `confidence` the same
+way, per class, and call out the individual rows that differ.
+
+`beat` is `—` when the teachers never said a number. `role` is one of `leader`,
+`follower`, `both`. `kind` is `footwork`, `arms`, `lead`, `rhythm`, or `concept`.
+
+The `verbatim` column is what makes a cue checkable: it is the transcript's own
+words, quoted, including Whisper's mistakes. Where you correct a mis-hearing in
+`text`, the error stays visible in `verbatim` — the beginners spec keeps Whisper's
+"not too long" in `verbatim` while the cue reads "not too low", and explains the
+substitution in prose underneath. Where the teachers never said something,
+neither does the cue: add a `warning` in the prose rather than deducing it.
+
+**Scale check.** The beginners spec runs 25–40 cues per class and about 10 KB of
+document per class; class 1 alone has 25 cues across three moves. If your file is
+coming out at 2 KB per class, you have written the segment map and skipped the
+work. The single most common failure in this pass has been producing a clean
+skeleton of chapter boundaries with no cues in it.
+
+Read `SALSA_COUPLES_SPEC_PART1.md` §1.4 (around line 239) for a complete worked
+example, including how the prose under each table carries the caveats.
+
+Segment id prefixes, so the batches never collide:
 
 | Course | Prefix | Example |
 |---|---|---|
