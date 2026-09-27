@@ -54,12 +54,20 @@ ALIASES: dict[str, list[str]] = {
                  "exit below", "exhibit",
                  # Couples pass: the h is silent, so Whisper drops it and then
                  # guesses at the first syllable.
-                 "exivela", "xibela", "exibala", "exiblas"],
+                 "exivela", "xibela", "exibala", "exiblas",
+                 # Intermediate sequence ("with Exibola turn left hand goes
+                 # down", ScbrkgnWV8s @162.4).
+                 "exibola"],
     "Enchufla": ["chufla", "enchufa", "anchufla", "enchuffla", "choupla", "shufla",
                  # Couples pass. "chuflas" is the plural the teachers actually
                  # say ("two chuflas"), heard without the leading "en".
-                 "enchuva", "enciufla", "chuflas", "chuffla"],
-    "Charanga": ["taranga", "charanaga"],
+                 "enchuva", "enciufla", "chuflas", "chuffla",
+                 # Intermediate: the full plural, said while stacking repeats
+                 # ("enchuflas and one with kachan", FtsTDpd8ARA @615.2).
+                 "enchuflas"],
+    # Intermediate steps class 5 is "Charanga wave"; Whisper drops the initial
+    # affricate ("saranga wave and go", I8a_F5iOXp8 @276.7).
+    "Charanga": ["taranga", "charanaga", "saranga"],
     "Rumba": ["roomba", "rhumba"],
     "Guaguancó": ["wawanko", "guaguanco", "wawanco"],
     "Cubano": ["kubano"],
@@ -67,7 +75,10 @@ ALIASES: dict[str, list[str]] = {
     "Guapea": ["guapear", "wapea", "guapéa",
                # Couples pass. Spanish "gu" is /gw/, hence "gwapea"; "guape"
                # is the word clipped short ("it ends with Guape again").
-               "gwapea", "guatea", "guape"],
+               "gwapea", "guatea", "guape",
+               # Intermediate: masculine ending, in clear instruction
+               # ("we go back to Guapeo", MRpIKs0iQD8 @99.6).
+               "guapeo"],
     "Vacilala": ["vasilala", "bacilala",
                  # Couples pass. Spanish v is /b/, so v<->f<->b all appear.
                  # Bare "vacila" is the teachers' own shortening —
@@ -95,13 +106,25 @@ ALIASES: dict[str, list[str]] = {
                  # safe regardless, because \b cannot match mid-word.
                  "basi la la", "basila la", "basi lala", "basilala",
                  "basila", "vasila"],
-    "Sombrero": ["sombrer", "tombrero"],
+    # "somberro" is the r's transposed, in clear instruction ("1 2 like
+    # somberro", X9Ad-ljIw-c @48.6).
+    "Sombrero": ["sombrer", "tombrero", "somberro"],
     "Dile que no": ["dilekeno", "dile que non"],
     "Mambo Cubano": ["mambo kubano", "mambo cuban", "mamba cubano",
                      "manpo cubano", "mambo kumano"],
     "Paseala": ["pasa yala",
                 # Couples pass. Class 12 is Paseala and mangles it every way.
-                "pasala", "passala", "pansala", "passela", "baseala"],
+                "pasala", "passala", "pansala", "passela", "baseala",
+                # Intermediate "Paseala Complicado", both in clear instruction
+                # ("We continue with Pasella Complicado" @59.5, "And
+                # pastella, arm resting grip" @146.8, 7ugimJ0MFas).
+                "pasella", "pastella"],
+    # The move is "Setenta y Cuatro" and the teachers say it correctly, but
+    # Whisper spells the number the Italian way throughout _L36hAcjsXg
+    # ("The move for today is setenta y quattro" @27.2). Without this the move
+    # is not findable by its own name (R1). Tight by construction: "quattro"
+    # is never correct Spanish, so there is nothing else it could be.
+    "Cuatro": ["quattro"],
     "basic side": ["basic sign"],
 }
 
@@ -117,6 +140,30 @@ ALIASES: dict[str, list[str]] = {
 #       mis-heard: "very often it happens that in Rueba we can..." Rueda is a
 #       separate playlist and explicitly out of scope (charter non-goals), so it
 #       gets no alias in either direction.
+#
+# And four more from the intermediate near-miss report, same treatment — each was
+# read in context before being rejected:
+#
+#   "cuba" -> Cubano.  The single most-reported near-miss (12 of the 41
+#       transcripts) and entirely spurious. Intermediate steps class 1 teaches a
+#       move called *Cuba Libre* ("This step is called Cuba Libre",
+#       g0h32MDXV6Q @28.7), and the rest are the country and "Cuban salsa".
+#       Aliasing it would rename a real move on twelve transcripts.
+#
+#   "kumba" -> Rumba.  Inside a vocalised-rhythm passage, not instruction: "And
+#       turn and king king. And turn and king king. ... And finish and kumba."
+#       (MRpIKs0iQD8 @1.3). "king king" is Whisper on a count-along, so nothing
+#       in that sentence is evidence of a word. One occurrence.
+#
+#   "rumbe" -> Rumba.  A speculative aside, and probably "rumbeando" rather than
+#       the bare noun: "I think it's a rumbe ando" (j3O7xmKbaAE @60.3). The
+#       teachers are guessing at the music, not naming a move. One occurrence.
+#
+#   "setantai" -> Setenta.  "setantai 4-hop", inside the same kind of count-along
+#       mush ("chick chick pa and chick chick pull", _L36hAcjsXg @~200). It is
+#       "setenta y cuatro" said at speed, and the move is already findable from
+#       the eight clear instructional mentions in that video, so rewriting a
+#       garbled rhythm passage buys nothing and risks a wrong phrase.
 #
 # Deliberately NOT aliased: "3 to 1" / "3 2 1" / "three to one" for the move
 # "Three, Two, One" (steps Class 8). Those strings are also literal counting,
@@ -138,6 +185,29 @@ KNOWN_GOOD = {
     # Without this the scan reports it against "Cubano" on five transcripts
     # forever, and a report that is never clean stops being read.
     "cubana", "juana",
+    # Same reasoning, intermediate pass: "Cuba" is both the country and half of
+    # the move "Cuba Libre" (steps class 1), and it was being reported against
+    # "Cubano" on twelve of the 41 transcripts. "cuatro" is now canonical, so it
+    # must be skipped too or it reports against itself.
+    "cuba", "libre", "cuatro",
+}
+
+# Near-misses that have been read in context and rejected, with the reason in one
+# line. Kept out of the actionable report but NOT put in KNOWN_GOOD, because these
+# spellings are not correct — they are garbled, we have simply decided that
+# rewriting them would do more harm than leaving them. The long-form reasoning for
+# each is in the "Deliberately NOT aliased" block above.
+#
+# The point of this set is that the report stays empty until something genuinely
+# new appears. A report that always has the same four lines in it stops being read,
+# and then the fifth line gets missed.
+REJECTED: dict[str, str] = {
+    "rueba": "is Rueda, a different dance and out of scope",
+    "cubana": "correct feminine in 'Juana la Cubana'",
+    "cuba": "the country, and half of the move 'Cuba Libre'",
+    "kumba": "inside a count-along, no word is evidence there",
+    "rumbe": "a speculative aside, probably 'rumbeando'",
+    "setantai": "'setenta y cuatro' at speed, inside a count-along",
 }
 
 log = logging.getLogger("normalize_salsa_terms")
@@ -174,6 +244,7 @@ def near_misses(text: str) -> dict[str, list[str]]:
             w for w in words
             if w != target
             and w not in KNOWN_GOOD
+            and w not in REJECTED
             and w not in known_variants
             and difflib.SequenceMatcher(None, target, w).ratio() > 0.78
         ]
@@ -239,6 +310,12 @@ def main() -> int:
     else:
         log.info("")
         log.info("No unmatched near-misses.")
+
+    # Stated, not hidden. Suppressing these from the actionable list is what keeps
+    # the list worth reading, but a silent filter would eventually be forgotten and
+    # then look like the scan had gone blind.
+    log.info("(%d near-miss spelling(s) suppressed as already-reviewed; see "
+             "REJECTED in this file)", len(REJECTED))
 
     return 0
 
