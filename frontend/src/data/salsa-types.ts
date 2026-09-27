@@ -69,11 +69,20 @@ export type CueRole = 'leader' | 'follower' | 'both'
  * are collapsed as background: see DRILLABLE_CUE_KINDS below.
  * `lead` is the partner hand-signal category — empty in the solo steps course,
  * and the reason R3 exists once the couples course lands.
+ *
+ * `body-movement` was added in the intermediate pass, where it is the whole
+ * point of several classes: "the movement comes from the hip, not the shoulder"
+ * is neither footwork nor `styling`. The distinction that matters is that
+ * `styling` is optional decoration a dancer may skip, while body movement is
+ * required technique — so the two cannot share a kind without making the drill
+ * filter wrong in one direction or the other. It also already exists as a
+ * `SalsaCourse` and a `SalsaMoveKind` above, so the vocabulary is not new here.
  */
 export type CueKind =
   | 'footwork'
   | 'lead'
   | 'arms'
+  | 'body-movement'
   | 'styling'
   | 'rhythm'
   | 'musicality'

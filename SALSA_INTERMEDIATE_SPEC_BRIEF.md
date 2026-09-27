@@ -126,7 +126,22 @@ the hundredth. `sourceVideo` is stated once per class in prose ("All
 way, per class, and call out the individual rows that differ.
 
 `beat` is `—` when the teachers never said a number. `role` is one of `leader`,
-`follower`, `both`. `kind` is `footwork`, `arms`, `lead`, `rhythm`, or `concept`.
+`follower`, `both`. `kind` is one of `footwork`, `lead`, `arms`, `body-movement`,
+`styling`, `rhythm`, `musicality`, `concept`, `context` — the full `CueKind`
+union, and `salsa-types.ts` is the authority if this list ever falls behind it.
+
+Three of those are easy to collapse into `concept` and should not be: `styling`
+is optional decoration ("you can add a little shoulder here"), `body-movement`
+is required technique ("the movement comes from the hip"), and `musicality` is
+about hearing the music rather than moving to it. Only the first four kinds plus
+`rhythm` are drilled aloud, so filing a real footwork cue as `concept` silently
+removes it from drill mode.
+
+**All seven columns are mandatory in every row, including `role`.** It is
+tempting to hoist `role` into the prose for a solo class where every cue is
+`both` — the way `sourceVideo` and `confidence` legitimately are hoisted — but
+`role` is a required field on `SalsaCue` and Step 5 reads it from the row. Batch
+B did exactly this and the validator read the file as containing zero cues.
 
 The `verbatim` column is what makes a cue checkable: it is the transcript's own
 words, quoted, including Whisper's mistakes. Where you correct a mis-hearing in
