@@ -26,9 +26,10 @@
 // footwork per slot and stores one cursor, so partner figures from a second
 // course would both mis-time the slots and interleave progress.
 //
-// Six moves (positions 2-7) have cues but no clips. They render as incomplete and
-// say why, rather than being hidden — the cues and the source link are usable on
-// their own, and hiding them would misrepresent the course as smaller than it is.
+// Every move here is clipped, but the incomplete rendering path stays. It is not
+// dead code kept out of sentiment: `complete: false` plus a `missingReason` is how
+// this data set says "no clip yet", and the six moves that used to take that path
+// were only finished last. The next course to be added will arrive the same way.
 
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'

@@ -3,11 +3,19 @@
 // Source of every number: SALSA_INTERMEDIATE_SPEC_PARTC.md and the 13 cue files
 // SALSA_INTERMEDIATE_CUES_ic-*.md.
 //
-// Positions 1-7 are NOT clipped yet — the spec marks them "[Requires full transcript
-// analysis]" and no clips appear in CLIP_MANIFEST_INTERMEDIATE.md. Those moves are
-// marked `complete: false` and have `missingReason` on their ClipPair.
+// All 13 positions now carry a slow and a fast clip. Positions 2-7 arrived last:
+// their chapters are auto-generated, so every window had to be derived from the
+// Whisper word timings rather than read off a chapter boundary, and they are logged
+// as trust-D departures in the audit for that reason.
 //
-// Positions 8-13 have authored chapters and clips, and are complete.
+// Four of those six take their fast clip from the channel's official short. The other
+// two — Tiramisu Complicado and El Dos — have no short, so the fast clip is cut from
+// the music section of the class video and carries a caveat saying so: the teachers
+// count over the music there, so it is full tempo but not silent.
+//
+// `teachStart` is 0 on positions 2-7 and that is deliberate, not a stub. These are
+// standalone single-move videos, so teaching starts at the top; there is no earlier
+// material to skip past, and no segment data to deep-link into.
 
 import type { SalsaMove } from '../salsa-types'
 
@@ -250,15 +258,29 @@ export const MOVES_PARTC: SalsaMove[] = [
         teachStart: 0,
         segmentIds: [],
         clips: {
-          slow: null,
-          fast: null,
-          missingReason:
-            `Clips not yet cut. This move is in the auto-generated chapter batch (positions 1-7) where segment boundaries require full transcript analysis. The video exists (pY55QVrPals, 159s) and cues are extracted, but clip windows are not yet determined.`,
+          slow: {
+            src: `/clips/salsa/intermediate/couples/balsero-slow.mp4`,
+            sourceVideo: `pY55QVrPals`,
+            start: 38.68,
+            end: 60.8,
+            aspect: `16/9`,
+            label: `First counted bar`,
+            confidence: `transcript`,
+          },
+          fast: {
+            src: `/clips/salsa/intermediate/couples/balsero-fast.mp4`,
+            sourceVideo: `9TRul_cN9ts`,
+            start: 0.0,
+            end: 33.762,
+            aspect: `9/16`,
+            label: `Official short`,
+            caveat: `Official short, music-only (no spoken cues). Full-tempo demo.`,
+            confidence: `transcript`,
+          },
         },
-        note: `Segment map and clip windows require full transcript analysis per SALSA_INTERMEDIATE_SPEC_PARTC.md.`,
       },
     ],
-    complete: false,
+    complete: true,
   },
 
   // Position 3 — Tiramisu complicado
@@ -365,15 +387,29 @@ export const MOVES_PARTC: SalsaMove[] = [
         teachStart: 0,
         segmentIds: [],
         clips: {
-          slow: null,
-          fast: null,
-          missingReason:
-            `Clips not yet cut. This move is in the auto-generated chapter batch (positions 1-7) where segment boundaries require full transcript analysis. The video exists (kr0fYDZABME, 197s) and cues are extracted, but clip windows are not yet determined.`,
+          slow: {
+            src: `/clips/salsa/intermediate/couples/tiramisu-complicado-slow.mp4`,
+            sourceVideo: `kr0fYDZABME`,
+            start: 46.68,
+            end: 85.8,
+            aspect: `16/9`,
+            label: `Counted demo, very slow`,
+            confidence: `transcript`,
+          },
+          fast: {
+            src: `/clips/salsa/intermediate/couples/tiramisu-complicado-fast.mp4`,
+            sourceVideo: `kr0fYDZABME`,
+            start: 109.18,
+            end: 155.02,
+            aspect: `16/9`,
+            label: `Full-tempo run`,
+            caveat: `Cut from the music section of the class video, not an official short — this move has none. The teachers count over the music, so it is full tempo but not silent.`,
+            confidence: `transcript`,
+          },
         },
-        note: `Segment map and clip windows require full transcript analysis per SALSA_INTERMEDIATE_SPEC_PARTC.md.`,
       },
     ],
-    complete: false,
+    complete: true,
   },
 
   // Position 4 — La Botella
@@ -497,15 +533,29 @@ export const MOVES_PARTC: SalsaMove[] = [
         teachStart: 0,
         segmentIds: [],
         clips: {
-          slow: null,
-          fast: null,
-          missingReason:
-            `Clips not yet cut. This move is in the auto-generated chapter batch (positions 1-7) where segment boundaries require full transcript analysis. The video exists (_A0VNIVvhtA, 166s) and cues are extracted, but clip windows are not yet determined.`,
+          slow: {
+            src: `/clips/salsa/intermediate/couples/la-botella-slow.mp4`,
+            sourceVideo: `_A0VNIVvhtA`,
+            start: 34.36,
+            end: 64.22,
+            aspect: `16/9`,
+            label: `First counted rep`,
+            confidence: `transcript`,
+          },
+          fast: {
+            src: `/clips/salsa/intermediate/couples/la-botella-fast.mp4`,
+            sourceVideo: `K5gDS-XIF3Q`,
+            start: 0.0,
+            end: 42.98,
+            aspect: `9/16`,
+            label: `Official short`,
+            caveat: `Official short, music-only (no spoken cues). Full-tempo demo.`,
+            confidence: `transcript`,
+          },
         },
-        note: `Segment map and clip windows require full transcript analysis per SALSA_INTERMEDIATE_SPEC_PARTC.md.`,
       },
     ],
-    complete: false,
+    complete: true,
   },
 
   // Position 5 — Setenta Complicado
@@ -722,15 +772,29 @@ export const MOVES_PARTC: SalsaMove[] = [
         teachStart: 0,
         segmentIds: [],
         clips: {
-          slow: null,
-          fast: null,
-          missingReason:
-            `Clips not yet cut. This move is in the auto-generated chapter batch (positions 1-7) where segment boundaries require full transcript analysis. The video exists (YOYk3Wbcf_M, 304s) and cues are extracted, but clip windows are not yet determined.`,
+          slow: {
+            src: `/clips/salsa/intermediate/couples/setenta-complicado-slow.mp4`,
+            sourceVideo: `YOYk3Wbcf_M`,
+            start: 131.04,
+            end: 157.6,
+            aspect: `16/9`,
+            label: `Fluent slow rep`,
+            confidence: `transcript`,
+          },
+          fast: {
+            src: `/clips/salsa/intermediate/couples/setenta-complicado-fast.mp4`,
+            sourceVideo: `TFc1glp6XXY`,
+            start: 0.0,
+            end: 49.575,
+            aspect: `9/16`,
+            label: `Official short`,
+            caveat: `Official short, music-only (no spoken cues). Full-tempo demo.`,
+            confidence: `transcript`,
+          },
         },
-        note: `Segment map and clip windows require full transcript analysis per SALSA_INTERMEDIATE_SPEC_PARTC.md.`,
       },
     ],
-    complete: false,
+    complete: true,
   },
 
   // Position 6 — El Dos
@@ -844,15 +908,29 @@ export const MOVES_PARTC: SalsaMove[] = [
         teachStart: 0,
         segmentIds: [],
         clips: {
-          slow: null,
-          fast: null,
-          missingReason:
-            `Clips not yet cut. This move is in the auto-generated chapter batch (positions 1-7) where segment boundaries require full transcript analysis. The video exists (SOjNHsjPFL4, 255s) and cues are extracted, but clip windows are not yet determined.`,
+          slow: {
+            src: `/clips/salsa/intermediate/couples/el-dos-slow.mp4`,
+            sourceVideo: `SOjNHsjPFL4`,
+            start: 91.2,
+            end: 120.14,
+            aspect: `16/9`,
+            label: `Counted demo`,
+            confidence: `transcript`,
+          },
+          fast: {
+            src: `/clips/salsa/intermediate/couples/el-dos-fast.mp4`,
+            sourceVideo: `SOjNHsjPFL4`,
+            start: 158.5,
+            end: 196.4,
+            aspect: `16/9`,
+            label: `Full-tempo run`,
+            caveat: `Cut from the music section of the class video, not an official short — this move has none. The teachers count over the music, so it is full tempo but not silent.`,
+            confidence: `transcript`,
+          },
         },
-        note: `Segment map and clip windows require full transcript analysis per SALSA_INTERMEDIATE_SPEC_PARTC.md.`,
       },
     ],
-    complete: false,
+    complete: true,
   },
 
   // Position 7 — Paseala Complicado
@@ -1025,15 +1103,29 @@ export const MOVES_PARTC: SalsaMove[] = [
         teachStart: 0,
         segmentIds: [],
         clips: {
-          slow: null,
-          fast: null,
-          missingReason:
-            `Clips not yet cut. This move is in the auto-generated chapter batch (positions 1-7) where segment boundaries require full transcript analysis. The video exists (7ugimJ0MFas, 313s) and cues are extracted, but clip windows are not yet determined.`,
+          slow: {
+            src: `/clips/salsa/intermediate/couples/paseala-complicado-slow.mp4`,
+            sourceVideo: `7ugimJ0MFas`,
+            start: 66.24,
+            end: 89.12,
+            aspect: `16/9`,
+            label: `Counted demo`,
+            confidence: `transcript`,
+          },
+          fast: {
+            src: `/clips/salsa/intermediate/couples/paseala-complicado-fast.mp4`,
+            sourceVideo: `eWR8KHyoQXw`,
+            start: 0.0,
+            end: 42.539,
+            aspect: `9/16`,
+            label: `Official short`,
+            caveat: `Official short, music-only (no spoken cues). Full-tempo demo.`,
+            confidence: `transcript`,
+          },
         },
-        note: `Segment map and clip windows require full transcript analysis per SALSA_INTERMEDIATE_SPEC_PARTC.md.`,
       },
     ],
-    complete: false,
+    complete: true,
   },
 
   // Position 8 — Sombrero por Debajo (clips exist, authored chapters)

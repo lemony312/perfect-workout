@@ -14,23 +14,21 @@
 // channel never numbers these. The `classNumber` field uses playlist position, NOT a
 // class number, and no UI may render "Class 13" for a move in this course.
 //
-// Positions 2-7 (Balsero, Tiramisu Complicado, La Botella, Setenta Complicado,
-// El Dos, Paseala Complicado) are marked `complete: false`: they have cues but no
-// clips. The reason is upstream of this file — no clip windows were ever specified
-// for them. SALSA_INTERMEDIATE_SPEC_PARTC.md says so plainly in its closing
-// section: positions 8-13 have chapter-grade windows, position 1 demonstrates the
-// pattern for an auto-generated-chapter video, and "full completion of positions
-// 2-7 ... was not completed within the agent's time budget. No values were
-// guessed."
-//
-// So these six render with their cues and a deep link to the source video, and
-// say honestly that no clip exists yet. That is the accurate state.
+// **Every move in this course is now clipped.** Positions 2-7 (Balsero, Tiramisu
+// Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) were the
+// last to arrive and were the hard ones: their videos carry auto-generated YouTube
+// chapters or none at all, so there was no chapter boundary to read a window off.
+// Each of their 12 windows was derived from the Whisper word timings instead and is
+// logged as a trust-D departure in the audit for exactly that reason — the boundary
+// is a real word timing, but it was chosen rather than published.
 //
 // **This course has no segment data.** There is no `SalsaCourseData` export here
 // and no `ClassSegment[]` anywhere, because the moves are standalone videos
 // rather than classes with a count/music structure. The `segmentIds` on each
 // TeachingSource are therefore names with nothing to resolve against — positions
-// 2-7 carry `[]`, and the rest carry ids no module defines. The page must not try
+// 2-7 carry `[]`, and the rest carry ids no module defines. Having clips does not
+// change that: a clip is a start and an end in a file, a segment is a named block
+// of a class, and this course has the former and not the latter. The page must not try
 // to look them up: `youtubeLink(videoId, teachStart)` is the only deep link this
 // course can honestly offer. Do not fabricate windows here to make the pages look uniform — a window
 // invented in this file would have no transcript anchor behind it, and the clip
@@ -92,17 +90,17 @@ export const INT_COUPLES_COURSE_CAVEATS: { id: string; text: string }[] = [
   {
     id: `ICC-b`,
     text:
-      `Six moves (positions 2-7: Balsero, Tiramisu Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) have cues but no clips yet, and are marked incomplete. Their videos carry auto-generated YouTube chapters or none at all, so no clip windows have been specified for them — position 1 shows what an auto-generated-chapter video looks like once it has been worked through. You get the cues and a link into the source video; the clips will follow.`,
+      `Six moves (positions 2-7: Balsero, Tiramisu Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) come from videos with auto-generated chapters or none at all, so their clip windows were derived from the spoken count in the transcript rather than read off a published chapter. The boundaries are real word timings, but they were chosen — expect a clip to occasionally start a beat early or run a beat long. Everything else about them is the same as the rest of the course.`,
   },
   {
     id: `ICC-c`,
     text:
-      `Positions 8-31 (Sombrero por Debajo onwards) have authored chapters, with "Table of contents / video index:" blocks in their descriptions. These are fully clipped and complete.`,
+      `Positions 8-31 (Sombrero por Debajo onwards) have authored chapters, with "Table of contents / video index:" blocks in their descriptions — the teachers published the boundaries themselves, so the clip windows for these are quoted rather than derived.`,
   },
   {
     id: `ICC-d`,
     text:
-      `Most fast clips (positions 8-13, 24, 27, 31) are official shorts: vertical (9/16 aspect), music-only, no spoken cues. Positions 15-20 have no official shorts, so their fast clips are cut from the music chapters of the main videos (landscape 16/9).`,
+      `Most fast clips are official shorts: vertical (9/16 aspect), music-only, no spoken cues. Eight moves have no short — positions 3 and 6 (Tiramisu Complicado, El Dos) and positions 15-20 — so their fast clips are cut from the music section of the main video instead: landscape 16/9, and the teachers are still counting over the music, so full tempo but not silent. Each of those carries a caveat on the clip itself.`,
   },
   {
     id: `ICC-e`,

@@ -486,18 +486,41 @@ move in the frame. That question needs a human or a reading pass over the
 transcript span, and it is the last thing in this pipeline that cannot be
 automated from metadata.
 
-### 9.7 Media headroom — 962 MB of 1024 MB
+### 9.7 ~~Media headroom — 962 MB of 1024 MB~~ — RESOLVED, by a second media site
 
-GitHub Pages publishes at most 1 GB per site. The media repo now holds 202 clips
-(133 beginners, 69 intermediate) at **94%** of that limit, leaving about 62 MB.
-`scripts/clip_salsa_intermediate.py` warns above 90% and refuses above 100%, so
-this cannot be crossed silently — but the next course will cross it.
+The prediction in this section came true immediately: the next course did cross the
+limit. With all 81 intermediate clips on it the media site reached **1035 MB, 101%**.
+Over the limit a Pages site does not deploy *at all*, so the failure was never going
+to be "the new clips are missing" — it was every clip in all four courses 404ing at
+once, including the beginners ones that had been fine for weeks.
 
-The lever, when it is needed, is the **fast grains**: the slow counted demos are
-what a learner actually practises to, and the full-tempo clips are reference. Their
-resolution or CRF can drop without touching the material that carries the
-teaching. Nothing has been re-encoded on that basis yet, because keeping one set
-of encode settings across all 203 clips is worth more today than 50 MB.
+Three levers were considered and two were measured:
+
+| Lever | Measured effect | Verdict |
+|---|---|---|
+| Downscale to 720p | **0 MB.** Every cached source is *already* 720p — 1280x720 landscape, 720x1280 vertical. A full re-encode produced a byte-identical total. | Dead end, and only knowable by trying it |
+| CRF 23 → 26 | 27% smaller | Rejected |
+| CRF 23 → 28 | 40% smaller | Rejected |
+| Second Pages site | 524 MB + 511 MB, both near half full | **Chosen** |
+
+The CRF rejection is the reasoned one, and this log is the right place for it: the
+loss from a higher CRF lands in *motion*, and motion is the entire content of a
+dance clip. A learner is looking at which foot moves on which beat. Trading that for
+27% is trading the thing away to keep the container.
+
+So `/clips/salsa/intermediate/` is served by `lemony312/perfect-workout-media-intermediate`
+and the rest of `/clips/salsa/` by `lemony312/perfect-workout-media`. The routing
+table is `MEDIA_ROUTES` in `frontend/src/lib/media.ts`, **ordered longest prefix
+first** — the intermediate path is a subpath of the general one, so a mis-ordered
+table would send every intermediate clip to the beginners site, where the URL is
+cross-origin, looks entirely plausible, and 404s. `scripts/test_media_origin.py`
+asserts each clip reaches *its* origin rather than "some media origin", which is the
+assertion that catches that specific mistake.
+
+The `-vf scale=w=trunc(min(iw\,1280)/2)*2:h=-2` filter in the clip script is kept
+even though it currently scales nothing. It is a guard, not a saving: a future
+re-download at 1080p would otherwise silently double a site's size and put it back
+over the limit.
 
 ---
 
@@ -526,11 +549,12 @@ There is no `verified` value anywhere in the intermediate data yet. That is accu
 
 | | Count |
 |---|---|
-| Moves | 26 (22 standalone moves + 4 sequences) |
-| Clips | 40 (two sequences exceed the 52s ceiling deliberately; see below) |
+| Moves | 26 (22 standalone moves + 4 sequences) — **all now clipped** |
+| Clips | 52 (two sequences exceed the 52s ceiling deliberately; see below) |
 | Cues | 227 (from `check_cue_fragments.py`) |
 | Cues with a source timestamp | 227 (**mandatory**, R3) |
-| Clips carrying a `caveat` | **0** |
+| Clips carrying a `caveat` | **2** (positions 3 and 6; see §10.3) |
+| Windows derived rather than quoted | **12** (positions 2-7; trust D, see §10.7) |
 | Clips below 23s floor | **3** |
 | Clips over 52s ceiling | **2** (both declared; see below) |
 | Everything else | `confidence: 'transcript'` — faithful to the audio, not eye-checked |
@@ -568,6 +592,25 @@ There is exactly one Sombrero por Debajo move video (`QAixPUmIQ64`), so **at lea
 
 The nine moves in the intermediate couples scope that have no official short are the candidate pool: Tiramisu complicado, El Dos, Santiago, Chocolate, Enchufla Triple Mix, Gota De La Sombra, Quebrala, Muchacho, Codo de la rabia.
 
+**A lead worth following before watching anything.** The shorts *are* numbered by the channel — all 15 are titled `"<Move> - Class N, Intermediate Salsa (Short)"`, covering classes 1 through 14 — and those numbers do **not** match playlist position:
+
+| Move | Playlist position | Class number in the short's title |
+|---|---|---|
+| Montaña | 13 | 1 |
+| Balsero | 2 | 2 |
+| El Uno Complicado | — | 3 |
+| Sombrero Por Debajo | 8 | **4** |
+| Paseala Complicado | 7 | 5 |
+| Setenta y Cuatro | 10 | 7 |
+| La Botella | 4 | **8** |
+| Sombrero Complicado | 1 | 9 |
+| Bayamo | 11 | 11 |
+| Setenta Complicado | 5 | **12** |
+
+So the channel is numbering by a *teaching order* that the playlist does not preserve. That matters here because the three mistitled shorts carry class numbers 4, 9 and 13 — and class 4 and class 9 are already taken, by the real Sombrero Por Debajo short (`nolwu7BcRdc`, Class 4) and by Sombrero *Complicado* (`CuUwwKNxCuI`, Class 9). Two shorts claiming Class 9 while showing different moves is the shape of a copy-paste title error, and it suggests the mistitling is in the *name* half of the title while the *class number* half may still be correct. If so, `hET29nU1hV8` (Class 13) belongs to whichever move the channel taught thirteenth — a much smaller search than nine candidates.
+
+This is a lead, not a finding. Nothing in the data has been changed on the strength of it, and it does not remove the need to watch the three shorts; it narrows what to expect when someone does.
+
 **Why this cannot be resolved from metadata.** All three shorts are music-only — no speech, no transcript, no cues. Whisper would hallucinate over them (and the transcriber now refuses any id in `SHORTS` unless `--allow-music-only` is passed, per `SALSA_INTERMEDIATE_PLAN.md` §2c). The only way to know which move each shows is to watch it.
 
 **How to resolve this.** Download `_a5fC4nGz1c` and `hET29nU1hV8` (each ~38s). Watch all three, identify which moves they actually show by comparing to the 22 move videos' teaching segments. If the other two are in the candidate pool, attach them to the correct moves in the spec and manifest. If they duplicate `nolwu7BcRdc`, document that and leave them out. Either way, update `SALSA_INTERMEDIATE_SPEC_PARTC.md` position 8's note to record what was seen, not what the title says.
@@ -586,7 +629,14 @@ Three intermediate steps clips carry caveats, all for the same reason: the full-
 
 These are the windows most worth a second look, because they are the only full-tempo demos their classes contain. If a cleaner window exists, note it in the spec and re-cut. If not, the caveat tells the truth and the clip stays.
 
-No intermediate couples clip carries a caveat. The 13 moves with authored chapters have clean front-camera counted demos and music-only shorts, and the rest were cut from clean segments identified in the transcripts.
+**Two intermediate couples clips now carry caveats**, and for a different reason from the three above — not that the demo is narrated, but that there is no official short to use at all:
+
+| Move | Clip | The caveat | Window | Video |
+|---|---|---|---|---|
+| Tiramisu Complicado (pos. 3) | `tiramisu-complicado-fast.mp4` | Cut from the music section of the class video, not an official short — this move has none. The teachers count over the music, so it is full tempo but not silent. | 109.18 → 155.02 | `kr0fYDZABME` |
+| El Dos (pos. 6) | `el-dos-fast.mp4` | Same. | 158.50 → 196.40 | `SOjNHsjPFL4` |
+
+Both are landscape `16/9` rather than the vertical `9/16` of a short, which is itself a visible signal that the clip came from the class video. They are two of the nine no-short moves listed in §10.2 — if one of the three mistitled shorts turns out to show Tiramisu Complicado or El Dos, these two clips can be replaced with a clean music-only vertical and the caveats dropped.
 
 ### 10.4 Clips below the 23-second reference floor
 
@@ -618,6 +668,25 @@ Both are graded `AV` (authored chapter + declared caveat) and appear in the audi
 ### 10.6 No `verified` confidence anywhere, and no `suspect` anywhere either
 
 As of the last integrity pass (`check_cue_fragments.py`), **606 intermediate cues** exist across 28 files. Every one carries `confidence: 'transcript'`. Zero carry `'verified'` (no one has watched anything) and zero carry `'suspect'` (the agents flagged nothing as actively untrustworthy, unlike beginners steps class 7's arm cue). The UNRESOLVED items in §10.1 are honest gaps, not suspected errors.
+
+### 10.7 The 12 derived windows — positions 2-7 of the couples course
+
+Positions 2-7 (Balsero, Tiramisu Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) were the last moves in either intermediate course to get clips, and they were the hard ones. Positions 8-31 have *authored* chapters — the teachers published "Table of contents / video index:" blocks in the video descriptions, so a clip window could be quoted from a boundary someone else committed to. Positions 2-7 have auto-generated chapters or none at all. There was nothing to quote.
+
+So all 12 windows were derived from the Whisper word timings: every in- and out-point is a real word's start or end, usually the `"Guapea"` that opens a counted rep and the `"seven."` that closes a bar. The audit grades them **trust D** for exactly that reason, and the distinction is worth keeping in mind — the boundary is a real timestamp, but it was *chosen* rather than published. Expect a clip to occasionally start a beat early or run a beat long. Caveat ICC-b in `frontend/src/data/salsa-int-couples.ts` says this to the learner in those words.
+
+**What makes these lower-risk than they sound.** The wrong-move failure mode that §9.1 describes for the intermediate *steps* course — a music block that reviews every earlier step, so a window can contain the right count and the wrong move — does not apply here. Each of these six is a **standalone single-move video**: there is no earlier material in the file to accidentally cut. Four of the six windows were spot-checked against the transcript around the boundaries and the move is named inside the window in every case.
+
+**What is still unchecked.** Nobody has watched them. The gates confirm a word timing, a counted bar, and a plausible position in the file. None of them confirms that the move on screen is the move the file is named after — that remains the standing limitation of every clip in both intermediate courses.
+
+### 10.8 Placeholders and a typo that the gates would never have caught
+
+Two classes of error surfaced while finishing positions 2-7, both in `SALSA_INTERMEDIATE_SPEC_PARTC.md`, and neither is the kind a checker finds:
+
+- **Ten `**[duration]**` placeholders.** Anchor cells for official shorts read "whole file, duration **[duration]**" — a literal placeholder where a number belonged, on six moves that had already shipped as complete. Resolved by reading each duration off the container in `data/cache/salsa/videos/<id>.mp4` rather than from the playlist metadata, and by confirming each short's identity against the channel's own title. Each anchor cell now records where the number came from.
+- **One video id one character wrong.** Paseala Complicado's short was recorded as `eWR8KHyoQHw`; the cached file is `eWR8KHyoQXw`. No such video as the former exists locally, which is why the clip had never been cut — a missing file is silent when the row that references it was never processed.
+
+A third instance of an older bug also turned up here: the audit's *summary line* read clip grain off the `tempo` field (scraped from the nearest `### Slow` / `### Fast` subheading) instead of off the filename, and so reported `?=12` for every row in a table that uses a leading `#` column instead of subheadings. The checks themselves had been fixed twice before — once in the audit, once in the manifest generator — and the summary was the third site. Twelve unknown tempos in a report whose whole job is to surface problems reads as a problem, and it was not one.
 
 ---
 
