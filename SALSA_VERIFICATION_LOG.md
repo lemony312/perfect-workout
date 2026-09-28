@@ -351,6 +351,156 @@ into, and is cheaper than watching.
 
 ---
 
+## 9. The intermediate course — what the automated gates caught
+
+The intermediate spec was written by a dozen agents across five parts, and the
+things that went wrong were not the things a review pass looks for. Each of the
+following was invisible to reading and was caught by a check that can fail.
+
+### 9.1 Word-anchoring is necessary but not sufficient
+
+Every clip window in the intermediate spec is graded for trust: `A` when both
+boundaries sit on a real word timing, `D` when one is derived, `V` when it carries
+a caveat. `scripts/extract_intermediate_clip_windows.py` verifies the grade rather
+than believing it — `anchor_of()` asks the transcript whether the boundary is
+actually there, and it found five boundaries whose citation quoted a word at a
+timestamp where that word does not occur.
+
+Then four windows passed that check and were still wrong. `toe-heel-cross` fast,
+`triple-jump` fast, `mojito` fast and `elegua` fast had both boundaries verified
+against real word timings, and the seconds between them held the teacher
+explaining knee bend or reciting the names of the drinks. Grade `A` on a clip with
+no dancing in it.
+
+The lesson worth keeping: the agents optimised for the validator, and the
+validator only checked where the edges sat, never what lay between them. So
+`counted_runs()` now asks whether a window contains three count words inside any
+three-second span — a teacher counting a bar in. A window with more than 25 spoken
+words and not one counted bar is explanation, not a demo run. Across all 70
+windows that rule flags exactly those four and nothing else; quiet windows are
+exempt, because a full-tempo grain sitting in music is what a fast clip *should*
+look like.
+
+Two calibration attempts were rejected before that one. Overall count density put
+a legitimate slow walkthrough 0.6 points from the threshold. "Does the window open
+on a count" flagged four windows that do contain real counted demos
+(`toe-heel-cross` slow, `malibu` fast, `charanga-wave` fast, `sombrero-por-debajo`
+slow) because a demo may legitimately open with "let's do it again".
+
+### 9.2 A check that has never failed
+
+Both new checks were mutation-tested, because a coverage or anchor check that has
+never fired is indistinguishable from one that always passes. Moving a good
+window onto a lecture span makes the content check fire; moving a bad window onto
+a demo span makes it pass; raising the word threshold above the corpus makes it go
+blind, which is what a broken threshold would look like. Nudging an anchored
+boundary by 0.25s makes the anchor check fire.
+
+This is also how a real false alarm was caught. The anchor verifier initially
+reported that only 44 of 122 boundaries were anchored — across every file,
+including parts no agent had touched. A check that disagrees with every file at
+once is usually itself the thing that is wrong. Whisper stores words as
+`{"w":, "s":, "e":}`, not `{"word":, "start":, "end":}`; reading the long names
+silently yields nothing but segment boundaries. After the fix, 135 of 140. Worth
+stating plainly because the wrong conclusion was one step away: that a dozen
+agents had fabricated every boundary in the corpus.
+
+### 9.3 Two extractor bugs that made the spec look worse than it was
+
+Both were mine, not the agents'.
+
+Columns were matched by exact header name, so PARTA's `Anchors & caveats` was
+dropped — and with it the check for windows that declare themselves unresolved, a
+check that had been working and went quiet without ever failing. It also hid four
+PARTC windows. The true window count is 70, not 66.
+
+Whole-short windows took their end from `.info.json`, whose `duration` is whole
+seconds, and were then flagged by the round-number rule — the script flagging its
+own output. Ends now come from `ffprobe` container duration. On a 38.47s short,
+ending at 38.0 drops the final beat of the move.
+
+### 9.4 Five dangling `composedOf` ids — four different causes
+
+Cross-checked against the 55 move ids the beginners modules actually export plus
+the intermediate scope tables. A dangling `composedOf` id renders as an ordinary
+link and stays indistinguishable from a working one until someone taps it, so this
+needed `check_composed_of()` and not a reading pass.
+
+| id | cause | resolution |
+|---|---|---|
+| `dile-cano` | Whisper's rendering of **Dile que no**, which exists as `dile-que-no` | renamed — and the mishearing had reached ten places of user-facing prose and cue text, including in a file whose own conventions section says to use the real move name |
+| `exhibela` | real in the video, but the only ids are `exhibela-crossing` and `enchufla-doble-alarde-exhibela`, and a left turn with a shoulder block is neither | dropped; carried by cues `casino-estilo-4`/`-5`, which quote the moment |
+| `aguajea` | never taught as a move of its own in either course | dropped; still named in the footwork paragraph |
+| `caminala` | taught only in *Caminala Variations*, one of the four videos this course links to without clipping | dropped; same |
+
+`['donde-vas', 'dedo', 'enchufla', 'setenta']` on Salsa con Rumba needed no change.
+Only the first of the five was fixable by renaming, which is the argument against
+resolving this class of problem in bulk.
+
+### 9.5 Declared departures are not defects
+
+The audit reports these separately from problems, and the distinction is
+load-bearing. Salsa con Rumba's two sequence windows run 67.64s and 124.0s against
+a 52s ceiling: one complete run of a four-part sequence does not fit, and cutting
+it to 52s would end mid-sequence, which is worse than a long clip. A window that
+states the overrun is a decision; one that is merely long is a defect. Conflating
+them either blocks a correct window forever or trains the reader to skip the
+report.
+
+### 9.6 A caveat cannot fix the wrong move — Elegua has no fast grain
+
+Four intermediate-steps classes turned out to have no clean full-tempo demo of
+their own move: the music block is a narrated review of every previous step, with
+the current move getting one brief pass at the top, if that. Three of them —
+`toe-heel-cross` (758.74–785.94), `triple-jump` (362.92–406.30), `pilon`
+(398.70–449.68) — ship as grade D with `NARRATED` in the anchors and the reason in
+`SalsaClip.caveat`. In all three the move is named and danced inside the window;
+what is wrong with the clip is only that the teacher talks over it, and that is
+exactly what a rendered caveat is for.
+
+Elegua is the fourth and it does not ship. A window at **585.34–628.06** was
+carried into the spec and survived every automated gate: both boundaries are real
+word timings, so the anchor check passes, and it sits inside `is11-music`
+(580.28–693.74), so the structural check passes too. Reading what is actually
+spoken in it, it is a full-tempo pass of **Pilon and Cuba Libre**. The whole block
+is a review — Pilon and Cuba Libre to 630, then toe-heel-cross, triple jump,
+Malibu, Mojito, Charanga Wave, Rumba basic and Cachan to 693 — and Elegua is not
+danced anywhere in it. "Elegua" occurs in the block once, at 581.86, and it is the
+teacher comparing tempos: *"Rumba to this tempo of salsa feels very, very slow, and
+with Alegua it's quite similar."* The nearest alternative, 540–580, is inside the
+`count` block and is the teacher saying *"yeah, this feels quite slow"* over
+variations.
+
+So the pair ships `slow` only, with `ClipPair.missingReason`. The reason this is a
+different decision from the other three, and not inconsistency: a caveat tells the
+truth about a clip that is hard to watch, but `elegua-fast.mp4` containing Pilon is
+a file someone practises the wrong step to. **Honesty about a clip is not a
+substitute for the clip being of the thing it is named after.**
+
+The general lesson is about the gates, not about Elegua. Three checks now stand
+between the spec and a bad window — boundaries anchored to real words, content
+containing a counted run or a declared narration, window inside the segment-role
+block the grain comes from — and all three are checks on *where* a window sits or
+*how* it sounds. None of them asks whether the move the file is named for is the
+move in the frame. That question needs a human or a reading pass over the
+transcript span, and it is the last thing in this pipeline that cannot be
+automated from metadata.
+
+### 9.7 Media headroom — 962 MB of 1024 MB
+
+GitHub Pages publishes at most 1 GB per site. The media repo now holds 202 clips
+(133 beginners, 69 intermediate) at **94%** of that limit, leaving about 62 MB.
+`scripts/clip_salsa_intermediate.py` warns above 90% and refuses above 100%, so
+this cannot be crossed silently — but the next course will cross it.
+
+The lever, when it is needed, is the **fast grains**: the slow counted demos are
+what a learner actually practises to, and the full-tempo clips are reference. Their
+resolution or CRF can drop without touching the material that carries the
+teaching. Nothing has been re-encoded on that basis yet, because keeping one set
+of encode settings across all 203 clips is worth more today than 50 MB.
+
+---
+
 ## How to record a resolution
 
 1. Change the value and set `confidence: 'verified'` in the relevant fragment

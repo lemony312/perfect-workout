@@ -94,7 +94,7 @@ position, walk forward twice with styling, and return to close position.
 | `id` | `aguajea-caminala-sequence` |
 | `name` | Salsa sequence with Aguajea and Caminala |
 | `kind` | `step` |
-| `composedOf` | `['aguajea', 'caminala', 'vacilala-por-la-mano']` (where these ids exist in the int-couples move index) |
+| `composedOf` | `['vacilala-por-la-mano']` — see the note below; `aguajea` and `caminala` are named in the footwork but are not move ids anywhere in the project |
 | `summary` | A short intermediate sequence: two Aguajeas, forward walking with styling, and Vacilala por la mano, returning to close position. |
 
 **Footwork paragraph:**
@@ -129,18 +129,18 @@ Two clips, both cut from the same video.
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `vjcWjUOy0po` | **46.72** | **82.00** | 35.28s | `aguajea-caminala-sequence-slow.mp4` | **A** | In: the word *"Five"* @46.72 in *"We'll do it very very slowly. Five six seven"*. Out: 82.00, end of the first complete slow demonstration with names; *"two parts of walking"* @81.54, next speech *"and then Basile La Por La Mano"* @82.14. |
+| `vjcWjUOy0po` | **46.72** | **81.54** | 34.82s | `aguajea-caminala-sequence-slow.mp4` | **A** | In: the word *"Five"* @46.72 in *"We'll do it very very slowly. Five six seven"*. Out: 81.54, end of the word *"7,"* — the last word of the counted demonstration segment before narration begins (*"one two three and five six seven so we have two Agua Hea's..."* starts at 81.54). |
 
 **Caveat**: The teachers narrate and name moves throughout — "Agua Heia" @54.74,
-"D leg" @60.72, "walking" @66.56, "Basile La Por La Mano" @82.14. Not a silent
-counted demo, but the clearest complete run-through of the sequence at slow tempo
-with count.
+"D leg" @60.72, "walking" @66.56. Not a silent counted demo, but the clearest
+complete run-through of the sequence at slow tempo with count. The clip ends before
+the post-demo narration that begins at 81.54.
 
 #### Fast
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `vjcWjUOy0po` | **177.64** | **210.84** | 33.20s | `aguajea-caminala-sequence-fast.mp4` | **A V** | In: the word *"Five,"* @177.64 in the segment starting *"Okay we'll do everything with music. Five, six, seven"*. Out: 210.84, where the music fades and speech resumes *"Okay, so..."* @211.18. |
+| `vjcWjUOy0po` | **174.9** | **210.84** | 35.94s | `aguajea-caminala-sequence-fast.mp4` | **A V** | In: the word *"Five,"* @174.9 in the segment *"Okay we'll do everything with music. Five, six, seven"*. Out: 210.84, where the music fades and speech resumes *"Okay, so..."* @211.18. |
 
 **Caveat**: The teachers count over the music in the first few seconds —
 *"five six seven and one two three six seven and one"* @177.64–184.42. After
@@ -167,13 +167,23 @@ the teachers present it as a concept demonstration rather than a step-by-step
 breakdown. The constituent moves (Aguajea, Vacilala por la mano) are assumed to
 be already known from their individual lessons earlier in the course.
 
+**Note on `composedOf`**: only `vacilala-por-la-mano` is listed, and the other two
+named moves are deliberately left out rather than written as ids that resolve to
+nothing. `aguajea` is never taught as a move of its own in either course, and
+Caminala is taught in *Caminala Variations*, which is one of the four videos this
+course links to without clipping. Writing them anyway would create edges the UI
+renders as links to pages that do not exist — the failure is silent, because a
+dangling id looks exactly like a working one until someone taps it. The moves are
+still named in the footwork paragraph above, which is where a reader who wants
+them will look.
+
 ---
 
 ## Sequence 2 — Casino con Estilo
 
 - **Video** `ScbrkgnWV8s` · 1160s (19:20) · 11 YouTube chapters · **no official short**
 - **Playlist position** 14
-- **Constituent moves**: Dile Cano, Guapea, Enchufla (walking forward), Exhibela (with left turn), Setenta Complicado, and multiple styling elements
+- **Constituent moves**: Dile que no, Guapea, Enchufla (walking forward), Exhibela (with left turn), Setenta Complicado, and multiple styling elements
 - Both clips cut from this video.
 
 This is a 19-minute lesson teaching a complex intermediate sequence with styling.
@@ -189,12 +199,12 @@ with music.
 | `id` | `casino-con-estilo` |
 | `name` | Casino con Estilo |
 | `kind` | `step` |
-| `composedOf` | `['dile-cano', 'guapea', 'enchufla', 'exhibela', 'setenta-complicado']` (where these ids exist) |
-| `summary` | An intermediate Cuban salsa sequence with styling: Dile Cano to Guapea, forward-walking Enchufla, Exhibela with left turn and body block, Setenta Complicado, and multiple styling details. |
+| `composedOf` | `['dile-que-no', 'guapea', 'enchufla', 'setenta-complicado']` — all four resolve; `exhibela` is deliberately absent, see the note below |
+| `summary` | An intermediate Cuban salsa sequence with styling: Dile que no to Guapea, forward-walking Enchufla, Exhibela with left turn and body block, Setenta Complicado, and multiple styling details. |
 
 **Footwork paragraph:**
 
-The sequence starts from Dile Cano position and transitions to Guapea. From
+The sequence starts from Dile que no position and transitions to Guapea. From
 Guapea, the couple does Enchufla while walking forward, with the held hands
 going between their bodies. Then Exhibela with a left turn, where the leader
 blocks the follower with his left hand on her left shoulder. This transitions
@@ -202,6 +212,17 @@ into Setenta Complicado with multiple hand changes and styling elements. The
 sequence emphasises body movement, arm styling, and smooth transitions between
 figures. The teachers break down the basic structure first, then layer in the
 styling details in the second half of the lesson.
+
+**Note on `composedOf` and `exhibela`**: the sequence plainly contains an Exhibela
+— "From here Exhibela and we are blocking our partner with the left hand on her
+left shoulder" @106.26 — but there is no bare `exhibela` move id. The two that
+exist are `exhibela-crossing` and `enchufla-doble-alarde-exhibela`, and what the
+teachers describe here (a left turn with a shoulder block) is neither a crossing
+nor a doble alarde. Picking one to make the array look complete would assert a
+relationship the source does not support, so the edge is dropped and the Exhibela
+is carried by cues `casino-estilo-4` and `-5` instead, which quote the moment
+directly. Same call as couples K6-g and K10-b. If a plain `exhibela` id is ever
+added, this is a one-string change.
 
 ### 2.2 Segment map
 
@@ -235,7 +256,7 @@ demonstration.
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `ScbrkgnWV8s` | **195.54** | **245.82** | 50.28s | `casino-con-estilo-slow.mp4` | **A** | In: the word *"Five"* @195.54 in *"Let's do everything from the very beginning. Five six seven, D leg and oh hop"*. Out: 245.82, last word *"seven"* @245.64 before chapter boundary @247.0; next speech *"Okay, you remember"* @247.54. |
+| `ScbrkgnWV8s` | **198.44** | **245.82** | 47.38s | `casino-con-estilo-slow.mp4` | **A** | In: the word *"5"* @198.44 in *"then we'll dance it with the music. 5 6 7 1 2 super slow-mo"*. Out: 245.82, last word *"seven"* @245.64 before chapter boundary @247.0; next speech *"Okay, you remember"* @247.54. |
 
 This is the "basic version with slow count" — the cleanest slow demonstration of
 the sequence structure without styling details.
@@ -244,7 +265,7 @@ the sequence structure without styling details.
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `ScbrkgnWV8s` | **930.52** | **979.42** | 48.90s | `casino-con-estilo-fast.mp4` | **A V** | In: the word *"Five"* @930.52 in *"Five six seven"* at the start of the "whole sequence with music (slowly)" segment. Out: 979.42, last audible music/movement before the tempo change and camera swap @981.0; speech resumes *"Okay one more"* @981.82. |
+| `ScbrkgnWV8s` | **930.52** | **979.42** | 48.90s | `casino-con-estilo-fast.mp4` | **D V** | In: the word *"Five"* @930.52 in *"Five six seven"* at the start of the "whole sequence with music (slowly)" segment. Out: 979.42, derived from music ending before the chapter boundary @981.0; last speech is *"with faster music."* ending @978.14, next speech *"Okay,"* @980.24. The boundary is in the music. |
 
 **Caveat**: Labelled "slowly" in the chapter title, but this is full tempo with
 music, just slightly slower than the final "faster" version. The count over the
@@ -263,7 +284,7 @@ entries elsewhere in the intermediate couples course.
 
 | id | beat | role | kind | text | @ | verbatim |
 |---|---|---|---|---|---|---|
-| `casino-estilo-1` | — | `leader` | `footwork` | From Dile Cano, step back and turn into Guapea. Step out slightly so she's on your right. | 76.3 | "All I have to do is to step out a bit, so I'm not in one line with her anymore. she's slightly on my right." |
+| `casino-estilo-1` | — | `leader` | `footwork` | From Dile que no, step back and turn into Guapea. Step out slightly so she's on your right. | 76.3 | "All I have to do is to step out a bit, so I'm not in one line with her anymore. she's slightly on my right." |
 | `casino-estilo-2` | — | `both` | `concept` | Do Enchufla while walking forward. The held hand goes between your bodies, in front of the follower's face. | 81.64 | "We carry on with an Enchufla, we're walking forward, the hand that we are holding, guys left, girls right, goes in between our bodies, in front of girls face" |
 | `casino-estilo-3` | — | `leader` | `lead` | Swap hands while walking forward. Your right palm meets her left palm. | 96.36 | "we're to the right palm, we're swapping hands" (from context @86-96) |
 | `casino-estilo-4` | 2 | `leader` | `lead` | Block her left shoulder with your left hand. | 106.26 | "From here Exhibela and we are blocking our partner with the left hand on her left shoulder. One two block." |
@@ -348,7 +369,7 @@ is added.
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `uMun9OrDKPc` | **930.14** | **960.22** | 30.08s | `casino-con-estilo-2-fast.mp4` | **A V** | In: 930.14, the word *"Five"* in *"Five six seven"* @930.14 at the start of the music segment. Out: 960.22, last audible music before chapter boundary @961.0; camera change and speech *"One more from the front"* @961.74. |
+| `uMun9OrDKPc` | **930.14** | **960.22** | 30.08s | `casino-con-estilo-2-fast.mp4` | **D V** | In: 930.14, derived from music starting after chapter boundary @928.0; nearest speech is counting *"1"* @931.74, *"2"* @931.9, *"3"* @932.24. The boundary is in music before the count begins. Out: 960.22, derived from music ending before chapter boundary @961.0; last speech is *"Let's do it again."* ending @958.72, next speech *"Three,"* @962.48. Both boundaries are in music. |
 
 **Caveat**: Labelled "slowly" but this is full tempo with music. The back camera
 version is preferred over the two front camera angles (961–998 and 998–1034)
@@ -370,7 +391,7 @@ styling, extracted below.
 | `casino-estilo-2-3` | 5 | `follower` | `footwork` | On 5, prep to the left, then rotate to the right to face him. | 260.92 | "So you left, you prep to the left and then you rotate to the right to face the guy. So it's Left, right and to the guy." |
 | `casino-estilo-2-4` | — | `follower` | `concept` | The prep step is important — it gives you extra momentum for the turn. | 282.26 | "She would do 5, 6 and on 7 she would technically step on the spot and it feels pretty strange... So this prep is important. It gives you extra momentum. The turn looks more dynamic" |
 | `casino-estilo-2-5` | — | `leader` | `footwork` | Do a left turn at the same time the follower does her right turn. | 304.84 | "And from guy perspective, we do a left turn at the same time." |
-| `casino-estilo-2-6` | — | `both` | `concept` | After Dile Cano, do another Dile Cano. Stay in close position — make a really long loop. | 330.86 | "Dilekno after dilekno. D like, no, hop, hold it, six, forward, D like, no, hop, five, six, seven. And I still stay in close position, okay? So we make really long loop." |
+| `casino-estilo-2-6` | — | `both` | `concept` | After Dile que no, do another Dile que no. Stay in close position — make a really long loop. | 330.86 | "Dilekno after dilekno. D like, no, hop, hold it, six, forward, D like, no, hop, five, six, seven. And I still stay in close position, okay? So we make really long loop." |
 | `casino-estilo-2-7` | — | `follower` | `concept` | From the follower's perspective, this is like an easier Coca-Cola — no turn, but dynamic. | 342.62 | "If you know Coca-Cola step from guy perspective, it is like Coca-Cola from girl perspective. It is like a lot easier Coca-Cola because you are not turning meanwhile. But if it's done dynamically, it's very fun, exciting step." |
 | `casino-estilo-2-8` | [1,2,5,6] | `both` | `concept` | Create tension on 1-2 and 5-6 during the Coca-Cola section. | 356.62 | "Five, six, seven, one, two, tension. 5, 6, tension, 1, 2, tension, and 5, 6, continue." |
 | `casino-estilo-2-9` | — | `leader` | `footwork` | Do a right turn while she walks forward rotating to the left. | 388.86 | "So I'm going right turn and you're doing what? Just walking forward, rotating to the left. So not much happening in terms of steps really, but there will be quite fun styling." |
@@ -427,7 +448,7 @@ with music, (4) the duration (129s) matches the length of a full-tempo run of th
 The sequence teaches four complete variations. **Part 1 (from Donde Vas)**: Start
 with Dile que no, then a short Donde Vas section (left turn, three steps in spot,
 double right turn), transitioning into basic Rumba step, Cachan, and body styling
-with arm movements, returning via Dile Cano to Guapea. **Part 2 (from Dedo)**:
+with arm movements, returning via Dile que no to Guapea. **Part 2 (from Dedo)**:
 Not fully extracted. **Part 3 (from Enchufla)**: Not fully extracted. **Part 4
 (from Setenta)**: Not fully extracted. Each part is 3–4 minutes of detailed
 breakdown. The sequence demonstrates how to blend the Afro-Cuban Rumba body
@@ -462,19 +483,21 @@ with a separate fast demo video.
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `FtsTDpd8ARA` | **1006.68** | **1120.48** | 113.80s | `salsa-con-rumba-slow.mp4` | **A V** | In: 1006.68, the word *"So"* in *"So we'll do everything from the beginning"* @1006.68–1009.54. Out: 1120.48, last audible count *"seven"* @1120.36 before chapter boundary @1125.0; next speech *"Everything with music back"* @1125.88. |
+| `FtsTDpd8ARA` | **1008.10** | **1075.74** | 67.64s | `salsa-con-rumba-slow.mp4` | **A V** | In: 1008.10, the word *"Five,"* starting the counted demonstration (*"Five, six, seven, slowly. One, two, three..."*). Out: 1075.74, end of the word *"seven."* — the last count before teaching resumes (*"One more thing that I will mention..."* @1076.80). **OVERRUN**: Complete run of the 4-part sequence is 67.64s, cannot fit in 52s; this is the shortest honest run. |
 
-**Caveat**: The teachers count and narrate throughout, labelling each part —
-"Part one" @1017.76, "Part two" @1037.32, "Part three" @1061.48, "Part four"
-@1085.02. Not a silent demo.
+**Caveat**: The teachers count and narrate throughout, labelling parts ("And last
+part" @1058.02). Not a silent demo. The 4-part sequence requires 67.64s for one
+complete counted run-through — an honest overrun documented per the brief's guidance.
 
 #### Fast
 
 | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|
-| `fPOzAAf8z0I` | **0.78** | **125.64** | 124.86s | `salsa-con-rumba-fast.mp4` | **A V** | In: 0.78, first beat of the music after the fade-in. Out: 125.64, last beat before the music fades out @126.02; silence and end screen @126.5. |
+| `fPOzAAf8z0I` | **2.36** | **126.36** | 124.00s | `salsa-con-rumba-fast.mp4` | **A V** | In: 2.36, end of the word *"One."* after the intro (*"And we start with basic. One."* @0.00–2.36). Out: 126.36, start of the word *"Thank"* before the outro (*"Thank you."* @126.36–127.48). Music-only demo; the last spoken cue is *"Nice one."* @105.26, followed by ~21 seconds of music-only demonstration. **OVERRUN**: Complete run of the 4-part sequence is 124.00s, cannot fit in 52s; this is the full demo from the separate music video. |
 
-No caveat — pure demonstration with music, no speech.
+**Caveat**: The 4-part sequence requires 124s for one complete run at tempo — an
+honest overrun documented per the brief's guidance. Pure demonstration with music
+and sparse spoken cues; not silent but minimal speech.
 
 ### 4.4 Cues
 
@@ -494,11 +517,11 @@ No caveat — pure demonstration with music, no speech.
 | `rumba-1-6` | — | `leader` | `footwork` | Do half a Cachan, then close and open, then do another Cachan. | 163.16 | "I did half of the Kachan. Now I will close and open and I will do another kachan." |
 | `rumba-1-7` | — | `both` | `footwork` | After the Cachan sequence, both bounce on the right foot in front. | 171.4 | "from here we are bouncing on the right foot. Are you bouncing on the right as well in front? So yes, we are both bouncing on the right in front." |
 | `rumba-1-8` | — | `leader` | `rhythm` | The "close and open" steps change the rhythm, so you can start on 1 with the right foot. | 175.88 | "the steps close and open, change the rhythm. So now I can start on one with the right foot." |
-| `rumba-1-9` | — | `both` | `concept` | Do Dile Cano twice to exit the Rumba section. | 199.98 | "And now just to reverse cameras back, we'll do the le cano twice. So it's the le cano, hop, five, six, seven, and the le cano, hop" |
-| `rumba-1-10` | — | `both` | `concept` | After the two Dile Canos, you're back in Guapea. | 210.4 | "and we are back in Guapea this time" |
+| `rumba-1-9` | — | `both` | `concept` | Do Dile que no twice to exit the Rumba section. | 199.98 | "And now just to reverse cameras back, we'll do the le cano twice. So it's the le cano, hop, five, six, seven, and the le cano, hop" |
+| `rumba-1-10` | — | `both` | `concept` | After the two Dile que nos, you're back in Guapea. | 210.4 | "and we are back in Guapea this time" |
 | `rumba-1-11` | — | `follower` | `styling` | During the Rumba section, keep your arms to the side with the basic step. With Cachan, bring your left hand in front of your body, open it to the side, put your right hand on your waist behind your back. | 253.4 | "With the basic step, nothing funky, five six seven, just arms to the side and bounce with kachan and nothing as well... she just went in front of her body with her left hand, opened it to the side, second goes on her waist behind her back" |
 | `rumba-1-12` | — | `follower` | `body-movement` | Shake your body while walking after the Cachan section. | 275.94 | "and now shake while walking just shake five six seven shake and shake and shake and shake" |
-| `rumba-1-13` | — | `follower` | `arms` | The arm that was already up will land on the leader's shoulder during Dile Cano. | 283.0 | "this arm that was already up will land on my shoulder D leg and hop I'll take other one" |
+| `rumba-1-13` | — | `follower` | `arms` | The arm that was already up will land on the leader's shoulder during Dile que no. | 283.0 | "this arm that was already up will land on my shoulder D leg and hop I'll take other one" |
 | `rumba-1-14` | — | `both` | `context` | This demonstrates how to apply Rumba into salsa. There are many ways to do it; this is one approach. | 18.0 | "We have received many requests to show how to apply rumba into salsa. There are probably million ways to do it, but in this video we are presenting four different variations." (from description/about section) |
 | `rumba-1-15` | — | `both` | `context` | The full class is in video FtsTDpd8ARA. A separate demo with music is in video fPOzAAf8z0I. | 18.0 | "On top of that we've recorded this sequence with music and posted it as a second video. You can find it here: https://youtu.be/fPOzAAf8z0I" (from description) |
 
@@ -537,7 +560,7 @@ No caveat — pure demonstration with music, no speech.
 |---|---|---|---|---|---|---|
 | `rumba-4-1` | — | `leader` | `lead` | This Setenta is slightly weird — move your right hand in front of you to put her behind your back. | 815.02 | "Okay, again, from guy perspective first. This set-hand is slightly weird because I'm moving the right hand in front of me, just to put Anna behind my back." |
 | `rumba-4-2` | — | `leader` | `lead` | Release your fingers so she feels you're letting her go. She can then create space. | 835.28 | "And already when I do it, I release my fingers, so she feels, aha, he doesn't care what is happening next, he lets me go. So yes, I do let her go, and straight away she's using it and creating space for herself with a step to the side." |
-| `rumba-4-3` | — | `leader` | `footwork` | Do heel behind, toe-heel-step, toe-heel-attack, cross, twist and shake, forward, then Dile Cano. | 850.46 | "Five, six, seven, and heel behind. Toe, heel, step. Toe, heel, attack. And cross. Twist and shake. Forward, dilek and o." |
+| `rumba-4-3` | — | `leader` | `footwork` | Do heel behind, toe-heel-step, toe-heel-attack, cross, twist and shake, forward, then Dile que no. | 850.46 | "Five, six, seven, and heel behind. Toe, heel, step. Toe, heel, attack. And cross. Twist and shake. Forward, dilek and o." |
 | `rumba-4-4` | [1,2,3,4,5,6,7,8] | `leader` | `rhythm` | The rhythm is syncopated: 1-2-3-4-5-6-7-8, then 1-2-3-5-7, then 1-2-3-5-6-7. | 872.9 | "5, 6, 7 and 1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 5, 7 and 1, 2, 3 and 5, 6, 7." |
 | `rumba-4-5` | — | `leader` | `footwork` | Heel-step behind, toe-heel-step, toe-heel-attack, cross, shake-shake. | 895.98 | "one more time from my perspective I go with heel, step behind, toe, heel, step, toe, heel, attack, cross, shake, shake" |
 | `rumba-4-6` | — | `follower` | `footwork` | Step out to the side. Go side-up-down on 1-2-3. | 920.82 | "So she's going side up down, one, two, three, five, six, seven, eight." |
@@ -570,10 +593,26 @@ caveat — it's clean.
 
 ### Unresolved items
 
-1. **`composedOf` arrays incomplete** — The constituent moves are listed where
-   explicitly named in transcripts, but not cross-checked against the intermediate
-   couples move index. A verification pass should confirm all move ids exist and
-   match the naming in the single-move video specs from batches A-D.
+1. ~~**`composedOf` arrays incomplete**~~ — **RESOLVED.** Every id in all four
+   arrays was cross-checked against the real move id universe: the 55 ids the
+   beginners steps and couples modules actually export, plus the intermediate
+   moves from batches A–D. Five did not resolve, and each was a different kind of
+   problem rather than one mistake repeated:
+
+   - `dile-cano` was Whisper's rendering of **Dile que no**, which does exist as
+     `dile-que-no`. The mishearing had also reached ten places of user-facing
+     prose and cue text, including this file's own naming convention (§Conventions
+     says to use the real move name and then this sequence did not). All corrected;
+     the `verbatim` columns keep the garble, which is what that column is for.
+   - `exhibela` is real in the video but has no bare id — see the note on
+     Sequence 2. Edge dropped rather than guessed.
+   - `aguajea` and `caminala` are not move ids anywhere — see the note on
+     Sequence 1. Edges dropped rather than guessed.
+
+   `['donde-vas', 'dedo', 'enchufla', 'setenta']` on Salsa con Rumba needed no
+   change; all four resolve. Note that a dangling id in `composedOf` fails
+   silently — it renders as an ordinary link until someone taps it — which is why
+   this needed a script and not a reading pass.
 
 2. **Footwork paragraphs incomplete** — Casino con Estilo 2 and Salsa con Rumba
    Parts 2–4 have only summary footwork descriptions. Full blow-by-blow footwork

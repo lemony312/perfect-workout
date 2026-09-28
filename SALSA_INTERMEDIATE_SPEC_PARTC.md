@@ -347,9 +347,9 @@ No official short listed. Fast clip from main video:
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `setenta-y-cuatro` | `_L36hAcjsXg` | **60.0** | **167.0** | 107.0s | `setenta-y-cuatro-slow.mp4` | **A** | Chapter to chapter. |
+| 1 | `setenta-y-cuatro` | `_L36hAcjsXg` | **139.30** | **170.22** | 30.92s | `setenta-y-cuatro-slow.mp4` | **A** | In: the word *"5"* @139.30, starting the cleanest counted demonstration after the announcement *"we'll do it two more times just fluently for both cameras"* @134.02–138.68. Out: 170.22, end of the word *"-hop"* — the last word of the counted run before a new sequence begins (*"and chick chick pa..."* @170.22+). |
 
-**Note**: 107s is unusually long for a counted demo — reflects the complexity of this move.
+**Note**: This window isolates one clean counted run (30.92s) from the longer 107s front-camera chapter (60–167s), which includes extensive teaching. The full chapter was too long for a demo clip.
 
 ### Fast
 

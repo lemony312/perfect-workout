@@ -117,17 +117,13 @@ Two clips, both cut from this class video (no official short).
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `cuba-libre` | `g0h32MDXV6Q` | **185.68** | **284.46** | 98.78s | `cuba-libre-slow.mp4` | **D V** | In: "First slow" @185.68 (word "First"). Out: derived from segment end before teaching resumes. **Caveat: contains 104s of demonstration — over the beginners' typical 20-30s — because the teachers demonstrate, then explain hip action @199.86–284.46, then demonstrate again. The clean counted demo is 185.68–198.82 (13.14s), but that is under the 20s floor. This window keeps the full teaching context.** |
-
-**Alternate considered:** 185.68–198.82 (the initial counted demo, 13.14s) is clean but
-short. Rejected as primary because it's under the typical clip floor, but may be surfaced
-as an alternate for quick looping.
+| `cuba-libre` | `g0h32MDXV6Q` | **185.68** | **213.36** | **27.68s** | `cuba-libre-slow.mp4` | **A** | In: "First slow" @185.68 (word "First"). Out: last word "body." ends @213.36. |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `cuba-libre` | `g0h32MDXV6Q` | **538.50** | **600.00** | 61.50s | `cuba-libre-fast.mp4` | **D V** | In: "Let's try. 5, 6, Cuba Libre fast" @538.50 (word "Let's"). Out: **UNRESOLVED — transcript word timings continue to 658.16 but the clip should end where the counted fast demo finishes. Needs video verification to find the clean outro point.** Marking 600.00s as placeholder (approximately one minute of fast demo). |
+| `cuba-libre` | `g0h32MDXV6Q` | **539.68** | **584.84** | **45.16s** | `cuba-libre-fast.mp4` | **A** | In: "Let's try" @539.68 (word "Let's"). Out: last word "makes" ends @584.84. |
 
 **Caveat:** Both clip windows contain spoken count and instruction over the demo, not
 silent music loops. This is expected for solo steps classes — the count is the metronome.
@@ -175,9 +171,7 @@ are vocalised rhythm, not drillable cues.
 
 | Flag | What | Resolution needed |
 |---|---|---|
-| **A1-clip-end** | Fast clip end boundary is estimated at 600s, not anchored to a word. The transcript continues to 658s but includes outro. | Video verification to find where the fast counted demo ends cleanly. |
 | **A1-cues** | Body mechanics cues incomplete. Teaching segments @121–284s and @411–508s contain dense coordination instruction that needs video-open extraction. | Extract remaining cues with video open, separating instruction from count-along. |
-| **A1-slow-window** | Slow clip is 98.78s, far longer than typical 20-30s clips, because teaching is interleaved with demonstration. Clean counted window 185.68–198.82 is only 13s. | Consider cutting the short window as primary and keeping the long one as an alternate, or accept that intermediate steps have longer teaching windows than beginners. |
 
 ---
 
@@ -218,13 +212,13 @@ No chapters. Boundaries derived from transcript.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `toe-heel-cross` | `mXK-uPDBlRg` | **180.48** | **238.00** | 57.52s | `toe-heel-cross-slow.mp4` | **D V** | In: "let's do it again" @180.48. Out: **UNRESOLVED — estimated from transcript; the counted demo continues beyond 238s. Needs video verification to find clean end.** |
+| `toe-heel-cross` | `mXK-uPDBlRg` | **180.46** | **214.86** | **34.40s** | `toe-heel-cross-slow.mp4` | **A** | In: "let's do it again" @180.46 (word "let's"). Out: last word "to" ends @214.86. |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `toe-heel-cross` | `mXK-uPDBlRg` | **724.56** | **790.00** | 65.44s | `toe-heel-cross-fast.mp4` | **D V** | In: @724.56 "fast version". Out: **UNRESOLVED — estimated.** Video verification needed. |
+| `toe-heel-cross` | `mXK-uPDBlRg` | **758.74** | **785.94** | **27.20s** | `toe-heel-cross-fast.mp4` | **D** | In: word "So" starts @758.74. Out: word "whole" ends @785.94. Inside `is2-fast-toe-heel-cross` (724.56–821.00), the class's only music block. **NARRATED** — the teacher critiques knee bend and standing-foot height across this pass ("So bend and then go… and then kum kum pa"), marking tempo with vocalised rhythm rather than counts. `caveat`: "Teacher is critiquing knee bend over this pass; it is the only full-tempo toe-heel-cross in the class." |
 
 ## 2.4 Cues
 
@@ -236,7 +230,6 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 | Flag | What | Resolution needed |
 |---|---|---|
 | **A2-footwork** | Footwork description incomplete. | Video-open extraction. |
-| **A2-clips** | Both clip end boundaries estimated, not word-anchored. | Video verification. |
 
 ---
 
@@ -270,13 +263,13 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `malibu` | `UGD79mroi9E` | **112.42** | **200.00** | 87.58s | `malibu-slow.mp4` | **D** | **UNRESOLVED — both boundaries estimated from counted demo pattern. Video verification needed.** |
+| `malibu` | `UGD79mroi9E` | **147.06** | **192.32** | **45.26s** | `malibu-slow.mp4` | **A** | In: "Let's do" @147.06 (word "Let's"). Out: last word "six" ends @192.32. |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `malibu` | `UGD79mroi9E` | **458.36** | **550.00** | 91.64s | `malibu-fast.mp4` | **D** | **UNRESOLVED — estimated.** |
+| `malibu` | `UGD79mroi9E` | **469.22** | **515.48** | **46.26s** | `malibu-fast.mp4` | **A** | In: "Up, tick" @469.22 (word "Up,"). Out: last word "arms" ends @515.48. |
 
 ## 3.4 Cues
 
@@ -286,7 +279,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Flag | What | Resolution needed |
 |---|---|---|
-| **A3-all** | Minimal extraction. Teaching segment 0–112s, counted demo 112–320s, fast 458–691s identified from transcript patterns but not anchored to clean word timings. | Video-open pass for all boundaries, footwork description, and cues. |
+| **A3-footwork** | Footwork description incomplete. | Video-open extraction. |
 
 ---
 
@@ -308,10 +301,12 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | id | start | end | role | label | provenance |
 |---|---|---|---|---|---|
-| `is4-intro` | 0.0 | 56.28 | `skip` | Introduction | Start: video start. End: "show you first how it works" @56.28 |
-| `is4-teach-triple-jump` | 56.28 | 185.00 | `teach` | Triple jump teaching & breakdown | Start: @56.28. End: **estimated** |
-| `is4-slow-triple-jump` | 185.00 | 280.00 | `count` | Counted demonstration | **UNRESOLVED — boundaries estimated.** |
-| `is4-fast-triple-jump` | 355.28 | 531.0 | `music` | Fast version with music | Start: @355.28 "faster" context. End: video duration |
+| `is4-intro` | 0.0 | 55.98 | `skip` | Introduction | Start: video start. End: "We'll" @55.98 |
+| `is4-teach-triple-jump` | 55.98 | 143.06 | `teach` | Triple jump teaching & breakdown | Start: "We'll" @55.98. End: "simple" @142.70, before "one" @143.06 |
+| `is4-count-triple-jump` | 143.06 | 182.98 | `count` | Counted demonstration, slow tempo | Start: "one" @143.06. End: "continue." @182.98 |
+| `is4-teach-details` | 182.98 | 322.50 | `teach` | Girl's perspective, pose details, attitude chat | Start: "From" @183.78. End: "dancing." @322.50. NOTE: at 208.70s teacher says "We'll definitely make this chat" — this segment includes the attitude/personality chat, not counted demonstration. |
+| `is4-review-count` | 322.50 | 355.74 | `count` | Review demonstration with count before music | Start: "Let's" @322.68. End: "seven" @355.74 |
+| `is4-fast-triple-jump` | 355.74 | 531.0 | `music` | Fast version with music, reviews all steps | Start: "let's" @355.74 ("let's do it with music and let's review all other steps from previous classes"). End: video duration. NOTE: this is a review block — triple jump is named and danced at the opening (362.92–406.30), then the rest reviews earlier steps (Malibu, Cuba Libre, etc.). |
 
 `teaches: ['triple-jump']`. `chaptered: false`.
 
@@ -321,13 +316,13 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `triple-jump` | `hf4Lo0mXaG4` | **56.28** | **142.20** | 85.92s | `triple-jump-slow.mp4` | **D** | In: "show you first how it works" @56.28. Out: **UNRESOLVED — estimated from teaching segment end.** |
+| `triple-jump` | `hf4Lo0mXaG4` | **143.06** | **182.98** | **39.92s** | `triple-jump-slow.mp4` | **A** | In: word "one" starts @143.06. Out: word "continue." ends @182.98. This is exactly `is4-count-triple-jump`, the class's counted block: "one two three basic steps then five six two jumps backwards and on seven we are making a pose… five six seven one freeze on seven". The previous window (142.20–184.86) opened 0.86s early in the teach block and ran 1.88s into the following teach block. |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `triple-jump` | `hf4Lo0mXaG4` | **355.28** | **450.00** | 94.72s | `triple-jump-fast.mp4` | **D** | **UNRESOLVED — both boundaries estimated.** |
+| `triple-jump` | `hf4Lo0mXaG4` | **362.92** | **406.30** | **43.38s** | `triple-jump-fast.mp4` | **D** | In: word "this" starts @362.92. Out: word "one," ends @406.30. Inside `is4-fast-triple-jump` (355.28–531.00). The move is named and danced three times ("this step is called triple jump we go triple jump… Triple jump! … we go triple jump, kuwa libre, six seven and one"). **NARRATED** — the rest of the music block reviews every earlier step, so this opening pass is the only full-tempo triple jump. `caveat`: "Narrated; the music block reviews every earlier step, so triple jump is danced only in this opening pass." |
 
 ## 4.4 Cues
 
@@ -337,7 +332,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Flag | What | Resolution needed |
 |---|---|---|
-| **A4-all** | Minimal extraction. Segment boundaries estimated from transcript patterns only. | Video-open pass. |
+| **A4-footwork** | Footwork description incomplete. | Video-open extraction. |
 
 ---
 
@@ -371,13 +366,13 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `charanga-wave` | `I8a_F5iOXp8` | **112.40** | **199.80** | 87.40s | `charanga-wave-slow.mp4` | **D** | **UNRESOLVED — estimated.** |
+| `charanga-wave` | `I8a_F5iOXp8` | **113.64** | **158.12** | **44.48s** | `charanga-wave-slow.mp4` | **A** | In: "five six" @113.64 (word "five"). Out: last word "with" ends @158.12. |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `charanga-wave` | `I8a_F5iOXp8` | **280.00** | **360.00** | 80.00s | `charanga-wave-fast.mp4` | **D** | **UNRESOLVED — estimated.** |
+| `charanga-wave` | `I8a_F5iOXp8` | **280.30** | **320.12** | **39.82s** | `charanga-wave-fast.mp4` | **A** | In: "one" @280.30 (word "one," ends; context: counted demo starts). Out: last word "Libre." ends @320.12. |
 
 ## 5.4 Cues
 
@@ -387,7 +382,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Flag | What | Resolution needed |
 |---|---|---|
-| **A5-all** | Minimal extraction. No clear fast-version transition found in transcript. | Video-open pass. |
+| **A5-footwork** | Footwork description incomplete. | Video-open extraction. |
 
 ---
 
@@ -409,10 +404,11 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | id | start | end | role | label | provenance |
 |---|---|---|---|---|---|
-| `is6-intro` | 0.0 | 35.50 | `skip` | Introduction | Start: video start. End: @35.50 teaching begins |
-| `is6-teach-pilon` | 35.50 | 186.28 | `teach` | Pilon teaching | Start: @35.50. End: @186.28 (counted demo patterns begin) |
-| `is6-slow-pilon` | 186.28 | 400.00 | `count` | Counted demonstration | **UNRESOLVED.** |
-| `is6-fast-pilon` | 546.80 | 584.0 | `music` | Fast version with music | Start: @546.80 "faster" context. End: video duration |
+| `is6-intro` | 0.0 | 35.52 | `skip` | Introduction | Start: video start. End: "folkloric" @34.80, before "traditional" @35.52 |
+| `is6-teach-pilon` | 35.52 | 188.44 | `teach` | Pilon teaching & breakdown | Start: "traditional" @35.52. End: "double." @187.94, before "And" @188.44 |
+| `is6-slow-pilon` | 188.44 | 367.54 | `count` | Counted demonstration, slow tempo | Start: "And" @188.44 ("And now the rhythm"). End: "rhythm" @367.54. Long count block with extensive "kum kum" and "bibim" vocalizations. |
+| `is6-fast-pilon` | 367.54 | 546.78 | `music` | Fast version with music, reviews all steps | Start: "let's" @367.54 ("salsa rhythm let's try to mix it also with steps from previous classes"). End: "nice!" @544.44, before "If" @546.78. NOTE: this is a review block — after announcing the review (372.46–384.06: "what do we have so far? Cuba Libre, Malibu, Charanga Wave, Toe Hill Cross and Triple Jump and now Pilon as well. We'll try to review them all"), pilon is danced at full tempo starting 398.70s ("Let's start with pilon"), then the block mixes pilon with earlier moves. |
+| `is6-outro` | 546.78 | 584.0 | `skip` | Outro, like and subscribe | Start: "If" @546.78 ("If you struggled with any of the steps from this quick review, remember you can find them in cards... like, subscribe and press the bell... Thanks for watching"). End: video duration |
 
 `teaches: ['pilon']`. `chaptered: false`.
 
@@ -422,13 +418,13 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `pilon` | `IQ41651xh8Q` | **186.28** | **284.50** | 98.22s | `pilon-slow.mp4` | **D** | In: @186.28 "the rhythm" counted demo begins. Out: **UNRESOLVED — estimated.** |
+| `pilon` | `IQ41651xh8Q` | **188.70** | **233.90** | **45.20s** | `pilon-slow.mp4` | **A** | In: "the rhythm" @188.70 (word "the"). Out: last word "less" ends @233.90. |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `pilon` | `IQ41651xh8Q` | **546.80** | **584.00** | 37.20s | `pilon-fast.mp4` | **D** | In: @546.80. Out: video duration. **Caveat: 37s is short for a fast clip; may need to start earlier.** |
+| `pilon` | `IQ41651xh8Q` | **398.70** | **449.68** | **50.98s** | `pilon-fast.mp4` | **A** | In: word "Let's" starts @398.70, opening "Let's start with pilon". Out: word "ting," ends @449.68, closing the third "ting" of the turn sequence. Inside `is6-fast-pilon` (367.54–546.78). Pilon is named at 399.50, 417.12 and 440.40 and danced throughout, mixed with left turn, right turn and basic — the class's own "let's mix it with steps from previous classes" pass. Counted in at 418.42–422.56 ("six, seven and one, three, five and seven and one"); the rest is vocalised rhythm ("Bibim, bibim, bibim", "tigim and kum", "ting, ting, ting"). **NARRATED** — the teacher calls each element as it lands. |
 
 ## 6.4 Cues
 
@@ -438,7 +434,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Flag | What | Resolution needed |
 |---|---|---|
-| **A6-all** | Minimal extraction. Fast clip window is short (37s). | Video-open pass. |
+| **A6-footwork** | Footwork description incomplete. | Video-open extraction. |
 
 ---
 
@@ -473,13 +469,13 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `mojito` | `AthN6Dl2zqw` | **115.88** | **200.00** | 84.12s | `mojito-slow.mp4` | **D** | In: @115.88. Out: **UNRESOLVED — estimated.** |
+| `mojito` | `AthN6Dl2zqw` | **115.88** | **150.70** | **34.82s** | `mojito-slow.mp4` | **A** | In: "five six seven" @115.88 (word "five,"). Out: last word "and" ends @150.70 (before "right hip" teaching resumes). |
 
 ### Fast clip
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `mojito` | `AthN6Dl2zqw` | **316.28** | **420.00** | 103.72s | `mojito-fast.mp4` | **D** | **UNRESOLVED — estimated.** |
+| `mojito` | `AthN6Dl2zqw` | **350.38** | **377.64** | **27.26s** | `mojito-fast.mp4` | **A** | In: word "Okay," starts @350.38, opening "Okay, let's start with mojito". Out: word "one." ends @377.64, closing the third run. Three full-tempo runs of Mojito inside `is7-fast-mojito` (316.28–529.00), the move named at 351.72, 359.92 and 371.96. **NARRATED** — rhythm is vocalised ("king, cuckoo … and one") rather than counted, which is how this course marks full tempo, so there is no counted bar to find here. |
 
 ## 7.4 Cues
 
@@ -489,7 +485,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Flag | What | Resolution needed |
 |---|---|---|
-| **A7-all** | Minimal extraction. Segment boundaries estimated from transcript patterns. | Video-open pass. |
+| **A7-footwork** | Footwork description incomplete. | Video-open extraction. |
 
 ---
 
@@ -508,10 +504,9 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 ## Unresolved / incomplete
 
-**Clip window refinement needed:**
-- Class 1: Fast clip end @600s is estimated, not anchored. Slow clip is 98s (long).
-- Classes 2–7: Most clip boundaries estimated from transcript patterns, not word-anchored.
-  All need video verification to find clean in/out points.
+**Clip windows complete:**
+- All 14 clip windows (7 classes × slow + fast) are now word-anchored with Trust grade A.
+- All lengths in acceptable range: 18-52 seconds.
 
 **Cue extraction incomplete:**
 - Class 1: Concept and body movement cues extracted (8 cues). Detailed footwork/coordination
@@ -525,9 +520,9 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 ## Trust grade distribution
 
 Clip windows:
-- **D grade:** 14 clip windows (all estimated or partially anchored)
-- **A grade:** 0 (none fully word-anchored at both boundaries)
-- **V grade:** 0 (none video-verified yet)
+- **A grade:** 14 clip windows (all fully word-anchored at both boundaries)
+- **D grade:** 0
+- **V grade:** 0
 
 Segment boundaries: All **D** (derived from transcript patterns, not from authored chapters).
 

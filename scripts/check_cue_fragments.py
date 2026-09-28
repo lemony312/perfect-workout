@@ -268,6 +268,60 @@ def check_file(path: Path, kinds: set[str], roles: set[str],
     return problems, cues, known
 
 
+def existing_move_ids() -> set[str]:
+    """Every move id the beginners courses actually export.
+
+    Read from `teaches:` arrays rather than from `id:`, because `id:` in those
+    modules is mostly cue and segment ids — matching against all of them makes any
+    string look valid and the check passes on nonsense.
+    """
+    ids: set[str] = set()
+    for d in ("salsa-steps-classes", "salsa-couples-classes"):
+        for p in (REPO / "frontend" / "src" / "data" / d).glob("*.ts"):
+            for block in re.findall(r"teaches:\s*\[([^\]]*)\]", p.read_text()):
+                ids |= set(re.findall(r"'([a-z0-9-]+)'", block))
+    return ids
+
+
+def check_composed_of(expected: list[tuple[str, str, str, str]],
+                      slugify) -> list[str]:
+    """Every `composedOf` id must name a move that exists.
+
+    This cannot be done by reading, which is the whole reason it is here. A
+    `composedOf` entry pointing at an id nothing defines renders as an ordinary
+    link and stays indistinguishable from a working one until someone taps it, so
+    the corpus carried five dangling ids through a full review pass. One was
+    Whisper's mishearing of a real move ("dile-cano" for `dile-que-no`), two named
+    moves that are only ever taught in videos this course deliberately does not
+    clip, and one named a move that is genuinely in the video but has no id of its
+    own. Only the first was fixable by renaming; the rest had to be dropped, and
+    the difference is exactly what a reader cannot see.
+    """
+    universe = existing_move_ids()
+    # The intermediate moves have no TypeScript yet — Step 5 writes it — so their
+    # ids come from the same scope tables the coverage check uses. That keeps the
+    # two checks from disagreeing about what is in scope.
+    universe |= {slugify(name) for _, _, name, _ in expected}
+    problems: list[str] = []
+    for path in sorted(REPO.glob("SALSA_INTERMEDIATE_SPEC_PART*.md")):
+        for lineno, line in enumerate(path.read_text().splitlines(), 1):
+            if "composedOf" not in line:
+                continue
+            # Only the array itself. These rows carry prose after it explaining
+            # which ids were dropped and why, and that prose names the dropped
+            # ids — reading the whole line would re-flag every one of them.
+            m = re.search(r"`\[([^\]]*)\]`", line)
+            if not m:
+                continue
+            for move_id in re.findall(r"'([^']+)'", m.group(1)):
+                if move_id not in universe:
+                    problems.append(
+                        f"{path.name}:{lineno}: composedOf names {move_id!r}, which "
+                        f"is not a move in any course — rename it to the real id or "
+                        f"drop it and say why (a dangling edge fails silently)")
+    return problems
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--verbose", action="store_true", help="print per-file stats")
@@ -370,6 +424,10 @@ def main() -> int:
              len(expected) - len(missing), len(expected))
     for n, name, want in missing:
         problems.append(f"no cues for {n}. {name} — nothing matching {want!r}")
+
+    composed = check_composed_of(expected, slugify)
+    problems += composed
+    log.info("composedOf: %d dangling move id(s)", len(composed))
 
     log.info("")
     log.info("%d cues across %d files", len(all_cues), len(files))

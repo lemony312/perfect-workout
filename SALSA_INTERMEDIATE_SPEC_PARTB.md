@@ -105,10 +105,10 @@ Two windows, both cut from this video (no official short exists). Both are grade
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `cachan` | `j3O7xmKbaAE` | **232.34** | **395.66** | 163.32s | `cachan-slow.mp4` | **D V** | In: word "what?" @232.34 starts footwork breakdown "what? One, two, ka-chan. Five, six, seven, eight...". Out: segment end @395.66, "Okay, let's go with kacchan straight away." |
+| 1 | `cachan` | `j3O7xmKbaAE` | **318.08** | **348.52** | 30.44s | `cachan-slow.mp4` | **A** | In: word "5" @318.08 starts counted run "5 6 7 1 2 kachan...". Out: word "seven" ends @348.52, completing "...and five six seven" before explanation. |
 | 2 | `cachan` | `j3O7xmKbaAE` | **395.66** | **444.9** | 49.24s | `cachan-fast.mp4` | **D** | In: segment start @395.66 "Okay, let's go with kacchan straight away. Five, six, go." Out: segment end @444.9 "let's start reviewing". |
 
-Window 1 caveat: **"163s long (2min 43s). Contains the full footwork breakdown from simple rhythm (1-2-3/5-6-7) to cachan rhythm (and-1-3/and-5-7), plus arm movement, plus multiple counted repetitions. The teacher builds it progressively. Cleanest counted runs are in the latter half, from ~318s onward."** Grade D because both boundaries are derived from segment marks, not independently anchored to distinct words for clip purposes.
+Window 1: Clean counted demonstration from the latter half of the teaching section, capturing multiple cachan repetitions integrated with salsa and rumba basic. Grade A, both boundaries word-anchored.
 
 Window 2 is 49s, clean, grade D. Cachan at full tempo over music.
 
@@ -187,12 +187,12 @@ Two windows, both cut from this video (no official short exists). Both are grade
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `salsa-son-transition` | `nBHFEQU1CnA` | **199.2** | **260.2** | 61.0s | `salsa-son-transition-slow.mp4` | **D** | In: segment start @199.2 "I'll point out what is happening". Out: segment end @260.2 "music". |
-| 2 | `salsa-son-transition` | `nBHFEQU1CnA` | **260.2** | **333.54** | 73.34s | `salsa-son-transition-fast.mp4` | **D** | In: segment start @260.2 (music begins). Out: segment end @333.54 "Ok, let's start reviewing". |
+| 1 | `salsa-son-transition` | `nBHFEQU1CnA` | **199.20** | **249.12** | 49.92s | `salsa-son-transition-slow.mp4` | **A** | In: word "out" @199.20 starts "out what is happening I'll explain it...". Out: word "five" ends @249.12, completing counted demonstration. |
+| 2 | `salsa-son-transition` | `nBHFEQU1CnA` | **288.96** | **331.68** | 42.72s | `salsa-son-transition-fast.mp4` | **A** | In: word "Pah," @288.96 (music playing). Out: word "1." ends @331.68, completing music demonstration. |
 
-Window 1 is 61s, contains counted demonstration of salsa→son and son→salsa transitions in sequence. Grade D (segment-bounded).
+Window 1 captures the counted demonstration of both salsa→son and son→salsa transitions in sequence. Grade A, both boundaries word-anchored.
 
-Window 2 is 73s, demonstrates transitions at tempo over music in both directions. Grade D (segment-bounded).
+Window 2 demonstrates the transitions at tempo over music in both directions. Grade A, both boundaries word-anchored.
 
 ## 9.4 Cues
 
@@ -291,12 +291,12 @@ Two windows, both cut from this video (no official short exists). Both are grade
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `fast-double-right` | `DSpArsCN860` | **525.4** | **709.82** | 184.42s | `fast-double-right-slow.mp4` | **D V** | In: segment start @525.4 "Let me just do it with the count". Out: segment end @709.82 "Let's go with music". |
-| 2 | `fast-double-right` | `DSpArsCN860` | **709.82** | **889.66** | 179.84s | `fast-double-right-fast.mp4` | **D** | In: segment start @709.82 "Let's go with music". Out: segment end @889.66 "Let's start reviewing". |
+| 1 | `fast-double-right` | `DSpArsCN860` | **547.04** | **585.92** | 38.88s | `fast-double-right-slow.mp4` | **A** | In: word "and" @547.04 starts counted run "and 5 6 7 1 2...". Out: word "spotting." ends @585.92, completing counted demonstration. |
+| 2 | `fast-double-right` | `DSpArsCN860` | **771.14** | **815.82** | 44.68s | `fast-double-right-fast.mp4` | **A** | In: word "one" @771.14 (music playing, counting). Out: word "wave." ends @815.82, completing music demonstration. |
 
-Window 1 caveat: **"184s long (3min 4s). Contains multiple counted repetitions at progressively faster tempos, with coaching between repetitions. The teacher builds confidence by starting slower and accelerating. The fast double turns begin appearing around the midpoint."** Grade D (segment-bounded).
+Window 1 captures clean counted repetitions of the fast double right turn. Grade A, both boundaries word-anchored.
 
-Window 2 is 180s (3min), demonstrating the fast double right at full tempo over music with multiple repetitions. Grade D (segment-bounded).
+Window 2 demonstrates the fast double right at full tempo over music. Grade A, both boundaries word-anchored.
 
 ## 10.4 Cues
 
@@ -370,16 +370,45 @@ No `Table of contents`. **Verdict: grade D.** All segment boundaries derived fro
 
 ## 11.3 Clip windows
 
-Two windows, both cut from this video (no official short exists). Both are grade D.
+**One window.** There is no full-tempo Elegua in this class, so the pair ships
+`slow` only with a `missingReason` — see the note below.
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `elegua` | `gPDxOZsjEbo` | **426.52** | **580.28** | 153.76s | `elegua-slow.mp4` | **D V** | In: segment start @426.52 "Let's do it with the count". Out: segment end @580.28 "Let's go with music". |
-| 2 | `elegua` | `gPDxOZsjEbo` | **580.28** | **693.74** | 113.46s | `elegua-fast.mp4` | **D** | In: segment start @580.28 "Let's go with music". Out: segment end @693.74 "Let's start reviewing". |
+| 1 | `elegua` | `gPDxOZsjEbo` | **485.38** | **525.62** | 40.24s | `elegua-slow.mp4` | **A** | In: word "1" @485.38 starts counted run. Out: word "minute" ends @525.62, completing counted demonstration. Inside `is11-count` (426.52–580.28). |
 
-Window 1 caveat: **"154s long (2min 34s). Contains counted repetitions with the teacher explaining body movement, character, and playfulness between repetitions. The folkloric quality of Elegua movement is emphasized throughout — not just the feet, but the whole body attitude."** Grade D (segment-bounded).
+Window 1 captures clean counted repetitions of Elegua with the characteristic
+playful character and body movement. Grade A, both boundaries word-anchored.
 
-Window 2 is 113s (1min 53s), demonstrating Elegua at tempo over music. Grade D (segment-bounded).
+### Note on the missing fast grain
+
+`ClipPair.missingReason`: **"This class never dances Elegua at full tempo. The
+music block reviews every earlier step instead, and the teacher says of Elegua's
+own tempo that 'this feels quite slow' — the step is folkloric and is taught
+counted. Practise the counted demo."**
+
+Elegua is the one intermediate step with no fast grain, and the reason is in the
+source rather than in the clipping. The class's music block, `is11-music`
+(580.28–693.74), is a review: Pilon and Cuba Libre at 585–630, then toe-heel-cross,
+triple jump, Malibu, Mojito, Charanga Wave, Rumba basic and Cachan through to
+693. Elegua is not danced anywhere in it. The word "Elegua" appears in the block
+exactly once, at 581.86, and it is the teacher comparing tempos — "Rumba to this
+tempo of salsa feels very, very slow, and with Alegua it's quite similar" — not
+dancing the step.
+
+The closest thing to a fast pass is 540–580, inside the `count` block: variations
+and a turn, over which the teacher says "yeah, this feels quite slow". Taking it
+would label a counted variations demo as full tempo.
+
+A window at 585.34–628.06 was considered and rejected. Its boundaries are
+word-anchored and it sits correctly inside the music block, so it passes both the
+anchor check and the structural check — but it is a full-tempo pass of *Pilon and
+Cuba Libre*. A caveat can tell the truth about a clip that is hard to watch; it
+cannot make a clip of the wrong move into the right one, and `elegua-fast.mp4`
+showing Pilon is a clip the user would practise the wrong step to. The remaining
+three narrated windows in this course (`toe-heel-cross`, `triple-jump`, `pilon`)
+all name and dance their own move, which is what makes a caveat sufficient for
+them and insufficient here. See `SALSA_VERIFICATION_LOG.md` §9.
 
 ## 11.4 Cues
 
@@ -469,20 +498,20 @@ Four windows needed: slow and fast for palo-basic, slow and fast for palo-salsa.
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `palo-basic` | `hRy-a1NI888` | **396.0** | **470.0** | 74.0s | `palo-basic-slow.mp4` | **A** | In: chapter "Palo steps with the palo rhythm" starts 396.0. Out: chapter ends 470.0 where "Palo step in salsa with count" begins. |
-| 2 | `palo-salsa` | `hRy-a1NI888` | **470.0** | **614.0** | 144.0s | `palo-salsa-slow.mp4` | **A V** | In: chapter "Palo step in salsa with count" starts 470.0. Out: chapter ends 614.0 where music begins. |
+| 1 | `palo-basic` | `hRy-a1NI888` | **409.40** | **454.02** | 44.62s | `palo-basic-slow.mp4` | **A** | In: word "1," @409.40 starts counted run in 6/8 rhythm. Out: word "simplest" ends @454.02, completing palo basic demonstration in original rhythm. |
+| 2 | `palo-salsa` | `hRy-a1NI888` | **518.88** | **568.98** | 50.10s | `palo-salsa-slow.mp4` | **A** | In: word "5" @518.88 starts counted run "5 6 7 1 2 3..." (salsa adaptation). Out: word "seven." ends @568.98, completing counted demonstration before gender discussion. |
 
-Window 1 is 74s — well over the floor, grade A, no caveat. The teachers demonstrate the palo step in its original 6/8 rhythm with counted vocalizations.
+Window 1 captures clean counted demonstration of palo in its original 6/8 rhythm. Grade A, both boundaries word-anchored.
 
-Window 2 is 144s — **well over the 45s target for a counted demo**. `caveat`: **"144s long (2min 24s) because the teachers break down the adaptation from 6/8 to salsa timing extensively. Contains teaching and counted repetitions mixed. The cleanest counted run is likely in the latter half of the window."** Still published as-is because it is the complete counted adaptation section and shortening it would cut the explanation of *how* palo maps onto salsa counts, which is the point of this move.
+Window 2 captures the cleanest counted run of palo adapted to salsa timing from the latter half of the chapter. Grade A, both boundaries word-anchored.
 
 ### Fast clips
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 3 | `palo-salsa` | `hRy-a1NI888` | **614.0** | **668.0** | 54.0s | `palo-salsa-fast.mp4` | **A** | In: chapter "Palo steps in salsa with music" starts 614.0. Out: chapter ends 668.0 where review begins. |
+| 3 | `palo-salsa` | `hRy-a1NI888` | **613.24** | **663.30** | 50.06s | `palo-salsa-fast.mp4` | **A** | In: word "rhythm." ends @613.24 after "Let's do it with salsa rhythm." Out: word "five," ends @663.30, completing music demonstration before "kum pa kikin" sounds. |
 
-Window 3 is grade A: 54s of palo danced at full tempo over music, chapter-bounded. Clean.
+Window 3 captures palo danced at full tempo over salsa music, including the instrumental intro and counted dancing. Grade A, both boundaries word-anchored.
 
 **No fast clip for `palo-basic`** — the 6/8 folkloric version is taught and counted but not demonstrated at full tempo over music. The class moves directly from counted palo-basic to teaching the salsa adaptation. `ClipPair` for `palo-basic` has `fast: null` with `missingReason`: "The basic palo step is taught in its 6/8 rhythm but not performed at full tempo over music in this class. Only the salsa variation gets a music demo."
 
@@ -557,12 +586,12 @@ Two windows: slow (from count chapter) and fast (from music chapter).
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `chango` | `z_0VsWZJNqc` | **255.0** | **385.0** | 130.0s | `chango-slow.mp4` | **A V** | In: chapter "Chango step with count" starts 255.0. Out: chapter ends 385.0 where music begins. |
+| 1 | `chango` | `z_0VsWZJNqc` | **326.16** | **366.08** | 39.92s | `chango-slow.mp4` | **A** | In: word "One," @326.16 starts clean counted run. Out: word "two," ends @366.08, completing counted demonstration from the second half of the chapter. |
 | 2 | `chango` | `z_0VsWZJNqc` | **385.0** | **427.0** | 42.0s | `chango-fast.mp4` | **A** | In: chapter "Chango step with music" starts 385.0. Out: chapter ends 427.0 where review begins. |
 
-Window 1 is 130s (2min 10s). `caveat`: **"130s long. Contains both the footwork breakdown and multiple counted repetitions. The teacher builds up the step progressively, adding elements. Cleanest counted demo is likely in the second half."** Grade A because both boundaries are chapter marks.
+Window 1 captures the cleanest counted demonstration from the latter portion of the count chapter, with the step fully built up. Grade A, both boundaries word-anchored.
 
-Window 2 is 42s, clean, grade A. Full-tempo Chango over music.
+Window 2 is clean, grade A. Full-tempo Chango over music, chapter-bounded.
 
 ## 13.4 Cues
 
@@ -648,14 +677,14 @@ Justification: The teachers present Arara as a two-step combination adapted to s
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
 | 1 | `arara-1` + `arara-2` (6/8) | `avhrmPAd_VI` | **426.0** | **452.0** | 26.0s | `arara-68-slow.mp4` | **A** | In: chapter "Both steps together with 6/8 count" starts 426.0. Out: chapter ends 452.0 where salsa adaptation begins. `shared: true` across both moves. |
-| 2 | `arara-1` + `arara-2` (salsa) | `avhrmPAd_VI` | **452.0** | **563.0** | 111.0s | `arara-salsa-slow.mp4` | **A V** | In: chapter "Arara step in salsa with count" starts 452.0. Out: chapter ends 563.0 where music begins. `shared: true` across both moves. |
-| 3 | `arara-1` + `arara-2` (fast) | `avhrmPAd_VI` | **563.0** | **634.0** | 71.0s | `arara-salsa-fast.mp4` | **A** | In: chapter "Arara step in salsa with music" starts 563.0. Out: chapter ends 634.0 where review begins. `shared: true` across both moves. |
+| 2 | `arara-1` + `arara-2` (salsa) | `avhrmPAd_VI` | **469.96** | **517.28** | 47.32s | `arara-salsa-slow.mp4` | **A** | In: word "1," @469.96 starts clean counted run in salsa. Out: word "5" ends @517.28, completing counted demonstration. `shared: true` across both moves. |
+| 3 | `arara-1` + `arara-2` (fast) | `avhrmPAd_VI` | **573.96** | **618.14** | 44.18s | `arara-salsa-fast.mp4` | **A** | In: word "4," @573.96 (music playing, counting). Out: word "king," ends @618.14, completing music demonstration. `shared: true` across both moves. |
 
-Window 1 is 26s, grade A, clean. Both Arara steps together in their original 6/8 rhythm.
+Window 1 is 26s, grade A, clean. Both Arara steps together in their original 6/8 rhythm, chapter-bounded.
 
-Window 2 is 111s (1min 51s). `caveat`: **"111s long. Contains the teacher's explanation of how to map the 6/8 Arara steps onto salsa's 1-2-3/5-6-7 timing, plus multiple counted repetitions. The adaptation process is the substance here, so the window includes the explanation, not just the final counted demo."** Grade A.
+Window 2 captures the cleanest counted run of both Arara steps in salsa timing, extracted from the latter portion of the adaptation chapter. Grade A, both boundaries word-anchored.
 
-Window 3 is 71s, grade A. Both Arara steps danced together at full tempo over salsa music.
+Window 3 demonstrates both Arara steps at full tempo over salsa music. Grade A, both boundaries word-anchored.
 
 ## 14.4 Cues
 
