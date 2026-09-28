@@ -202,9 +202,20 @@ def load_clips() -> list[Clip]:
             logger.error("%s: no output filename in the spec's File column",
                          r["source"])
             sys.exit(1)
+        # Grain comes from the filename, not from `tempo`. `tempo` is read off the
+        # nearest `### Slow` / `### Fast` subheading, and the spec tables that use a
+        # leading `#` column instead of subheadings silently inherit whichever
+        # heading came last — so `elegua-slow.mp4`, `chango-slow.mp4`,
+        # `fast-double-right-slow.mp4` and `arara-68-slow.mp4` all arrived here
+        # labelled `fast`. The manifest calls itself authoritative and the data
+        # modules read their `ClipPair` slots out of it, so a wrong grain there puts
+        # the slow cut in the fast slot: a clip that plays, of the right move, at
+        # the wrong tempo, which nothing downstream can detect. The stem is what
+        # the encoder actually writes, so it cannot disagree with the output.
+        grain = "slow" if stem.endswith("-slow") else "fast" if stem.endswith("-fast") else ""
         clips.append(Clip(
             slug=stem, video_id=r["video"], start=r["start"], end=r["end"],
-            tempo=r["tempo"], course=course, trust=r["trust"] or "?",
+            tempo=grain, course=course, trust=r["trust"] or "?",
             move=r["move"], section=r["section"], anchors=r["anchors"],
             source=r["source"],
         ))
