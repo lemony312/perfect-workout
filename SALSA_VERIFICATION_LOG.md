@@ -501,6 +501,126 @@ of encode settings across all 203 clips is worth more today than 50 MB.
 
 ---
 
+## 10. The intermediate courses — what is unverified, and what is simply missing
+
+Both intermediate courses were built the same way the beginners courses were: from transcript fragments, clip audits, and automated gates, with no one watching the source video. The transcript can tell you *what words were said at which timestamps*; it cannot tell you which hand went up, whether a footwork description matches the feet in the frame, or whether three videos titled identically show the same move.
+
+This section is the standing worklist of **things no human has watched yet**. Its structure mirrors §8 for the beginners couples course: status tables, then the UNRESOLVED items from the specs, then the edge cases the automated gates either accepted or flagged as declared departures.
+
+### Status of the intermediate steps course, at a glance
+
+| | Count |
+|---|---|
+| Moves | 15 (14 classes; Arara teaches two steps, Palo teaches basic + salsa) |
+| Clips | 29 (`elegua-fast` does not exist; see §9.6) |
+| Cues | 379 (from `check_cue_fragments.py`) |
+| Cues with a source timestamp | 379 (**mandatory**, R3) |
+| Clips carrying a `caveat` | **3** (all NARRATED full-tempo windows) |
+| Clips below 23s floor | **0** |
+| Clips over 52s ceiling | **0** |
+| Everything else | `confidence: 'transcript'` — faithful to the audio, not eye-checked |
+
+There is no `verified` value anywhere in the intermediate data yet. That is accurate: the courses were built from transcripts and clip windows, and no one has sat down with the video open to confirm a single cue. The UNRESOLVED items below are places where the transcript genuinely does not contain the information, so watching the video is the only path forward.
+
+### Status of the intermediate couples course, at a glance
+
+| | Count |
+|---|---|
+| Moves | 26 (22 standalone moves + 4 sequences) |
+| Clips | 40 (two sequences exceed the 52s ceiling deliberately; see below) |
+| Cues | 227 (from `check_cue_fragments.py`) |
+| Cues with a source timestamp | 227 (**mandatory**, R3) |
+| Clips carrying a `caveat` | **0** |
+| Clips below 23s floor | **3** |
+| Clips over 52s ceiling | **2** (both declared; see below) |
+| Everything else | `confidence: 'transcript'` — faithful to the audio, not eye-checked |
+
+### 10.1 The UNRESOLVED items — six footwork paragraphs in PARTA, one class-1 cue
+
+`grep -rn "UNRESOLVED" SALSA_INTERMEDIATE_SPEC_*.md` reports 29 occurrences, all in `SALSA_INTERMEDIATE_SPEC_PARTA.md`. They fall into two categories.
+
+**Six footwork paragraphs** (classes 2–7) are flagged as requiring video-open extraction. The transcript contains *teaching* — words spoken during the breakdown — but the agents could not confidently derive beat-by-beat footwork descriptions from word timings alone, particularly where the teachers demonstrate rather than state. Each needs someone to watch the teaching segment with the video open and write the footwork paragraph from what they see, not what they hear.
+
+| Class | Move | Video | Segment | What is needed |
+|---|---|---|---|---|
+| 2 | Toe-Heel-Cross | `mXK-uPDBlRg` | 0.0 → 180.48s | Which foot, which beats, how the cross works. Transcript says "toe heel cross" repeatedly but does not enumerate the beat pattern. |
+| 3 | Malibu | `UGD79mroi9E` | 0.0 → 112.42s | Full footwork description. Transcript contains teaching but agents marked it unresolved rather than guessing. |
+| 4 | Triple jump | `hf4Lo0mXaG4` | 55.98 → 143.06s | Full footwork description. Teaching segment identified, extraction incomplete. |
+| 5 | Charanga wave | `I8a_F5iOXp8` | 0.0 → 112.40s | Full footwork description. Distinct from beginners "Charanga" (class 12). |
+| 6 | Pilon | `IQ41651xh8Q` | 35.52 → 188.44s | Full footwork description. Folkloric step, transcript mentions "traditional" and contains breakdown. |
+| 7 | Mojito | `AthN6Dl2zqw` | 0.0 → 115.88s | Full footwork description. Teaching segment identified, extraction incomplete. |
+
+**How to resolve these.** Open the video at the timestamp, watch the teaching segment (typically 1–3 minutes), and write the 2–4 sentence footwork paragraph describing the step pattern. Use Class 1 (Cuba Libre, `SALSA_INTERMEDIATE_SPEC_PARTA.md` lines 77–86) as the model. Set `confidence: 'verified'` on the move entry in the relevant `frontend/src/data/salsa-int-steps-classes/` fragment once written.
+
+**One detailed cue in Class 1** (Cuba Libre) is also marked UNRESOLVED: body mechanics cues covering hip circles, upper body coordination, and the slow/fast distinction are incomplete. The teaching segments @121–284s and @411–508s contain dense coordination instruction that requires video-open extraction to separate instruction from counted demonstration. Eight concept and body movement cues were extracted (lines 141–161 of the spec); the remaining detail pass is the gap.
+
+### 10.2 The three mistitled shorts — 38 seconds of watching, highest value per second in the intermediate work
+
+Three videos in the Intermediate Salsa Moves — Shorts playlist are all titled *Sombrero por Debajo*:
+
+| Short ID | Titled | Labelled | Duration |
+|---|---|---|---|
+| `nolwu7BcRdc` | Sombrero Por Debajo | Class 4 | 38.1s |
+| `_a5fC4nGz1c` | Sombrero por Debajo | Class 9 | ~38s (not downloaded) |
+| `hET29nU1hV8` | Sombrero por Debajo | Class 13 | ~38s (not downloaded) |
+
+There is exactly one Sombrero por Debajo move video (`QAixPUmIQ64`), so **at least two of these three shorts are mistitled** and show some other move. `nolwu7BcRdc` is the TRUSTED short — it is attached to position 8 in `SALSA_INTERMEDIATE_SPEC_PARTC.md` and cut as `sombrero-por-debajo-fast.mp4`. The other two are held back as unresolved.
+
+The nine moves in the intermediate couples scope that have no official short are the candidate pool: Tiramisu complicado, El Dos, Santiago, Chocolate, Enchufla Triple Mix, Gota De La Sombra, Quebrala, Muchacho, Codo de la rabia.
+
+**Why this cannot be resolved from metadata.** All three shorts are music-only — no speech, no transcript, no cues. Whisper would hallucinate over them (and the transcriber now refuses any id in `SHORTS` unless `--allow-music-only` is passed, per `SALSA_INTERMEDIATE_PLAN.md` §2c). The only way to know which move each shows is to watch it.
+
+**How to resolve this.** Download `_a5fC4nGz1c` and `hET29nU1hV8` (each ~38s). Watch all three, identify which moves they actually show by comparing to the 22 move videos' teaching segments. If the other two are in the candidate pool, attach them to the correct moves in the spec and manifest. If they duplicate `nolwu7BcRdc`, document that and leave them out. Either way, update `SALSA_INTERMEDIATE_SPEC_PARTC.md` position 8's note to record what was seen, not what the title says.
+
+This is the single highest-value human task in the intermediate work: **~38 seconds of watching per short**, three shorts, settles which of 9 moves get a clean full-tempo clip and which stay one-sided or must be cut from longer class videos.
+
+### 10.3 Clips with caveats
+
+Three intermediate steps clips carry caveats, all for the same reason: the full-tempo music block is narrated — the teacher talks over the demo rather than letting it run silently. In each case the move is named and danced inside the window; what is wrong with the clip is only that the teacher is coaching aloud, which is what a rendered caveat exists to say.
+
+| Move | Clip | The caveat | Window | Video |
+|---|---|---|---|---|
+| Toe-Heel-Cross | `toe-heel-cross-fast.mp4` | Teacher is critiquing knee bend over this pass; it is the only full-tempo toe-heel-cross in the class. | 758.74 → 785.94 | `mXK-uPDBlRg` |
+| Triple jump | `triple-jump-fast.mp4` | Narrated; the music block reviews every earlier step, so triple jump is danced only in this opening pass. | 362.92 → 406.30 | `hf4Lo0mXaG4` |
+| Pilon | `pilon-fast.mp4` *(not explicitly caveated in spec, but audit reports it NARRATED)* | Teacher calls each element as it lands; the window is mixed with left turn, right turn and basic per the class's "let's mix it with steps from previous classes" pass. | 398.70 → 449.68 | `IQ41651xh8Q` |
+
+These are the windows most worth a second look, because they are the only full-tempo demos their classes contain. If a cleaner window exists, note it in the spec and re-cut. If not, the caveat tells the truth and the clip stays.
+
+No intermediate couples clip carries a caveat. The 13 moves with authored chapters have clean front-camera counted demos and music-only shorts, and the rest were cut from clean segments identified in the transcripts.
+
+### 10.4 Clips below the 23-second reference floor
+
+R2 asks for 23–47s per clip. **Three intermediate couples clips come in under 23s:**
+
+| Move | Clip | Duration | Why |
+|---|---|---|---|
+| `donde-vas` | `donde-vas-slow.mp4` | **21.0s** | The demo itself is that short; the teachers move on. |
+| `muchacho` | `muchacho-fast.mp4` | **22.0s** | Under by 1s. |
+| `quebrala` | `quebrala-fast.mp4` | **20.0s** | The shortest couples clip in either intermediate course. |
+
+All three are cut and published anyway — a short counted demo beats none — and each would carry a caveat if the reason were non-obvious, but these are simply brief demos. If a longer window exists for any of them, it would be in `ClipPair.alternates` (none are listed, so none were found during the build).
+
+**No intermediate steps clip is under the floor.** The shortest is `arara-68-slow.mp4` at 26.0s.
+
+### 10.5 Clips over the 52-second ceiling
+
+**Two intermediate couples clips exceed the 52s ceiling, both deliberately:**
+
+| Move | Clip | Duration | Why this is a departure, not a defect |
+|---|---|---|---|
+| `salsa-con-rumba` | `salsa-con-rumba-slow.mp4` | **67.64s** | One complete run of the four-part sequence does not fit in 52s. Cutting it shorter would end mid-sequence, which is worse than a long clip. Declared in `SALSA_INTERMEDIATE_SPEC_PARTE.md` line 486. |
+| `salsa-con-rumba` | `salsa-con-rumba-fast.mp4` | **124.0s** | Same sequence, full tempo. Declared in line 496. |
+
+Both are graded `AV` (authored chapter + declared caveat) and appear in the audit's DECLARED DEPARTURES list. They are correct, not defects.
+
+**No intermediate steps clip exceeds the ceiling.** The longest is `pilon-fast.mp4` at 50.98s.
+
+### 10.6 No `verified` confidence anywhere, and no `suspect` anywhere either
+
+As of the last integrity pass (`check_cue_fragments.py`), **606 intermediate cues** exist across 28 files. Every one carries `confidence: 'transcript'`. Zero carry `'verified'` (no one has watched anything) and zero carry `'suspect'` (the agents flagged nothing as actively untrustworthy, unlike beginners steps class 7's arm cue). The UNRESOLVED items in §10.1 are honest gaps, not suspected errors.
+
+---
+
 ## How to record a resolution
 
 1. Change the value and set `confidence: 'verified'` in the relevant fragment
