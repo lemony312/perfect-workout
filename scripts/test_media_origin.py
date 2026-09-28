@@ -48,6 +48,11 @@ MEDIA_PREFIX = "/clips/salsa/"
 SALSA_PAGES = [
     "/salsa?move=exhibela-crossing",
     "/salsa/couples?move=setenta",
+    # The intermediate courses load from the same media origin. Listing one move
+    # per course rather than per clip: the prefix rewrite is in `mediaUrl`, so one
+    # page per route proves the route reaches it.
+    "/salsa/intermediate?move=pilon",
+    "/salsa/intermediate/couples?move=sombrero-por-debajo",
 ]
 
 # Media that must NOT move: the music is `/audio/...` and the other courses'

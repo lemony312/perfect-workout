@@ -40,6 +40,18 @@ PAGES = [
     # not separate routes, so they need listing explicitly or they go untested.
     "/salsa?move=exhibela-crossing",
     "/salsa?mode=drill",
+    "/salsa/couples",
+    "/salsa/couples?move=setenta",
+    # The two intermediate courses. Detail views are listed for the cases whose
+    # layout differs from a plain one: a move whose fast clip is missing entirely
+    # (Elegua renders `missingReason` where the video goes), one carrying a clip
+    # caveat, and an int-couples move with no clips at all (positions 2-7).
+    "/salsa/intermediate",
+    "/salsa/intermediate?move=elegua",
+    "/salsa/intermediate?move=toe-heel-cross",
+    "/salsa/intermediate/couples",
+    "/salsa/intermediate/couples?move=sombrero-por-debajo",
+    "/salsa/intermediate/couples?move=balsero",
 ]
 
 # A few px of slop: subpixel rounding on scaled layouts is not a real overflow.

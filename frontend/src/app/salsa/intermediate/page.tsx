@@ -1,38 +1,41 @@
 'use client'
 
-// /salsa/couples — the partnerwork course, a sibling of /salsa rather than a
-// mode of it. It lives under /salsa because it is the same channel, the same
-// vocabulary and the same tab; it is its own route because a partner figure is
-// not a step and does not render like one.
+// /salsa/intermediate — the intermediate solo steps course, 14 classes from the
+// same channel as /salsa. A sibling route rather than a mode of /salsa, for the
+// same reason /salsa/couples is: the two share types and components but not data,
+// and a `?level=` param on one page would mean one bundle carrying both courses'
+// move tables to render either.
 //
-// Three things are deliberately different from /salsa:
+// Differences from /salsa that are deliberate:
 //
-//   1. **Leader cues come first, and `kind: 'lead'` is highlighted.** In the solo
-//      course the lead category is empty; here it is the reason the page exists.
-//      A figure you cannot lead is not learnable, so the hand signal is promoted
-//      above the footwork rather than buried under it.
-//   2. **Leader and follower are never merged** (charter R4). They render as
-//      separate blocks even when that means repeating a beat number. A cue marked
-//      `both` is genuinely role-independent — it is not a summary of the two.
-//   3. **No drill mode.** The steps drill assumes one 8-count of solo footwork per
-//      slot and stores its cursor under a single key; running partner figures
-//      through it would both mis-time the slots and interleave the two courses'
-//      progress. Left out on purpose rather than half-wired.
+//   1. **No drill mode.** The drill stores its cursor under a single key and
+//      assumes the beginners course's move list; pointing it at a second course
+//      would interleave the two courses' progress in one saved position. Left out
+//      until the drill takes a course id, rather than half-wired now.
+//   2. **Some moves are honestly incomplete.** Six classes have footwork
+//      paragraphs marked UNRESOLVED in the spec — they need someone to watch the
+//      video to say which foot on which beat. Those moves render with
+//      `complete: false` and say so. An admitted gap beats a plausible guess.
+//   3. **Elegua has no full-tempo clip at all.** Its class never dances it at
+//      tempo. `ClipPair.missingReason` explains that, and SalsaClipPlayer renders
+//      the reason where the video would be.
+//   4. **Every clip is cut from the class video**, because this course has no
+//      official shorts. So the "full tempo" clips have the teachers talking over
+//      them, and three carry a `caveat` saying so.
 //
-// Tempo is NOT local state here. It comes from `useTempoMode()`, the same
-// persisted store /salsa reads, so choosing "Slow" survives moving between the
-// two courses as well as between moves — see the note at the top of
-// salsa-tempo.ts.
+// Tempo is NOT local state. It comes from `useTempoMode()`, the same persisted
+// store the other three courses read, so choosing "Slow" survives moving between
+// courses as well as between moves — see the note at the top of salsa-tempo.ts.
 
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import {
-  COUPLES_COURSE,
-  COUPLES_MOVES,
-  COUPLES_COURSE_FLAGS,
-  couplesClassTitle,
-} from '@/data/salsa-couples'
+  INT_STEPS_COURSE,
+  INT_STEPS_MOVES,
+  INT_STEPS_COURSE_FLAGS,
+  intStepsClassTitle,
+} from '@/data/salsa-int-steps'
 import {
   youtubeLink,
   DRILLABLE_CUE_KINDS,
@@ -44,10 +47,10 @@ import { useTempoMode } from '@/lib/salsa-tempo'
 import { SalsaClipPlayer } from '@/components/SalsaClipPlayer'
 import { SalsaCourseSwitcher } from '@/components/SalsaCourseSwitcher'
 
-export default function SalsaCouplesPage() {
+export default function SalsaIntermediateStepsPage() {
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <CouplesContent />
+      <IntStepsContent />
     </Suspense>
   )
 }
@@ -64,14 +67,16 @@ function LoadingFallback() {
   return (
     <PageShell>
       <header className="text-center mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold">Cuban Salsa — Couples</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">
+          Intermediate Salsa — Solo Steps
+        </h1>
         <p className="text-[#a0a0a0] mt-1 text-sm md:text-base">Loading...</p>
       </header>
     </PageShell>
   )
 }
 
-function CouplesContent() {
+function IntStepsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -93,14 +98,14 @@ function CouplesContent() {
   )
 
   if (moveId) {
-    const move = COUPLES_MOVES.find((m) => m.id === moveId)
+    const move = INT_STEPS_MOVES.find((m) => m.id === moveId)
     if (move) {
       return <DetailView move={move} onBack={() => navigate({ move: null })} />
     }
-    // Unknown id (stale bookmark, or a move not indexed yet): fall through to the
-    // index rather than rendering a blank detail view. The steps page calls
-    // `navigate` here, which mutates history during render; doing it on this
-    // route would fight the `move` param on the very first paint.
+    // Unknown id (stale bookmark, or a link to a beginners move): fall through to
+    // the index rather than rendering a blank detail view. Deliberately not
+    // calling `navigate` here — that mutates history during render and would
+    // fight the `move` param on the first paint.
   }
 
   return <IndexView queryString={queryString} onNavigate={navigate} />
@@ -109,17 +114,6 @@ function CouplesContent() {
 // ============================================================================
 // Index
 // ============================================================================
-
-/** Which cue roles a move actually carries — drives the badges on each card. */
-function roleSummary(move: SalsaMove) {
-  const leadCues = move.cues.filter((c) => c.kind === 'lead')
-  return {
-    lead: leadCues.length,
-    leader: move.cues.filter((c) => c.role === 'leader').length,
-    follower: move.cues.filter((c) => c.role === 'follower').length,
-    drillable: move.cues.filter((c) => DRILLABLE_CUE_KINDS.includes(c.kind)).length,
-  }
-}
 
 function IndexView({
   queryString,
@@ -137,20 +131,22 @@ function IndexView({
     }
   }, [])
 
-  const filtered = searchMoves(query, COUPLES_MOVES, couplesClassTitle)
+  const filtered = searchMoves(query, INT_STEPS_MOVES, intStepsClassTitle)
   const groups = groupByClass(filtered)
 
   return (
     <PageShell>
       <header className="text-center mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold">Cuban Salsa — Couples</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">
+          Intermediate Salsa — Solo Steps
+        </h1>
         <p className="text-[#a0a0a0] mt-1 text-sm md:text-base">
-          La Suerte Dance School · {COUPLES_COURSE.classes.length} classes ·{' '}
-          {COUPLES_MOVES.length} partner moves
+          La Suerte Dance School · {INT_STEPS_COURSE.classes.length} classes ·{' '}
+          {INT_STEPS_MOVES.length} steps
         </p>
       </header>
 
-      <SalsaCourseSwitcher active="couples" />
+      <SalsaCourseSwitcher active="int-steps" />
 
       <div className="mb-6">
         <input
@@ -169,40 +165,36 @@ function IndexView({
               onNavigate({ q: null })
             }
           }}
-          placeholder="Search a move — try “setenta”, “basila”, “sombrero”"
+          placeholder="Search a step — try “pilon”, “mojito”, “arara”"
           className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-3 text-[#f5f5f5] placeholder:text-[#707070] focus:outline-none focus:ring-2 focus:ring-[#e53e3e]/50"
         />
       </div>
 
-      {COUPLES_MOVES.length === 0 ? (
-        <EmptyState />
-      ) : (
-        <div className="space-y-6">
-          {groups.map((group) => (
-            <section key={group.classNumber}>
-              <h2 className="text-[11px] uppercase tracking-widest text-[#fbbf24] mb-2">
-                Class {group.classNumber} — {couplesClassTitle(group.classNumber)}
-              </h2>
-              <div className="space-y-2">
-                {group.moves.map((move) => (
-                  <MoveCard
-                    key={move.id}
-                    move={move}
-                    onClick={() => onNavigate({ move: move.id, q: null })}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      )}
+      <div className="space-y-6">
+        {groups.map((group) => (
+          <section key={group.classNumber}>
+            <h2 className="text-[11px] uppercase tracking-widest text-[#fbbf24] mb-2">
+              Class {group.classNumber} — {intStepsClassTitle(group.classNumber)}
+            </h2>
+            <div className="space-y-2">
+              {group.moves.map((move) => (
+                <MoveCard
+                  key={move.id}
+                  move={move}
+                  onClick={() => onNavigate({ move: move.id, q: null })}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
 
       <details className="mt-8 border-t border-white/5 pt-6">
         <summary className="cursor-pointer text-sm text-[#a0a0a0] hover:text-[#f5f5f5]">
           About this course ▸
         </summary>
         <div className="mt-4 space-y-2 text-xs text-[#707070]">
-          {COUPLES_COURSE_FLAGS.map((flag) => (
+          {INT_STEPS_COURSE_FLAGS.map((flag) => (
             <p key={flag.id}>• {flag.text}</p>
           ))}
         </div>
@@ -211,39 +203,13 @@ function IndexView({
   )
 }
 
-/**
- * Shown while the move index is still being built out. It states what is
- * actually true rather than rendering an empty list that reads as a bug — the
- * clips and cues land per class range, mirroring the three spec files.
- */
-function EmptyState() {
-  return (
-    <div className="bg-[#1a1a1a] rounded-xl border border-white/5 p-6 text-sm text-[#a0a0a0]">
-      <p className="text-[#f5f5f5] font-medium mb-2">Move index still being cut.</p>
-      <p>
-        All {COUPLES_COURSE.classes.length} classes are transcribed and chaptered, and
-        the clip windows are chosen. The counted “slow” demos and the full-tempo
-        clips are being cut from the source videos now, and moves appear here a
-        class range at a time.
-      </p>
-      <p className="mt-3">
-        The solo footwork course is complete in the meantime —{' '}
-        <Link href="/salsa" className="text-[#e53e3e] hover:text-[#c53030]">
-          Cuban Salsa — Solo Steps
-        </Link>
-        .
-      </p>
-    </div>
-  )
-}
-
 function groupByClass(moves: SalsaMove[]): { classNumber: number; moves: SalsaMove[] }[] {
   const byClass = new Map<number, SalsaMove[]>()
   for (const move of moves) {
-    // A move taught in both courses carries two sources; pick the couples one,
-    // or this groups Enchufla under its solo class number.
-    const source =
-      move.sources.find((s) => s.course === 'couples') ?? move.sources[0]
+    // A move with more than one source (Arara has two, one per rhythm) groups
+    // under its int-steps source, and under the first if the course field is ever
+    // wrong — better than dropping it into an unnumbered bucket.
+    const source = intStepsSource(move)
     const classNum = source?.classNumber ?? 0
     if (!byClass.has(classNum)) byClass.set(classNum, [])
     byClass.get(classNum)!.push(move)
@@ -253,11 +219,16 @@ function groupByClass(moves: SalsaMove[]): { classNumber: number; moves: SalsaMo
     .map(([classNumber, moves]) => ({ classNumber, moves }))
 }
 
+/** This course's teaching source for a move, or the first one as a fallback. */
+function intStepsSource(move: SalsaMove) {
+  return move.sources.find((s) => s.course === 'int-steps') ?? move.sources[0]
+}
+
 function MoveCard({ move, onClick }: { move: SalsaMove; onClick: () => void }) {
-  const source = move.sources.find((s) => s.course === 'couples') ?? move.sources[0]
+  const source = intStepsSource(move)
   const slow = source?.clips.slow
   const fast = source?.clips.fast
-  const { lead, drillable } = roleSummary(move)
+  const drillable = move.cues.filter((c) => DRILLABLE_CUE_KINDS.includes(c.kind)).length
 
   return (
     <button
@@ -271,12 +242,9 @@ function MoveCard({ move, onClick }: { move: SalsaMove; onClick: () => void }) {
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-medium">{move.name}</span>
-            {lead > 0 && (
-              <span className="text-[10px] uppercase tracking-wide text-[#fbbf24] border border-[#fbbf24]/40 rounded px-1.5 py-0.5">
-                {lead} lead
-              </span>
+            {!move.complete && (
+              <span className="text-[10px] text-[#fbbf24]">⚠ incomplete</span>
             )}
-            {!move.complete && <span className="text-[10px] text-[#fbbf24]">⚠ incomplete</span>}
           </div>
           <p className="text-sm text-[#a0a0a0] mt-0.5">{move.summary}</p>
           <div className="text-xs text-[#707070] mt-1 flex items-center gap-2 flex-wrap">
@@ -286,7 +254,14 @@ function MoveCard({ move, onClick }: { move: SalsaMove; onClick: () => void }) {
             ) : (
               <span className="text-[#fbbf24]">· no slow demo</span>
             )}
-            {fast && <span>· fast {Math.round(fast.end - fast.start)}s</span>}
+            {fast ? (
+              <span>· fast {Math.round(fast.end - fast.start)}s</span>
+            ) : (
+              <span className="text-[#fbbf24]">· no full-tempo demo</span>
+            )}
+            {(slow?.caveat || fast?.caveat) && (
+              <span className="text-[#fbbf24]">· ⓘ see caveat</span>
+            )}
           </div>
         </div>
       </div>
@@ -302,31 +277,34 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
   const [tempoMode, setTempoMode] = useTempoMode()
   const [clipMuted, setClipMuted] = useState(false)
 
-  // A move taught in both courses has two sources; this page shows the couples
-  // one. Falling back to sources[0] keeps a couples-only move working if its
-  // `course` field is ever wrong, rather than rendering "no teaching source".
-  const source = move.sources.find((s) => s.course === 'couples') ?? move.sources[0]
+  // Arara carries two sources — the folkloric 6/8 original and the salsa-timed
+  // adaptation — and both are worth practising, so this page renders every
+  // int-steps source rather than only the first. Every other move has one.
+  const sources = move.sources.filter((s) => s.course === 'int-steps')
+  const shown = sources.length > 0 ? sources : move.sources
 
-  if (!source) {
+  if (shown.length === 0) {
     return (
       <PageShell>
-        <button onClick={onBack} className="text-sm text-[#a0a0a0] hover:text-[#f5f5f5] mb-4">
-          ← All couples moves
+        <button
+          onClick={onBack}
+          className="text-sm text-[#a0a0a0] hover:text-[#f5f5f5] mb-4"
+        >
+          ← All intermediate steps
         </button>
-        <p className="text-[#a0a0a0]">No teaching source recorded for this move yet.</p>
+        <p className="text-[#a0a0a0]">No teaching source recorded for this step yet.</p>
       </PageShell>
     )
   }
 
-  const classNum = source.classNumber
-  const cls = COUPLES_COURSE.classes.find((c) => c.number === classNum)
+  const classNum = shown[0].classNumber
 
   return (
     <PageShell>
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
           <button onClick={onBack} className="text-sm text-[#a0a0a0] hover:text-[#f5f5f5]">
-            ← All couples moves
+            ← All intermediate steps
           </button>
           <span className="text-xs text-[#707070]">
             Class {classNum} · {move.kind}
@@ -341,57 +319,67 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
             </p>
           )}
           <p className="text-sm text-[#a0a0a0] mt-2">{move.summary}</p>
+          {!move.complete && (
+            <p className="text-xs text-[#fbbf24] mt-3 border border-[#fbbf24]/30 rounded-lg p-3">
+              ⚠ This step is incomplete. Its footwork breakdown needs someone to watch
+              the class and say which foot moves on which beat — the transcript alone
+              does not settle it. The cues and clips below are accurate; the footwork
+              paragraph is the gap.
+            </p>
+          )}
         </header>
 
-        {/* `key` remounts the player per move so a Slow→Fast cycle restarts on
-            the counted demo instead of carrying over mid-cycle. */}
-        <SalsaClipPlayer
-          key={move.id}
-          clips={source.clips}
-          aspect={source.clips.slow?.aspect ?? source.clips.fast?.aspect ?? '16/9'}
-          tempoMode={tempoMode}
-          onTempoChange={setTempoMode}
-          muted={clipMuted}
-          onMutedChange={setClipMuted}
-          origin={`Class ${classNum}`}
-        />
+        {shown.map((source, i) => (
+          <section key={`${source.videoId}-${source.teachStart}`} className={i > 0 ? 'mt-8' : ''}>
+            {shown.length > 1 && (
+              <h2 className="text-sm uppercase tracking-widest text-[#fbbf24] mb-3">
+                {source.clips.slow?.label ?? `Version ${i + 1}`}
+              </h2>
+            )}
+            {/* `key` remounts the player per source so a Slow→Fast cycle restarts
+                on the counted demo instead of carrying over mid-cycle. */}
+            <SalsaClipPlayer
+              key={`${move.id}-${source.teachStart}`}
+              clips={source.clips}
+              aspect={source.clips.slow?.aspect ?? source.clips.fast?.aspect ?? '16/9'}
+              tempoMode={tempoMode}
+              onTempoChange={setTempoMode}
+              muted={clipMuted}
+              onMutedChange={setClipMuted}
+              origin={`Class ${source.classNumber}`}
+            />
+            {source.note && <p className="text-xs text-[#707070] mt-3">{source.note}</p>}
+          </section>
+        ))}
 
-        {/* Leading comes first: it is what makes a partner figure work. */}
+        {/* Solo course, so there are no lead cues and every cue is `role: both`.
+            Grouping by kind rather than by role is what is informative here. */}
         <CueBlock
-          title="Leading"
-          subtitle="The hand signals and body cues that make the figure happen."
-          cues={move.cues.filter((c) => c.kind === 'lead')}
+          title="Footwork"
+          subtitle="Which foot, which beat."
+          cues={move.cues.filter((c) => c.kind === 'footwork')}
           emphasise
-          classNumber={classNum}
         />
-
         <CueBlock
-          title="Leader — footwork & arms"
-          cues={move.cues.filter(
-            (c) => c.role === 'leader' && c.kind !== 'lead' && DRILLABLE_CUE_KINDS.includes(c.kind),
-          )}
-          classNumber={classNum}
+          title="Rhythm"
+          cues={move.cues.filter((c) => c.kind === 'rhythm')}
         />
-
         <CueBlock
-          title="Follower — footwork & arms"
-          cues={move.cues.filter(
-            (c) =>
-              c.role === 'follower' && c.kind !== 'lead' && DRILLABLE_CUE_KINDS.includes(c.kind),
-          )}
-          classNumber={classNum}
+          title="Arms"
+          cues={move.cues.filter((c) => c.kind === 'arms')}
         />
-
         <CueBlock
-          title="Both"
-          subtitle="Genuinely role-independent instructions — not a merge of the two."
+          title="Body movement & styling"
           cues={move.cues.filter(
-            (c) => c.role === 'both' && c.kind !== 'lead' && DRILLABLE_CUE_KINDS.includes(c.kind),
+            (c) => c.kind === 'body-movement' || c.kind === 'styling',
           )}
-          classNumber={classNum}
+        />
+        <CueBlock
+          title="Context"
+          subtitle="What the step is, where it comes from, what it is for."
+          cues={move.cues.filter((c) => c.kind === 'concept' || c.kind === 'context')}
         />
 
-        {/* Footwork */}
         <section className="mt-6 bg-[#1a1a1a] rounded-xl border border-white/5 p-6">
           <h2 className="text-sm uppercase tracking-widest text-[#fbbf24] mb-4">Footwork</h2>
           <p className="text-sm text-[#e0e0e0]">{move.footwork}</p>
@@ -442,37 +430,44 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
           </section>
         )}
 
-        {/* Watch the class — the long grain (R2) and the R3 "check it yourself" link. */}
+        {/* The long grain: the class itself, plus every segment the clips came from. */}
         <section className="mt-6 bg-[#1a1a1a] rounded-xl border border-white/5 p-6">
           <h2 className="text-sm uppercase tracking-widest text-[#fbbf24] mb-4">
             Watch the class
           </h2>
-          <div className="flex items-center gap-3 flex-wrap text-xs">
-            <a
-              href={youtubeLink(source.videoId, source.teachStart)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#e53e3e] hover:text-[#c53030]"
-            >
-              Full teach block ↗
-            </a>
-            {source.segmentIds.map((segId) => {
-              const seg = cls?.segments.find((s) => s.id === segId)
-              if (!seg) return null
-              return (
+          {shown.map((source) => {
+            const cls = INT_STEPS_COURSE.classes.find((c) => c.number === source.classNumber)
+            return (
+              <div
+                key={`${source.videoId}-${source.teachStart}`}
+                className="flex items-center gap-3 flex-wrap text-xs mb-2 last:mb-0"
+              >
                 <a
-                  key={segId}
-                  href={youtubeLink(source.videoId, seg.start)}
+                  href={youtubeLink(source.videoId, source.teachStart)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#a0a0a0] hover:text-[#e53e3e]"
+                  className="text-[#e53e3e] hover:text-[#c53030]"
                 >
-                  {seg.role} {formatTime(seg.start)} ↗
+                  Full teach block ↗
                 </a>
-              )
-            })}
-          </div>
-          {source.note && <p className="text-xs text-[#707070] mt-3">{source.note}</p>}
+                {source.segmentIds.map((segId) => {
+                  const seg = cls?.segments.find((s) => s.id === segId)
+                  if (!seg) return null
+                  return (
+                    <a
+                      key={segId}
+                      href={youtubeLink(source.videoId, seg.start)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#a0a0a0] hover:text-[#e53e3e]"
+                    >
+                      {seg.role} {formatTime(seg.start)} ↗
+                    </a>
+                  )
+                })}
+              </div>
+            )
+          })}
         </section>
       </div>
     </PageShell>
@@ -484,21 +479,17 @@ function CueBlock({
   subtitle,
   cues,
   emphasise = false,
-  classNumber,
 }: {
   title: string
   subtitle?: string
   cues: SalsaCue[]
   emphasise?: boolean
-  classNumber: number
 }) {
   if (cues.length === 0) return null
   return (
     <section
       className={`mt-6 rounded-xl border p-6 ${
-        emphasise
-          ? 'bg-[#1f1a12] border-[#fbbf24]/25'
-          : 'bg-[#1a1a1a] border-white/5'
+        emphasise ? 'bg-[#1f1a12] border-[#fbbf24]/25' : 'bg-[#1a1a1a] border-white/5'
       }`}
     >
       <h2
@@ -511,24 +502,23 @@ function CueBlock({
       {subtitle && <p className="text-xs text-[#707070] mb-4">{subtitle}</p>}
       <div className={`space-y-3 ${subtitle ? '' : 'mt-4'}`}>
         {cues.map((cue) => (
-          <CueItem key={cue.id} cue={cue} classNumber={classNumber} />
+          <CueItem key={cue.id} cue={cue} />
         ))}
       </div>
     </section>
   )
 }
 
-function CueItem({ cue, classNumber }: { cue: SalsaCue; classNumber: number }) {
+function CueItem({ cue }: { cue: SalsaCue }) {
   const beatLabel = cue.beat
     ? `Beat ${cue.beat}`
     : cue.beats
       ? `Beats ${cue.beats.join(', ')}`
       : '—'
-  // Resolve the class from the cue's own source video, not the move's, because a
-  // cue can legitimately be drawn from a different class than the one that
-  // teaches the move (an earlier class introducing the hold, say).
-  const cueClass =
-    COUPLES_COURSE.classes.find((c) => c.videoId === cue.sourceVideo)?.number ?? classNumber
+  // Resolve the class from the cue's own source video rather than the move's: a
+  // cue can legitimately come from a different class than the one teaching the
+  // move, and labelling it with the move's class would send you to the wrong video.
+  const cueClass = INT_STEPS_COURSE.classes.find((c) => c.videoId === cue.sourceVideo)
 
   return (
     <div className="text-sm">
@@ -536,11 +526,6 @@ function CueItem({ cue, classNumber }: { cue: SalsaCue; classNumber: number }) {
         <span className="shrink-0 font-mono text-xs text-[#707070] w-14">{beatLabel}</span>
         <div className="flex-1">
           <p className="text-[#e0e0e0]">
-            {cue.role !== 'both' && (
-              <span className="text-[10px] uppercase tracking-wide text-[#707070] mr-2">
-                {cue.role}
-              </span>
-            )}
             {cue.text}
             {cue.confidence === 'suspect' && (
               <span className="ml-2 inline-flex items-center gap-1 text-[10px] uppercase tracking-wide text-[#fbbf24] border border-[#fbbf24]/50 rounded px-1.5 py-0.5">
@@ -555,7 +540,8 @@ function CueItem({ cue, classNumber }: { cue: SalsaCue; classNumber: number }) {
             rel="noopener noreferrer"
             className="text-xs text-[#a0a0a0] hover:text-[#e53e3e] mt-1 inline-block"
           >
-            Class {cueClass} @ {formatTime(cue.sourceStart)} ↗
+            {cueClass ? `Class ${cueClass.number}` : 'Source'} @{' '}
+            {formatTime(cue.sourceStart)} ↗
           </a>
         </div>
       </div>
@@ -564,16 +550,16 @@ function CueItem({ cue, classNumber }: { cue: SalsaCue; classNumber: number }) {
 }
 
 /**
- * Links to another couples move. A `composedOf` or `base` id may legitimately
- * point at a solo-course move (Enchufla is taught in both), so an id that is not
- * in this course links across to /salsa instead of rendering as dead text.
+ * Links to another intermediate step. A `base` or `composedOf` id often points at
+ * a beginners move (most intermediate steps build on one), so an id not in this
+ * course links across to /salsa instead of rendering as dead text.
  */
 function MoveLink({ id }: { id: string }) {
-  const move = COUPLES_MOVES.find((m) => m.id === id)
+  const move = INT_STEPS_MOVES.find((m) => m.id === id)
   if (move) {
     return (
       <Link
-        href={`/salsa/couples?move=${id}`}
+        href={`/salsa/intermediate?move=${id}`}
         className="text-[#e53e3e] hover:text-[#c53030] hover:underline"
       >
         {move.name}

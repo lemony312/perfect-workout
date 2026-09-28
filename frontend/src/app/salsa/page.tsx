@@ -381,7 +381,7 @@ function DetailView({ move, onBack }: { move: SalsaMove; onBack: () => void }) {
           onTempoChange={setTempoMode}
           muted={clipMuted}
           onMutedChange={setClipMuted}
-          classNum={classNum}
+          origin={`Class ${classNum}`}
         />
 
         {/* Cues */}

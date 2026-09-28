@@ -1,13 +1,19 @@
 'use client'
 
-// The Salsa clip player, shared by the solo steps course and the couples course.
+// The Salsa clip player, shared by all four salsa courses.
 //
-// Both courses need the identical control, so it lives here rather than being
-// copied: the tempo toggle is the main way you interact with a move, and two
-// implementations would drift. The couples course is also where `aspect` starts
-// earning its keep — its official shorts are 1080x1920 vertical while every
-// class is 1920x1080 landscape, and a vertical demo must not be cropped to
-// landscape.
+// They need the identical control, so it lives here rather than being copied: the
+// tempo toggle is the main way you interact with a move, and four implementations
+// would drift. The couples courses are also where `aspect` starts earning its
+// keep — their official shorts are 1080x1920 vertical while every class is
+// 1920x1080 landscape, and a vertical demo must not be cropped to landscape.
+//
+// `origin` is a caller-supplied string, not a class number, because the
+// intermediate couples playlist has no classes — it is 22 individually-titled
+// move videos, and its `classNumber` field holds playlist position. This
+// component used to take `classNum: number` and print "Class {n}", which would
+// have rendered "Class 13" for a video the channel never numbered. Composing the
+// label is the caller's job; it is the only one that knows what the number means.
 //
 // Tempo mode is NOT state here. It comes in as a prop from `useTempoMode()` so
 // the choice persists across navigation and across both courses — see the note
@@ -34,7 +40,7 @@ export function SalsaClipPlayer({
   onTempoChange,
   muted,
   onMutedChange,
-  classNum,
+  origin,
 }: {
   clips: ClipPair
   aspect: '16/9' | '9/16'
@@ -42,7 +48,8 @@ export function SalsaClipPlayer({
   onTempoChange: (mode: TempoMode) => void
   muted: boolean
   onMutedChange: (muted: boolean) => void
-  classNum: number
+  /** Where the clip came from, e.g. `Class 7` or `Sombrero por Debajo`. */
+  origin: string
 }) {
   const slow = clips.slow
   const fast = clips.fast
@@ -204,8 +211,8 @@ export function SalsaClipPlayer({
         {showSlow && slow && (
           <div>
             <p>
-              {slow.label ?? 'Counted, no music'} · {Math.round(slow.end - slow.start)}s · Class{' '}
-              {classNum} @ {formatTime(slow.start)}
+              {slow.label ?? 'Counted, no music'} · {Math.round(slow.end - slow.start)}s · {origin} @{' '}
+              {formatTime(slow.start)}
             </p>
             {slow.caveat && <p className="text-[#fbbf24] mt-1">ⓘ {slow.caveat}</p>}
           </div>
@@ -213,8 +220,8 @@ export function SalsaClipPlayer({
         {showFast && fast && (
           <div>
             <p>
-              {fast.label ?? 'Full tempo'} · {Math.round(fast.end - fast.start)}s · Class{' '}
-              {classNum} @ {formatTime(fast.start)}
+              {fast.label ?? 'Full tempo'} · {Math.round(fast.end - fast.start)}s · {origin} @{' '}
+              {formatTime(fast.start)}
             </p>
             {fast.caveat && <p className="text-[#fbbf24] mt-1">ⓘ {fast.caveat}</p>}
           </div>

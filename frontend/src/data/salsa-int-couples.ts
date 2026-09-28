@@ -23,9 +23,16 @@
 // 2-7 ... was not completed within the agent's time budget. No values were
 // guessed."
 //
-// So these six render with their cues, their segment map and a deep link to the
-// source video, and say honestly that no clip exists yet. That is the accurate
-// state. Do not fabricate windows here to make the pages look uniform — a window
+// So these six render with their cues and a deep link to the source video, and
+// say honestly that no clip exists yet. That is the accurate state.
+//
+// **This course has no segment data.** There is no `SalsaCourseData` export here
+// and no `ClassSegment[]` anywhere, because the moves are standalone videos
+// rather than classes with a count/music structure. The `segmentIds` on each
+// TeachingSource are therefore names with nothing to resolve against — positions
+// 2-7 carry `[]`, and the rest carry ids no module defines. The page must not try
+// to look them up: `youtubeLink(videoId, teachStart)` is the only deep link this
+// course can honestly offer. Do not fabricate windows here to make the pages look uniform — a window
 // invented in this file would have no transcript anchor behind it, and the clip
 // audit that guards every other window (scripts/extract_intermediate_clip_windows.py)
 // reads the specs, not this module, so it could not catch one.
@@ -39,6 +46,18 @@ export const INT_COUPLES_MOVES: SalsaMove[] = [...MOVES_PARTC, ...MOVES_PARTD, .
 
 export const INT_COUPLES_MOVES_BY_ID: Record<MoveId, SalsaMove> = Object.fromEntries(
   INT_COUPLES_MOVES.map((m) => [m.id, m]),
+)
+
+/**
+ * The 4 multi-move sequences, as ids. Derived from the PARTE export rather than
+ * matched on name or `kind`, because they carry `kind: 'step'` like everything
+ * else — a sequence is not a distinct move kind, it is a combination of moves,
+ * and the only authority on which entries are sequences is which spec they came
+ * from. A page that needs to list them apart from the 22 single moves should test
+ * membership here, not parse names for the word "sequence".
+ */
+export const INT_COUPLES_SEQUENCE_IDS: ReadonlySet<MoveId> = new Set(
+  SEQUENCES_PARTE.map((m) => m.id),
 )
 
 /**
@@ -73,7 +92,7 @@ export const INT_COUPLES_COURSE_CAVEATS: { id: string; text: string }[] = [
   {
     id: `ICC-b`,
     text:
-      `Six moves (positions 2-7: Balsero, Tiramisu Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) have cues but no clips yet, and are marked incomplete. Their videos carry auto-generated YouTube chapters or none at all, so no clip windows have been specified for them — position 1 shows what an auto-generated-chapter video looks like once it has been worked through. You get the cues, the segment map and a link into the source video; the clips will follow.`,
+      `Six moves (positions 2-7: Balsero, Tiramisu Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) have cues but no clips yet, and are marked incomplete. Their videos carry auto-generated YouTube chapters or none at all, so no clip windows have been specified for them — position 1 shows what an auto-generated-chapter video looks like once it has been worked through. You get the cues and a link into the source video; the clips will follow.`,
   },
   {
     id: `ICC-c`,
