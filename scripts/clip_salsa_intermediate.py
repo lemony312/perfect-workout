@@ -17,13 +17,14 @@ Three things differ from clip_salsa_couples.py, all deliberate:
     SALSA_INTERMEDIATE_CLIP_WINDOWS.json, and read from there. The numbers in the
     encoder are the spec's numbers by construction.
 
-  * **Output goes to the media repo, split by course.** ../perfect-workout-media/
-    clips/salsa/intermediate/{steps,couples}/, not frontend/public. The salsa clips
-    left the main repo to get the built site back under GitHub Pages' 1 GB limit, so
-    a new course's clips must land there too or the split stops working. Splitting by
-    course matters because the two courses share move names the way the beginners
-    courses do, and a flat namespace would let one course's cut silently overwrite
-    the other's.
+  * **Output goes to a media repo, split by course.**
+    ../perfect-workout-media-intermediate/clips/salsa/intermediate/{steps,couples}/,
+    not frontend/public. The salsa clips left the main repo to get the built site back
+    under GitHub Pages' 1 GB limit; these have a second media repo of their own because
+    one was not enough either, at 1035 MB with both courses' clips on it. Splitting by
+    course inside the repo matters because the two courses share move names the way the
+    beginners courses do, and a flat namespace would let one course's cut silently
+    overwrite the other's.
 
   * **Aspect is measured, not declared.** The couples clipper carries `aspect` per
     clip because it was written before the sources were all on disk. They are on disk
@@ -37,7 +38,7 @@ appear in the same component, so a clip from one must not look or sound differen
 Usage:
     uv run scripts/extract_intermediate_clip_windows.py        # refresh the JSON first
     uv run scripts/clip_salsa_intermediate.py --review         # -> data/review/salsa-intermediate/
-    uv run scripts/clip_salsa_intermediate.py                  # -> ../perfect-workout-media/
+    uv run scripts/clip_salsa_intermediate.py                  # -> ../perfect-workout-media-intermediate/
     uv run scripts/clip_salsa_intermediate.py --only mojito
     uv run scripts/clip_salsa_intermediate.py --dry-run
     uv run scripts/clip_salsa_intermediate.py --manifest       # verify, encode nothing
@@ -63,16 +64,21 @@ VIDEOS_DIR = PROJECT_ROOT / "data" / "cache" / "salsa" / "videos"
 WINDOWS_JSON = PROJECT_ROOT / "SALSA_INTERMEDIATE_CLIP_WINDOWS.json"
 REVIEW_DIR = PROJECT_ROOT / "data" / "review" / "salsa-intermediate"
 
-# Salsa clips publish into the separate media repo, not into frontend/public. The
-# main site was ~1.28 GB against GitHub Pages' 1 GB per-site limit, so every path
-# under `/clips/salsa/` was moved out to lemony312/perfect-workout-media and is
-# loaded cross-origin — see frontend/src/lib/media.ts, which resolves the origin by
-# path prefix. That prefix already covers `/clips/salsa/intermediate/...`, so these
-# clips need no front-end change; they just have to land in the right repo.
+# Salsa clips publish into a separate media repo, not into frontend/public. The main
+# site was ~1.28 GB against GitHub Pages' 1 GB per-site limit, so every path under
+# `/clips/salsa/` moved out and is loaded cross-origin — see frontend/src/lib/media.ts,
+# which resolves the origin by path prefix.
 #
-# Writing them to frontend/public instead would appear to work in `next dev`, where
-# MEDIA_BASE is unset and everything resolves locally, and 404 in production.
-MEDIA_REPO = PROJECT_ROOT.parent / "perfect-workout-media"
+# These clips go to their own media repo, separate from the one holding the beginners
+# clips, because one media site was not enough either: with the intermediate courses
+# added it reached 1035 MB, and over the limit a Pages site does not deploy at all, so
+# every clip in all four courses 404s rather than just the new ones. The prefix
+# `/clips/salsa/intermediate/` routes to this second origin, which is why the paths
+# inside the repo are unchanged — only the repo they land in differs.
+#
+# Writing them to frontend/public instead would appear to work in `next dev`, where the
+# media bases are unset and everything resolves locally, and 404 in production.
+MEDIA_REPO = PROJECT_ROOT.parent / "perfect-workout-media-intermediate"
 PUBLISH_ROOT = MEDIA_REPO / "clips" / "salsa" / "intermediate"
 
 # Which course each spec part belongs to. PART E is the four multi-move sequence
@@ -99,14 +105,29 @@ AUDIO_BITRATE = "128k"
 # the two halves of a pair can be more than 10 dB apart.
 AUDIO_FILTER = "loudnorm=I=-16:TP=-1.5:LRA=11"
 
+# Cap the long edge at 1280. Today this is a no-op guard, not a saving: every cached
+# source is already 1280x720 landscape or 720x1280 vertical, so nothing gets scaled.
+#
+# It is here because that was checked the expensive way. When the media site went over
+# the 1 GB Pages limit, downscaling looked like the obvious lever — and it freed
+# nothing, because there was no 1080p anywhere to downscale. The cap stays so that a
+# future re-download at a higher resolution cannot silently double the site's size and
+# put it back over the limit; the fix for the limit itself was a second media repo.
+#
+# `min(iw,1280)` rather than a fixed width, so it never upscales, and `/2*2` keeps both
+# dimensions even for yuv420p. Vertical shorts pass through untouched: their width is
+# already under the cap.
+VIDEO_FILTER = "scale=w=trunc(min(iw\\,1280)/2)*2:h=-2"
+
 # R2's demo-loop range. Outside it is not fatal here — the extractor's audit is the
 # gate for that — but it is flagged so a surprising length is never silently encoded.
 FLOOR = 18.0
 CEILING = 52.0
 
-# GitHub Pages publishes at most 1 GB per site. The media site already carries the
-# beginners clips, so this is reported after every publish run rather than assumed
-# to be fine — the whole reason the split exists is that the limit was breached once.
+# GitHub Pages publishes at most 1 GB per site. Reported after every publish run rather
+# than assumed to be fine: this limit has now been breached twice — once by the main
+# site, and once by the first media site — and each time the symptom was every clip on
+# that origin 404ing at once, which looks nothing like "the site is a bit too big".
 PAGES_LIMIT_BYTES = 1024 ** 3
 
 logger = logging.getLogger(__name__)
@@ -269,6 +290,7 @@ def cut(clip: Clip, out_dir: Path, dry_run: bool) -> tuple[bool, float]:
         "-c:v", VIDEO_CODEC,
         "-preset", VIDEO_PRESET,
         "-crf", str(VIDEO_CRF),
+        "-vf", VIDEO_FILTER,
         "-pix_fmt", "yuv420p",
         "-c:a", AUDIO_CODEC,
         "-b:a", AUDIO_BITRATE,
@@ -575,11 +597,19 @@ def main() -> None:
                    if f.is_file() and ".git" not in f.parts)
         pct = 100 * site / PAGES_LIMIT_BYTES
         report = logger.warning if pct > 90 else logger.info
-        report("Media site total: %.0f MB of the 1024 MB Pages limit (%.0f%%)",
-               site / (1024 * 1024), pct)
+        report("%s: %.0f MB of the 1024 MB Pages limit (%.0f%%)",
+               MEDIA_REPO.name, site / (1024 * 1024), pct)
         if pct > 100:
-            logger.error("Media site is OVER the 1 GB Pages limit — it will not "
-                         "deploy. Re-encode at a higher CRF or drop the fast grains.")
+            # Deliberately not "re-encode at a higher CRF": that was measured at 27%
+            # for CRF 26 and rejected, because the loss lands in motion and motion is
+            # what a dance clip is for. Another site is the lever that costs no
+            # picture quality, and it is what was done when this last fired.
+            logger.error("%s is OVER the 1 GB Pages limit — it will not deploy, "
+                         "which 404s every clip on that origin and not just the new "
+                         "ones. Split the clips across another media repo (see "
+                         "frontend/src/lib/media.ts, MEDIA_ROUTES) rather than "
+                         "re-encoding: CRF 26 buys 27%% and costs motion detail.",
+                         MEDIA_REPO.name)
 
     if args.review and not args.dry_run:
         for course in sorted({c.course for c in clips}):

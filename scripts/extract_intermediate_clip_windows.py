@@ -546,10 +546,15 @@ def main() -> int:
 
     log.info("")
     log.info("%d windows across %d files", len(rows), len(files))
-    by_tempo: dict[str, int] = {}
+    # `grain_of`, not `r['tempo']`. The checks already use it; this summary did not,
+    # and reported `?=12` for every row in a table that uses a leading `#` column
+    # rather than `### Slow` / `### Fast` subheadings. Twelve unknown tempos in a
+    # report whose job is to find problems reads as a problem, and it is not one —
+    # so the summary and the checks now agree on where grain comes from.
+    by_grain: dict[str, int] = {}
     for r in rows:
-        by_tempo[r["tempo"] or "?"] = by_tempo.get(r["tempo"] or "?", 0) + 1
-    log.info("   by tempo: %s", ", ".join(f"{k}={v}" for k, v in sorted(by_tempo.items())))
+        by_grain[grain_of(r) or "?"] = by_grain.get(grain_of(r) or "?", 0) + 1
+    log.info("   by grain: %s", ", ".join(f"{k}={v}" for k, v in sorted(by_grain.items())))
     lengths = sorted(round(r["end"] - r["start"], 1) for r in rows)
     if lengths:
         log.info("   lengths: min %.1fs, median %.1fs, max %.1fs",

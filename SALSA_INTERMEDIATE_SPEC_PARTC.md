@@ -109,7 +109,7 @@ The official short `CuUwwKNxCuI` is listed, but intermediate shorts are music-on
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `sombrero-complicado` | `CuUwwKNxCuI` | **0.0** | **[duration]** | ~[short dur]s | `sombrero-complicado-fast.mp4` | **A V** | Full official short, music-only. Aspect: `'9/16'`. |
+| 2 | `sombrero-complicado` | `CuUwwKNxCuI` | **0.0** | **31.927** | 31.927s | `sombrero-complicado-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/CuUwwKNxCuI.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Sombrero Complicado - Class 9, Intermediate Salsa (Short)". |
 
 **Window 2 caveat**: "Official short, music-only (no spoken cues). Full-tempo demo."
 
@@ -162,16 +162,26 @@ No chapters. Boundaries derived from transcript.
 
 | id | start | end | role | label | moves | provenance |
 |---|---|---|---|---|---|---|
-| `ic-balsero-intro` | 0.0 | [TBD] | `skip` | Intro | — | [Requires transcript analysis] |
-| `ic-balsero-count` | [TBD] | [TBD] | `count` | Counted demo | `balsero` | [Requires transcript analysis] |
-| `ic-balsero-music` | [TBD] | [TBD] | `music` | With music | `balsero` | [Requires transcript analysis] |
-| `ic-balsero-outro` | [TBD] | 159.0 | `skip` | Outro | — | [Requires transcript analysis] |
+| `ic-balsero-intro` | 0.0 | 38.0 | `skip` | Intro | — | Ends at *"Guapea."* @38.0, start of first counted rep |
+| `ic-balsero-count` | 38.0 | 85.46 | `count` | Counted demo, two reps | `balsero` | Starts *"Guapea."* @38.0; announcement "twice" @35.46; ends *"Cool!"* @85.46 |
+| `ic-balsero-music` | 86.38 | 124.02 | `music` | With music | `balsero` | Starts "1," @86.38; move named "balsero" @93.06, @108.04; ends *"great."* @124.02 |
+| `ic-balsero-outro` | 126.78 | 159.0 | `skip` | Outro | — | Starts *"From"* @126.78; social media and closing |
 
 `chaptered: false`. `teaches: ['balsero']`.
 
 ## 2.3 Clip windows
 
-[Requires full transcript analysis to determine boundaries]
+### Slow
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `balsero` | `pY55QVrPals` | **38.68** | **60.80** | 22.12s | `balsero-slow.mp4` | **D** | In: *"Guapea."* @38.68 (e=38.68), end of intro cue before counted rep. Out: *"seven."* @60.80 (e=60.80), end of first bar. Move named "balsero" @45.52 within window. |
+
+### Fast
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `balsero` | `9TRul_cN9ts` | **0.0** | **33.762** | 33.762s | `balsero-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **33.762s** read from the container in `data/cache/salsa/videos/9TRul_cN9ts.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Balsero - Class 2, Intermediate Salsa (Short)" — so this is the right move, not a same-length clip of a neighbouring one. |
 
 ## 2.4 Cues
 
@@ -179,14 +189,233 @@ No chapters. Boundaries derived from transcript.
 
 ---
 
-**[POSITIONS 3–7: PLACEHOLDER — Full transcript analysis required for each]**
+# Position 3 — Tiramisu Complicado
 
-Due to the absence of authored chapters, positions 2–7 require full transcript reading per video to extract:
-- Segment boundaries from speech markers
-- Clip window timings anchored to word-level timestamps  
-- Lead and follower cues with sources
+- **Video** `kr0fYDZABME` · 197s · no chapters · **no Table of contents**
+- **Move, per the description**: "Tiramisu Complicado"
+- **Official short**: none
+- **Chapters verdict**: No chapters. Boundaries derived from transcript.
 
-Each of these 6 videos is 159–313 seconds and follows the same fast-paced intermediate format as position 1 (minimal explanatory segments, straight to counted demo and music). The work is tractable but time-intensive.
+## 3.1 Move index
+
+| id | Canonical name | kind | base | Aliases | Summary |
+|---|---|---|---|---|---|
+| `tiramisu-complicado` | Tiramisu Complicado | `step` | `tiramisu` | `tiramisu complicado`, `Tiramisu Complicado`, `tiramisú complicado` | Intermediate elaboration of Tiramisu: includes double right turn for the follower. |
+
+## 3.2 Segment map
+
+No chapters. Boundaries derived from transcript.
+
+| id | start | end | role | label | moves | provenance |
+|---|---|---|---|---|---|---|
+| `ic-tiramisu-complicado-intro` | 0.0 | 46.68 | `skip` | Intro and explanation | — | Ends at *"Guapea"* @46.68, start of counted demo |
+| `ic-tiramisu-complicado-count` | 46.68 | 93.02 | `count` | Counted demo | `tiramisu-complicado` | Starts *"Guapea"* @46.68; move named @51.26, @70.08; ends *"demanding."* @93.02 |
+| `ic-tiramisu-complicado-music` | 109.18 | 155.02 | `music` | With music | `tiramisu-complicado` | Starts *"One,"* @109.18; move named "tiramisu complicato" @137.64; ends *"and"* @155.02 |
+| `ic-tiramisu-complicado-outro` | 160.52 | 197.0 | `skip` | Outro | — | Starts *"Very cool."* @160.52; social media and closing |
+
+`chaptered: false`. `teaches: ['tiramisu-complicado']`.
+
+## 3.3 Clip windows
+
+### Slow
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `tiramisu-complicado` | `kr0fYDZABME` | **46.68** | **85.8** | 39.12s | `tiramisu-complicado-slow.mp4` | **D** | In: *"Guapea"* @46.68 (s=46.68), start of counted demo with announcement "very very slowly". Out: *"seven."* @85.8 (e=85.8), end of counted bar. Move named "tiramisu" @51.26 and "tiramisu complicado" @70.08-72.5 within window. |
+
+### Fast
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `tiramisu-complicado` | `kr0fYDZABME` | **109.18** | **155.02** | 45.84s | `tiramisu-complicado-fast.mp4` | **D NARRATED** | In: *"One,"* @109.18 (s=109.18), start of music section. Out: *"and"* @155.02 (e=155.02), end of counted phrase. Move named "tiramisu complicato" @137.64-139.38 within window. NARRATED: teachers vocalize rhythm continuously ("chick chicky kum", "pimpimpimpimp") throughout music section per intermediate format; 41 spoken words but all rhythm markers, not explanation. |
+
+## 3.4 Cues
+
+[Requires transcript reading]
+
+---
+
+# Position 4 — La Botella
+
+- **Video** `_A0VNIVvhtA` · 166s · 3 auto-generated chapters · **no Table of contents**
+- **Move, per the description**: "LA BOTELLA"
+- **Official short**: `K5gDS-XIF3Q` · vertical 9:16
+- **Chapters verdict**: Auto-generated chapters. Boundaries derived from transcript.
+
+## 4.1 Move index
+
+| id | Canonical name | kind | base | Aliases | Summary |
+|---|---|---|---|---|---|
+| `la-botella` | La Botella | `step` | — | `la botella`, `LA BOTELLA`, `La Botella`, `abotea` | The bottle: a couples move. |
+
+## 4.2 Segment map
+
+Auto-generated chapters ignored. Boundaries derived from transcript.
+
+| id | start | end | role | label | moves | provenance |
+|---|---|---|---|---|---|---|
+| `ic-la-botella-intro` | 0.0 | 34.36 | `skip` | Intro | — | Move named @30.86 "LA BOTELLA"; ends at *"5,"* @34.36 start of counted demo |
+| `ic-la-botella-count` | 34.36 | 92.54 | `count` | Counted demo, two reps | `la-botella` | Starts *"5,"* @34.36; move named @38.78-39.88, @69.6-70.04, @102.82-103.24; ends *"We'll"* @92.54 |
+| `ic-la-botella-music` | 97.6 | 138.26 | `music` | With music | `la-botella` | Starts *"5,"* @97.6; move named "la botella" @102.82, "la botea" @122.74; ends *"five"* @138.26 |
+| `ic-la-botella-outro` | 143.72 | 166.0 | `skip` | Outro | — | Starts *"Okie dokie"* @143.72 |
+
+`chaptered: false`. `teaches: ['la-botella']`.
+
+## 4.3 Clip windows
+
+### Slow
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `la-botella` | `_A0VNIVvhtA` | **34.36** | **64.22** | 29.86s | `la-botella-slow.mp4` | **D** | In: *"5,"* @34.36 (s=34.36), start of first counted rep with move named @38.78 "LA BOTELLA". Out: *"seven."* @64.22 (e=64.22), end of first demonstration. Move named within window @38.78-39.88. |
+
+### Fast
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `la-botella` | `K5gDS-XIF3Q` | **0.0** | **42.98** | 42.98s | `la-botella-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **42.98s** read from the container in `data/cache/salsa/videos/K5gDS-XIF3Q.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "La botella - Class 8, Intermediate Salsa (Short)" — so this is the right move, not a same-length clip of a neighbouring one. |
+
+## 4.4 Cues
+
+[Requires transcript reading]
+
+---
+
+# Position 5 — Setenta Complicado
+
+- **Video** `YOYk3Wbcf_M` · 304s · no chapters · **no Table of contents**
+- **Move, per the description**: "Setenta complicado"
+- **Official short**: `TFc1glp6XXY` · vertical 9:16
+- **Chapters verdict**: No chapters. Boundaries derived from transcript.
+
+## 5.1 Move index
+
+| id | Canonical name | kind | base | Aliases | Summary |
+|---|---|---|---|---|---|
+| `setenta-complicado` | Setenta Complicado | `step` | `setenta` | `setenta complicado`, `Setenta Complicado`, `Setenta complicado` | Intermediate variation of Setenta (70): includes back-to-back flaps and rotation. |
+
+## 5.2 Segment map
+
+No chapters. Boundaries derived from transcript.
+
+| id | start | end | role | label | moves | provenance |
+|---|---|---|---|---|---|---|
+| `ic-setenta-complicado-intro` | 0.0 | 64.22 | `skip` | Intro and explanation | — | Ends at *"Five"* @64.22, start of counted demo after *"details."* @63.3 |
+| `ic-setenta-complicado-count` | 64.22 | 192.44 | `count` | Counted demo with teaching | `setenta-complicado` | Starts *"Five"* @64.22; move named @67.88-69.02, @171.28-172.7; ends *"7."* @192.44 |
+| `ic-setenta-complicado-music` | 208.2 | 255.68 | `music` | With music | `setenta-complicado` | Starts *"6,"* @208.2; ends *"One."* @255.68 (segment ends @255.64) |
+| `ic-setenta-complicado-outro` | 261.38 | 304.0 | `skip` | Outro | — | Starts *"Setenta Complicado is a bit generic name"* @261.38 |
+
+`chaptered: false`. `teaches: ['setenta-complicado']`.
+
+## 5.3 Clip windows
+
+### Slow
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `setenta-complicado` | `YOYk3Wbcf_M` | **131.04** | **157.6** | 26.56s | `setenta-complicado-slow.mp4` | **D** | In: *"seven,"* @131.04 (s=131.04), start of clean fluent counted rep per announcement @131.68 "fluently, slowly still". Out: *"seven"* @157.6 (s=157.6, e=158.78), end of counted phrase "five six seven before we go one more time". Move named "setenta complicado" @171.28-172.7 is AFTER this window, but move is performed and teacher references it throughout; window shows the move execution per the teaching that preceded it. |
+
+### Fast
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `setenta-complicado` | `TFc1glp6XXY` | **0.0** | **49.575** | 49.575s | `setenta-complicado-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **49.575s** read from the container in `data/cache/salsa/videos/TFc1glp6XXY.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Setenta Complicado - Class 12, Intermediate Salsa (Short)" — so this is the right move, not a same-length clip of a neighbouring one. |
+
+## 5.4 Cues
+
+[Requires transcript reading]
+
+---
+
+# Position 6 — El Dos
+
+- **Video** `SOjNHsjPFL4` · 255s · no chapters · **no Table of contents**
+- **Move, per the description**: "El dos"
+- **Official short**: none
+- **Chapters verdict**: No chapters. Boundaries derived from transcript.
+
+## 6.1 Move index
+
+| id | Canonical name | kind | base | Aliases | Summary |
+|---|---|---|---|---|---|
+| `el-dos` | El Dos | `step` | `el-uno` | `el dos`, `El dos`, `El Dos`, `L2`, `L-DOS` | The two: similar to El Uno but requires Sefue command to exit in rueda context. |
+
+## 6.2 Segment map
+
+No chapters. Boundaries derived from transcript.
+
+| id | start | end | role | label | moves | provenance |
+|---|---|---|---|---|---|---|
+| `ic-el-dos-intro` | 0.0 | 91.2 | `skip` | Intro and explanation about rueda | — | Teacher explains L2 / El dos and Sefue exit command; ends *"Let's"* @91.2 |
+| `ic-el-dos-count` | 91.2 | 155.74 | `count` | Counted demo | `el-dos` | Starts *"Let's start with Guapea"* @91.2; move named "l dos" @124.06-124.36; ends *"music."* @155.74 |
+| `ic-el-dos-music` | 158.5 | 211.32 | `music` | With music | `el-dos` | Starts *"One,"* @158.5; ends *"one."* @211.32 |
+| `ic-el-dos-outro` | 216.48 | 255.0 | `skip` | Outro | — | Starts *"L-DOS"* @216.48, teacher explains variations |
+
+`chaptered: false`. `teaches: ['el-dos']`.
+
+## 6.3 Clip windows
+
+### Slow
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `el-dos` | `SOjNHsjPFL4` | **91.2** | **120.14** | 28.94s | `el-dos-slow.mp4` | **D** | In: *"Let's"* @91.2 (s=91.2, e=91.66), start of counted demo after intro. Out: *"five"* @120.14 (s=120.14, e=120.96), end of counted phrase before *"a bit slower"* announcement @121.64. Move named "l dos" @124.06-124.36 is AFTER this window, but move is demonstrated per the teaching; name spoken during intro @49.88-50.52. |
+
+### Fast
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `el-dos` | `SOjNHsjPFL4` | **158.5** | **196.4** | 37.9s | `el-dos-fast.mp4` | **D NARRATED** | In: *"One,"* @158.5 (s=158.5, e=159.06), start of music section. Out: *"one."* @196.4 (s=196.12, e=196.4), end of counted phrase. NARRATED: teachers count and coach throughout music section per intermediate format; window contains "And the two" @165.16, "Front" @170.52, "Stepway" @173.62-174.18, move being performed with vocal cues. |
+
+## 6.4 Cues
+
+[Requires transcript reading]
+
+---
+
+# Position 7 — Paseala Complicado
+
+- **Video** `7ugimJ0MFas` · 313s · no chapters · **no Table of contents**
+- **Move, per the description**: "Pase a la complicado"
+- **Official short**: `eWR8KHyoQHw` · vertical 9:16
+- **Chapters verdict**: No chapters. Boundaries derived from transcript.
+
+## 7.1 Move index
+
+| id | Canonical name | kind | base | Aliases | Summary |
+|---|---|---|---|---|---|
+| `paseala-complicado` | Paseala Complicado | `step` | `paseala` | `paseala complicado`, `Paseala Complicado`, `Pase a la complicado`, `pase a la complicada`, `pastella` | Intermediate elaboration of Paseala: starts from arm-resting grip in rueda position. |
+
+## 7.2 Segment map
+
+No chapters. Boundaries derived from transcript.
+
+| id | start | end | role | label | moves | provenance |
+|---|---|---|---|---|---|---|
+| `ic-paseala-complicado-intro` | 0.0 | 66.24 | `skip` | Intro explaining starting position | — | Teacher explains arm-resting lecona grip start; move named @32.84-33.68; ends *"then"* @66.24 |
+| `ic-paseala-complicado-count` | 66.24 | 112.62 | `count` | Counted demo, two reps | `paseala-complicado` | Starts *"then behind me"* @66.24; move named @92.58-93.44, @125.66-126.22; ends *"Music"* @112.62 |
+| `ic-paseala-complicado-music` | 115.48 | 168.62 | `music` | With music | `paseala-complicado` | Starts *"One,"* @115.48; ends *"If"* @168.62, before teacher discusses free-style version |
+| `ic-paseala-complicado-outro` | 168.62 | 313.0 | `skip` | Free-style demo and outro | — | Teacher discusses dancing more freely vs. rueda-positioned @168.62 onwards |
+
+`chaptered: false`. `teaches: ['paseala-complicado']`.
+
+## 7.3 Clip windows
+
+### Slow
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `paseala-complicado` | `7ugimJ0MFas` | **66.24** | **89.12** | 22.88s | `paseala-complicado-slow.mp4` | **D** | In: *"then"* @66.24 (s=66.24, e=66.26), start of counted demo after intro explaining starting position. Out: *"and"* @89.12 (s=88.62, e=89.12), end of first counted rep before *"chufla mix"* @89.56. Move named "pase a la complicado" @32.84-33.68 in intro, "passe alla complicato" @92.58-93.44 later; window shows the demonstrated move. |
+
+### Fast
+
+| # | Move | Video | In | Out | Len | File | Trust | Anchors |
+|---|---|---|---|---|---|---|---|---|
+| 2 | `paseala-complicado` | `eWR8KHyoQXw` | **0.0** | **42.539** | 42.539s | `paseala-complicado-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **42.539s** read from the container in `data/cache/salsa/videos/eWR8KHyoQXw.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Paseala complicado - Class 5, Intermediate Salsa (Short)" — so this is the right move, not a same-length clip of a neighbouring one. **The spec previously named `eWR8KHyoQHw`, which is one character out** — no such video is cached, and the id was never checked against a container. |
+
+## 7.4 Cues
+
+[Requires transcript reading]
 
 ---
 
@@ -243,7 +472,7 @@ Each of these 6 videos is 159–313 seconds and follows the same fast-paced inte
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `sombrero-por-debajo` | `nolwu7BcRdc` | **0.0** | **[duration]** | ~[short dur]s | `sombrero-por-debajo-fast.mp4` | **A V** | Full official short, music-only. Aspect: `'9/16'`. |
+| 2 | `sombrero-por-debajo` | `nolwu7BcRdc` | **0.0** | **38.127** | 38.127s | `sombrero-por-debajo-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/nolwu7BcRdc.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Sombrero Por Debajo - Class 4, Intermediate Salsa (Short)". |
 
 **Window 2 caveat**: "Official short, music-only (no spoken cues). Full-tempo demo. This is the TRUSTED short — two others with this title exist and are unresolved."
 
@@ -355,7 +584,7 @@ No official short listed. Fast clip from main video:
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `setenta-y-cuatro` | `5XYM9h_TYoU` | **0.0** | **[dur]** | ~[dur]s | `setenta-y-cuatro-fast.mp4` | **A V** | Official short, music-only, aspect `'9/16'`. |
+| 2 | `setenta-y-cuatro` | `5XYM9h_TYoU` | **0.0** | **46.138** | 46.138s | `setenta-y-cuatro-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/5XYM9h_TYoU.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Setenta y cuatro  - Class 7, Intermediate Salsa (Short)". |
 
 **Alternate**: Music front camera 221.0–253.0 (32s) from main video.
 
@@ -406,7 +635,7 @@ No official short listed. Fast clip from main video:
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `bayamo` | `cBPUTs6I3J4` | **0.0** | **[dur]** | ~[dur]s | `bayamo-fast.mp4` | **A V** | Official short, music-only, aspect `'9/16'`. |
+| 2 | `bayamo` | `cBPUTs6I3J4` | **0.0** | **48.042** | 48.042s | `bayamo-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/cBPUTs6I3J4.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Bayamo - Class 11, Intermediate Salsa (Short)". |
 
 ## 11.4 Cues
 
@@ -456,7 +685,7 @@ No official short listed. Fast clip from main video:
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `el-uno-complicado` | `A_5VmrVYuXA` | **0.0** | **[dur]** | ~[dur]s | `el-uno-complicado-fast.mp4` | **A V** | Official short, music-only, aspect `'9/16'`. |
+| 2 | `el-uno-complicado` | `A_5VmrVYuXA` | **0.0** | **46.602** | 46.602s | `el-uno-complicado-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/A_5VmrVYuXA.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "El uno complicado - Class 3, Intermediate Salsa (Short)". |
 
 ## 12.4 Cues
 
@@ -505,7 +734,7 @@ No official short listed. Fast clip from main video:
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `montana` | `AtQqi_5hNCY` | **0.0** | **[dur]** | ~[dur]s | `montana-fast.mp4` | **A V** | Official short, music-only, aspect `'9/16'`. |
+| 2 | `montana` | `AtQqi_5hNCY` | **0.0** | **38.034** | 38.034s | `montana-fast.mp4` | **A V** | Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/AtQqi_5hNCY.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, "Montaña - Class 1, Intermediate Salsa (Short)". |
 
 ## 13.4 Cues
 

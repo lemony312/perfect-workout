@@ -398,9 +398,165 @@
   "trust": "AV",
   "tempo": "fast",
   "section": "1.3 Clip windows",
-  "anchors": "Full official short, music-only. Aspect: `'9/16'`.",
-  "end_from_metadata": true,
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/CuUwwKNxCuI.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Sombrero Complicado - Class 9, Intermediate Salsa (Short)\".",
+  "end_from_metadata": false,
   "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:112"
+ },
+ {
+  "move": "balsero",
+  "video": "pY55QVrPals",
+  "start": 38.68,
+  "end": 60.8,
+  "file": "balsero-slow.mp4",
+  "trust": "D",
+  "tempo": "slow",
+  "section": "2.3 Clip windows",
+  "anchors": "In: *\"Guapea.\"* @38.68 (e=38.68), end of intro cue before counted rep. Out: *\"seven.\"* @60.80 (e=60.80), end of first bar. Move named \"balsero\" @45.52 within window.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:178"
+ },
+ {
+  "move": "balsero",
+  "video": "9TRul_cN9ts",
+  "start": 0.0,
+  "end": 33.762,
+  "file": "balsero-fast.mp4",
+  "trust": "AV",
+  "tempo": "fast",
+  "section": "2.3 Clip windows",
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **33.762s** read from the container in `data/cache/salsa/videos/9TRul_cN9ts.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Balsero - Class 2, Intermediate Salsa (Short)\" \u2014 so this is the right move, not a same-length clip of a neighbouring one.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:184"
+ },
+ {
+  "move": "tiramisu-complicado",
+  "video": "kr0fYDZABME",
+  "start": 46.68,
+  "end": 85.8,
+  "file": "tiramisu-complicado-slow.mp4",
+  "trust": "D",
+  "tempo": "slow",
+  "section": "3.3 Clip windows",
+  "anchors": "In: *\"Guapea\"* @46.68 (s=46.68), start of counted demo with announcement \"very very slowly\". Out: *\"seven.\"* @85.8 (e=85.8), end of counted bar. Move named \"tiramisu\" @51.26 and \"tiramisu complicado\" @70.08-72.5 within window.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:224"
+ },
+ {
+  "move": "tiramisu-complicado",
+  "video": "kr0fYDZABME",
+  "start": 109.18,
+  "end": 155.02,
+  "file": "tiramisu-complicado-fast.mp4",
+  "trust": "DNARRATED",
+  "tempo": "fast",
+  "section": "3.3 Clip windows",
+  "anchors": "In: *\"One,\"* @109.18 (s=109.18), start of music section. Out: *\"and\"* @155.02 (e=155.02), end of counted phrase. Move named \"tiramisu complicato\" @137.64-139.38 within window. NARRATED: teachers vocalize rhythm continuously (\"chick chicky kum\", \"pimpimpimpimp\") throughout music section per intermediate format; 41 spoken words but all rhythm markers, not explanation.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:230"
+ },
+ {
+  "move": "la-botella",
+  "video": "_A0VNIVvhtA",
+  "start": 34.36,
+  "end": 64.22,
+  "file": "la-botella-slow.mp4",
+  "trust": "D",
+  "tempo": "slow",
+  "section": "4.3 Clip windows",
+  "anchors": "In: *\"5,\"* @34.36 (s=34.36), start of first counted rep with move named @38.78 \"LA BOTELLA\". Out: *\"seven.\"* @64.22 (e=64.22), end of first demonstration. Move named within window @38.78-39.88.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:270"
+ },
+ {
+  "move": "la-botella",
+  "video": "K5gDS-XIF3Q",
+  "start": 0.0,
+  "end": 42.98,
+  "file": "la-botella-fast.mp4",
+  "trust": "AV",
+  "tempo": "fast",
+  "section": "4.3 Clip windows",
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **42.98s** read from the container in `data/cache/salsa/videos/K5gDS-XIF3Q.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"La botella - Class 8, Intermediate Salsa (Short)\" \u2014 so this is the right move, not a same-length clip of a neighbouring one.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:276"
+ },
+ {
+  "move": "setenta-complicado",
+  "video": "YOYk3Wbcf_M",
+  "start": 131.04,
+  "end": 157.6,
+  "file": "setenta-complicado-slow.mp4",
+  "trust": "D",
+  "tempo": "slow",
+  "section": "5.3 Clip windows",
+  "anchors": "In: *\"seven,\"* @131.04 (s=131.04), start of clean fluent counted rep per announcement @131.68 \"fluently, slowly still\". Out: *\"seven\"* @157.6 (s=157.6, e=158.78), end of counted phrase \"five six seven before we go one more time\". Move named \"setenta complicado\" @171.28-172.7 is AFTER this window, but move is performed and teacher references it throughout; window shows the move execution per the teaching that preceded it.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:316"
+ },
+ {
+  "move": "setenta-complicado",
+  "video": "TFc1glp6XXY",
+  "start": 0.0,
+  "end": 49.575,
+  "file": "setenta-complicado-fast.mp4",
+  "trust": "AV",
+  "tempo": "fast",
+  "section": "5.3 Clip windows",
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **49.575s** read from the container in `data/cache/salsa/videos/TFc1glp6XXY.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Setenta Complicado - Class 12, Intermediate Salsa (Short)\" \u2014 so this is the right move, not a same-length clip of a neighbouring one.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:322"
+ },
+ {
+  "move": "el-dos",
+  "video": "SOjNHsjPFL4",
+  "start": 91.2,
+  "end": 120.14,
+  "file": "el-dos-slow.mp4",
+  "trust": "D",
+  "tempo": "slow",
+  "section": "6.3 Clip windows",
+  "anchors": "In: *\"Let's\"* @91.2 (s=91.2, e=91.66), start of counted demo after intro. Out: *\"five\"* @120.14 (s=120.14, e=120.96), end of counted phrase before *\"a bit slower\"* announcement @121.64. Move named \"l dos\" @124.06-124.36 is AFTER this window, but move is demonstrated per the teaching; name spoken during intro @49.88-50.52.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:362"
+ },
+ {
+  "move": "el-dos",
+  "video": "SOjNHsjPFL4",
+  "start": 158.5,
+  "end": 196.4,
+  "file": "el-dos-fast.mp4",
+  "trust": "DNARRATED",
+  "tempo": "fast",
+  "section": "6.3 Clip windows",
+  "anchors": "In: *\"One,\"* @158.5 (s=158.5, e=159.06), start of music section. Out: *\"one.\"* @196.4 (s=196.12, e=196.4), end of counted phrase. NARRATED: teachers count and coach throughout music section per intermediate format; window contains \"And the two\" @165.16, \"Front\" @170.52, \"Stepway\" @173.62-174.18, move being performed with vocal cues.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:368"
+ },
+ {
+  "move": "paseala-complicado",
+  "video": "7ugimJ0MFas",
+  "start": 66.24,
+  "end": 89.12,
+  "file": "paseala-complicado-slow.mp4",
+  "trust": "D",
+  "tempo": "slow",
+  "section": "7.3 Clip windows",
+  "anchors": "In: *\"then\"* @66.24 (s=66.24, e=66.26), start of counted demo after intro explaining starting position. Out: *\"and\"* @89.12 (s=88.62, e=89.12), end of first counted rep before *\"chufla mix\"* @89.56. Move named \"pase a la complicado\" @32.84-33.68 in intro, \"passe alla complicato\" @92.58-93.44 later; window shows the demonstrated move.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:408"
+ },
+ {
+  "move": "paseala-complicado",
+  "video": "eWR8KHyoQXw",
+  "start": 0.0,
+  "end": 42.539,
+  "file": "paseala-complicado-fast.mp4",
+  "trust": "AV",
+  "tempo": "fast",
+  "section": "7.3 Clip windows",
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration **42.539s** read from the container in `data/cache/salsa/videos/eWR8KHyoQXw.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Paseala complicado - Class 5, Intermediate Salsa (Short)\" \u2014 so this is the right move, not a same-length clip of a neighbouring one. **The spec previously named `eWR8KHyoQHw`, which is one character out** \u2014 no such video is cached, and the id was never checked against a container.",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:414"
  },
  {
   "move": "sombrero-por-debajo",
@@ -413,7 +569,7 @@
   "section": "8.3 Clip windows",
   "anchors": "In: Chapter \"Sombrero por dabajo with count - Front camera\" @34.0. Out: Chapter \"Sombrero por dabajo with count - Back camera\" @75.0.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:236"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:465"
  },
  {
   "move": "sombrero-por-debajo",
@@ -424,9 +580,9 @@
   "trust": "AV",
   "tempo": "fast",
   "section": "8.3 Clip windows",
-  "anchors": "Full official short, music-only. Aspect: `'9/16'`.",
-  "end_from_metadata": true,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:246"
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/nolwu7BcRdc.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Sombrero Por Debajo - Class 4, Intermediate Salsa (Short)\".",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:475"
  },
  {
   "move": "santiago",
@@ -439,7 +595,7 @@
   "section": "9.3 Clip windows",
   "anchors": "Chapter \"Santiago with count - Front camera\" to chapter \"Santiago with count - Back camera\".",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:297"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:526"
  },
  {
   "move": "santiago",
@@ -452,7 +608,7 @@
   "section": "9.3 Clip windows",
   "anchors": "Chapter \"Santiago with music - Front Camera\" to chapter \"Summary / Outro\".",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:305"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:534"
  },
  {
   "move": "setenta-y-cuatro",
@@ -465,7 +621,7 @@
   "section": "10.3 Clip windows",
   "anchors": "In: the word *\"5\"* @139.30, starting the cleanest counted demonstration after the announcement *\"we'll do it two more times just fluently for both cameras\"* @134.02\u2013138.68. Out: 170.22, end of the word *\"-hop\"* \u2014 the last word of the counted run before a new sequence begins (*\"and chick chick pa...\"* @170.22+).",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:350"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:579"
  },
  {
   "move": "setenta-y-cuatro",
@@ -476,9 +632,9 @@
   "trust": "AV",
   "tempo": "fast",
   "section": "10.3 Clip windows",
-  "anchors": "Official short, music-only, aspect `'9/16'`.",
-  "end_from_metadata": true,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:358"
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/5XYM9h_TYoU.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Setenta y cuatro  - Class 7, Intermediate Salsa (Short)\".",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:587"
  },
  {
   "move": "bayamo",
@@ -491,7 +647,7 @@
   "section": "11.3 Clip windows",
   "anchors": "Chapter to chapter.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:403"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:632"
  },
  {
   "move": "bayamo",
@@ -502,9 +658,9 @@
   "trust": "AV",
   "tempo": "fast",
   "section": "11.3 Clip windows",
-  "anchors": "Official short, music-only, aspect `'9/16'`.",
-  "end_from_metadata": true,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:409"
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/cBPUTs6I3J4.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Bayamo - Class 11, Intermediate Salsa (Short)\".",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:638"
  },
  {
   "move": "el-uno-complicado",
@@ -517,7 +673,7 @@
   "section": "12.3 Clip windows",
   "anchors": "Chapter to chapter.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:453"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:682"
  },
  {
   "move": "el-uno-complicado",
@@ -528,9 +684,9 @@
   "trust": "AV",
   "tempo": "fast",
   "section": "12.3 Clip windows",
-  "anchors": "Official short, music-only, aspect `'9/16'`.",
-  "end_from_metadata": true,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:459"
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/A_5VmrVYuXA.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"El uno complicado - Class 3, Intermediate Salsa (Short)\".",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:688"
  },
  {
   "move": "montana",
@@ -543,7 +699,7 @@
   "section": "13.3 Clip windows",
   "anchors": "Chapter to chapter.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:502"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:731"
  },
  {
   "move": "montana",
@@ -554,9 +710,9 @@
   "trust": "AV",
   "tempo": "fast",
   "section": "13.3 Clip windows",
-  "anchors": "Official short, music-only, aspect `'9/16'`.",
-  "end_from_metadata": true,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:508"
+  "anchors": "Official short, whole file, music-only, aspect `'9/16'` (720x1280). Duration read from the container in `data/cache/salsa/videos/AtQqi_5hNCY.mp4`, not from the playlist metadata. Identity confirmed by the channel's own title, \"Monta\u00f1a - Class 1, Intermediate Salsa (Short)\".",
+  "end_from_metadata": false,
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:737"
  },
  {
   "move": "chocolate",

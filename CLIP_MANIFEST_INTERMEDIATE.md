@@ -13,7 +13,7 @@ Every window here was parsed out of the five spec files by
 spec file and line each row came from, so any number can be traced back to the
 transcript anchor that justifies it.
 
-69 of 69 referenced files are on disk, totalling 438.6 MB.
+81 of 81 referenced files are on disk, totalling 511.2 MB.
 
 | course | move | grain | src file | on disk | start | end | len | aspect | trust | source video | spec |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -48,18 +48,30 @@ transcript anchor that justifies it.
 | steps | `salsa-son-transition` | slow | `salsa-son-transition-slow.mp4` | yes | 199.2 | 249.12 | 49.92 | `16/9` | A | `nBHFEQU1CnA` | SALSA_INTERMEDIATE_SPEC_PARTB.md:190 |
 | couples | `sombrero-complicado` | fast | `sombrero-complicado-fast.mp4` | yes | 0.0 | 31.927 | 31.93 | `9/16` | AV | `CuUwwKNxCuI` | SALSA_INTERMEDIATE_SPEC_PARTC.md:112 |
 | couples | `sombrero-complicado` | slow | `sombrero-complicado-slow.mp4` | yes | 50.3 | 79.28 | 28.98 | `16/9` | D | `Bmz_K32Ybxo` | SALSA_INTERMEDIATE_SPEC_PARTC.md:102 |
-| couples | `setenta-y-cuatro` | fast | `setenta-y-cuatro-fast.mp4` | yes | 0.0 | 46.138 | 46.14 | `9/16` | AV | `5XYM9h_TYoU` | SALSA_INTERMEDIATE_SPEC_PARTC.md:358 |
-| couples | `setenta-y-cuatro` | slow | `setenta-y-cuatro-slow.mp4` | yes | 139.3 | 170.22 | 30.92 | `16/9` | A | `_L36hAcjsXg` | SALSA_INTERMEDIATE_SPEC_PARTC.md:350 |
-| couples | `bayamo` | fast | `bayamo-fast.mp4` | yes | 0.0 | 48.042 | 48.04 | `9/16` | AV | `cBPUTs6I3J4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:409 |
-| couples | `bayamo` | slow | `bayamo-slow.mp4` | yes | 36.0 | 69.0 | 33.0 | `16/9` | A | `sjPliNxddxQ` | SALSA_INTERMEDIATE_SPEC_PARTC.md:403 |
-| couples | `el-uno-complicado` | fast | `el-uno-complicado-fast.mp4` | yes | 0.0 | 46.602 | 46.6 | `9/16` | AV | `A_5VmrVYuXA` | SALSA_INTERMEDIATE_SPEC_PARTC.md:459 |
-| couples | `el-uno-complicado` | slow | `el-uno-complicado-slow.mp4` | yes | 40.0 | 82.0 | 42.0 | `16/9` | A | `N1T5fjywnh8` | SALSA_INTERMEDIATE_SPEC_PARTC.md:453 |
-| couples | `montana` | fast | `montana-fast.mp4` | yes | 0.0 | 38.034 | 38.03 | `9/16` | AV | `AtQqi_5hNCY` | SALSA_INTERMEDIATE_SPEC_PARTC.md:508 |
-| couples | `montana` | slow | `montana-slow.mp4` | yes | 50.0 | 82.0 | 32.0 | `16/9` | A | `X9Ad-ljIw-c` | SALSA_INTERMEDIATE_SPEC_PARTC.md:502 |
-| couples | `sombrero-por-debajo` | fast | `sombrero-por-debajo-fast.mp4` | yes | 0.0 | 38.127 | 38.13 | `9/16` | AV | `nolwu7BcRdc` | SALSA_INTERMEDIATE_SPEC_PARTC.md:246 |
-| couples | `sombrero-por-debajo` | slow | `sombrero-por-debajo-slow.mp4` | yes | 34.0 | 75.0 | 41.0 | `16/9` | A | `QAixPUmIQ64` | SALSA_INTERMEDIATE_SPEC_PARTC.md:236 |
-| couples | `santiago` | fast | `santiago-fast.mp4` | yes | 108.0 | 133.0 | 25.0 | `16/9` | A | `mwifx01N5KI` | SALSA_INTERMEDIATE_SPEC_PARTC.md:305 |
-| couples | `santiago` | slow | `santiago-slow.mp4` | yes | 32.0 | 62.0 | 30.0 | `16/9` | A | `mwifx01N5KI` | SALSA_INTERMEDIATE_SPEC_PARTC.md:297 |
+| couples | `setenta-y-cuatro` | fast | `setenta-y-cuatro-fast.mp4` | yes | 0.0 | 46.138 | 46.14 | `9/16` | AV | `5XYM9h_TYoU` | SALSA_INTERMEDIATE_SPEC_PARTC.md:587 |
+| couples | `setenta-y-cuatro` | slow | `setenta-y-cuatro-slow.mp4` | yes | 139.3 | 170.22 | 30.92 | `16/9` | A | `_L36hAcjsXg` | SALSA_INTERMEDIATE_SPEC_PARTC.md:579 |
+| couples | `bayamo` | fast | `bayamo-fast.mp4` | yes | 0.0 | 48.042 | 48.04 | `9/16` | AV | `cBPUTs6I3J4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:638 |
+| couples | `bayamo` | slow | `bayamo-slow.mp4` | yes | 36.0 | 69.0 | 33.0 | `16/9` | A | `sjPliNxddxQ` | SALSA_INTERMEDIATE_SPEC_PARTC.md:632 |
+| couples | `el-uno-complicado` | fast | `el-uno-complicado-fast.mp4` | yes | 0.0 | 46.602 | 46.6 | `9/16` | AV | `A_5VmrVYuXA` | SALSA_INTERMEDIATE_SPEC_PARTC.md:688 |
+| couples | `el-uno-complicado` | slow | `el-uno-complicado-slow.mp4` | yes | 40.0 | 82.0 | 42.0 | `16/9` | A | `N1T5fjywnh8` | SALSA_INTERMEDIATE_SPEC_PARTC.md:682 |
+| couples | `montana` | fast | `montana-fast.mp4` | yes | 0.0 | 38.034 | 38.03 | `9/16` | AV | `AtQqi_5hNCY` | SALSA_INTERMEDIATE_SPEC_PARTC.md:737 |
+| couples | `montana` | slow | `montana-slow.mp4` | yes | 50.0 | 82.0 | 32.0 | `16/9` | A | `X9Ad-ljIw-c` | SALSA_INTERMEDIATE_SPEC_PARTC.md:731 |
+| couples | `balsero` | fast | `balsero-fast.mp4` | yes | 0.0 | 33.762 | 33.76 | `9/16` | AV | `9TRul_cN9ts` | SALSA_INTERMEDIATE_SPEC_PARTC.md:184 |
+| couples | `balsero` | slow | `balsero-slow.mp4` | yes | 38.68 | 60.8 | 22.12 | `16/9` | D | `pY55QVrPals` | SALSA_INTERMEDIATE_SPEC_PARTC.md:178 |
+| couples | `tiramisu-complicado` | fast | `tiramisu-complicado-fast.mp4` | yes | 109.18 | 155.02 | 45.84 | `16/9` | DNARRATED | `kr0fYDZABME` | SALSA_INTERMEDIATE_SPEC_PARTC.md:230 |
+| couples | `tiramisu-complicado` | slow | `tiramisu-complicado-slow.mp4` | yes | 46.68 | 85.8 | 39.12 | `16/9` | D | `kr0fYDZABME` | SALSA_INTERMEDIATE_SPEC_PARTC.md:224 |
+| couples | `la-botella` | fast | `la-botella-fast.mp4` | yes | 0.0 | 42.98 | 42.98 | `9/16` | AV | `K5gDS-XIF3Q` | SALSA_INTERMEDIATE_SPEC_PARTC.md:276 |
+| couples | `la-botella` | slow | `la-botella-slow.mp4` | yes | 34.36 | 64.22 | 29.86 | `16/9` | D | `_A0VNIVvhtA` | SALSA_INTERMEDIATE_SPEC_PARTC.md:270 |
+| couples | `setenta-complicado` | fast | `setenta-complicado-fast.mp4` | yes | 0.0 | 49.575 | 49.58 | `9/16` | AV | `TFc1glp6XXY` | SALSA_INTERMEDIATE_SPEC_PARTC.md:322 |
+| couples | `setenta-complicado` | slow | `setenta-complicado-slow.mp4` | yes | 131.04 | 157.6 | 26.56 | `16/9` | D | `YOYk3Wbcf_M` | SALSA_INTERMEDIATE_SPEC_PARTC.md:316 |
+| couples | `el-dos` | fast | `el-dos-fast.mp4` | yes | 158.5 | 196.4 | 37.9 | `16/9` | DNARRATED | `SOjNHsjPFL4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:368 |
+| couples | `el-dos` | slow | `el-dos-slow.mp4` | yes | 91.2 | 120.14 | 28.94 | `16/9` | D | `SOjNHsjPFL4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:362 |
+| couples | `paseala-complicado` | fast | `paseala-complicado-fast.mp4` | yes | 0.0 | 42.539 | 42.54 | `9/16` | AV | `eWR8KHyoQXw` | SALSA_INTERMEDIATE_SPEC_PARTC.md:414 |
+| couples | `paseala-complicado` | slow | `paseala-complicado-slow.mp4` | yes | 66.24 | 89.12 | 22.88 | `16/9` | D | `7ugimJ0MFas` | SALSA_INTERMEDIATE_SPEC_PARTC.md:408 |
+| couples | `sombrero-por-debajo` | fast | `sombrero-por-debajo-fast.mp4` | yes | 0.0 | 38.127 | 38.13 | `9/16` | AV | `nolwu7BcRdc` | SALSA_INTERMEDIATE_SPEC_PARTC.md:475 |
+| couples | `sombrero-por-debajo` | slow | `sombrero-por-debajo-slow.mp4` | yes | 34.0 | 75.0 | 41.0 | `16/9` | A | `QAixPUmIQ64` | SALSA_INTERMEDIATE_SPEC_PARTC.md:465 |
+| couples | `santiago` | fast | `santiago-fast.mp4` | yes | 108.0 | 133.0 | 25.0 | `16/9` | A | `mwifx01N5KI` | SALSA_INTERMEDIATE_SPEC_PARTC.md:534 |
+| couples | `santiago` | slow | `santiago-slow.mp4` | yes | 32.0 | 62.0 | 30.0 | `16/9` | A | `mwifx01N5KI` | SALSA_INTERMEDIATE_SPEC_PARTC.md:526 |
 | couples | `abanico` | fast | `abanico-fast.mp4` | yes | 0.0 | 37.082 | 37.08 | `9/16` | A | `WEa9tZMpSvc` | SALSA_INTERMEDIATE_SPEC_PARTD.md:533 |
 | couples | `abanico` | slow | `abanico-slow.mp4` | yes | 24.02 | 70.7 | 46.68 | `16/9` | D | `8qLrLTk1aVE` | SALSA_INTERMEDIATE_SPEC_PARTD.md:522 |
 | couples | `chihuahua` | fast | `chihuahua-fast.mp4` | yes | 0.0 | 49.969 | 49.97 | `9/16` | A | `YVxWBaVaJO8` | SALSA_INTERMEDIATE_SPEC_PARTD.md:606 |

@@ -2,10 +2,17 @@
 Regression test: every media file resolves to the origin that actually serves it.
 
 The salsa clips do not live in the app's repo. GitHub Pages publishes at most
-1 GB per site and the app built to ~1.28 GB with them, so they were split out to
-lemony312/perfect-workout-media and are loaded cross-origin. `src/lib/media.ts`
-maps the `/clips/salsa/` prefix onto NEXT_PUBLIC_MEDIA_BASE and leaves every other
-path on the app's own origin.
+1 GB per site and the app built to ~1.28 GB with them, so they were split out and
+are loaded cross-origin. `src/lib/media.ts` maps path prefixes onto origins and
+leaves every other path on the app's own origin.
+
+There are TWO media origins, because one was not enough either: with both
+intermediate courses on it the first media site reached 1035 MB and stopped
+deploying. So `/clips/salsa/intermediate/` is served by one site and the rest of
+`/clips/salsa/` by another. That makes the ordering in MEDIA_ROUTES load-bearing —
+the intermediate prefix is a subpath of the general one, so if the general rule
+were matched first every intermediate clip would resolve to the beginners site and
+404. This test is what catches that, because both spellings look plausible.
 
 Why this needs a browser rather than a grep of `out/`: the join happens at
 *runtime*. The built bundle contains the origin and the root-relative paths as
@@ -35,12 +42,29 @@ import sys
 from playwright.async_api import async_playwright
 
 DEFAULT_BASE = "http://localhost:3000/perfect-workout"
-MEDIA_ORIGIN = "https://lemony312.github.io/perfect-workout-media"
+# Prefix -> the origin that must serve it. Mirrors MEDIA_ROUTES in src/lib/media.ts,
+# longest prefix first for the same reason: the intermediate path is a subpath of the
+# general one. If that list grows, so does this one, and the test fails loudly rather
+# than quietly checking nothing.
+MEDIA_ROUTES = [
+    ("/clips/salsa/intermediate/",
+     "https://lemony312.github.io/perfect-workout-media-intermediate"),
+    ("/clips/salsa/",
+     "https://lemony312.github.io/perfect-workout-media"),
+]
 
-# Paths under here are served by the media site; everything else is served by the
-# app. Mirrors MEDIA_PREFIXES in src/lib/media.ts — if that list grows, so does
-# this one, and the test fails loudly rather than quietly checking nothing.
+# Any salsa clip path, for spotting a clip that reached no media origin at all.
 MEDIA_PREFIX = "/clips/salsa/"
+
+MEDIA_ORIGINS = [origin for _, origin in MEDIA_ROUTES]
+
+
+def expected_origin(url: str) -> str | None:
+    """The origin that should be serving `url`, by longest matching prefix."""
+    for prefix, origin in MEDIA_ROUTES:
+        if prefix in url:
+            return origin
+    return None
 
 # One page per course, each with a move selected so a <video> is actually
 # mounted. The clip players render client-side off query state, so a bare /salsa
@@ -48,9 +72,10 @@ MEDIA_PREFIX = "/clips/salsa/"
 SALSA_PAGES = [
     "/salsa?move=exhibela-crossing",
     "/salsa/couples?move=setenta",
-    # The intermediate courses load from the same media origin. Listing one move
-    # per course rather than per clip: the prefix rewrite is in `mediaUrl`, so one
-    # page per route proves the route reaches it.
+    # The intermediate courses load from the *other* media origin, so these two
+    # entries are the ones that catch a mis-ordered MEDIA_ROUTES. One move per
+    # course rather than per clip: the rewrite is in `mediaUrl`, so a single page
+    # per route proves the route reaches it.
     "/salsa/intermediate?move=pilon",
     "/salsa/intermediate/couples?move=sombrero-por-debajo",
 ]
@@ -94,18 +119,25 @@ async def run(base: str, expect_local: bool) -> list[str]:
                 if expect_local:
                     if not s.startswith(base.split("/perfect-workout")[0]):
                         failures.append(f"{path}: expected a local clip, got {s}")
-                elif not s.startswith(MEDIA_ORIGIN + MEDIA_PREFIX):
-                    failures.append(
-                        f"{path}: clip must come from the media site, got {s}"
-                    )
+                else:
+                    # Checked against the origin this specific path routes to, not
+                    # against "some media origin". The bug worth catching is an
+                    # intermediate clip served from the beginners site: that is
+                    # cross-origin, looks right, and 404s.
+                    want = expected_origin(s)
+                    if want and not s.startswith(want + "/clips/salsa/"):
+                        failures.append(
+                            f"{path}: clip must come from {want}, got {s}"
+                        )
 
         for path in LOCAL_PAGES:
             for s in await media_srcs(page, base + path):
-                if s.startswith(MEDIA_ORIGIN):
-                    failures.append(
-                        f"{path}: {s} was sent to the media site, but only "
-                        f"{MEDIA_PREFIX} belongs there"
-                    )
+                for origin in MEDIA_ORIGINS:
+                    if s.startswith(origin):
+                        failures.append(
+                            f"{path}: {s} was sent to {origin}, but only "
+                            f"{MEDIA_PREFIX} belongs on a media origin"
+                        )
 
         await browser.close()
 
