@@ -21,12 +21,12 @@
 | id | beat | role | kind | text | @ | verbatim |
 |---|---|---|---|---|---|---|
 | `is3-footwork-1` | 3 | `both` | `footwork` | Open on three with your right foot. | 52.92 | "We open on three." |
-| `is3-footwork-2` | — | `both` | `footwork` | Just before opening, add an extra step on the end of two: left, right, left, right. | 61.06 | "but just before we add extra step on end of two." |
+| `is3-footwork-2` | — | `both` | `footwork` | Just before opening, add an extra step on the end of two — the sequence is left, right, left, right. | 61.06 | "but just before we add extra step on end of two." |
 | `is3-footwork-3` | — | `both` | `footwork` | Right foot is just a tap — don't shift your weight to the right leg. | 77.7 | "right is just tap. I'm not shifting my way to the right leg." |
-| `is3-footwork-4` | 3 | `both` | `footwork` | Right is on three. Swap to opposite direction: close right, open left. | 80.8 | "Right is now three and we can swap it opposite direction." |
+| `is3-footwork-4` | [3,5] | `both` | `footwork` | Right is on three. Swap to opposite direction: close right, open left. | 80.8 | "Right is now three and we can swap it opposite direction." |
 | `is3-footwork-5` | — | `both` | `footwork` | Close right, open left. | 83.96 | "I close right, I open left." |
-| `is3-footwork-6` | — | `both` | `footwork` | Third time: close left, open right. | 87.6 | "We'll do it third time. close left open right" |
-| `is3-footwork-7` | — | `both` | `footwork` | At the end, bring right foot to the center and continue front and back. | 91.0 | "and then in the end we'll bring right to the center and continue front and back" |
+| `is3-footwork-6` | 7 | `both` | `footwork` | Third time: close left, open right. | 87.6 | "We'll do it third time. close left open right" |
+| `is3-footwork-7` | 8 | `both` | `footwork` | At the end, bring right foot to the center and continue front and back. | 91.0 | "and then in the end we'll bring right to the center and continue front and back" |
 | `is3-footwork-8` | 8 | `both` | `footwork` | Push from toes to heel with the whole foot — press from toes to heel. | 128.98 | "significant push with whole foot when you are making steps." |
 | `is3-footwork-9` | 8 | `both` | `footwork` | Go from toes to heel, like a press. | 138.06 | "like press." |
 | `is3-footwork-10` | 8 | `both` | `footwork` | This toe-to-heel press is very common in Cuban styles. | 138.68 | "This is very common in dancing Cuban styles and I'm using it here on eight." |

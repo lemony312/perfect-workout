@@ -201,8 +201,9 @@ No chapters. Boundaries derived from transcript.
 |---|---|---|---|---|---|
 | `is2-teach-toe-heel-cross` | 0.0 | 180.48 | `teach` | Toe-Heel-Cross explanation & breakdown | Start: video start, teaching begins immediately. End: "let's do it again" @180.48 before counted demo |
 | `is2-slow-toe-heel-cross` | 180.48 | 455.68 | `count` | Counted demonstration, slow tempo | Start: "let's do it again toe heel cross" @180.48. End: "we'll talk about it" @455.68 before fast section |
-| `is2-teach-details` | 455.68 | 724.56 | `teach` | Additional details & setup for fast version | Start: @455.68. End: "fast version" @724.56 |
-| `is2-fast-toe-heel-cross` | 724.56 | 821.0 | `music` | Fast version with music | Start: @724.56. End: video duration |
+| `is2-teach-details` | 455.68 | 618.18 | `teach` | Additional details & setup for fast version | Start: @455.68. End: "Music." @618.18 |
+| `is2-fast-toe-heel-cross` | 618.18 | 724.56 | `music` | Fast version with music | Start: "Music." @618.18. End: "When" @724.62 opens the closing talk. *(Frame review 2026-10-23: this segment was recorded as 724.56–821.0, which is the closing talk; the music block, back camera, is 619–724.5.)* |
+| `is2-closing` | 724.56 | 821.0 | `teach` | Closing notes: knee bend | Start: "When we were doing it with music I realized we didn't tell you about one important aspect" @724.62. End: video duration |
 
 `teaches: ['toe-heel-cross']`. `chaptered: false`.
 
@@ -218,7 +219,7 @@ No chapters. Boundaries derived from transcript.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `toe-heel-cross` | `mXK-uPDBlRg` | **758.74** | **785.94** | **27.20s** | `toe-heel-cross-fast.mp4` | **D** | In: word "So" starts @758.74. Out: word "whole" ends @785.94. Inside `is2-fast-toe-heel-cross` (724.56–821.00), the class's only music block. **NARRATED** — the teacher critiques knee bend and standing-foot height across this pass ("So bend and then go… and then kum kum pa"), marking tempo with vocalised rhythm rather than counts. `caveat`: "Teacher is critiquing knee bend over this pass; it is the only full-tempo toe-heel-cross in the class." |
+| `toe-heel-cross` | `mXK-uPDBlRg` | **619.98** | **662.46** | **42.48s** | `toe-heel-cross-fast.mp4` | **D** | In: word "One," starts @619.98, first count after "Music." @618.18 and the dissolve into the back-camera music block. Out: word "And" starts @662.46 ("And now with arms"), end of the simple-version passes. Inside `is2-fast-toe-heel-cross` (618.18–724.56). Toe-heel-cross is named @622.84 ("Two versions. First simple one…"). **NARRATED** with vocalised rhythm ("tick-tick-cuckoo"). `caveat`: "Back view of the music block; the teachers call the rhythm aloud." *(Re-windowed 2026-10-23 by frame review: the previous window, 758.74–785.94, showed the teacher standing and explaining knee bend, not a full-tempo demo.)* |
 
 ## 2.4 Cues
 
@@ -245,7 +246,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 |---|---|---|---|---|
 | `malibu` | Malibu | `step` | `Malibu`, `malibu` | **UNRESOLVED — summary requires video-open review of teaching segment 0–112s.** |
 
-**Footwork paragraph:** **UNRESOLVED.**
+**Footwork paragraph:** ~~UNRESOLVED~~ — written from the transcript into `frontend/src/data/salsa-int-steps-classes/classes-01-07.ts`, then checked and corrected against still frames on 2026-10-23 (`SALSA_VERIFICATION_LOG.md` §10.9). Not yet watched by a human, so `confidence` stays `transcript`.
 
 ## 3.2 Segment map
 
@@ -295,14 +296,14 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 |---|---|---|---|---|
 | `triple-jump` | Triple jump | `step` | `Triple jump`, `triple jump`, `triple`, `jump` | **UNRESOLVED.** Transcript @56.3–142s contains teaching. |
 
-**Footwork paragraph:** **UNRESOLVED.**
+**Footwork paragraph:** ~~UNRESOLVED~~ — written from the transcript into `frontend/src/data/salsa-int-steps-classes/classes-01-07.ts`, then checked and corrected against still frames on 2026-10-23 (`SALSA_VERIFICATION_LOG.md` §10.9). Not yet watched by a human, so `confidence` stays `transcript`.
 
 ## 4.2 Segment map
 
 | id | start | end | role | label | provenance |
 |---|---|---|---|---|---|
-| `is4-intro` | 0.0 | 55.98 | `skip` | Introduction | Start: video start. End: "We'll" @55.98 |
-| `is4-teach-triple-jump` | 55.98 | 143.06 | `teach` | Triple jump teaching & breakdown | Start: "We'll" @55.98. End: "simple" @142.70, before "one" @143.06 |
+| `is4-intro` | 0.0 | 17.68 | `skip` | Introduction | Start: video start. End: "And" @17.68, before "what I have to mention at the very beginning that jump is not a real jump". *(Was 55.98, mid-sentence and after the explanation; moved 2026-10-23 so cue `is4-concept-1` @29.44 is no longer inside a skipped segment.)* |
+| `is4-teach-triple-jump` | 17.68 | 143.06 | `teach` | Triple jump teaching & breakdown | Start: "And" @17.68. First demo from "So let's do it" @48.96. End: "simple" @142.70, before "one" @143.06 |
 | `is4-count-triple-jump` | 143.06 | 182.98 | `count` | Counted demonstration, slow tempo | Start: "one" @143.06. End: "continue." @182.98 |
 | `is4-teach-details` | 182.98 | 322.50 | `teach` | Girl's perspective, pose details, attitude chat | Start: "From" @183.78. End: "dancing." @322.50. NOTE: at 208.70s teacher says "We'll definitely make this chat" — this segment includes the attitude/personality chat, not counted demonstration. |
 | `is4-review-count` | 322.50 | 355.74 | `count` | Review demonstration with count before music | Start: "Let's" @322.68. End: "seven" @355.74 |
@@ -322,7 +323,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `triple-jump` | `hf4Lo0mXaG4` | **362.92** | **406.30** | **43.38s** | `triple-jump-fast.mp4` | **D** | In: word "this" starts @362.92. Out: word "one," ends @406.30. Inside `is4-fast-triple-jump` (355.28–531.00). The move is named and danced three times ("this step is called triple jump we go triple jump… Triple jump! … we go triple jump, kuwa libre, six seven and one"). **NARRATED** — the rest of the music block reviews every earlier step, so this opening pass is the only full-tempo triple jump. `caveat`: "Narrated; the music block reviews every earlier step, so triple jump is danced only in this opening pass." |
+| `triple-jump` | `hf4Lo0mXaG4` | **362.92** | **406.30** | **43.38s** | `triple-jump-fast.mp4` | **D** | In: word "this" starts @362.92. Out: word "one," ends @406.30. Inside `is4-fast-triple-jump` (355.28–531.00). The move is named and danced three times ("this step is called triple jump we go triple jump… Triple jump! … we go triple jump, kuwa libre, six seven and one"). **NARRATED** — the music block reviews every earlier step. Frame review 2026-10-23: triple jump also recurs at ~428 and ~456, but each time at the same density of other steps, so this opening pass (three landings, plus the named introduction) stays the best window. `caveat`: "Narrated review block; triple jump lands three times (~8s, ~20s, ~36s into the clip), mixed with Malibu and Cuba Libre." |
 
 ## 4.4 Cues
 
@@ -348,7 +349,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 |---|---|---|---|---|
 | `charanga-wave` | Charanga wave | `step` | `Charanga wave`, `charanga wave`, `charanga`, `wave` | **UNRESOLVED.** Note: distinct from "Charanga" (beginners steps class 12). |
 
-**Footwork paragraph:** **UNRESOLVED.**
+**Footwork paragraph:** ~~UNRESOLVED~~ — written from the transcript into `frontend/src/data/salsa-int-steps-classes/classes-01-07.ts`, then checked and corrected against still frames on 2026-10-23 (`SALSA_VERIFICATION_LOG.md` §10.9). Not yet watched by a human, so `confidence` stays `transcript`.
 
 ## 5.2 Segment map
 
@@ -398,14 +399,14 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 |---|---|---|---|---|
 | `pilon` | Pilon | `step` | `Pilon`, `pilon` | **UNRESOLVED.** |
 
-**Footwork paragraph:** **UNRESOLVED.**
+**Footwork paragraph:** ~~UNRESOLVED~~ — written from the transcript into `frontend/src/data/salsa-int-steps-classes/classes-01-07.ts`, then checked and corrected against still frames on 2026-10-23 (`SALSA_VERIFICATION_LOG.md` §10.9). Not yet watched by a human, so `confidence` stays `transcript`.
 
 ## 6.2 Segment map
 
 | id | start | end | role | label | provenance |
 |---|---|---|---|---|---|
-| `is6-intro` | 0.0 | 35.52 | `skip` | Introduction | Start: video start. End: "folkloric" @34.80, before "traditional" @35.52 |
-| `is6-teach-pilon` | 35.52 | 188.44 | `teach` | Pilon teaching & breakdown | Start: "traditional" @35.52. End: "double." @187.94, before "And" @188.44 |
+| `is6-intro` | 0.0 | 29.22 | `skip` | Introduction | Start: video start. End: "this" @29.22, before "this will be pilon". *(Was 35.52, mid-sentence, which left cues `is6-pilon-1`/`-2` inside a skipped segment; moved 2026-10-23.)* |
+| `is6-teach-pilon` | 29.22 | 188.44 | `teach` | Pilon teaching & breakdown | Start: "this will be pilon" @29.22. End: "double." @187.94, before "And" @188.44 |
 | `is6-slow-pilon` | 188.44 | 367.54 | `count` | Counted demonstration, slow tempo | Start: "And" @188.44 ("And now the rhythm"). End: "rhythm" @367.54. Long count block with extensive "kum kum" and "bibim" vocalizations. |
 | `is6-fast-pilon` | 367.54 | 546.78 | `music` | Fast version with music, reviews all steps | Start: "let's" @367.54 ("salsa rhythm let's try to mix it also with steps from previous classes"). End: "nice!" @544.44, before "If" @546.78. NOTE: this is a review block — after announcing the review (372.46–384.06: "what do we have so far? Cuba Libre, Malibu, Charanga Wave, Toe Hill Cross and Triple Jump and now Pilon as well. We'll try to review them all"), pilon is danced at full tempo starting 398.70s ("Let's start with pilon"), then the block mixes pilon with earlier moves. |
 | `is6-outro` | 546.78 | 584.0 | `skip` | Outro, like and subscribe | Start: "If" @546.78 ("If you struggled with any of the steps from this quick review, remember you can find them in cards... like, subscribe and press the bell... Thanks for watching"). End: video duration |
@@ -424,7 +425,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors & caveats |
 |---|---|---|---|---|---|---|---|
-| `pilon` | `IQ41651xh8Q` | **398.70** | **449.68** | **50.98s** | `pilon-fast.mp4` | **A** | In: word "Let's" starts @398.70, opening "Let's start with pilon". Out: word "ting," ends @449.68, closing the third "ting" of the turn sequence. Inside `is6-fast-pilon` (367.54–546.78). Pilon is named at 399.50, 417.12 and 440.40 and danced throughout, mixed with left turn, right turn and basic — the class's own "let's mix it with steps from previous classes" pass. Counted in at 418.42–422.56 ("six, seven and one, three, five and seven and one"); the rest is vocalised rhythm ("Bibim, bibim, bibim", "tigim and kum", "ting, ting, ting"). **NARRATED** — the teacher calls each element as it lands. |
+| `pilon` | `IQ41651xh8Q` | **398.70** | **422.56** | **23.86s** | `pilon-fast.mp4` | **A** | In: word "Let's" starts @398.70, opening "Let's start with pilon". Out: word "one" ends @422.56, closing the counted second pass ("One more time pilon, six, seven and one, three, five and seven and one"), before "and left turn" @422.56. *(Tightened 2026-10-23 by frame review: the previous out-point, "ting," @449.68, left ~25s of left turn, basic and right turns in a clip named Pilon.)* Earlier notes: Inside `is6-fast-pilon` (367.54–546.78). Pilon is named at 399.50, 417.12 and 440.40 and danced throughout, mixed with left turn, right turn and basic — the class's own "let's mix it with steps from previous classes" pass. Counted in at 418.42–422.56 ("six, seven and one, three, five and seven and one"); the rest is vocalised rhythm ("Bibim, bibim, bibim", "tigim and kum", "ting, ting, ting"). **NARRATED** — the teacher calls each element as it lands. |
 
 ## 6.4 Cues
 
@@ -450,7 +451,7 @@ requires video-open pass to identify beats, foot positions, and cross mechanics.
 |---|---|---|---|---|
 | `mojito` | Mojito | `step` | `Mojito`, `mojito` | **UNRESOLVED.** |
 
-**Footwork paragraph:** **UNRESOLVED.**
+**Footwork paragraph:** ~~UNRESOLVED~~ — written from the transcript into `frontend/src/data/salsa-int-steps-classes/classes-01-07.ts`, then checked and corrected against still frames on 2026-10-23 (`SALSA_VERIFICATION_LOG.md` §10.9). Not yet watched by a human, so `confidence` stays `transcript`.
 
 ## 7.2 Segment map
 

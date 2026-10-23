@@ -175,7 +175,7 @@ No chapters. Boundaries derived from transcript.
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `balsero` | `pY55QVrPals` | **38.68** | **60.80** | 22.12s | `balsero-slow.mp4` | **D** | In: *"Guapea."* @38.68 (e=38.68), end of intro cue before counted rep. Out: *"seven."* @60.80 (e=60.80), end of first bar. Move named "balsero" @45.52 within window. |
+| 1 | `balsero` | `pY55QVrPals` | **37.74** | **62.14** | 24.40s | `balsero-slow.mp4` | **D** | In: *"music."* @37.74 (e), immediately before *"Guapea."* (s=38.00, a whole second the audit would read as chosen) — the old in-point was 38.68, Guapea's end, which left the clip 22.12s. Out: *"time"* @62.14 (e), before the camera swap at ~62.75 (frame review 2026-10-23). Previously: Out: *"seven."* @60.80 (e=60.80), end of first bar. Move named "balsero" @45.52 within window. |
 
 ### Fast
 
@@ -365,7 +365,7 @@ No chapters. Boundaries derived from transcript.
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 2 | `el-dos` | `SOjNHsjPFL4` | **158.5** | **196.4** | 37.9s | `el-dos-fast.mp4` | **D NARRATED** | In: *"One,"* @158.5 (s=158.5, e=159.06), start of music section. Out: *"one."* @196.4 (s=196.12, e=196.4), end of counted phrase. NARRATED: teachers count and coach throughout music section per intermediate format; window contains "And the two" @165.16, "Front" @170.52, "Stepway" @173.62-174.18, move being performed with vocal cues. |
+| 2 | `el-dos` | `SOjNHsjPFL4` | **160.02** | **211.32** | 51.3s | `el-dos-fast.mp4` | **D NARRATED** | In: *"one"* @160.02 (s). Out: *"Nice one."* @211.32 (e). Frame review 2026-10-23: the old out-point, "one." @196.4, cut mid-figure — the turn, the sombrero wrap at ~198–201 and the unwind came after it, and the couple is back in open hold only from ~204. No word ends between 202.10 and 210.14, so the in-point moved 1.5s later to stay under 52s. Previously: in *"One,"* @158.5, out *"one."* @196.4. NARRATED: teachers count and coach throughout music section per intermediate format; window contains "And the two" @165.16, "Front" @170.52, "Stepway" @173.62-174.18, move being performed with vocal cues. |
 
 ## 6.4 Cues
 
@@ -405,7 +405,7 @@ No chapters. Boundaries derived from transcript.
 
 | # | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `paseala-complicado` | `7ugimJ0MFas` | **66.24** | **89.12** | 22.88s | `paseala-complicado-slow.mp4` | **D** | In: *"then"* @66.24 (s=66.24, e=66.26), start of counted demo after intro explaining starting position. Out: *"and"* @89.12 (s=88.62, e=89.12), end of first counted rep before *"chufla mix"* @89.56. Move named "pase a la complicado" @32.84-33.68 in intro, "passe alla complicato" @92.58-93.44 later; window shows the demonstrated move. |
+| 1 | `paseala-complicado` | `7ugimJ0MFas` | **63.50** | **88.08** | 24.58s | `paseala-complicado-slow.mp4` | **D** | In: *"So"* @63.50 (s). Out: *"time"* @88.08 (e), ~0.2s before the camera swap at 88.3 (frame review 2026-10-23; the old window ran 0.8s into the swap and was 22.88s). Previously: in *"then"* @66.24, out *"and"* @89.12, before *"chufla mix"* @89.56. Move named "pase a la complicado" @32.84-33.68 in intro, "passe alla complicato" @92.58-93.44 later; window shows the demonstrated move. |
 
 ### Fast
 
@@ -434,7 +434,7 @@ No chapters. Boundaries derived from transcript.
 
 **Canonical spelling**: The description writes "Sombrero por dabajo" (lowercase d). The chapter titles write "Sombrero por dabajo" consistently. Alias includes "debajo" (correct Spanish spelling) in case search uses that.
 
-**The three-shorts problem**: The brief documents that three different shorts carry the title "Sombrero por Debajo": `nolwu7BcRdc` (Class 4, trusted), `_a5fC4nGz1c` (Class 9), `hET29nU1hV8` (Class 13). Two of these are mistitled. Only `nolwu7BcRdc` is attached here; the other two are held back as **unresolved** until someone watches them.
+**The three-shorts problem**: The brief documents that three different shorts carry the title "Sombrero por Debajo": `nolwu7BcRdc` (Class 4, trusted), `_a5fC4nGz1c` (Class 9), `hET29nU1hV8` (Class 13). Two of these are mistitled. Only `nolwu7BcRdc` is attached here. **Resolved 2026-10-23 by frame comparison** (`SALSA_VERIFICATION_LOG.md` §10.9): `nolwu7BcRdc` is Sombrero por debajo (matches `QAixPUmIQ64` "with music - Front camera" move for move); `_a5fC4nGz1c` is actually **Sombrero Complicado** (a second take of `CuUwwKNxCuI`; its "Class 9" number is right, its name is copy-pasted); `hET29nU1hV8` is **Sombrero por debajo** again, filmed on a different day. Neither fills a no-short move, so nothing is re-attached.
 
 ### Footwork paragraph
 
@@ -771,7 +771,7 @@ No official short listed. Fast clip from main video:
 
 ## Unresolved items
 
-1. **Sombrero por Debajo shorts problem**: Three shorts carry this title (`nolwu7BcRdc`, `_a5fC4nGz1c`, `hET29nU1hV8`). Only `nolwu7BcRdc` is attached to position 8. The other two are **unresolved** — they cannot be assigned to moves without watching them (they are music-only, no transcript). At least two of the three are mistitled.
+1. **Sombrero por Debajo shorts problem**: Three shorts carry this title (`nolwu7BcRdc`, `_a5fC4nGz1c`, `hET29nU1hV8`). Only `nolwu7BcRdc` is attached to position 8. The other two were resolved by frame comparison on 2026-10-23: `_a5fC4nGz1c` shows Sombrero Complicado, `hET29nU1hV8` shows Sombrero por debajo again. Neither changes an attachment.
 
 2. **Positions 2–7 segment boundaries**: Auto-generated chapters ignored per brief; full transcript reading required per video to extract word-anchored boundaries.
 

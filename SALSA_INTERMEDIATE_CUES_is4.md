@@ -15,7 +15,7 @@ All `sourceVideo: 'hf4Lo0mXaG4'`. All `confidence: 'transcript'`.
 | `is4-footwork-3` | — | `both` | `footwork` | Feet are not on the floor, but sliding over the floor. | 106.84 | "They are not on the floor, but they are sliding over the floor." |
 | `is4-concept-3` | — | `both` | `concept` | Don't change the level of your head. | 109.24 | "to not to change the level of my head" |
 | `is4-footwork-4` | — | `both` | `footwork` | Bend your knees more to keep your head level. | 113.28 | "I'm bending my knees more." |
-| `is4-concept-4` | — | `both` | `concept` | Move back but keep your head stays in place. | 120.68 | "you're moving back, but your head stays" |
+| `is4-concept-4` | — | `both` | `concept` | Move back but keep your head in place. | 120.68 | "you're moving back, but your head stays" |
 | `is4-concept-5` | — | `both` | `concept` | When jumping, it's not boom boom — don't bounce up and down. | 130.52 | "when you are jumping, it's not boom, boom." |
 | `is4-footwork-5` | — | `both` | `footwork` | Keep knees bent and keep everything low. | 137.1 | "we want to keep our knees bent and keep everything low." |
 | `is4-rhythm-1` | [1,2,3] | `both` | `rhythm` | The timing: one two three basic steps forward. | 143.06 | "one two three basic steps" |

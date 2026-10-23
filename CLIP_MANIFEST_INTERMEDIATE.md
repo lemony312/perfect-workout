@@ -13,7 +13,7 @@ Every window here was parsed out of the five spec files by
 spec file and line each row came from, so any number can be traced back to the
 transcript anchor that justifies it.
 
-81 of 81 referenced files are on disk, totalling 511.2 MB.
+81 of 81 referenced files are on disk, totalling 520.5 MB.
 
 | course | move | grain | src file | on disk | start | end | len | aspect | trust | source video | spec |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -30,18 +30,18 @@ transcript anchor that justifies it.
 | steps | `arara-1` + `arara-2` (6/8)` | slow | `arara-68-slow.mp4` | yes | 426.0 | 452.0 | 26.0 | `16/9` | A | `avhrmPAd_VI` | SALSA_INTERMEDIATE_SPEC_PARTB.md:679 |
 | steps | `arara-1` + `arara-2` (fast)` | fast | `arara-salsa-fast.mp4` | yes | 573.96 | 618.14 | 44.18 | `16/9` | A | `avhrmPAd_VI` | SALSA_INTERMEDIATE_SPEC_PARTB.md:681 |
 | steps | `arara-1` + `arara-2` (salsa)` | slow | `arara-salsa-slow.mp4` | yes | 469.96 | 517.28 | 47.32 | `16/9` | A | `avhrmPAd_VI` | SALSA_INTERMEDIATE_SPEC_PARTB.md:680 |
-| steps | `toe-heel-cross` | fast | `toe-heel-cross-fast.mp4` | yes | 758.74 | 785.94 | 27.2 | `16/9` | D | `mXK-uPDBlRg` | SALSA_INTERMEDIATE_SPEC_PARTA.md:221 |
-| steps | `toe-heel-cross` | slow | `toe-heel-cross-slow.mp4` | yes | 180.46 | 214.86 | 34.4 | `16/9` | A | `mXK-uPDBlRg` | SALSA_INTERMEDIATE_SPEC_PARTA.md:215 |
-| steps | `malibu` | fast | `malibu-fast.mp4` | yes | 469.22 | 515.48 | 46.26 | `16/9` | A | `UGD79mroi9E` | SALSA_INTERMEDIATE_SPEC_PARTA.md:272 |
-| steps | `malibu` | slow | `malibu-slow.mp4` | yes | 147.06 | 192.32 | 45.26 | `16/9` | A | `UGD79mroi9E` | SALSA_INTERMEDIATE_SPEC_PARTA.md:266 |
-| steps | `triple-jump` | fast | `triple-jump-fast.mp4` | yes | 362.92 | 406.3 | 43.38 | `16/9` | D | `hf4Lo0mXaG4` | SALSA_INTERMEDIATE_SPEC_PARTA.md:325 |
-| steps | `triple-jump` | slow | `triple-jump-slow.mp4` | yes | 143.06 | 182.98 | 39.92 | `16/9` | A | `hf4Lo0mXaG4` | SALSA_INTERMEDIATE_SPEC_PARTA.md:319 |
-| steps | `charanga-wave` | fast | `charanga-wave-fast.mp4` | yes | 280.3 | 320.12 | 39.82 | `16/9` | A | `I8a_F5iOXp8` | SALSA_INTERMEDIATE_SPEC_PARTA.md:375 |
-| steps | `charanga-wave` | slow | `charanga-wave-slow.mp4` | yes | 113.64 | 158.12 | 44.48 | `16/9` | A | `I8a_F5iOXp8` | SALSA_INTERMEDIATE_SPEC_PARTA.md:369 |
-| steps | `pilon` | fast | `pilon-fast.mp4` | yes | 398.7 | 449.68 | 50.98 | `16/9` | A | `IQ41651xh8Q` | SALSA_INTERMEDIATE_SPEC_PARTA.md:427 |
-| steps | `pilon` | slow | `pilon-slow.mp4` | yes | 188.7 | 233.9 | 45.2 | `16/9` | A | `IQ41651xh8Q` | SALSA_INTERMEDIATE_SPEC_PARTA.md:421 |
-| steps | `mojito` | fast | `mojito-fast.mp4` | yes | 350.38 | 377.64 | 27.26 | `16/9` | A | `AthN6Dl2zqw` | SALSA_INTERMEDIATE_SPEC_PARTA.md:478 |
-| steps | `mojito` | slow | `mojito-slow.mp4` | yes | 115.88 | 150.7 | 34.82 | `16/9` | A | `AthN6Dl2zqw` | SALSA_INTERMEDIATE_SPEC_PARTA.md:472 |
+| steps | `toe-heel-cross` | fast | `toe-heel-cross-fast.mp4` | yes | 619.98 | 662.46 | 42.48 | `16/9` | D | `mXK-uPDBlRg` | SALSA_INTERMEDIATE_SPEC_PARTA.md:222 |
+| steps | `toe-heel-cross` | slow | `toe-heel-cross-slow.mp4` | yes | 180.46 | 214.86 | 34.4 | `16/9` | A | `mXK-uPDBlRg` | SALSA_INTERMEDIATE_SPEC_PARTA.md:216 |
+| steps | `malibu` | fast | `malibu-fast.mp4` | yes | 469.22 | 515.48 | 46.26 | `16/9` | A | `UGD79mroi9E` | SALSA_INTERMEDIATE_SPEC_PARTA.md:273 |
+| steps | `malibu` | slow | `malibu-slow.mp4` | yes | 147.06 | 192.32 | 45.26 | `16/9` | A | `UGD79mroi9E` | SALSA_INTERMEDIATE_SPEC_PARTA.md:267 |
+| steps | `triple-jump` | fast | `triple-jump-fast.mp4` | yes | 362.92 | 406.3 | 43.38 | `16/9` | D | `hf4Lo0mXaG4` | SALSA_INTERMEDIATE_SPEC_PARTA.md:326 |
+| steps | `triple-jump` | slow | `triple-jump-slow.mp4` | yes | 143.06 | 182.98 | 39.92 | `16/9` | A | `hf4Lo0mXaG4` | SALSA_INTERMEDIATE_SPEC_PARTA.md:320 |
+| steps | `charanga-wave` | fast | `charanga-wave-fast.mp4` | yes | 280.3 | 320.12 | 39.82 | `16/9` | A | `I8a_F5iOXp8` | SALSA_INTERMEDIATE_SPEC_PARTA.md:376 |
+| steps | `charanga-wave` | slow | `charanga-wave-slow.mp4` | yes | 113.64 | 158.12 | 44.48 | `16/9` | A | `I8a_F5iOXp8` | SALSA_INTERMEDIATE_SPEC_PARTA.md:370 |
+| steps | `pilon` | fast | `pilon-fast.mp4` | yes | 398.7 | 422.56 | 23.86 | `16/9` | A | `IQ41651xh8Q` | SALSA_INTERMEDIATE_SPEC_PARTA.md:428 |
+| steps | `pilon` | slow | `pilon-slow.mp4` | yes | 188.7 | 233.9 | 45.2 | `16/9` | A | `IQ41651xh8Q` | SALSA_INTERMEDIATE_SPEC_PARTA.md:422 |
+| steps | `mojito` | fast | `mojito-fast.mp4` | yes | 350.38 | 377.64 | 27.26 | `16/9` | A | `AthN6Dl2zqw` | SALSA_INTERMEDIATE_SPEC_PARTA.md:479 |
+| steps | `mojito` | slow | `mojito-slow.mp4` | yes | 115.88 | 150.7 | 34.82 | `16/9` | A | `AthN6Dl2zqw` | SALSA_INTERMEDIATE_SPEC_PARTA.md:473 |
 | steps | `cachan` | fast | `cachan-fast.mp4` | yes | 395.66 | 444.9 | 49.24 | `16/9` | D | `j3O7xmKbaAE` | SALSA_INTERMEDIATE_SPEC_PARTB.md:109 |
 | steps | `cachan` | slow | `cachan-slow.mp4` | yes | 318.08 | 348.52 | 30.44 | `16/9` | A | `j3O7xmKbaAE` | SALSA_INTERMEDIATE_SPEC_PARTB.md:108 |
 | steps | `salsa-son-transition` | fast | `salsa-son-transition-fast.mp4` | yes | 288.96 | 331.68 | 42.72 | `16/9` | A | `nBHFEQU1CnA` | SALSA_INTERMEDIATE_SPEC_PARTB.md:191 |
@@ -57,17 +57,17 @@ transcript anchor that justifies it.
 | couples | `montana` | fast | `montana-fast.mp4` | yes | 0.0 | 38.034 | 38.03 | `9/16` | AV | `AtQqi_5hNCY` | SALSA_INTERMEDIATE_SPEC_PARTC.md:737 |
 | couples | `montana` | slow | `montana-slow.mp4` | yes | 50.0 | 82.0 | 32.0 | `16/9` | A | `X9Ad-ljIw-c` | SALSA_INTERMEDIATE_SPEC_PARTC.md:731 |
 | couples | `balsero` | fast | `balsero-fast.mp4` | yes | 0.0 | 33.762 | 33.76 | `9/16` | AV | `9TRul_cN9ts` | SALSA_INTERMEDIATE_SPEC_PARTC.md:184 |
-| couples | `balsero` | slow | `balsero-slow.mp4` | yes | 38.68 | 60.8 | 22.12 | `16/9` | D | `pY55QVrPals` | SALSA_INTERMEDIATE_SPEC_PARTC.md:178 |
+| couples | `balsero` | slow | `balsero-slow.mp4` | yes | 37.74 | 62.14 | 24.4 | `16/9` | D | `pY55QVrPals` | SALSA_INTERMEDIATE_SPEC_PARTC.md:178 |
 | couples | `tiramisu-complicado` | fast | `tiramisu-complicado-fast.mp4` | yes | 109.18 | 155.02 | 45.84 | `16/9` | DNARRATED | `kr0fYDZABME` | SALSA_INTERMEDIATE_SPEC_PARTC.md:230 |
 | couples | `tiramisu-complicado` | slow | `tiramisu-complicado-slow.mp4` | yes | 46.68 | 85.8 | 39.12 | `16/9` | D | `kr0fYDZABME` | SALSA_INTERMEDIATE_SPEC_PARTC.md:224 |
 | couples | `la-botella` | fast | `la-botella-fast.mp4` | yes | 0.0 | 42.98 | 42.98 | `9/16` | AV | `K5gDS-XIF3Q` | SALSA_INTERMEDIATE_SPEC_PARTC.md:276 |
 | couples | `la-botella` | slow | `la-botella-slow.mp4` | yes | 34.36 | 64.22 | 29.86 | `16/9` | D | `_A0VNIVvhtA` | SALSA_INTERMEDIATE_SPEC_PARTC.md:270 |
 | couples | `setenta-complicado` | fast | `setenta-complicado-fast.mp4` | yes | 0.0 | 49.575 | 49.58 | `9/16` | AV | `TFc1glp6XXY` | SALSA_INTERMEDIATE_SPEC_PARTC.md:322 |
 | couples | `setenta-complicado` | slow | `setenta-complicado-slow.mp4` | yes | 131.04 | 157.6 | 26.56 | `16/9` | D | `YOYk3Wbcf_M` | SALSA_INTERMEDIATE_SPEC_PARTC.md:316 |
-| couples | `el-dos` | fast | `el-dos-fast.mp4` | yes | 158.5 | 196.4 | 37.9 | `16/9` | DNARRATED | `SOjNHsjPFL4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:368 |
+| couples | `el-dos` | fast | `el-dos-fast.mp4` | yes | 160.02 | 211.32 | 51.3 | `16/9` | DNARRATED | `SOjNHsjPFL4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:368 |
 | couples | `el-dos` | slow | `el-dos-slow.mp4` | yes | 91.2 | 120.14 | 28.94 | `16/9` | D | `SOjNHsjPFL4` | SALSA_INTERMEDIATE_SPEC_PARTC.md:362 |
 | couples | `paseala-complicado` | fast | `paseala-complicado-fast.mp4` | yes | 0.0 | 42.539 | 42.54 | `9/16` | AV | `eWR8KHyoQXw` | SALSA_INTERMEDIATE_SPEC_PARTC.md:414 |
-| couples | `paseala-complicado` | slow | `paseala-complicado-slow.mp4` | yes | 66.24 | 89.12 | 22.88 | `16/9` | D | `7ugimJ0MFas` | SALSA_INTERMEDIATE_SPEC_PARTC.md:408 |
+| couples | `paseala-complicado` | slow | `paseala-complicado-slow.mp4` | yes | 63.5 | 88.08 | 24.58 | `16/9` | D | `7ugimJ0MFas` | SALSA_INTERMEDIATE_SPEC_PARTC.md:408 |
 | couples | `sombrero-por-debajo` | fast | `sombrero-por-debajo-fast.mp4` | yes | 0.0 | 38.127 | 38.13 | `9/16` | AV | `nolwu7BcRdc` | SALSA_INTERMEDIATE_SPEC_PARTC.md:475 |
 | couples | `sombrero-por-debajo` | slow | `sombrero-por-debajo-slow.mp4` | yes | 34.0 | 75.0 | 41.0 | `16/9` | A | `QAixPUmIQ64` | SALSA_INTERMEDIATE_SPEC_PARTC.md:465 |
 | couples | `santiago` | fast | `santiago-fast.mp4` | yes | 108.0 | 133.0 | 25.0 | `16/9` | A | `mwifx01N5KI` | SALSA_INTERMEDIATE_SPEC_PARTC.md:534 |
@@ -81,14 +81,14 @@ transcript anchor that justifies it.
 | couples | `codo-de-la-rabia` | fast | `codo-de-la-rabia-fast.mp4` | yes | 133.0 | 161.0 | 28.0 | `16/9` | A | `Dcsd-Yt1Vug` | SALSA_INTERMEDIATE_SPEC_PARTD.md:401 |
 | couples | `codo-de-la-rabia` | slow | `codo-de-la-rabia-slow.mp4` | yes | 51.0 | 85.0 | 34.0 | `16/9` | A | `Dcsd-Yt1Vug` | SALSA_INTERMEDIATE_SPEC_PARTD.md:395 |
 | couples | `donde-vas` | fast | `donde-vas-fast.mp4` | yes | 0.0 | 23.406 | 23.41 | `9/16` | A | `_9amNey_heg` | SALSA_INTERMEDIATE_SPEC_PARTD.md:463 |
-| couples | `donde-vas` | slow | `donde-vas-slow.mp4` | yes | 42.0 | 63.0 | 21.0 | `16/9` | A | `-oIcWUIwlx4` | SALSA_INTERMEDIATE_SPEC_PARTD.md:457 |
+| couples | `donde-vas` | slow | `donde-vas-slow.mp4` | yes | 42.0 | 82.64 | 40.64 | `16/9` | A | `-oIcWUIwlx4` | SALSA_INTERMEDIATE_SPEC_PARTD.md:457 |
 | couples | `enchufla-triple-mix` | fast | `enchufla-triple-mix-fast.mp4` | yes | 137.0 | 160.0 | 23.0 | `16/9` | A | `MRpIKs0iQD8` | SALSA_INTERMEDIATE_SPEC_PARTD.md:168 |
 | couples | `enchufla-triple-mix` | slow | `enchufla-triple-mix-slow.mp4` | yes | 60.0 | 85.0 | 25.0 | `16/9` | A | `MRpIKs0iQD8` | SALSA_INTERMEDIATE_SPEC_PARTD.md:162 |
 | couples | `gota-de-la-sombra` | fast | `gota-de-la-sombra-fast.mp4` | yes | 304.0 | 328.0 | 24.0 | `16/9` | A | `8E6SV_3TxYo` | SALSA_INTERMEDIATE_SPEC_PARTD.md:228 |
 | couples | `gota-de-la-sombra` | slow | `gota-de-la-sombra-slow.mp4` | yes | 228.0 | 257.0 | 29.0 | `16/9` | A | `8E6SV_3TxYo` | SALSA_INTERMEDIATE_SPEC_PARTD.md:222 |
 | couples | `muchacho` | fast | `muchacho-fast.mp4` | yes | 130.0 | 152.0 | 22.0 | `16/9` | A | `qaX9s-YzvKE` | SALSA_INTERMEDIATE_SPEC_PARTD.md:342 |
 | couples | `muchacho` | slow | `muchacho-slow.mp4` | yes | 51.0 | 85.0 | 34.0 | `16/9` | A | `qaX9s-YzvKE` | SALSA_INTERMEDIATE_SPEC_PARTD.md:336 |
-| couples | `quebrala` | fast | `quebrala-fast.mp4` | yes | 100.0 | 120.0 | 20.0 | `16/9` | A | `K5LSifs80fc` | SALSA_INTERMEDIATE_SPEC_PARTD.md:287 |
+| couples | `quebrala` | fast | `quebrala-fast.mp4` | yes | 79.72 | 120.0 | 40.28 | `16/9` | A | `K5LSifs80fc` | SALSA_INTERMEDIATE_SPEC_PARTD.md:287 |
 | couples | `quebrala` | slow | `quebrala-slow.mp4` | yes | 35.0 | 58.0 | 23.0 | `16/9` | A | `K5LSifs80fc` | SALSA_INTERMEDIATE_SPEC_PARTD.md:281 |
 | couples | `aguajea-caminala-sequence-fast` | fast | `aguajea-caminala-sequence-fast.mp4` | yes | 174.9 | 210.84 | 35.94 | `16/9` | AV | `vjcWjUOy0po` | SALSA_INTERMEDIATE_SPEC_PARTE.md:143 |
 | couples | `aguajea-caminala-sequence-slow` | slow | `aguajea-caminala-sequence-slow.mp4` | yes | 46.72 | 81.54 | 34.82 | `16/9` | A | `vjcWjUOy0po` | SALSA_INTERMEDIATE_SPEC_PARTE.md:132 |

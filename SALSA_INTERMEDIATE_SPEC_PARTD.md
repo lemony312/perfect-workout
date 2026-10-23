@@ -284,7 +284,7 @@ Both windows grade A, front camera for both.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|
-| `quebrala` | `K5LSifs80fc` | **100.0** | **120.0** | 20.0s | `quebrala-fast.mp4` | **A** | Both from chapter marks. In: chapter "Quebrala with music - Front Camera" @100.0. Out: next chapter "Summary / Outro" @120.0. |
+| `quebrala` | `K5LSifs80fc` | **79.72** | **120.0** | 40.28s | `quebrala-fast.mp4` | **A** | In: word "it!" ends @79.72 ("music Let's do it!"), on the dissolve into the back-camera music pass; the chapter mark "Quebrala with music - Back camera" @82.0 is late. Out: chapter "Summary / Outro" @120.0. The back-camera pass is music-only; the front pass after it is counted. *(Extended 2026-10-23 by frame review: the old window, 100.0–120.0, was 20.0s and used only the front pass.)* |
 
 Both windows grade A, front camera for both.
 
@@ -454,7 +454,7 @@ Both windows grade A, front camera for both.
 
 | Move | Video | In | Out | Len | File | Trust | Anchors |
 |---|---|---|---|---|---|---|---|
-| `donde-vas` | `-oIcWUIwlx4` | **42.0** | **63.0** | 21.0s | `donde-vas-slow.mp4` | **A** | Both from chapter marks. In: chapter "Donde vas with count - Front camera" @42.0. Out: next chapter @63.0. Landscape 16/9. |
+| `donde-vas` | `-oIcWUIwlx4` | **42.0** | **82.64** | 40.64s | `donde-vas-slow.mp4` | **A** | In: chapter "Donde vas with count - Front camera" @42.0. Out: word "seven." ends @82.64, closing the back-camera counted rep, before "It's a relatively short move" @82.92. Spans both camera passes of the counted demo; the camera change is at ~61.8. Landscape 16/9. *(Extended 2026-10-23 by frame review: the old out-point, chapter @63.0, gave a 21.0s clip and landed 1s into the back-camera shot.)* |
 
 ### Fast (official short, vertical)
 

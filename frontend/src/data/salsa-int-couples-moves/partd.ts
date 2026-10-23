@@ -654,7 +654,7 @@ export const MOVES_PARTD: SalsaMove[] = [
           fast: {
             src: `/clips/salsa/intermediate/couples/quebrala-fast.mp4`,
             sourceVideo: `K5LSifs80fc`,
-            start: 100.0,
+            start: 79.72,
             end: 120.0,
             aspect: `16/9`,
             label: `With music — front camera`,
@@ -1155,7 +1155,7 @@ export const MOVES_PARTD: SalsaMove[] = [
             src: `/clips/salsa/intermediate/couples/donde-vas-slow.mp4`,
             sourceVideo: `-oIcWUIwlx4`,
             start: 42.0,
-            end: 63.0,
+            end: 82.64,
             aspect: `16/9`,
             label: `Counted demo — front camera`,
             confidence: `transcript`,

@@ -10,7 +10,7 @@ All `sourceVideo: 'mXK-uPDBlRg'`. All `confidence: 'transcript'` unless noted.
 |---|---|---|---|---|---|---|
 | `is2-concept-1` | — | `both` | `concept` | This class teaches toe heel cross step. | 8.04 | "teach you toe heel cross step" |
 | `is2-concept-2` | — | `both` | `concept` | Both guys and girls can use this move. | 78.12 | "Both guys and girls can use it." |
-| `is2-repeats-1` | — | `both` | `rhythm` | When called "toe heel cross", do two repeats — two eights. | 198.9 | "we agree to do two repeats, so two eights." |
+| `is2-repeats-1` | — | `both` | `rhythm` | When called "toe heel cross", do two repeats — two eights. | 198.34 | "we agree to do two repeats, so two eights." |
 
 ## Body movement & arm coordination (Version 1)
 

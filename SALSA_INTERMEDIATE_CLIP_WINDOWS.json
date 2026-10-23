@@ -36,20 +36,20 @@
   "section": "2.3 Clip windows",
   "anchors": "In: \"let's do it again\" @180.46 (word \"let's\"). Out: last word \"to\" ends @214.86.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:215"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:216"
  },
  {
   "move": "toe-heel-cross",
   "video": "mXK-uPDBlRg",
-  "start": 758.74,
-  "end": 785.94,
+  "start": 619.98,
+  "end": 662.46,
   "file": "toe-heel-cross-fast.mp4",
   "trust": "D",
   "tempo": "fast",
   "section": "2.3 Clip windows",
-  "anchors": "In: word \"So\" starts @758.74. Out: word \"whole\" ends @785.94. Inside `is2-fast-toe-heel-cross` (724.56\u2013821.00), the class's only music block. **NARRATED** \u2014 the teacher critiques knee bend and standing-foot height across this pass (\"So bend and then go\u2026 and then kum kum pa\"), marking tempo with vocalised rhythm rather than counts. `caveat`: \"Teacher is critiquing knee bend over this pass; it is the only full-tempo toe-heel-cross in the class.\"",
+  "anchors": "In: word \"One,\" starts @619.98, first count after \"Music.\" @618.18 and the dissolve into the back-camera music block. Out: word \"And\" starts @662.46 (\"And now with arms\"), end of the simple-version passes. Inside `is2-fast-toe-heel-cross` (618.18\u2013724.56). Toe-heel-cross is named @622.84 (\"Two versions. First simple one\u2026\"). **NARRATED** with vocalised rhythm (\"tick-tick-cuckoo\"). `caveat`: \"Back view of the music block; the teachers call the rhythm aloud.\" *(Re-windowed 2026-10-23 by frame review: the previous window, 758.74\u2013785.94, showed the teacher standing and explaining knee bend, not a full-tempo demo.)",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:221"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:222"
  },
  {
   "move": "malibu",
@@ -62,7 +62,7 @@
   "section": "3.3 Clip windows",
   "anchors": "In: \"Let's do\" @147.06 (word \"Let's\"). Out: last word \"six\" ends @192.32.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:266"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:267"
  },
  {
   "move": "malibu",
@@ -75,7 +75,7 @@
   "section": "3.3 Clip windows",
   "anchors": "In: \"Up, tick\" @469.22 (word \"Up,\"). Out: last word \"arms\" ends @515.48.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:272"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:273"
  },
  {
   "move": "triple-jump",
@@ -88,7 +88,7 @@
   "section": "4.3 Clip windows",
   "anchors": "In: word \"one\" starts @143.06. Out: word \"continue.\" ends @182.98. This is exactly `is4-count-triple-jump`, the class's counted block: \"one two three basic steps then five six two jumps backwards and on seven we are making a pose\u2026 five six seven one freeze on seven\". The previous window (142.20\u2013184.86) opened 0.86s early in the teach block and ran 1.88s into the following teach block.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:319"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:320"
  },
  {
   "move": "triple-jump",
@@ -99,9 +99,9 @@
   "trust": "D",
   "tempo": "fast",
   "section": "4.3 Clip windows",
-  "anchors": "In: word \"this\" starts @362.92. Out: word \"one,\" ends @406.30. Inside `is4-fast-triple-jump` (355.28\u2013531.00). The move is named and danced three times (\"this step is called triple jump we go triple jump\u2026 Triple jump! \u2026 we go triple jump, kuwa libre, six seven and one\"). **NARRATED** \u2014 the rest of the music block reviews every earlier step, so this opening pass is the only full-tempo triple jump. `caveat`: \"Narrated; the music block reviews every earlier step, so triple jump is danced only in this opening pass.\"",
+  "anchors": "In: word \"this\" starts @362.92. Out: word \"one,\" ends @406.30. Inside `is4-fast-triple-jump` (355.28\u2013531.00). The move is named and danced three times (\"this step is called triple jump we go triple jump\u2026 Triple jump! \u2026 we go triple jump, kuwa libre, six seven and one\"). **NARRATED** \u2014 the music block reviews every earlier step. Frame review 2026-10-23: triple jump also recurs at ~428 and ~456, but each time at the same density of other steps, so this opening pass (three landings, plus the named introduction) stays the best window. `caveat`: \"Narrated review block; triple jump lands three times (~8s, ~20s, ~36s into the clip), mixed with Malibu and Cuba Libre.\"",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:325"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:326"
  },
  {
   "move": "charanga-wave",
@@ -114,7 +114,7 @@
   "section": "5.3 Clip windows",
   "anchors": "In: \"five six\" @113.64 (word \"five\"). Out: last word \"with\" ends @158.12.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:369"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:370"
  },
  {
   "move": "charanga-wave",
@@ -127,7 +127,7 @@
   "section": "5.3 Clip windows",
   "anchors": "In: \"one\" @280.30 (word \"one,\" ends; context: counted demo starts). Out: last word \"Libre.\" ends @320.12.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:375"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:376"
  },
  {
   "move": "pilon",
@@ -140,20 +140,20 @@
   "section": "6.3 Clip windows",
   "anchors": "In: \"the rhythm\" @188.70 (word \"the\"). Out: last word \"less\" ends @233.90.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:421"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:422"
  },
  {
   "move": "pilon",
   "video": "IQ41651xh8Q",
   "start": 398.7,
-  "end": 449.68,
+  "end": 422.56,
   "file": "pilon-fast.mp4",
   "trust": "A",
   "tempo": "fast",
   "section": "6.3 Clip windows",
-  "anchors": "In: word \"Let's\" starts @398.70, opening \"Let's start with pilon\". Out: word \"ting,\" ends @449.68, closing the third \"ting\" of the turn sequence. Inside `is6-fast-pilon` (367.54\u2013546.78). Pilon is named at 399.50, 417.12 and 440.40 and danced throughout, mixed with left turn, right turn and basic \u2014 the class's own \"let's mix it with steps from previous classes\" pass. Counted in at 418.42\u2013422.56 (\"six, seven and one, three, five and seven and one\"); the rest is vocalised rhythm (\"Bibim, bibim, bibim\", \"tigim and kum\", \"ting, ting, ting\"). **NARRATED** \u2014 the teacher calls each element as it lands.",
+  "anchors": "In: word \"Let's\" starts @398.70, opening \"Let's start with pilon\". Out: word \"one\" ends @422.56, closing the counted second pass (\"One more time pilon, six, seven and one, three, five and seven and one\"), before \"and left turn\" @422.56. *(Tightened 2026-10-23 by frame review: the previous out-point, \"ting,\" @449.68, left ~25s of left turn, basic and right turns in a clip named Pilon.)* Earlier notes: Inside `is6-fast-pilon` (367.54\u2013546.78). Pilon is named at 399.50, 417.12 and 440.40 and danced throughout, mixed with left turn, right turn and basic \u2014 the class's own \"let's mix it with steps from previous classes\" pass. Counted in at 418.42\u2013422.56 (\"six, seven and one, three, five and seven and one\"); the rest is vocalised rhythm (\"Bibim, bibim, bibim\", \"tigim and kum\", \"ting, ting, ting\"). **NARRATED** \u2014 the teacher calls each element as it lands.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:427"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:428"
  },
  {
   "move": "mojito",
@@ -166,7 +166,7 @@
   "section": "7.3 Clip windows",
   "anchors": "In: \"five six seven\" @115.88 (word \"five,\"). Out: last word \"and\" ends @150.70 (before \"right hip\" teaching resumes).",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:472"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:473"
  },
  {
   "move": "mojito",
@@ -179,7 +179,7 @@
   "section": "7.3 Clip windows",
   "anchors": "In: word \"Okay,\" starts @350.38, opening \"Okay, let's start with mojito\". Out: word \"one.\" ends @377.64, closing the third run. Three full-tempo runs of Mojito inside `is7-fast-mojito` (316.28\u2013529.00), the move named at 351.72, 359.92 and 371.96. **NARRATED** \u2014 rhythm is vocalised (\"king, cuckoo \u2026 and one\") rather than counted, which is how this course marks full tempo, so there is no counted bar to find here.",
   "end_from_metadata": false,
-  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:478"
+  "source": "SALSA_INTERMEDIATE_SPEC_PARTA.md:479"
  },
  {
   "move": "cachan",
@@ -405,13 +405,13 @@
  {
   "move": "balsero",
   "video": "pY55QVrPals",
-  "start": 38.68,
-  "end": 60.8,
+  "start": 37.74,
+  "end": 62.14,
   "file": "balsero-slow.mp4",
   "trust": "D",
   "tempo": "slow",
   "section": "2.3 Clip windows",
-  "anchors": "In: *\"Guapea.\"* @38.68 (e=38.68), end of intro cue before counted rep. Out: *\"seven.\"* @60.80 (e=60.80), end of first bar. Move named \"balsero\" @45.52 within window.",
+  "anchors": "In: *\"music.\"* @37.74 (e), immediately before *\"Guapea.\"* (s=38.00, a whole second the audit would read as chosen) \u2014 the old in-point was 38.68, Guapea's end, which left the clip 22.12s. Out: *\"time\"* @62.14 (e), before the camera swap at ~62.75 (frame review 2026-10-23). Previously: Out: *\"seven.\"* @60.80 (e=60.80), end of first bar. Move named \"balsero\" @45.52 within window.",
   "end_from_metadata": false,
   "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:178"
  },
@@ -522,26 +522,26 @@
  {
   "move": "el-dos",
   "video": "SOjNHsjPFL4",
-  "start": 158.5,
-  "end": 196.4,
+  "start": 160.02,
+  "end": 211.32,
   "file": "el-dos-fast.mp4",
   "trust": "DNARRATED",
   "tempo": "fast",
   "section": "6.3 Clip windows",
-  "anchors": "In: *\"One,\"* @158.5 (s=158.5, e=159.06), start of music section. Out: *\"one.\"* @196.4 (s=196.12, e=196.4), end of counted phrase. NARRATED: teachers count and coach throughout music section per intermediate format; window contains \"And the two\" @165.16, \"Front\" @170.52, \"Stepway\" @173.62-174.18, move being performed with vocal cues.",
+  "anchors": "In: *\"one\"* @160.02 (s). Out: *\"Nice one.\"* @211.32 (e). Frame review 2026-10-23: the old out-point, \"one.\" @196.4, cut mid-figure \u2014 the turn, the sombrero wrap at ~198\u2013201 and the unwind came after it, and the couple is back in open hold only from ~204. No word ends between 202.10 and 210.14, so the in-point moved 1.5s later to stay under 52s. Previously: in *\"One,\"* @158.5, out *\"one.\"* @196.4. NARRATED: teachers count and coach throughout music section per intermediate format; window contains \"And the two\" @165.16, \"Front\" @170.52, \"Stepway\" @173.62-174.18, move being performed with vocal cues.",
   "end_from_metadata": false,
   "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:368"
  },
  {
   "move": "paseala-complicado",
   "video": "7ugimJ0MFas",
-  "start": 66.24,
-  "end": 89.12,
+  "start": 63.5,
+  "end": 88.08,
   "file": "paseala-complicado-slow.mp4",
   "trust": "D",
   "tempo": "slow",
   "section": "7.3 Clip windows",
-  "anchors": "In: *\"then\"* @66.24 (s=66.24, e=66.26), start of counted demo after intro explaining starting position. Out: *\"and\"* @89.12 (s=88.62, e=89.12), end of first counted rep before *\"chufla mix\"* @89.56. Move named \"pase a la complicado\" @32.84-33.68 in intro, \"passe alla complicato\" @92.58-93.44 later; window shows the demonstrated move.",
+  "anchors": "In: *\"So\"* @63.50 (s). Out: *\"time\"* @88.08 (e), ~0.2s before the camera swap at 88.3 (frame review 2026-10-23; the old window ran 0.8s into the swap and was 22.88s). Previously: in *\"then\"* @66.24, out *\"and\"* @89.12, before *\"chufla mix\"* @89.56. Move named \"pase a la complicado\" @32.84-33.68 in intro, \"passe alla complicato\" @92.58-93.44 later; window shows the demonstrated move.",
   "end_from_metadata": false,
   "source": "SALSA_INTERMEDIATE_SPEC_PARTC.md:408"
  },
@@ -808,13 +808,13 @@
  {
   "move": "quebrala",
   "video": "K5LSifs80fc",
-  "start": 100.0,
+  "start": 79.72,
   "end": 120.0,
   "file": "quebrala-fast.mp4",
   "trust": "A",
   "tempo": "fast",
   "section": "Clip windows",
-  "anchors": "Both from chapter marks. In: chapter \"Quebrala with music - Front Camera\" @100.0. Out: next chapter \"Summary / Outro\" @120.0.",
+  "anchors": "In: word \"it!\" ends @79.72 (\"music Let's do it!\"), on the dissolve into the back-camera music pass; the chapter mark \"Quebrala with music - Back camera\" @82.0 is late. Out: chapter \"Summary / Outro\" @120.0. The back-camera pass is music-only; the front pass after it is counted. *(Extended 2026-10-23 by frame review: the old window, 100.0\u2013120.0, was 20.0s and used only the front pass.)",
   "end_from_metadata": false,
   "source": "SALSA_INTERMEDIATE_SPEC_PARTD.md:287"
  },
@@ -874,12 +874,12 @@
   "move": "donde-vas",
   "video": "-oIcWUIwlx4",
   "start": 42.0,
-  "end": 63.0,
+  "end": 82.64,
   "file": "donde-vas-slow.mp4",
   "trust": "A",
   "tempo": "slow",
   "section": "Clip windows",
-  "anchors": "Both from chapter marks. In: chapter \"Donde vas with count - Front camera\" @42.0. Out: next chapter @63.0. Landscape 16/9.",
+  "anchors": "In: chapter \"Donde vas with count - Front camera\" @42.0. Out: word \"seven.\" ends @82.64, closing the back-camera counted rep, before \"It's a relatively short move\" @82.92. Spans both camera passes of the counted demo; the camera change is at ~61.8. Landscape 16/9. *(Extended 2026-10-23 by frame review: the old out-point, chapter @63.0, gave a 21.0s clip and landed 1s into the back-camera shot.)",
   "end_from_metadata": false,
   "source": "SALSA_INTERMEDIATE_SPEC_PARTD.md:457"
  },

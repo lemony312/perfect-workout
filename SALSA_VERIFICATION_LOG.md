@@ -561,6 +561,8 @@ There is no `verified` value anywhere in the intermediate data yet. That is accu
 
 ### 10.1 The UNRESOLVED items — six footwork paragraphs in PARTA, one class-1 cue
 
+> **Reviewed 2026-10-23 from still frames — see §10.9 for what changed and what is still open.**
+
 `grep -rn "UNRESOLVED" SALSA_INTERMEDIATE_SPEC_*.md` reports 29 occurrences, all in `SALSA_INTERMEDIATE_SPEC_PARTA.md`. They fall into two categories.
 
 **Six footwork paragraphs** (classes 2–7) are flagged as requiring video-open extraction. The transcript contains *teaching* — words spoken during the breakdown — but the agents could not confidently derive beat-by-beat footwork descriptions from word timings alone, particularly where the teachers demonstrate rather than state. Each needs someone to watch the teaching segment with the video open and write the footwork paragraph from what they see, not what they hear.
@@ -579,6 +581,8 @@ There is no `verified` value anywhere in the intermediate data yet. That is accu
 **One detailed cue in Class 1** (Cuba Libre) is also marked UNRESOLVED: body mechanics cues covering hip circles, upper body coordination, and the slow/fast distinction are incomplete. The teaching segments @121–284s and @411–508s contain dense coordination instruction that requires video-open extraction to separate instruction from counted demonstration. Eight concept and body movement cues were extracted (lines 141–161 of the spec); the remaining detail pass is the gap.
 
 ### 10.2 The three mistitled shorts — 38 seconds of watching, highest value per second in the intermediate work
+
+> **Reviewed 2026-10-23 from still frames — see §10.9 for what changed and what is still open.**
 
 Three videos in the Intermediate Salsa Moves — Shorts playlist are all titled *Sombrero por Debajo*:
 
@@ -619,6 +623,8 @@ This is the single highest-value human task in the intermediate work: **~38 seco
 
 ### 10.3 Clips with caveats
 
+> **Reviewed 2026-10-23 from still frames — see §10.9 for what changed and what is still open.**
+
 Three intermediate steps clips carry caveats, all for the same reason: the full-tempo music block is narrated — the teacher talks over the demo rather than letting it run silently. In each case the move is named and danced inside the window; what is wrong with the clip is only that the teacher is coaching aloud, which is what a rendered caveat exists to say.
 
 | Move | Clip | The caveat | Window | Video |
@@ -639,6 +645,8 @@ These are the windows most worth a second look, because they are the only full-t
 Both are landscape `16/9` rather than the vertical `9/16` of a short, which is itself a visible signal that the clip came from the class video. They are two of the nine no-short moves listed in §10.2 — if one of the three mistitled shorts turns out to show Tiramisu Complicado or El Dos, these two clips can be replaced with a clean music-only vertical and the caveats dropped.
 
 ### 10.4 Clips below the 23-second reference floor
+
+> **Reviewed 2026-10-23 from still frames — see §10.9 for what changed and what is still open.**
 
 R2 asks for 23–47s per clip. **Three intermediate couples clips come in under 23s:**
 
@@ -667,9 +675,11 @@ Both are graded `AV` (authored chapter + declared caveat) and appear in the audi
 
 ### 10.6 No `verified` confidence anywhere, and no `suspect` anywhere either
 
-As of the last integrity pass (`check_cue_fragments.py`), **606 intermediate cues** exist across 28 files. Every one carries `confidence: 'transcript'`. Zero carry `'verified'` (no one has watched anything) and zero carry `'suspect'` (the agents flagged nothing as actively untrustworthy, unlike beginners steps class 7's arm cue). The UNRESOLVED items in §10.1 are honest gaps, not suspected errors.
+As of the last integrity pass (`check_cue_fragments.py`, 2026-10-23), **616 intermediate cues** exist across 28 files. Every one carries `confidence: 'transcript'`. Zero carry `'verified'` (no one has watched anything) and zero carry `'suspect'` (the agents flagged nothing as actively untrustworthy, unlike beginners steps class 7's arm cue). The UNRESOLVED items in §10.1 are honest gaps, not suspected errors.
 
 ### 10.7 The 12 derived windows — positions 2-7 of the couples course
+
+> **Reviewed 2026-10-23 from still frames — see §10.9 for what changed and what is still open.**
 
 Positions 2-7 (Balsero, Tiramisu Complicado, La Botella, Setenta Complicado, El Dos, Paseala Complicado) were the last moves in either intermediate course to get clips, and they were the hard ones. Positions 8-31 have *authored* chapters — the teachers published "Table of contents / video index:" blocks in the video descriptions, so a clip window could be quoted from a boundary someone else committed to. Positions 2-7 have auto-generated chapters or none at all. There was nothing to quote.
 
@@ -689,6 +699,46 @@ Two classes of error surfaced while finishing positions 2-7, both in `SALSA_INTE
 A third instance of an older bug also turned up here: the audit's *summary line* read clip grain off the `tempo` field (scraped from the nearest `### Slow` / `### Fast` subheading) instead of off the filename, and so reported `?=12` for every row in a table that uses a leading `#` column instead of subheadings. The checks themselves had been fixed twice before — once in the audit, once in the manifest generator — and the summary was the third site. Twelve unknown tempos in a report whose whole job is to surface problems reads as a problem, and it was not one.
 
 ---
+
+### 10.9 Frame review, 2026-10-23 — what changed
+
+Every open item in §10.1–10.4 and §10.7 was reviewed by Claude agents from ffmpeg contact sheets of the local source videos, lined up against Whisper word timings. That is **not** a human watching the video, so nothing was promoted to `confidence: 'verified'` — the type's definition of `verified` is "a human watched the video and confirmed it". What the frames settled was corrected; what they could not settle is listed at the end. The four reports are in `data/review/intermediate/` (gitignored).
+
+**Shorts (§10.2) — resolved.** `nolwu7BcRdc` is Sombrero por debajo (matches `QAixPUmIQ64`'s "with music - Front camera" move for move, ~127.5s offset). `_a5fC4nGz1c` is **Sombrero Complicado** — a second take of the routine in `CuUwwKNxCuI`; its "Class 9" is right and only the name was copy-pasted. `hET29nU1hV8` is Sombrero por debajo again, filmed on a different day. The tell between the two: in por debajo the man ducks nearly flat under the joined hands; in Complicado there is no duck. Neither fills a no-short move, so Tiramisu Complicado and El Dos keep their caveated class-video clips. The "Class 13 = 13th move taught" lead in §10.2 did not hold.
+
+**Footwork paragraphs (§10.1).**
+
+| Class | Move | Verdict | Change |
+|---|---|---|---|
+| 2 | Toe-Heel-Cross | accurate, unbeated | Rewritten with beats: left toe to the side on 1, heel on 2, cross in front on 3; right on 5-6-7; nothing on 4/8. Summary no longer says it "breaks" the basic timing. |
+| 3 | Malibu | entry misdescribed | The entry is L-R-L-R on 1, 2, &, 3 (one extra step, not four). Opens: right on 3, left on 5, right on 7, centre on 8. The toe-to-heel press on 8 is still transcript-only. |
+| 4 | Triple jump | accurate | Added feet-together jumps and the walk out of the pose. Teach segment now starts at 17.68 (was 55.98, mid-sentence, leaving `is4-concept-1` in the skipped intro). |
+| 5 | Charanga wave | accurate, thin | Added the open stance held 5–8 with the left stepping out on 5. |
+| 6 | Pilon | accurate | Added that it travels left then right, and which foot crosses (right going left, left coming back). Teach segment now starts at 29.22 (was 35.52, mid-sentence). |
+| 7 | Mojito | **wrong** | The paragraph gave the follower's pattern as the whole move. Leader: L to side (1), join R (3), cross L in front (5), open R (7). Follower: cross L (1), open R (3), open L (5), cross R (7). Both confirmed at 117.25–120.25. 25 cues reassigned from `both` to `leader`/`follower` (R4). |
+| 1 | Cuba Libre | body cues incomplete | 10 cues added (slow/fast variations, the 1-3-5-7 slow count, leader knee-hop, transitions, checkpoints); `masculine-*` → `leader`, `feminine-*` → `follower`. |
+
+About 45 cue `sourceStart`s were also moved back to the first word of their own verbatim (several were 1.5–2.8s late).
+
+**Clips (§10.3, §10.4, §10.7).** Seven re-cut in `perfect-workout-media-intermediate`:
+
+| Clip | Was | Now | Why |
+|---|---|---|---|
+| `toe-heel-cross-fast` | 758.74–785.94 | 619.98–662.46 | The old window was the teacher standing and explaining knee bend. The real music block is 618–724, which the segment map had filed under "details"; segments `is2-teach-details`/`is2-fast-toe-heel-cross` re-drawn and `is2-closing` added. |
+| `pilon-fast` | 398.70–449.68 | 398.70–422.56 | Half the old window was left turn, basic and right turns. |
+| `el-dos-fast` | 158.50–196.40 | 160.02–211.32 | Ended mid-wrap; the figure finishes ~204. |
+| `balsero-slow` | 38.68–60.80 | 37.74–62.14 | Under 23s; in-point was the *end* of "Guapea." |
+| `paseala-complicado-slow` | 66.24–89.12 | 63.50–88.08 | Under 23s, and ran 0.8s into a camera swap. |
+| `donde-vas-slow` | 42.0–63.0 | 42.0–82.64 | 21s, opened on a Subscribe overlay; now both camera passes of the counted rep. |
+| `quebrala-fast` | 100.0–120.0 | 79.72–120.0 | 20s; the back-camera music pass before it is speech-free. |
+
+`triple-jump-fast` keeps its window but its caveat was false (triple jump recurs at ~428 and ~456); reworded. `muchacho-fast` (22.0s) is clean and has no better window. The other nine couples clips at positions 2–7 show the named move with clean ends.
+
+**Still open — needs a human, or a decision:**
+- Which Charanga word ("left, open, right, Tiki") lands on which of beats 1–4; whether Pilon's cross is in front or behind and which beat the double lands on; whether Mojito's follower crosses are in front.
+- Class 5 and class 7 teach segments end early (112.4 and 115.88), so most of their explanation sits in a `count` segment. Not re-drawn, because clip windows sit in those ranges.
+- Hip, ribcage and knee cues tagged `footwork`/`arms` (e.g. `is5-wave-body`, `is7-bend-right-knee`, `is1-body-hips-opposite`) arguably belong to `body-movement` — but that kind is not drillable (`salsa-types.ts`), so re-tagging removes them from drills. Left as is.
+- `@157.92` in Cuba Libre ("All eyes obviously…") is probably Whisper for "Ola is…"; re-transcribe before using.
 
 ## How to record a resolution
 

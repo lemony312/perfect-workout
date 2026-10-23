@@ -12,23 +12,23 @@ All `sourceVideo: 'IQ41651xh8Q'`. All `confidence: 'transcript'`.
 
 | id | beat | role | kind | text | @ | verbatim |
 |---|---|---|---|---|---|---|
-| `is6-pilon-1` | — | `both` | `concept` | This step is called Pilon. | 29.96 | "this will be pilon." |
-| `is6-pilon-2` | — | `both` | `concept` | It's a folkloric traditional carnival dance, like Mambo Cubano. | 34.8 | "which is folkloric traditional carnival dance." |
-| `is6-pilon-3` | — | `both` | `concept` | It appears in modern Cuban salsa — or timba music. | 51.58 | "in modern Cuban salsa, or I should say timba music." |
-| `is6-pilon-4` | — | `both` | `concept` | Some songs are purely dedicated to pilon rhythm. | 59.02 | "songs purely dedicated to pylon," |
-| `is6-pilon-5` | — | `both` | `rhythm` | The step is very closely associated with the rhythm. | 165.34 | "The step is very closely associated with the rhythm." |
-| `is6-pilon-6` | 1 | `both` | `footwork` | Start with your left leg to the left. | 172.1 | "We start with the left leg to the left." |
-| `is6-pilon-7` | 3 | `both` | `footwork` | Cross on three. | 174.14 | "we cross on three," |
+| `is6-pilon-1` | — | `both` | `concept` | This step is called Pilon. | 29.22 | "this will be pilon." |
+| `is6-pilon-2` | — | `both` | `concept` | It's a folkloric traditional carnival dance, like Mambo Cubano. | 34.38 | "which is folkloric traditional carnival dance." |
+| `is6-pilon-3` | — | `both` | `concept` | It appears in modern Cuban salsa — or timba music. | 51.14 | "in modern Cuban salsa, or I should say timba music." |
+| `is6-pilon-4` | — | `both` | `concept` | Some songs are purely dedicated to pilon rhythm. | 57.86 | "songs purely dedicated to pylon," |
+| `is6-pilon-5` | — | `both` | `rhythm` | The step is very closely associated with the rhythm. | 164.4 | "The step is very closely associated with the rhythm." |
+| `is6-pilon-6` | 1 | `both` | `footwork` | Start with your left leg to the left. | 171.34 | "We start with the left leg to the left." |
+| `is6-pilon-7` | 3 | `both` | `footwork` | Cross on three — the right foot crosses over the left. | 174.14 | "we cross on three," |
 | `is6-pilon-8` | 5 | `both` | `footwork` | Open on five. | 175.5 | "we open on five," |
-| `is6-pilon-9` | — | `both` | `footwork` | Do a double step and seven. | 177.66 | "we do double step and seven." |
-| `is6-pilon-10` | — | `both` | `footwork` | Come back the same way: open with the right, cross with left, open with the right, and double. | 181.54 | "We come back the same way. We open with the right, cross with left, open with the right," |
-| `is6-pilon-11` | — | `both` | `arms` | Keep a very stable upper body action. | 205.66 | "there is a very stable upper body action." |
-| `is6-pilon-12` | — | `both` | `arms` | Circle your shoulders and arms together. | 211.06 | "We are circling our shoulders." |
-| `is6-pilon-13` | — | `both` | `concept` | The movement is like making butter — a pounding motion. | 222.98 | "say that this is like making a butter movement." |
-| `is6-pilon-14` | [1,3,5] | `both` | `arms` | Do the circling motion three times — on one, three, five. | 236.76 | "So we do three times making butter one three five" |
-| `is6-pilon-15` | 7 | `both` | `arms` | Then in seven, open the arms. | 242.24 | "and then in seven we open kum kum" |
-| `is6-pilon-16` | — | `both` | `concept` | You can do turns on the same pilon basis — progressive turns, turning while walking. | 279.62 | "On the same basis we can do turns." |
-| `is6-pilon-17` | — | `both` | `rhythm` | Finish on your left leg when traveling left, so you need to do a second repeat to finish on the right and return to salsa timing. | 334.22 | "I finish on the left leg so if I wanted to come back to salsa now it would be opposite foot on one so we have to do second repeat" |
+| `is6-pilon-9` | — | `both` | `footwork` | Do a double step and seven. | 177.34 | "we do double step and seven." |
+| `is6-pilon-10` | — | `both` | `footwork` | Come back the same way: open with the right, cross with left, open with the right, and double. | 181.26 | "We come back the same way. We open with the right, cross with left, open with the right," |
+| `is6-pilon-11` | — | `both` | `arms` | Keep a very stable upper body action. | 202.88 | "there is a very stable upper body action." |
+| `is6-pilon-12` | — | `both` | `arms` | Circle your shoulders and arms together. | 210.22 | "We are circling our shoulders." |
+| `is6-pilon-13` | — | `both` | `concept` | The movement is like making butter — a pounding motion. | 222.22 | "say that this is like making a butter movement." |
+| `is6-pilon-14` | [1,3,5] | `both` | `arms` | Do the circling motion three times — on one, three, five. | 236.4 | "So we do three times making butter one three five" |
+| `is6-pilon-15` | 7 | `both` | `arms` | Then in seven, open the arms. | 241.62 | "and then in seven we open kum kum" |
+| `is6-pilon-16` | — | `both` | `concept` | You can do turns on the same pilon basis — progressive turns, turning while walking. | 277.08 | "On the same basis we can do turns." |
+| `is6-pilon-17` | — | `both` | `rhythm` | Finish on your left leg when traveling left, so you need to do a second repeat to finish on the right and return to salsa timing. | 333.74 | "I finish on the left leg so if I wanted to come back to salsa now it would be opposite foot on one so we have to do second repeat" |
 
 ---
 
