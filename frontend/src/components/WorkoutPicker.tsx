@@ -14,13 +14,10 @@ export default function WorkoutPicker({
   options,
   cycleLength,
   currentDayNumber,
-  onSelect,
 }: {
   options: WorkoutOption[]
   cycleLength: number
   currentDayNumber: number
-  /** Override for tabs that keep their own start date instead of the shared one. */
-  onSelect?: (dayNumber: number) => void
 }) {
   const { setTodayAs } = useWorkout()
   const [isOpen, setIsOpen] = useState(false)
@@ -28,8 +25,7 @@ export default function WorkoutPicker({
   const currentOption = options.find((o) => o.dayNumber === currentDayNumber)
 
   const handleSelect = (dayNumber: number) => {
-    if (onSelect) onSelect(dayNumber)
-    else setTodayAs(dayNumber, cycleLength)
+    setTodayAs(dayNumber, cycleLength)
     setIsOpen(false)
   }
 

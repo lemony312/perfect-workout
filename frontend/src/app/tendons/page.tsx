@@ -1,163 +1,236 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import {
-  getTendonDayForDate,
-  CYCLE_LENGTH_TENDONS,
-  TENDON_CYCLE,
+  TENDON_SESSIONS,
   TENDON_TESTS,
   TENDON_VIDEO_ID,
   TENDON_VIDEO_TITLE,
+  type TendonExercise,
 } from '@/data/workouts-tendons'
-import { useTendonStartDate } from '@/lib/tendon-start'
-import WorkoutPicker from '@/components/WorkoutPicker'
+import { mediaUrl } from '@/lib/media'
+import RestTimer from '@/components/RestTimer'
+import { VideoTransport } from '@/components/VideoTransport'
 
 const TENDON_COLOR = '#2dd4bf'
 
-const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const YOUTUBE_ICON =
+  'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'
 
-const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-]
+function TendonClip({ src, label }: { src: string; label: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [hasError, setHasError] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
-export default function CalendarTendons() {
-  const { startDate, setTodayAs } = useTendonStartDate()
-  const router = useRouter()
-  const [currentMonth, setCurrentMonth] = useState(new Date())
+  // Lazy load: only set the src once the clip scrolls into view.
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.disconnect() } },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  // A progression swapped the source in: keep playing if we already were.
+  useEffect(() => {
+    setHasError(false)
+    const video = videoRef.current
+    if (video && isPlaying) video.play().catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src])
 
-  const year = currentMonth.getFullYear()
-  const month = currentMonth.getMonth()
-
-  const firstDay = new Date(year, month, 1)
-  const daysInMonth = new Date(year, month + 1, 0).getDate()
-  const startingDayOfWeek = firstDay.getDay()
-
-  const calendarDays: Array<Date | null> = []
-  for (let i = 0; i < startingDayOfWeek; i++) calendarDays.push(null)
-  for (let day = 1; day <= daysInMonth; day++) calendarDays.push(new Date(year, month, day))
-
-  const handlePrevMonth = () => setCurrentMonth(new Date(year, month - 1, 1))
-  const handleNextMonth = () => setCurrentMonth(new Date(year, month + 1, 1))
-
-  const handleDayClick = (date: Date) => {
-    const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-    router.push(`/tendons/day/${dateStr}`)
+  const togglePlay = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) video.play()
+    else video.pause()
   }
 
-  const isToday = (date: Date) => date.toDateString() === today.toDateString()
+  if (hasError) return null
 
   return (
+    // Transport sits outside the clickable frame so its buttons don't also toggle play.
+    <div className="w-full sm:w-[260px] md:w-[300px] flex-shrink-0">
+      <div
+        ref={containerRef}
+        className="relative w-full aspect-video rounded-lg overflow-hidden bg-white cursor-pointer group"
+        onClick={togglePlay}
+      >
+        <video
+          ref={videoRef}
+          src={isVisible ? mediaUrl(src) : undefined}
+          className="w-full h-full object-contain"
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          onError={() => setHasError(true)}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+        <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+          {isPlaying ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-12 h-12 sm:w-10 sm:h-10 text-white/90">
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-12 h-12 sm:w-10 sm:h-10 text-white/90">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          )}
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+          <p className="text-xs text-white font-medium truncate">{label}</p>
+        </div>
+      </div>
+      <VideoTransport videoRef={videoRef} compact className="mt-1.5 justify-center" />
+    </div>
+  )
+}
+
+function ExerciseCard({ exercise, index }: { exercise: TendonExercise; index: number }) {
+  // Which clip the player shows: the exercise's own (-1) or a progression's.
+  const [activeStep, setActiveStep] = useState(-1)
+  const activeProgression = activeStep >= 0 ? exercise.progressions?.[activeStep] : undefined
+  const clip = activeProgression?.clip ?? exercise.clip
+  const clipLabel = activeProgression?.clip
+    ? activeProgression.name
+    : exercise.clipCaption ?? exercise.name
+
+  return (
+    <div className="bg-[#252525] rounded-lg border border-white/5 p-4 sm:p-5">
+      <div className="flex flex-col sm:flex-row gap-4">
+        {clip && <TendonClip src={clip} label={clipLabel} />}
+
+        <div className="flex-1 min-w-0">
+          <div className="text-xs uppercase tracking-wide mb-1" style={{ color: TENDON_COLOR }}>
+            {exercise.method}
+          </div>
+          <h5 className="text-lg font-semibold text-[#f5f5f5] mb-2">
+            {index + 1}. {exercise.name}
+          </h5>
+          {exercise.startsAfterWeeks && (
+            <div className="mb-2 inline-block text-xs font-semibold text-amber-300 bg-amber-500/10 border border-amber-500/30 rounded px-2 py-1">
+              Only after {exercise.startsAfterWeeks}+ weeks of the other methods
+            </div>
+          )}
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
+            <div>
+              <div className="text-xs text-[#a0a0a0]">Sets</div>
+              <div className="text-base font-bold" style={{ color: TENDON_COLOR }}>{exercise.sets}</div>
+            </div>
+            <div>
+              <div className="text-xs text-[#a0a0a0]">Reps / Hold</div>
+              <div className="text-base font-bold" style={{ color: TENDON_COLOR }}>{exercise.reps}</div>
+            </div>
+            {exercise.rest && (
+              <div>
+                <div className="text-xs text-[#a0a0a0]">Rest</div>
+                <div className="text-base font-bold" style={{ color: TENDON_COLOR }}>{exercise.rest}</div>
+              </div>
+            )}
+          </div>
+          <p className="text-sm text-[#d4d4d4]">{exercise.notes}</p>
+          {exercise.mistake && (
+            <p className="text-sm text-[#a0a0a0] mt-2">
+              <span className="text-red-400 font-semibold">Common mistake: </span>
+              {exercise.mistake}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {exercise.progressions && exercise.progressions.length > 0 && (
+        <div className="mt-4 pt-4 border-t border-white/5">
+          <h6 className="text-sm font-semibold text-[#f5f5f5] mb-3">
+            Progressions <span className="font-normal text-[#a0a0a0]">· easiest first</span>
+          </h6>
+          <ol className="space-y-2">
+            {exercise.progressions.map((step, stepIdx) => {
+              const isActive = stepIdx === activeStep
+              return (
+                <li key={step.name} className="flex gap-3">
+                  <div
+                    className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
+                    style={{ backgroundColor: `${TENDON_COLOR}22`, color: TENDON_COLOR }}
+                  >
+                    {stepIdx + 1}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-sm font-medium text-[#f5f5f5]">{step.name}</span>
+                      {step.clip && (
+                        <button
+                          onClick={() => setActiveStep(isActive ? -1 : stepIdx)}
+                          className={`text-xs px-2 py-1 rounded border transition-colors ${
+                            isActive
+                              ? 'border-teal-400 bg-teal-400/15 text-teal-300'
+                              : 'border-white/10 text-[#a0a0a0] hover:text-[#f5f5f5] hover:bg-white/5'
+                          }`}
+                        >
+                          {isActive ? '✓ Showing demo' : '▶ Show demo'}
+                        </button>
+                      )}
+                    </div>
+                    <p className="text-sm text-[#a0a0a0]">{step.detail}</p>
+                  </div>
+                </li>
+              )
+            })}
+          </ol>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function TendonsPage() {
+  return (
     <div className="min-h-screen bg-[#0f0f0f] p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5f5f5] mb-2 tracking-tight">
             TENDON TRAINING
           </h1>
           <p className="text-lg text-[#a0a0a0]">3 days a week · 20–30 min · think in months</p>
+          <p className="text-sm text-[#a0a0a0] mt-2 max-w-2xl mx-auto">
+            Keep at least one rest day between sessions — tendons rebuild during recovery, not during the workout.
+          </p>
         </div>
 
-        {/* Workout Picker */}
-        <div className="mb-6 max-w-sm mx-auto">
-          <WorkoutPicker
-            options={TENDON_CYCLE.map((day) => ({
-              dayNumber: day.dayNumber,
-              label: day.dayLabel,
-              detail: day.isRest ? 'Rest & Recovery' : day.focus,
-              isRest: day.isRest,
-            }))}
-            cycleLength={CYCLE_LENGTH_TENDONS}
-            currentDayNumber={getTendonDayForDate(startDate, today).dayNumber}
-            onSelect={setTodayAs}
-          />
-        </div>
-
-        {/* Month Navigation */}
-        <div className="flex items-center justify-between mb-6 bg-[#1a1a1a] p-4 rounded-lg border border-white/5">
-          <button
-            onClick={handlePrevMonth}
-            className="p-3 hover:bg-[#252525] active:bg-[#303030] rounded-lg transition-colors"
-            aria-label="Previous month"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-[#f5f5f5]">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </button>
-
-          <h2 className="text-xl sm:text-2xl font-semibold text-[#f5f5f5]">
-            {MONTHS[month]} {year}
-          </h2>
-
-          <button
-            onClick={handleNextMonth}
-            className="p-3 hover:bg-[#252525] active:bg-[#303030] rounded-lg transition-colors"
-            aria-label="Next month"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-[#f5f5f5]">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Calendar Grid */}
-        <div className="bg-[#1a1a1a] rounded-lg border border-white/5 p-4 shadow-2xl">
-          <div className="grid grid-cols-7 gap-0.5 sm:gap-2 mb-4">
-            {WEEKDAYS.map((day) => (
-              <div key={day} className="text-center text-[10px] sm:text-sm font-semibold text-[#a0a0a0] py-1 sm:py-2">
-                {day}
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-7 gap-0.5 sm:gap-2">
-            {calendarDays.map((date, index) => {
-              if (!date) {
-                return <div key={`empty-${index}`} className="aspect-square" />
-              }
-
-              const day = getTendonDayForDate(startDate, date)
-
-              return (
-                <button
-                  key={`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`}
-                  onClick={() => handleDayClick(date)}
-                  className={`
-                    aspect-square p-0.5 sm:p-2 rounded sm:rounded-lg border border-white/5 transition-all overflow-hidden
-                    hover:scale-105 hover:bg-[#252525] active:bg-[#303030] bg-[#1a1a1a]/50
-                    ${isToday(date) ? 'ring-2 ring-[#e53e3e] ring-offset-1 sm:ring-offset-2 ring-offset-[#0f0f0f]' : ''}
-                  `}
+        {/* Sessions */}
+        <div className="space-y-8">
+          {TENDON_SESSIONS.map((session) => (
+            <section
+              key={session.slug}
+              className="bg-[#1a1a1a] rounded-lg border-l-4 border-t border-r border-b border-white/5 border-l-teal-600 p-4 sm:p-6"
+            >
+              <div className="mb-6 flex flex-wrap items-center gap-3">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#f5f5f5]">{session.label}</h2>
+                <span
+                  className="inline-block px-3 py-1 rounded-full text-sm font-semibold border border-teal-600 bg-teal-600/10"
+                  style={{ color: TENDON_COLOR }}
                 >
-                  <div className="flex flex-col h-full overflow-hidden">
-                    <span className="text-[10px] sm:text-sm font-semibold mb-0 sm:mb-1 text-[#f5f5f5] leading-tight">
-                      {date.getDate()}
-                    </span>
-                    {day.isRest ? (
-                      <span className="text-[8px] sm:text-xs text-gray-400">Rest</span>
-                    ) : (
-                      <div
-                        className="text-[7px] sm:text-xs leading-tight border-l sm:border-l-2 pl-0.5 sm:pl-1 border-teal-600"
-                        style={{ color: TENDON_COLOR }}
-                        title={day.focus}
-                      >
-                        <span className="sm:hidden">{day.dayLabel.replace('Tendon Day ', 'D')}</span>
-                        <span className="hidden sm:inline">{day.dayLabel}</span>
-                        <span className="hidden md:block text-[10px] text-[#a0a0a0] mt-0.5 line-clamp-2">{day.focus}</span>
-                      </div>
-                    )}
-                  </div>
-                </button>
-              )
-            })}
-          </div>
+                  {session.focus}
+                </span>
+              </div>
+              <div className="space-y-4">
+                {session.exercises.map((exercise, idx) => (
+                  <ExerciseCard key={`${session.slug}-${idx}`} exercise={exercise} index={idx} />
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
 
         {/* Progress tests */}
-        <div className="mt-6 bg-[#1a1a1a] rounded-lg border border-white/5 p-5 sm:p-6">
+        <div className="mt-8 bg-[#1a1a1a] rounded-lg border border-white/5 p-5 sm:p-6">
           <h3 className="text-lg font-semibold text-[#f5f5f5] mb-1">Test every 4 weeks</h3>
           <p className="text-sm text-[#a0a0a0] mb-3">Don&apos;t trust the mirror — write the numbers down.</p>
           <ol className="space-y-1.5 text-sm text-[#d4d4d4] list-decimal list-inside">
@@ -167,18 +240,29 @@ export default function CalendarTendons() {
           </ol>
         </div>
 
+        <div className="mt-6 p-4 bg-[#1a1a1a] rounded-lg border border-white/5">
+          <p className="text-sm text-[#a0a0a0]">
+            <span className="text-[#f5f5f5] font-semibold">Already in pain? </span>
+            Tendon pain that lasts for weeks, gets worse during training, swells, or shows up at rest needs a health professional first — training doesn&apos;t replace a diagnosis.
+          </p>
+        </div>
+
         {/* Source video */}
-        <div className="mt-6 pt-4 border-t border-white/5 text-center">
+        <div className="mt-6 pt-4 border-t border-white/5">
           <a
             href={`https://www.youtube.com/watch?v=${TENDON_VIDEO_ID}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[#a0a0a0] hover:text-[#e53e3e] transition-colors"
+            className="text-sm text-[#a0a0a0] hover:text-[#e53e3e] transition-colors inline-flex items-center gap-1"
           >
-            Source video: {TENDON_VIDEO_TITLE}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0">
+              <path d={YOUTUBE_ICON} />
+            </svg>
+            Watch full video: {TENDON_VIDEO_TITLE}
           </a>
         </div>
       </div>
+      <RestTimer />
     </div>
   )
 }

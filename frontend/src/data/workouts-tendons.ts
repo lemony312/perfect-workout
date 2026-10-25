@@ -4,7 +4,7 @@
 // The video teaches five methods and closes with a 3-day weekly routine, with at
 // least one rest day between sessions because tendons rebuild between workouts,
 // not during them. Each session is 20–30 minutes, on its own or before a regular
-// workout. The cycle is 7 days so it lands on the same weekdays every week.
+// workout. The tab shows all three sessions on one page rather than a calendar.
 //
 // Everything here is taken from the transcript. Progressions are listed only where
 // the video offers them, easiest first. Clips are cut by scripts/clip_tendon_moves.py.
@@ -37,12 +37,10 @@ export interface TendonExercise {
   startsAfterWeeks?: number
 }
 
-export interface TendonDay {
-  dayNumber: number
+export interface TendonSession {
   slug: string
-  dayLabel: string
+  label: string
   focus: string
-  isRest: boolean
   exercises: TendonExercise[]
 }
 
@@ -128,15 +126,11 @@ const ECCENTRIC_CALF_RAISE: TendonExercise = {
   ],
 }
 
-export const CYCLE_LENGTH_TENDONS = 7
-
-export const TENDON_CYCLE: TendonDay[] = [
+export const TENDON_SESSIONS: TendonSession[] = [
   {
-    dayNumber: 1,
     slug: 'day-1',
-    dayLabel: 'Tendon Day 1',
+    label: 'Day 1',
     focus: 'Isometric + Slow Strength',
-    isRest: false,
     exercises: [
       TOWEL_ISOMETRIC,
       {
@@ -154,19 +148,9 @@ export const TENDON_CYCLE: TendonDay[] = [
     ],
   },
   {
-    dayNumber: 2,
-    slug: 'rest-1',
-    dayLabel: 'Rest',
-    focus: 'Recovery',
-    isRest: true,
-    exercises: [],
-  },
-  {
-    dayNumber: 3,
     slug: 'day-2',
-    dayLabel: 'Tendon Day 2',
+    label: 'Day 2',
     focus: 'Holds + Negatives',
-    isRest: false,
     exercises: [
       {
         name: 'Dead Hang',
@@ -248,19 +232,9 @@ export const TENDON_CYCLE: TendonDay[] = [
     ],
   },
   {
-    dayNumber: 4,
-    slug: 'rest-2',
-    dayLabel: 'Rest',
-    focus: 'Recovery',
-    isRest: true,
-    exercises: [],
-  },
-  {
-    dayNumber: 5,
     slug: 'day-3',
-    dayLabel: 'Tendon Day 3',
+    label: 'Day 3',
     focus: 'Isometric + Eccentric + Hops',
-    isRest: false,
     exercises: [
       TOWEL_ISOMETRIC,
       ECCENTRIC_CALF_RAISE,
@@ -298,22 +272,6 @@ export const TENDON_CYCLE: TendonDay[] = [
       },
     ],
   },
-  {
-    dayNumber: 6,
-    slug: 'rest-3',
-    dayLabel: 'Rest',
-    focus: 'Recovery',
-    isRest: true,
-    exercises: [],
-  },
-  {
-    dayNumber: 7,
-    slug: 'rest-4',
-    dayLabel: 'Rest',
-    focus: 'Recovery',
-    isRest: true,
-    exercises: [],
-  },
 ]
 
 /** Repeat every 4 weeks and write the numbers down. Think in months, not weeks. */
@@ -322,12 +280,3 @@ export const TENDON_TESTS = [
   'How many single-leg calf raises you can do at a controlled tempo',
   'How the heavy exercise that bothers your joints most feels right now',
 ]
-
-export function getTendonDayForDate(startDate: Date, targetDate: Date): TendonDay {
-  const msPerDay = 1000 * 60 * 60 * 24
-  const startTime = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()).getTime()
-  const targetTime = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate()).getTime()
-  const daysDiff = Math.round((targetTime - startTime) / msPerDay)
-  const cycleIndex = ((daysDiff % CYCLE_LENGTH_TENDONS) + CYCLE_LENGTH_TENDONS) % CYCLE_LENGTH_TENDONS
-  return TENDON_CYCLE[cycleIndex]
-}
