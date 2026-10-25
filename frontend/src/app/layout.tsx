@@ -64,6 +64,13 @@ export default function RootLayout({
                 </Link>
                 <div className="h-4 w-px shrink-0 bg-white/10" />
                 <Link
+                  href="/tendons"
+                  className="shrink-0 whitespace-nowrap text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-4 py-3 rounded-md hover:bg-[#252525] active:bg-[#303030]"
+                >
+                  Tendons
+                </Link>
+                <div className="h-4 w-px shrink-0 bg-white/10" />
+                <Link
                   href="/bodyweight"
                   className="shrink-0 whitespace-nowrap text-sm font-medium text-[#a0a0a0] hover:text-[#f5f5f5] transition-colors px-4 py-3 rounded-md hover:bg-[#252525] active:bg-[#303030]"
                 >
