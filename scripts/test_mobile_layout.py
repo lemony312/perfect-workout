@@ -31,6 +31,8 @@ WIDTHS = [320, 375, 390]
 PAGES = [
     "/",
     "/2025",
+    "/tendons",
+    "/rehab",
     "/bodyweight",
     "/stretching",
     "/posture",

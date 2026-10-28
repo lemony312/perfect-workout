@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   TENDON_SESSIONS,
   TENDON_TESTS,
@@ -8,90 +8,13 @@ import {
   TENDON_VIDEO_TITLE,
   type TendonExercise,
 } from '@/data/workouts-tendons'
-import { mediaUrl } from '@/lib/media'
 import RestTimer from '@/components/RestTimer'
-import { VideoTransport } from '@/components/VideoTransport'
+import LoopClip from '@/components/LoopClip'
 
 const TENDON_COLOR = '#2dd4bf'
 
 const YOUTUBE_ICON =
   'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'
-
-function TendonClip({ src, label }: { src: string; label: string }) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [hasError, setHasError] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  // Lazy load: only set the src once the clip scrolls into view.
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.disconnect() } },
-      { threshold: 0.1 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  // A progression swapped the source in: keep playing if we already were.
-  useEffect(() => {
-    setHasError(false)
-    const video = videoRef.current
-    if (video && isPlaying) video.play().catch(() => {})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src])
-
-  const togglePlay = () => {
-    const video = videoRef.current
-    if (!video) return
-    if (video.paused) video.play()
-    else video.pause()
-  }
-
-  if (hasError) return null
-
-  return (
-    // Transport sits outside the clickable frame so its buttons don't also toggle play.
-    <div className="w-full sm:w-[260px] md:w-[300px] flex-shrink-0">
-      <div
-        ref={containerRef}
-        className="relative w-full aspect-video rounded-lg overflow-hidden bg-white cursor-pointer group"
-        onClick={togglePlay}
-      >
-        <video
-          ref={videoRef}
-          src={isVisible ? mediaUrl(src) : undefined}
-          className="w-full h-full object-contain"
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          onError={() => setHasError(true)}
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
-        />
-        <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
-          {isPlaying ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-12 h-12 sm:w-10 sm:h-10 text-white/90">
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-12 h-12 sm:w-10 sm:h-10 text-white/90">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-          <p className="text-xs text-white font-medium truncate">{label}</p>
-        </div>
-      </div>
-      <VideoTransport videoRef={videoRef} compact className="mt-1.5 justify-center" />
-    </div>
-  )
-}
 
 function ExerciseCard({ exercise, index }: { exercise: TendonExercise; index: number }) {
   // Which clip the player shows: the exercise's own (-1) or a progression's.
@@ -105,7 +28,7 @@ function ExerciseCard({ exercise, index }: { exercise: TendonExercise; index: nu
   return (
     <div className="bg-[#252525] rounded-lg border border-white/5 p-4 sm:p-5">
       <div className="flex flex-col sm:flex-row gap-4">
-        {clip && <TendonClip src={clip} label={clipLabel} />}
+        {clip && <LoopClip src={clip} label={clipLabel} />}
 
         <div className="flex-1 min-w-0">
           <div className="text-xs uppercase tracking-wide mb-1" style={{ color: TENDON_COLOR }}>
