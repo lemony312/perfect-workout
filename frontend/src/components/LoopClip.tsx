@@ -9,11 +9,14 @@ export default function LoopClip({
   src,
   label,
   className = 'w-full sm:w-[260px] md:w-[300px] flex-shrink-0',
+  autoPlay = false,
 }: {
   src: string
   label: string
   /** Sizing of the outer box; defaults to the fixed-width card thumbnail. */
   className?: string
+  /** Play without a tap, including each new src — for guided, hands-free routines. */
+  autoPlay?: boolean
 }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -33,13 +36,13 @@ export default function LoopClip({
     return () => observer.disconnect()
   }, [])
 
-  // A progression swapped the source in: keep playing if we already were.
+  // A new source swapped in: keep playing if we already were, or if told to.
   useEffect(() => {
     setHasError(false)
     const video = videoRef.current
-    if (video && isPlaying) video.play().catch(() => {})
+    if (video && (isPlaying || autoPlay)) video.play().catch(() => {})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src])
+  }, [src, autoPlay])
 
   const togglePlay = () => {
     const video = videoRef.current
@@ -61,6 +64,7 @@ export default function LoopClip({
         <video
           ref={videoRef}
           src={isVisible ? mediaUrl(src) : undefined}
+          autoPlay={autoPlay}
           className="w-full h-full object-contain"
           loop
           muted

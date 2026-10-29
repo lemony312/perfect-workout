@@ -1,10 +1,11 @@
 // Rehab — targeted corrective exercises, each paired with the symptoms that
 // suggest you need it.
 //
-// Every exercise carries its own source video, because unlike the other tabs the
-// exercises won't share one. Content is taken from the video's transcript (local
-// Whisper; YouTube's captions 429'd), with the speaker's timestamps in comments
-// so a claim can be checked against the source. Speculative claims in the video
+// Every exercise carries its own source videos, because unlike the other tabs the
+// exercises won't share one. Content is taken from the videos' transcripts (local
+// Whisper, in ~/Documents/healing-syllabus/transcripts), with the speaker's
+// timestamps in comments — or on the step itself — so a claim can be checked
+// against the source. Speculative claims in the video
 // that aren't needed to decide whether to do the exercise are left out.
 // Clips are cut by scripts/clip_rehab_moves.py.
 
@@ -24,6 +25,17 @@ export interface RehabStep {
   name: string
   detail: string
   clip?: string
+  /** How long the guided timer gives this step. */
+  seconds?: number
+  /** Where in which source video this step is taught; t is "m:ss". */
+  from?: { videoId: string; t: string }
+}
+
+/** One rung of a progression: when to move up, and what changes. */
+export interface RehabLevel {
+  name: string
+  when: string
+  change: string
 }
 
 export interface RehabExercise {
@@ -34,7 +46,7 @@ export interface RehabExercise {
   summary: string
   time: string
   dose: string
-  source: RehabSource
+  sources: RehabSource[]
   signs: RehabSign[]
   /** A quick test you can run before deciding whether the exercise is for you. */
   selfCheck: string[]
@@ -42,10 +54,12 @@ export interface RehabExercise {
   why: string[]
   setup: string[]
   steps: RehabStep[]
+  progression?: RehabLevel[]
   watchFor: string[]
 }
 
 const CLIP = '/clips/rehab'
+const CHANNEL = 'Stop Chasing Pain — Dr. Perry'
 
 const SMOOTH_PURSUITS: RehabExercise = {
   slug: 'smooth-pursuits',
@@ -55,11 +69,13 @@ const SMOOTH_PURSUITS: RehabExercise = {
     'Follow a pencil with your eyes only — not your head — in every direction. Tight or weak eye muscles make the neck and the rest of the body compensate; this retrains them.',
   time: '~5 min',
   dose: '3 slow passes per direction, every day. Once you find the direction that helps most, focus on that one.',
-  source: {
-    videoId: 'QhhXjoD6rZw',
-    title: 'Your EYES Could Be Affecting Your Entire Body (Try This Exercise!)',
-    channel: 'Stop Chasing Pain — Dr. Perry',
-  },
+  sources: [
+    {
+      videoId: 'QhhXjoD6rZw',
+      title: 'Your EYES Could Be Affecting Your Entire Body (Try This Exercise!)',
+      channel: CHANNEL,
+    },
+  ],
   signs: [
     {
       // 03:34, 07:45–08:37
@@ -175,4 +191,193 @@ const SMOOTH_PURSUITS: RehabExercise = {
   ],
 }
 
-export const REHAB_EXERCISES: RehabExercise[] = [SMOOTH_PURSUITS]
+const SOCKETS = 'xPwQ01NTtzk'
+const EYE_H = 'pHv7HlOujAc'
+const DONT_FORGET = 'RdOf-Isk0IU'
+const PALMING = 'YyVCJgZWRaQ'
+
+const SCREEN_EYE_RESET: RehabExercise = {
+  slug: 'screen-eye-reset',
+  name: 'Screen Eye Reset',
+  area: 'Eye fatigue · screens · head and neck tension',
+  summary:
+    'A 5-minute break for eyes worn out by a screen. It follows his order: open blood and lymph flow around the neck first, then ease the tissue around the eyes, move them through their full range, practise near focus, and finish by resting them in total darkness.',
+  time: '5 min',
+  dose: 'Once or twice a day, or whenever you come off a long screen session. The pencil push-ups can also be done on their own in short sessions through the day.',
+  sources: [
+    { videoId: DONT_FORGET, title: "Stop Chasing Pain Mini-Podcast: Don't Forget The Eyes", channel: CHANNEL },
+    { videoId: SOCKETS, title: 'Easing Eye and Facial Tension To Calm The Body', channel: CHANNEL },
+    { videoId: EYE_H, title: 'Calm Your Body Using The Eyes', channel: CHANNEL },
+    { videoId: PALMING, title: 'Eye Palming To Calm Your Nervous System', channel: CHANNEL },
+  ],
+  signs: [
+    {
+      // Palming 01:53–02:02, 00:15–00:44
+      sign: 'Tired, strained eyes after hours on a screen or phone',
+      why: 'Open eyes take in information from everywhere, all the time, and all of it goes into your nervous system. He says people looking at phones all day have a hard time letting their eyes relax at all.',
+    },
+    {
+      // Sockets 00:25–00:57, 01:37
+      sign: 'Tension around the eyes, forehead, sinuses or face, or headaches',
+      why: 'Looking up, down and all over the place all day pulls on the connective tissue around the eye socket, and that pull travels into the rest of the head and face.',
+    },
+    {
+      // Don't Forget 12:35–13:18
+      sign: 'A tight base of the skull that keeps coming back however much you rub it',
+      why: 'The small muscles under the skull fire every time your eyes move, getting the head ready to turn. If the eyes are struggling, those muscles are overworked — and tight there can choke off blood flow to the head.',
+    },
+    {
+      // Don't Forget 19:50–20:00; Eye H 08:13
+      sign: 'Feeling drained or foggy after focused screen work',
+      why: 'Vision takes a lot of brain energy — he puts the brain at about a quarter of the body\'s energy. Eye work tires the brain quickly too, which is why the reps here are low.',
+    },
+  ],
+  selfCheck: [
+    // Palming 01:24–01:53, 07:29–07:43
+    'Cover your closed eyes with cupped palms so no light gets in. Do you see total black, or white specks, flashes or colours? Specks mean your eye muscles are not relaxed.',
+    // Don't Forget 19:01–19:24
+    'Hold a pencil at arm\'s length and slowly bring it to the tip of your nose, eyes on the tip. Note where it turns from one pencil into two — check again after a week.',
+    // Don't Forget 13:20–13:33
+    'Put your fingers under the back of your skull, keep your head still and look left, right, up and down. Feel those muscles fire? If the area is tight and tender, your eyes may be making them work too hard.',
+  ],
+  why: [
+    // Don't Forget 17:17–17:49; Eye stress (jJxiOQ7UEQo) 01:47–03:28
+    'Flow first: the blood supply to your eyes runs up from the collarbone through the side of the neck, and the eye drains back down to the neck. He treats it like a warm-up — get circulation going before asking the eyes to work.',
+    // Sockets 00:25–00:57
+    'The tissue around the eye socket is connected to everything around it, so tension there pulls on the face and head. Easing it lets the eyes move freely.',
+    // Eye H 01:17–01:32, 03:23–03:38, 06:31–07:01
+    'Moving your eyes uses the oculomotor nerve (cranial nerve 3), which is part of the calming, rest-and-recover side of the nervous system. The H and the circle also work cranial nerves 4 and 6.',
+    // Don't Forget 16:49–17:09, 19:46–20:21
+    'Pencil push-ups train your eyes to focus up close and back out — the work a screen asks of them all day — the same way push-ups train your arms.',
+    // Palming 00:44–01:22, 03:45–04:14
+    'Closing your eyes still lets light in. Palming blocks it completely so the eyes can rest, and long exhales switch on the calming side of the nervous system.',
+  ],
+  setup: [
+    // Eye H 03:38–03:46
+    'Sit down — it is easier on your nervous system than standing.',
+    // Eye H 03:46–04:43
+    'Mouth closed, breathe through your nose, whole tongue resting on the roof of your mouth.',
+    // Sockets 02:22
+    'Glasses off for the massage and palming.',
+    // Don't Forget 18:48–18:54
+    'A pencil, or use your finger.',
+    // Palming 05:43–05:47
+    'A dim room makes palming easier, but isn\'t essential.',
+  ],
+  steps: [
+    {
+      name: 'Open the flow: collarbone',
+      detail: 'Rub very gently just above and just below both collarbones. This is where the arteries to your head and eyes begin.',
+      clip: `${CLIP}/flow-collarbone.mp4`,
+      seconds: 15,
+      from: { videoId: DONT_FORGET, t: '17:58' },
+    },
+    {
+      name: 'Open the flow: behind the jaw',
+      detail: 'Top of the neck, on the side, behind the angle of the jaw and below the earlobe. Gentle circles.',
+      clip: `${CLIP}/flow-jaw-angle.mp4`,
+      seconds: 15,
+      from: { videoId: DONT_FORGET, t: '18:10' },
+    },
+    {
+      name: 'Open the flow: under the skull',
+      detail: 'Hands behind your head, just under the skull. Rub and massage very gently — it moves lymph here too.',
+      clip: `${CLIP}/flow-under-skull.mp4`,
+      seconds: 15,
+      from: { videoId: DONT_FORGET, t: '18:29' },
+    },
+    {
+      name: 'Eye-socket massage',
+      detail:
+        'With your finger pads (or thumb for the upper rim), press along the inside edge of the eye socket and rub side to side and a little in and out. Work all the way round. Stay on a tender spot until it eases, and spend longer on the side that feels tighter. Never press on the eyeball itself.',
+      clip: `${CLIP}/eye-socket-massage.mp4`,
+      seconds: 50,
+      from: { videoId: SOCKETS, t: '1:48' },
+    },
+    {
+      name: 'Eye H: first side',
+      detail:
+        'Finger at arm\'s length. Moving only your eyes, follow it to your left, up to the top-left corner, down to the bottom-left corner, back up and to the middle. Keep breathing.',
+      clip: `${CLIP}/eye-h-first-side.mp4`,
+      seconds: 25,
+      from: { videoId: EYE_H, t: '4:56' },
+    },
+    {
+      name: 'Eye H: second side',
+      detail:
+        'Switch to the other hand. To your right, up to the top-right corner, down to the bottom-right corner, back up and to the centre. Blink and breathe.',
+      clip: `${CLIP}/eye-h-second-side.mp4`,
+      seconds: 25,
+      from: { videoId: EYE_H, t: '5:30' },
+    },
+    {
+      name: 'Eye circles',
+      detail:
+        'Start with your finger at 12 o\'clock and follow it slowly round in a circle, then the other way. A couple each direction. Notice which pattern or direction felt hardest.',
+      clip: `${CLIP}/eye-circles.mp4`,
+      seconds: 30,
+      from: { videoId: EYE_H, t: '5:53' },
+    },
+    {
+      name: 'Pencil push-ups',
+      detail:
+        'Pencil at arm\'s length, level with the tip of your nose. Keep your eyes on the tip and slowly bring it all the way in to touch your nose, then slowly back out. 5 slow, controlled reps. Don\'t stop breathing.',
+      clip: `${CLIP}/pencil-push-up.mp4`,
+      seconds: 45,
+      from: { videoId: DONT_FORGET, t: '19:01' },
+    },
+    {
+      name: 'Palming with long exhales',
+      detail:
+        'Cup your palms slightly and lay them diagonally over closed eyes, overlapping, with no pressure on the eyeballs. Adjust until no light gets in. Breathe in through your nose for 4 seconds, then breathe out through your mouth making a long "voooo" sound, as long as is comfortable. 3 breaths.',
+      clip: `${CLIP}/eye-palming.mp4`,
+      seconds: 65,
+      from: { videoId: PALMING, t: '5:47' },
+    },
+    {
+      name: 'Look around',
+      detail:
+        'Open your eyes and slowly peel your hands away. Look up, down, left, right, into the corners, and make a few loose circles each way. Breathe through your nose.',
+      seconds: 15,
+      from: { videoId: PALMING, t: '9:41' },
+    },
+  ],
+  progression: [
+    {
+      // Don't Forget 19:46–19:56; Eye H 05:53, 07:38
+      name: 'Start here',
+      when: 'Week 1',
+      change: 'The routine as written: 5 pencil push-ups, the H once each side, a couple of circles each way. If you get tired after the pencil reps, stop there — that is normal.',
+    },
+    {
+      // Don't Forget 20:04–20:10
+      name: 'More reps',
+      when: 'When 5 reps feel slow and controlled',
+      change: 'Build the pencil push-ups up to 10 good-quality reps.',
+    },
+    {
+      // Don't Forget 20:10–20:26
+      name: 'Spread it out',
+      when: 'Once 10 reps are comfortable',
+      change: 'Do 10 pencil push-ups 3–5 times through the day — at screen breaks — rather than one big set. Keep this up daily for a week and see what changes.',
+    },
+    {
+      // Smooth Pursuits video 27:39–27:57; Palming 02:09–02:23
+      name: 'Add Smooth Pursuits',
+      when: 'When the routine feels easy',
+      change: 'Add the Smooth Pursuits exercise above for full-range tracking. Keep practising palming until you can relax into total black — little and often.',
+    },
+  ],
+  watchFor: [
+    // Sockets 01:23, 01:27; Palming 05:54
+    'Never press on the eyeball. If the socket massage is uncomfortable, lighten your touch.',
+    // Eye H 04:43–04:50; Don't Forget 19:31
+    'You will probably hold your breath during the eye movements — keep breathing.',
+    // Eye H 08:06–08:19; Don't Forget 19:50
+    'Eye work tires your brain quickly. More isn\'t better, better is better: stop when you feel fatigued.',
+    // Palming 02:09–02:17
+    'Specks when palming are normal at first. It can take many sessions to see black.',
+  ],
+}
+
+export const REHAB_EXERCISES: RehabExercise[] = [SCREEN_EYE_RESET, SMOOTH_PURSUITS]

@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { REHAB_EXERCISES, type RehabExercise } from '@/data/rehab'
+import { useEffect, useState } from 'react'
+import { REHAB_EXERCISES, type RehabExercise, type RehabStep } from '@/data/rehab'
 import LoopClip from '@/components/LoopClip'
 
 const REHAB_COLOR = '#a78bfa'
@@ -45,25 +45,96 @@ function SignList({ exercise }: { exercise: RehabExercise }) {
   )
 }
 
+/** "m:ss" -> a YouTube link that starts there. */
+function sourceLink(from: NonNullable<RehabStep['from']>): string {
+  const [m, sec] = from.t.split(':').map(Number)
+  return `https://youtu.be/${from.videoId}?t=${m * 60 + sec}`
+}
+
+function clock(seconds: number): string {
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
+}
+
 function FollowAlong({ exercise }: { exercise: RehabExercise }) {
-  const [active, setActive] = useState(0)
+  const { steps } = exercise
+  // One state object so the guided timer can move to the next step in the same
+  // update as its countdown hits zero.
+  const [{ active, remaining, running }, setGuide] = useState({ active: 0, remaining: 0, running: false })
+  const timed = steps.every((s) => s.seconds)
+  const total = steps.reduce((sum, s) => sum + (s.seconds ?? 0), 0)
   // The last step may have no clip; keep showing the most recent one.
-  const clipStep = exercise.steps.slice(0, active + 1).reverse().find((s) => s.clip)
+  const clipStep = steps.slice(0, active + 1).reverse().find((s) => s.clip)
+
+  useEffect(() => {
+    if (!running) return
+    const id = setInterval(
+      () =>
+        setGuide((g) => {
+          if (g.remaining > 1) return { ...g, remaining: g.remaining - 1 }
+          if (g.active === steps.length - 1) return { ...g, remaining: 0, running: false }
+          return { active: g.active + 1, remaining: steps[g.active + 1].seconds ?? 0, running: true }
+        }),
+      1000
+    )
+    return () => clearInterval(id)
+  }, [running, steps])
+
+  const start = () => setGuide({ active: 0, remaining: steps[0].seconds ?? 0, running: true })
+  const pause = () => setGuide((g) => ({ ...g, running: false }))
+  const resume = () => setGuide((g) => ({ ...g, running: true }))
+  const goTo = (i: number) =>
+    setGuide((g) => ({ ...g, active: i, remaining: g.running ? steps[i].seconds ?? 0 : g.remaining }))
+  const elapsed =
+    steps.slice(0, active).reduce((sum, s) => sum + (s.seconds ?? 0), 0) +
+    (running || remaining > 0 ? (steps[active].seconds ?? 0) - remaining : 0)
 
   return (
+    <div className="space-y-3">
+      {timed && (
+        <div className="flex flex-wrap items-center gap-3">
+          {running ? (
+            <button
+              onClick={pause}
+              className="text-sm px-4 py-2 rounded border border-white/10 text-[#f5f5f5] hover:bg-white/5"
+            >
+              ❚❚ Pause
+            </button>
+          ) : (
+            <button
+              onClick={remaining > 0 ? resume : start}
+              className="text-sm font-semibold px-4 py-2 rounded bg-violet-500/90 hover:bg-violet-500 text-white"
+            >
+              {remaining > 0 ? '▶ Resume' : `▶ Start guided routine · ${clock(total)}`}
+            </button>
+          )}
+          {(running || remaining > 0) && (
+            <div className="flex-1 min-w-[160px]">
+              <div className="flex justify-between text-xs text-[#a0a0a0] mb-1">
+                <span>Step {active + 1}: {clock(Math.max(0, remaining))} left</span>
+                <span>{clock(elapsed)} / {clock(total)}</span>
+              </div>
+              <div className="h-1.5 rounded bg-white/10 overflow-hidden">
+                <div className="h-full bg-violet-400 transition-all" style={{ width: `${(elapsed / total) * 100}%` }} />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     <div className="flex flex-col md:flex-row gap-4">
       {clipStep?.clip && (
-        <div className="md:w-[380px] flex-shrink-0 md:sticky md:top-4 self-start w-full">
-          <LoopClip src={clipStep.clip} label={clipStep.name} className="w-full" />
+        // Pinned below the sticky nav on every width, so on a phone the clip stays
+        // in view while the step list scrolls past underneath it.
+        <div className="md:w-[380px] flex-shrink-0 sticky top-14 z-10 self-start w-full bg-[#1a1a1a] pb-1">
+          <LoopClip src={clipStep.clip} label={clipStep.name} className="w-full" autoPlay={running} />
         </div>
       )}
       <ol className="flex-1 min-w-0 space-y-2">
-        {exercise.steps.map((step, i) => {
+        {steps.map((step, i) => {
           const isActive = i === active
           return (
             <li key={step.name}>
               <button
-                onClick={() => setActive(i)}
+                onClick={() => goTo(i)}
                 className={`w-full text-left flex gap-3 rounded-md border px-3 py-2.5 transition-colors ${
                   isActive ? 'border-violet-400/60 bg-violet-400/10' : 'border-white/5 bg-[#252525] hover:bg-white/5'
                 }`}
@@ -74,11 +145,25 @@ function FollowAlong({ exercise }: { exercise: RehabExercise }) {
                 >
                   {i + 1}
                 </span>
-                <span className="min-w-0">
-                  <span className="block text-sm font-medium text-[#f5f5f5]">{step.name}</span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-baseline justify-between gap-2">
+                    <span className="text-sm font-medium text-[#f5f5f5]">{step.name}</span>
+                    {step.seconds && <span className="text-xs text-[#a0a0a0] flex-shrink-0">{step.seconds}s</span>}
+                  </span>
                   <span className={`block text-sm text-[#a0a0a0] ${isActive ? '' : 'line-clamp-1'}`}>
                     {step.detail}
                   </span>
+                  {isActive && step.from && (
+                    <a
+                      href={sourceLink(step.from)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-block mt-1 text-xs text-violet-300 hover:underline"
+                    >
+                      Watch him teach it ▶ {step.from.t}
+                    </a>
+                  )}
                 </span>
               </button>
             </li>
@@ -86,21 +171,22 @@ function FollowAlong({ exercise }: { exercise: RehabExercise }) {
         })}
         <li className="flex gap-2 pt-1">
           <button
-            onClick={() => setActive(Math.max(0, active - 1))}
+            onClick={() => goTo(Math.max(0, active - 1))}
             disabled={active === 0}
             className="text-sm px-3 py-2 rounded border border-white/10 text-[#a0a0a0] hover:text-[#f5f5f5] disabled:opacity-30"
           >
             ← Back
           </button>
           <button
-            onClick={() => setActive(Math.min(exercise.steps.length - 1, active + 1))}
-            disabled={active === exercise.steps.length - 1}
+            onClick={() => goTo(Math.min(steps.length - 1, active + 1))}
+            disabled={active === steps.length - 1}
             className="text-sm px-3 py-2 rounded border border-violet-400/40 text-violet-300 hover:bg-violet-400/10 disabled:opacity-30"
           >
             Next step →
           </button>
         </li>
       </ol>
+    </div>
     </div>
   )
 }
@@ -168,6 +254,23 @@ function ExerciseSection({ exercise }: { exercise: RehabExercise }) {
         <FollowAlong exercise={exercise} />
       </div>
 
+      {exercise.progression && (
+        <div>
+          <Heading note="move up when the last level feels easy">Progression</Heading>
+          <ol className="grid sm:grid-cols-2 gap-3">
+            {exercise.progression.map((level, i) => (
+              <li key={level.name} className="rounded-md border border-white/5 bg-[#252525] p-3">
+                <div className="text-xs uppercase tracking-wide" style={{ color: REHAB_COLOR }}>
+                  Level {i + 1} · {level.when}
+                </div>
+                <div className="text-sm font-semibold text-[#f5f5f5] mt-0.5">{level.name}</div>
+                <p className="text-sm text-[#a0a0a0] mt-1">{level.change}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
       <div>
         <Heading>Watch for</Heading>
         <ul className="space-y-1.5 text-sm text-[#d4d4d4] list-disc list-outside pl-5">
@@ -177,19 +280,23 @@ function ExerciseSection({ exercise }: { exercise: RehabExercise }) {
         </ul>
       </div>
 
-      <div className="pt-4 border-t border-white/5">
-        <a
-          href={`https://www.youtube.com/watch?v=${exercise.source.videoId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-[#a0a0a0] hover:text-[#e53e3e] transition-colors inline-flex items-center gap-1"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0">
-            <path d={YOUTUBE_ICON} />
-          </svg>
-          {exercise.source.channel}: {exercise.source.title}
-        </a>
-      </div>
+      <ul className="pt-4 border-t border-white/5 space-y-1">
+        {exercise.sources.map((source) => (
+          <li key={source.videoId}>
+            <a
+              href={`https://www.youtube.com/watch?v=${source.videoId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#a0a0a0] hover:text-[#e53e3e] transition-colors inline-flex items-center gap-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0">
+                <path d={YOUTUBE_ICON} />
+              </svg>
+              {source.channel}: {source.title}
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
